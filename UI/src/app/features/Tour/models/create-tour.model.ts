@@ -1,5 +1,4 @@
 export interface Tour {
-    tourId: number;
     tourName: string;
     description: string;
     mainImage?: string;

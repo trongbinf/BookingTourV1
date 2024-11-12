@@ -12,8 +12,6 @@ export interface Booking {
     bookingDate: Date;
     notes?: string;
     status: StatusType;
-    tourId: number;
     tour?: Tour;
-    userId: string;
     user?: User;
 }
