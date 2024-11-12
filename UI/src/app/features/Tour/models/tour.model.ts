@@ -17,7 +17,6 @@ export interface Tour {
     vehicleType: string;
     created?: Date;
     status: boolean;
-    categoryId: number;
     category?: Category;
     dateStarts?: DateStart[];
     activities?: Activity[];
