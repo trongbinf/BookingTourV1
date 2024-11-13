@@ -4647,19 +4647,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\USA\\.nuget\\packages\\": {}
+    "C:\\Users\\Admin\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\dotritrong\\C#\\BookingTourV1\\BookingTourAPI\\BookingTour\\BookingTour.API.csproj",
+      "projectUniqueName": "D:\\C#\\Project\\CPL_BookingTour\\BookingTourV1\\BookingTourAPI\\BookingTour\\BookingTour.API.csproj",
       "projectName": "BookingTour.API",
-      "projectPath": "E:\\dotritrong\\C#\\BookingTourV1\\BookingTourAPI\\BookingTour\\BookingTour.API.csproj",
-      "packagesPath": "C:\\Users\\USA\\.nuget\\packages\\",
-      "outputPath": "E:\\dotritrong\\C#\\BookingTourV1\\BookingTourAPI\\BookingTour\\obj\\",
+      "projectPath": "D:\\C#\\Project\\CPL_BookingTour\\BookingTourV1\\BookingTourAPI\\BookingTour\\BookingTour.API.csproj",
+      "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
+      "outputPath": "D:\\C#\\Project\\CPL_BookingTour\\BookingTourV1\\BookingTourAPI\\BookingTour\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
       "configFilePaths": [
-        "C:\\Users\\USA\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -4667,17 +4672,18 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "E:\\dotritrong\\C#\\BookingTourV1\\BookingTourAPI\\BookingTour.Business\\BookingTour.Business.csproj": {
-              "projectPath": "E:\\dotritrong\\C#\\BookingTourV1\\BookingTourAPI\\BookingTour.Business\\BookingTour.Business.csproj"
+            "D:\\C#\\Project\\CPL_BookingTour\\BookingTourV1\\BookingTourAPI\\BookingTour.Business\\BookingTour.Business.csproj": {
+              "projectPath": "D:\\C#\\Project\\CPL_BookingTour\\BookingTourV1\\BookingTourAPI\\BookingTour.Business\\BookingTour.Business.csproj"
             },
-            "E:\\dotritrong\\C#\\BookingTourV1\\BookingTourAPI\\BookingTour.Data\\BookingTour.Data.csproj": {
-              "projectPath": "E:\\dotritrong\\C#\\BookingTourV1\\BookingTourAPI\\BookingTour.Data\\BookingTour.Data.csproj"
+            "D:\\C#\\Project\\CPL_BookingTour\\BookingTourV1\\BookingTourAPI\\BookingTour.Data\\BookingTour.Data.csproj": {
+              "projectPath": "D:\\C#\\Project\\CPL_BookingTour\\BookingTourV1\\BookingTourAPI\\BookingTour.Data\\BookingTour.Data.csproj"
             }
           }
         }
