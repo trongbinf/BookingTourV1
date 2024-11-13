@@ -10,4 +10,4 @@ export const appConfig: ApplicationConfig = {
     , provideHttpClient(withInterceptors([authInterceptor]))]
 };
 
-export const BASE_URL = 'https://localhost:7159/api';
+export const BASE_URL = 'https://localhost:7228/api';

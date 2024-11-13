@@ -97,7 +97,14 @@ namespace BookingTour
 
 			app.UseHttpsRedirection();
 
-			app.UseAuthorization();
+            app.UseCors(options =>
+            {
+                options.AllowAnyHeader();
+                options.AllowAnyMethod();
+                options.AllowAnyOrigin();
+            });
+
+            app.UseAuthorization();
 
 
 			app.MapControllers();

@@ -1,5 +1,6 @@
 ﻿using BookingTour.Model;
 using BookingTour.Model.Enum;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace BookingTour.Data.Data
@@ -8,6 +9,12 @@ namespace BookingTour.Data.Data
     {
         public static void InsertData(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<IdentityRole>().HasData
+              (
+              new IdentityRole() { Name = "Admin", ConcurrencyStamp = "1", NormalizedName = "Admin" },
+              new IdentityRole() { Name = "User", ConcurrencyStamp = "2", NormalizedName = "User" }
+              );
+
             // Thêm dữ liệu cho bảng Category
             modelBuilder.Entity<Category>().HasData(
                 new Category { CategoryId = 1, Name = "Tour tham quan", Status = true },
