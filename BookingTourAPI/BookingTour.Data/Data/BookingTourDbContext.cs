@@ -9,7 +9,7 @@ namespace BookingTour.Data.Data
         public BookingTourDbContext(DbContextOptions<BookingTourDbContext> options)
             : base(options) { }
 
-		public DbSet<AppUser> Users { get; set; }
+		public DbSet<RefreshToken> RefreshTokens { get; set; }
 		public DbSet<Tour> Tours { get; set; }
 		public DbSet<Booking> Bookings { get; set; }
 		public DbSet<Review> Reviews { get; set; }
