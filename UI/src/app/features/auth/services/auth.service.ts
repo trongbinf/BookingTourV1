@@ -7,13 +7,14 @@ import { BASE_URL } from '../../../app.config';
 import { User } from '../models/user.model';
 import { CookieService } from 'ngx-cookie-service';
 import { Register } from '../models/register.model';
+import { ResetPassword } from '../models/reset-password.model';
+import { ChangePassword } from '../models/changepass..models';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-
   $user = new BehaviorSubject<User | undefined>(undefined);
 
   constructor(private http: HttpClient,
@@ -28,6 +29,17 @@ export class AuthService {
     return auth != null && auth !== '';
   }
 
+  forgotpass(email: string): Observable<void> {
+    return this.http.post<void>(`${BASE_URL}/Auth/forgot-password?email=${email}`, {});
+  }
+
+  changepass(model: ChangePassword): Observable<void> {
+    return this.http.post<void>(`${BASE_URL}/Auth/change-password`, model)
+  }
+
+  resetpass(model: ResetPassword): Observable<void> {
+    return this.http.post<void>(`${BASE_URL}/Auth/reset-password`, model)
+  }
 
   register(register: Register): Observable<void> {
     return this.http.post<void>(`${BASE_URL}/Auth/register-user`, register);

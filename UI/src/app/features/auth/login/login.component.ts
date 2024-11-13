@@ -16,6 +16,8 @@ import { jwtDecode } from "jwt-decode";
 })
 export class LoginComponent {
 
+  email: string = '';
+
   model: LoginRequest;
 
   constructor(private authService: AuthService,
@@ -54,5 +56,13 @@ export class LoginComponent {
           console.log(err);
         }
       });
+  }
+
+  onForgotPassword() {
+    this.authService.forgotpass(this.email).subscribe({
+      next: respose => {
+        alert("Đã gửi xác thực về mail")
+      }
+    })
   }
 }

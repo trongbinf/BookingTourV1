@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace BookingTour.Model
+namespace BookingTour.Model.ViewModel
+
 {
     public class RegisterVm
     {
