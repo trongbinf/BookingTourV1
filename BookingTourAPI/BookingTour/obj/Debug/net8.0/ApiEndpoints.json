@@ -1,0 +1,34 @@
+[
+  {
+    "ContainingType": "BookingTour.API.Controllers.AuthController",
+    "Method": "Login",
+    "RelativePath": "api/Auth/login-user",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "loginVm",
+        "Type": "BookingTour.Model.LoginVm",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BookingTour.API.Controllers.AuthController",
+    "Method": "Register",
+    "RelativePath": "api/Auth/register-user",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "registerVm",
+        "Type": "BookingTour.Model.RegisterVm",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  }
+]
