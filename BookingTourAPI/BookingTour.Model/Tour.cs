@@ -24,8 +24,8 @@ namespace BookingTour.Model
 		[ForeignKey("CategoryId")]
 		public Category Category { get; set; }
 		public ICollection<DateStart> DateStarts { get; set; } = new List<DateStart>();
-		public ICollection<Activity> Activities { get; set; } = new List<Activity>();
-		public ICollection<Booking> Bookings { get; set; } = new List<Booking>();
+        public ICollection<TourActivity> TourActivities { get; set; } = new List<TourActivity>();
+        public ICollection<Booking> Bookings { get; set; } = new List<Booking>();
 		public ICollection<Review> Reviews { get; set; } = new List<Review>();
 
 		public string FormatPrice(double price)

@@ -20,7 +20,7 @@ export class AuthService {
     private cookieService: CookieService) { }
 
   login(request: LoginRequest): Observable<LoginResponse> {
-    return this.http.post<LoginResponse>(`${BASE_URL}/Authentication/login-user`, request);
+    return this.http.post<LoginResponse>(`${BASE_URL}/Auth/login-user`, request);
   }
 
   isLoginedIn() {
@@ -30,7 +30,7 @@ export class AuthService {
 
 
   register(register: Register): Observable<void> {
-    return this.http.post<void>(`${BASE_URL}/Authentication/register-user`, register);
+    return this.http.post<void>(`${BASE_URL}/Auth/register-user`, register);
   }
 
   setUser(user: User): void {

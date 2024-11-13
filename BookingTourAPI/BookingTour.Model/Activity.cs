@@ -12,6 +12,6 @@ namespace BookingTour.Model
         public string ActivityName { get; set; }
         public string Description {  get; set; }
         public int TourId { get; set; }
-        public Tour Tour { get; set; }
+        public ICollection<TourActivity> TourActivities { get; set; } = new List<TourActivity>();
     }
 }

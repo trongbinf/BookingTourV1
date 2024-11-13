@@ -1,5 +1,6 @@
 ﻿using BookingTour.Model;
 using BookingTour.Model.Enum;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace BookingTour.Data.Data
@@ -8,6 +9,12 @@ namespace BookingTour.Data.Data
     {
         public static void InsertData(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<IdentityRole>().HasData
+              (
+              new IdentityRole() { Name = "Admin", ConcurrencyStamp = "1", NormalizedName = "Admin" },
+              new IdentityRole() { Name = "User", ConcurrencyStamp = "2", NormalizedName = "User" }
+              );
+
             // Thêm dữ liệu cho bảng Category
             modelBuilder.Entity<Category>().HasData(
                 new Category { CategoryId = 1, Name = "Tour tham quan", Status = true },
@@ -112,7 +119,6 @@ namespace BookingTour.Data.Data
                     ActivityType = ActivityType.Services,
                     ActivityName = "Hướng dẫn viên du lịch",
                     Description = "Cung cấp hướng dẫn viên chuyên nghiệp suốt chuyến tham quan.",
-                    TourId = 1
                 },
                 new Activity
                 {
@@ -120,7 +126,6 @@ namespace BookingTour.Data.Data
                     ActivityType = ActivityType.Rules,
                     ActivityName = "Quy định khi tham quan",
                     Description = "Du khách không được hút thuốc và giữ trật tự trong khu vực công cộng.",
-                    TourId = 1
                 },
                 new Activity
                 {
@@ -128,7 +133,6 @@ namespace BookingTour.Data.Data
                     ActivityType = ActivityType.Schedule,
                     ActivityName = "Lịch trình tham quan",
                     Description = "Khám phá các địa danh nổi bật trong thành phố trong 4 giờ.",
-                    TourId = 1
                 },
 
                 // Hoạt động cho tour "Khám phá thiên nhiên"
@@ -138,7 +142,6 @@ namespace BookingTour.Data.Data
                     ActivityType = ActivityType.Services,
                     ActivityName = "Cắm trại và BBQ",
                     Description = "Trải nghiệm nướng BBQ và nghỉ đêm tại khu cắm trại.",
-                    TourId = 2
                 },
                 new Activity
                 {
@@ -146,7 +149,6 @@ namespace BookingTour.Data.Data
                     ActivityType = ActivityType.Rules,
                     ActivityName = "Bảo vệ môi trường",
                     Description = "Du khách cần tuân thủ các quy định bảo vệ môi trường trong khu cắm trại.",
-                    TourId = 2
                 },
                 new Activity
                 {
@@ -154,7 +156,6 @@ namespace BookingTour.Data.Data
                     ActivityType = ActivityType.Schedule,
                     ActivityName = "Đi bộ đường dài",
                     Description = "Chuyến đi bộ xuyên rừng kéo dài 3 giờ qua các cảnh quan thiên nhiên.",
-                    TourId = 2
                 },
 
                 // Hoạt động cho tour "Du lịch biển"
@@ -164,7 +165,6 @@ namespace BookingTour.Data.Data
                     ActivityType = ActivityType.Services,
                     ActivityName = "Dịch vụ lặn biển",
                     Description = "Hướng dẫn lặn biển chuyên nghiệp và cung cấp trang thiết bị an toàn.",
-                    TourId = 3
                 },
                 new Activity
                 {
@@ -172,7 +172,6 @@ namespace BookingTour.Data.Data
                     ActivityType = ActivityType.Rules,
                     ActivityName = "Quy định trên biển",
                     Description = "Du khách không được vứt rác bừa bãi trên bãi biển.",
-                    TourId = 3
                 },
                 new Activity
                 {
@@ -180,7 +179,6 @@ namespace BookingTour.Data.Data
                     ActivityType = ActivityType.Schedule,
                     ActivityName = "Tham quan san hô",
                     Description = "Lặn biển ngắm san hô và khám phá đáy biển trong 2 giờ.",
-                    TourId = 3
                 },
 
                 // Hoạt động cho tour "Tham quan bảo tàng"
@@ -190,7 +188,6 @@ namespace BookingTour.Data.Data
                     ActivityType = ActivityType.Services,
                     ActivityName = "Hướng dẫn viên bảo tàng",
                     Description = "Hướng dẫn chi tiết về các hiện vật quan trọng trong bảo tàng.",
-                    TourId = 4
                 },
                 new Activity
                 {
@@ -198,7 +195,6 @@ namespace BookingTour.Data.Data
                     ActivityType = ActivityType.Rules,
                     ActivityName = "Quy định tại bảo tàng",
                     Description = "Không được chạm vào hiện vật và giữ trật tự trong bảo tàng.",
-                    TourId = 4
                 },
                 new Activity
                 {
@@ -206,7 +202,6 @@ namespace BookingTour.Data.Data
                     ActivityType = ActivityType.Schedule,
                     ActivityName = "Lịch trình tham quan bảo tàng",
                     Description = "Khám phá bảo tàng trong khoảng thời gian 3 giờ.",
-                    TourId = 4
                 },
 
                 // Hoạt động cho tour "Cắm trại rừng"
@@ -216,7 +211,6 @@ namespace BookingTour.Data.Data
                     ActivityType = ActivityType.Services,
                     ActivityName = "Thuê lều và dụng cụ",
                     Description = "Cung cấp các dịch vụ thuê lều và dụng cụ cắm trại đầy đủ.",
-                    TourId = 5
                 },
                 new Activity
                 {
@@ -224,7 +218,6 @@ namespace BookingTour.Data.Data
                     ActivityType = ActivityType.Rules,
                     ActivityName = "Quy định cắm trại",
                     Description = "Không gây tiếng ồn sau 10 giờ tối và tuân thủ các quy định an toàn.",
-                    TourId = 5
                 },
                 new Activity
                 {
@@ -232,7 +225,6 @@ namespace BookingTour.Data.Data
                     ActivityType = ActivityType.Schedule,
                     ActivityName = "Tham quan rừng",
                     Description = "Đi bộ ngắm cảnh rừng và nghỉ qua đêm tại khu vực cắm trại.",
-                    TourId = 5
                 },
 
                 // Hoạt động cho tour "Kỳ nghỉ biển"
@@ -242,7 +234,6 @@ namespace BookingTour.Data.Data
                     ActivityType = ActivityType.Services,
                     ActivityName = "Dịch vụ đưa đón",
                     Description = "Dịch vụ xe đưa đón từ sân bay và các điểm đón đến khu resort.",
-                    TourId = 6
                 },
                 new Activity
                 {
@@ -250,7 +241,6 @@ namespace BookingTour.Data.Data
                     ActivityType = ActivityType.Rules,
                     ActivityName = "Quy định an toàn",
                     Description = "Du khách không được mang theo các vật dụng nguy hiểm vào khu nghỉ dưỡng.",
-                    TourId = 6
                 },
                 new Activity
                 {
@@ -258,7 +248,6 @@ namespace BookingTour.Data.Data
                     ActivityType = ActivityType.Schedule,
                     ActivityName = "Nghỉ dưỡng tại resort",
                     Description = "Trải nghiệm nghỉ dưỡng và tham gia các hoạt động giải trí tại resort.",
-                    TourId = 6
                 }
             );
 

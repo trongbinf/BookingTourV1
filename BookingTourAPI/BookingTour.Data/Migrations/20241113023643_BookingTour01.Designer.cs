@@ -4,6 +4,7 @@ using BookingTour.Data.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BookingTour.Data.Migrations
 {
     [DbContext(typeof(BookingTourDbContext))]
-    partial class BookingTourDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241113023643_BookingTour01")]
+    partial class BookingTour01
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -46,6 +49,8 @@ namespace BookingTour.Data.Migrations
 
                     b.HasKey("ActivityId");
 
+                    b.HasIndex("TourId");
+
                     b.ToTable("Activities");
 
                     b.HasData(
@@ -55,7 +60,7 @@ namespace BookingTour.Data.Migrations
                             ActivityName = "Hướng dẫn viên du lịch",
                             ActivityType = 0,
                             Description = "Cung cấp hướng dẫn viên chuyên nghiệp suốt chuyến tham quan.",
-                            TourId = 0
+                            TourId = 1
                         },
                         new
                         {
@@ -63,7 +68,7 @@ namespace BookingTour.Data.Migrations
                             ActivityName = "Quy định khi tham quan",
                             ActivityType = 1,
                             Description = "Du khách không được hút thuốc và giữ trật tự trong khu vực công cộng.",
-                            TourId = 0
+                            TourId = 1
                         },
                         new
                         {
@@ -71,7 +76,7 @@ namespace BookingTour.Data.Migrations
                             ActivityName = "Lịch trình tham quan",
                             ActivityType = 2,
                             Description = "Khám phá các địa danh nổi bật trong thành phố trong 4 giờ.",
-                            TourId = 0
+                            TourId = 1
                         },
                         new
                         {
@@ -79,7 +84,7 @@ namespace BookingTour.Data.Migrations
                             ActivityName = "Cắm trại và BBQ",
                             ActivityType = 0,
                             Description = "Trải nghiệm nướng BBQ và nghỉ đêm tại khu cắm trại.",
-                            TourId = 0
+                            TourId = 2
                         },
                         new
                         {
@@ -87,7 +92,7 @@ namespace BookingTour.Data.Migrations
                             ActivityName = "Bảo vệ môi trường",
                             ActivityType = 1,
                             Description = "Du khách cần tuân thủ các quy định bảo vệ môi trường trong khu cắm trại.",
-                            TourId = 0
+                            TourId = 2
                         },
                         new
                         {
@@ -95,7 +100,7 @@ namespace BookingTour.Data.Migrations
                             ActivityName = "Đi bộ đường dài",
                             ActivityType = 2,
                             Description = "Chuyến đi bộ xuyên rừng kéo dài 3 giờ qua các cảnh quan thiên nhiên.",
-                            TourId = 0
+                            TourId = 2
                         },
                         new
                         {
@@ -103,7 +108,7 @@ namespace BookingTour.Data.Migrations
                             ActivityName = "Dịch vụ lặn biển",
                             ActivityType = 0,
                             Description = "Hướng dẫn lặn biển chuyên nghiệp và cung cấp trang thiết bị an toàn.",
-                            TourId = 0
+                            TourId = 3
                         },
                         new
                         {
@@ -111,7 +116,7 @@ namespace BookingTour.Data.Migrations
                             ActivityName = "Quy định trên biển",
                             ActivityType = 1,
                             Description = "Du khách không được vứt rác bừa bãi trên bãi biển.",
-                            TourId = 0
+                            TourId = 3
                         },
                         new
                         {
@@ -119,7 +124,7 @@ namespace BookingTour.Data.Migrations
                             ActivityName = "Tham quan san hô",
                             ActivityType = 2,
                             Description = "Lặn biển ngắm san hô và khám phá đáy biển trong 2 giờ.",
-                            TourId = 0
+                            TourId = 3
                         },
                         new
                         {
@@ -127,7 +132,7 @@ namespace BookingTour.Data.Migrations
                             ActivityName = "Hướng dẫn viên bảo tàng",
                             ActivityType = 0,
                             Description = "Hướng dẫn chi tiết về các hiện vật quan trọng trong bảo tàng.",
-                            TourId = 0
+                            TourId = 4
                         },
                         new
                         {
@@ -135,7 +140,7 @@ namespace BookingTour.Data.Migrations
                             ActivityName = "Quy định tại bảo tàng",
                             ActivityType = 1,
                             Description = "Không được chạm vào hiện vật và giữ trật tự trong bảo tàng.",
-                            TourId = 0
+                            TourId = 4
                         },
                         new
                         {
@@ -143,7 +148,7 @@ namespace BookingTour.Data.Migrations
                             ActivityName = "Lịch trình tham quan bảo tàng",
                             ActivityType = 2,
                             Description = "Khám phá bảo tàng trong khoảng thời gian 3 giờ.",
-                            TourId = 0
+                            TourId = 4
                         },
                         new
                         {
@@ -151,7 +156,7 @@ namespace BookingTour.Data.Migrations
                             ActivityName = "Thuê lều và dụng cụ",
                             ActivityType = 0,
                             Description = "Cung cấp các dịch vụ thuê lều và dụng cụ cắm trại đầy đủ.",
-                            TourId = 0
+                            TourId = 5
                         },
                         new
                         {
@@ -159,7 +164,7 @@ namespace BookingTour.Data.Migrations
                             ActivityName = "Quy định cắm trại",
                             ActivityType = 1,
                             Description = "Không gây tiếng ồn sau 10 giờ tối và tuân thủ các quy định an toàn.",
-                            TourId = 0
+                            TourId = 5
                         },
                         new
                         {
@@ -167,7 +172,7 @@ namespace BookingTour.Data.Migrations
                             ActivityName = "Tham quan rừng",
                             ActivityType = 2,
                             Description = "Đi bộ ngắm cảnh rừng và nghỉ qua đêm tại khu vực cắm trại.",
-                            TourId = 0
+                            TourId = 5
                         },
                         new
                         {
@@ -175,7 +180,7 @@ namespace BookingTour.Data.Migrations
                             ActivityName = "Dịch vụ đưa đón",
                             ActivityType = 0,
                             Description = "Dịch vụ xe đưa đón từ sân bay và các điểm đón đến khu resort.",
-                            TourId = 0
+                            TourId = 6
                         },
                         new
                         {
@@ -183,7 +188,7 @@ namespace BookingTour.Data.Migrations
                             ActivityName = "Quy định an toàn",
                             ActivityType = 1,
                             Description = "Du khách không được mang theo các vật dụng nguy hiểm vào khu nghỉ dưỡng.",
-                            TourId = 0
+                            TourId = 6
                         },
                         new
                         {
@@ -191,7 +196,7 @@ namespace BookingTour.Data.Migrations
                             ActivityName = "Nghỉ dưỡng tại resort",
                             ActivityType = 2,
                             Description = "Trải nghiệm nghỉ dưỡng và tham gia các hoạt động giải trí tại resort.",
-                            TourId = 0
+                            TourId = 6
                         });
                 });
 
@@ -467,7 +472,7 @@ namespace BookingTour.Data.Migrations
                             CategoryId = 1,
                             City = "Hà Nội",
                             Country = "Việt Nam",
-                            Created = new DateTime(2024, 11, 13, 12, 43, 59, 239, DateTimeKind.Local).AddTicks(6722),
+                            Created = new DateTime(2024, 11, 13, 9, 36, 43, 289, DateTimeKind.Local).AddTicks(5761),
                             Description = "Tour tham quan các danh lam thắng cảnh trong thành phố.",
                             IsFullDay = true,
                             Price = 500000.0,
@@ -481,7 +486,7 @@ namespace BookingTour.Data.Migrations
                             CategoryId = 2,
                             City = "Đà Lạt",
                             Country = "Việt Nam",
-                            Created = new DateTime(2024, 11, 13, 12, 43, 59, 239, DateTimeKind.Local).AddTicks(6730),
+                            Created = new DateTime(2024, 11, 13, 9, 36, 43, 289, DateTimeKind.Local).AddTicks(5765),
                             Description = "Tour khám phá các khu rừng nguyên sinh.",
                             IsFullDay = false,
                             Price = 800000.0,
@@ -495,7 +500,7 @@ namespace BookingTour.Data.Migrations
                             CategoryId = 3,
                             City = "Nha Trang",
                             Country = "Việt Nam",
-                            Created = new DateTime(2024, 11, 13, 12, 43, 59, 239, DateTimeKind.Local).AddTicks(6740),
+                            Created = new DateTime(2024, 11, 13, 9, 36, 43, 289, DateTimeKind.Local).AddTicks(5767),
                             Description = "Tour du lịch nghỉ dưỡng tại các bãi biển đẹp.",
                             IsFullDay = false,
                             Price = 1200000.0,
@@ -509,7 +514,7 @@ namespace BookingTour.Data.Migrations
                             CategoryId = 1,
                             City = "Hà Nội",
                             Country = "Việt Nam",
-                            Created = new DateTime(2024, 11, 13, 12, 43, 59, 239, DateTimeKind.Local).AddTicks(6746),
+                            Created = new DateTime(2024, 11, 13, 9, 36, 43, 289, DateTimeKind.Local).AddTicks(5770),
                             Description = "Tham quan các bảo tàng nổi tiếng.",
                             IsFullDay = true,
                             Price = 300000.0,
@@ -523,7 +528,7 @@ namespace BookingTour.Data.Migrations
                             CategoryId = 2,
                             City = "Sa Pa",
                             Country = "Việt Nam",
-                            Created = new DateTime(2024, 11, 13, 12, 43, 59, 239, DateTimeKind.Local).AddTicks(6754),
+                            Created = new DateTime(2024, 11, 13, 9, 36, 43, 289, DateTimeKind.Local).AddTicks(5772),
                             Description = "Tour cắm trại qua đêm trong rừng.",
                             IsFullDay = false,
                             Price = 950000.0,
@@ -537,7 +542,7 @@ namespace BookingTour.Data.Migrations
                             CategoryId = 3,
                             City = "Phú Quốc",
                             Country = "Việt Nam",
-                            Created = new DateTime(2024, 11, 13, 12, 43, 59, 239, DateTimeKind.Local).AddTicks(6765),
+                            Created = new DateTime(2024, 11, 13, 9, 36, 43, 289, DateTimeKind.Local).AddTicks(5774),
                             Description = "Tour nghỉ dưỡng và tham quan vùng biển.",
                             IsFullDay = true,
                             Price = 1500000.0,
@@ -545,21 +550,6 @@ namespace BookingTour.Data.Migrations
                             TourName = "Kỳ nghỉ biển",
                             VehicleType = "Thuyền"
                         });
-                });
-
-            modelBuilder.Entity("BookingTour.Model.TourActivity", b =>
-                {
-                    b.Property<int>("TourId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ActivityId")
-                        .HasColumnType("int");
-
-                    b.HasKey("TourId", "ActivityId");
-
-                    b.HasIndex("ActivityId");
-
-                    b.ToTable("TourActivities");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -591,17 +581,17 @@ namespace BookingTour.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "4c97ba02-2d6c-4a95-90bb-84e74b6af561",
-                            ConcurrencyStamp = "1",
+                            Id = "f926761e-ba55-4c30-808f-a3c8236246cb",
+                            ConcurrencyStamp = "1fca37ea-3c37-4779-b343-d3fa10b903b4",
                             Name = "Admin",
-                            NormalizedName = "Admin"
+                            NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "47b6cbac-6b28-46cc-a125-a6962d24ae74",
-                            ConcurrencyStamp = "2",
+                            Id = "5fec56cf-3543-4964-85f2-592661715c66",
+                            ConcurrencyStamp = "27872e71-b3cb-4bd5-a88a-3f1d80e05d2c",
                             Name = "User",
-                            NormalizedName = "User"
+                            NormalizedName = "USER"
                         });
                 });
 
@@ -702,6 +692,40 @@ namespace BookingTour.Data.Migrations
                     b.HasDiscriminator().HasValue("IdentityUser");
 
                     b.UseTphMappingStrategy();
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "c33ff290-ff40-4cec-9a06-f21b394d0417",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "fccf9ee9-434b-4484-8b84-9c4f60c2d4db",
+                            Email = "admin@gmail.com",
+                            EmailConfirmed = true,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "ADMIN@GMAIL.COM",
+                            NormalizedUserName = "ADMIN@GMAIL.COM",
+                            PasswordHash = "AQAAAAIAAYagAAAAEJVUXg/RfT/dIROKEomww41cYGdvO5tzclnM3uNfTTlUixC1XbcTviRsxFrMtPLwew==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "3472d667-ab25-4ef2-8032-e119ebe4a550",
+                            TwoFactorEnabled = false,
+                            UserName = "admin@gmail.com"
+                        },
+                        new
+                        {
+                            Id = "e50b7cfa-c381-4c33-9d48-409d6aa3d948",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "6f688c04-50cc-4bf3-bae1-099a699bf506",
+                            Email = "user@gmail.com",
+                            EmailConfirmed = true,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "USER@GMAIL.COM",
+                            NormalizedUserName = "USER@GMAIL.COM",
+                            PasswordHash = "AQAAAAIAAYagAAAAEOlU/rBAGyQqIvFyfiaozMArTsAS7184VbBqQFBS8kSIGrcj0wPiAxtO5lh0hP6poA==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "45e32a0a-449d-4a75-b693-4fa6f1c18850",
+                            TwoFactorEnabled = false,
+                            UserName = "user@gmail.com"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
@@ -764,6 +788,18 @@ namespace BookingTour.Data.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetUserRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = "c33ff290-ff40-4cec-9a06-f21b394d0417",
+                            RoleId = "f926761e-ba55-4c30-808f-a3c8236246cb"
+                        },
+                        new
+                        {
+                            UserId = "e50b7cfa-c381-4c33-9d48-409d6aa3d948",
+                            RoleId = "5fec56cf-3543-4964-85f2-592661715c66"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
@@ -794,6 +830,17 @@ namespace BookingTour.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasDiscriminator().HasValue("AppUser");
+                });
+
+            modelBuilder.Entity("BookingTour.Model.Activity", b =>
+                {
+                    b.HasOne("BookingTour.Model.Tour", "Tour")
+                        .WithMany("Activities")
+                        .HasForeignKey("TourId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Tour");
                 });
 
             modelBuilder.Entity("BookingTour.Model.Booking", b =>
@@ -867,25 +914,6 @@ namespace BookingTour.Data.Migrations
                     b.Navigation("Category");
                 });
 
-            modelBuilder.Entity("BookingTour.Model.TourActivity", b =>
-                {
-                    b.HasOne("BookingTour.Model.Activity", "Activity")
-                        .WithMany("TourActivities")
-                        .HasForeignKey("ActivityId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("BookingTour.Model.Tour", "Tour")
-                        .WithMany("TourActivities")
-                        .HasForeignKey("TourId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Activity");
-
-                    b.Navigation("Tour");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -937,11 +965,6 @@ namespace BookingTour.Data.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("BookingTour.Model.Activity", b =>
-                {
-                    b.Navigation("TourActivities");
-                });
-
             modelBuilder.Entity("BookingTour.Model.Category", b =>
                 {
                     b.Navigation("Tours");
@@ -949,13 +972,13 @@ namespace BookingTour.Data.Migrations
 
             modelBuilder.Entity("BookingTour.Model.Tour", b =>
                 {
+                    b.Navigation("Activities");
+
                     b.Navigation("Bookings");
 
                     b.Navigation("DateStarts");
 
                     b.Navigation("Reviews");
-
-                    b.Navigation("TourActivities");
                 });
 
             modelBuilder.Entity("BookingTour.Model.AppUser", b =>
