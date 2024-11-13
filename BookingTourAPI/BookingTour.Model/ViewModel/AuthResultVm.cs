@@ -1,4 +1,4 @@
-﻿namespace BookingTour.Model
+﻿namespace BookingTour.Model.ViewModel
 {
     public class AuthResultVm
     {

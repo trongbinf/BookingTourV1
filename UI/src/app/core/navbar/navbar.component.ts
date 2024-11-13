@@ -14,6 +14,9 @@ import { CommonModule } from '@angular/common';
 export class NavbarComponent implements OnInit {
 
   user?: User;
+
+  isDropdownVisible = false;
+
   constructor(private authService: AuthService,
     private router: Router
   ) {
@@ -26,8 +29,11 @@ export class NavbarComponent implements OnInit {
           this.user = response;
         }
       });
-
     this.user = this.authService.getUser();
+  }
+
+  toggleDropdown() {
+    this.isDropdownVisible = !this.isDropdownVisible;
   }
 
   onLogout() {
