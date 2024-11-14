@@ -5,6 +5,8 @@ import { ForgotPasswordComponent } from './features/auth/forgot-password/forgot-
 import { ChangepasswordComponent } from './features/auth/changepassword/changepassword.component';
 
 import { TourListComponent } from './features/Tour/tour-list/tour-list.component';
+import { HomeComponent } from './features/home/home.component';
+import { TourDetailComponent } from './features/tour-detail/tour-detail.component';
 
 export const routes: Routes = [
     {
@@ -25,10 +27,18 @@ export const routes: Routes = [
         path: 'changepass',
         component: ChangepasswordComponent
     },
-
-    {       
+    {
         path: 'tour',
         component: TourListComponent
-
+    }
+    ,
+    {
+        path: 'home',
+        component: HomeComponent
+    }
+    ,
+    {
+        path: 'tourdetail',
+        component: TourDetailComponent
     }
 ];

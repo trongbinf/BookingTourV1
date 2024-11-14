@@ -120,5 +120,404 @@
       }
     ],
     "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BookingTour.API.Controllers.TourController",
+    "Method": "GetAllTours",
+    "RelativePath": "api/Tour",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[BookingTour.Model.ViewModel.TourVm, BookingTour.Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "BookingTour.API.Controllers.TourController",
+    "Method": "CreateTour",
+    "RelativePath": "api/Tour",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Tour.TourId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Tour.TourName",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Tour.Description",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Tour.MainImage",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Tour.OtherImage",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Tour.City",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Tour.Country",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Tour.IsFullDay",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "Tour.Price",
+        "Type": "System.Double",
+        "IsRequired": false
+      },
+      {
+        "Name": "Tour.VehicleType",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Tour.Created",
+        "Type": "System.DateTime",
+        "IsRequired": false
+      },
+      {
+        "Name": "Tour.Status",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "Tour.CategoryId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Tour.Category.CategoryId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Tour.Category.Name",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Tour.Category.Status",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "Tour.Category.Tours",
+        "Type": "System.Collections.Generic.ICollection\u00601[[BookingTour.Model.Tour, BookingTour.Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "Tour.DateStarts",
+        "Type": "System.Collections.Generic.ICollection\u00601[[BookingTour.Model.DateStart, BookingTour.Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "Tour.TourActivities",
+        "Type": "System.Collections.Generic.ICollection\u00601[[BookingTour.Model.TourActivity, BookingTour.Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "Tour.Bookings",
+        "Type": "System.Collections.Generic.ICollection\u00601[[BookingTour.Model.Booking, BookingTour.Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "Tour.Reviews",
+        "Type": "System.Collections.Generic.ICollection\u00601[[BookingTour.Model.Review, BookingTour.Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "DateStarts",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[BookingTour.Model.DateStart, BookingTour.Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "TourActivities",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[BookingTour.Model.TourActivity, BookingTour.Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "Bookings",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[BookingTour.Model.Booking, BookingTour.Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "Reviews",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[BookingTour.Model.Review, BookingTour.Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "Category.CategoryId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Category.Name",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Category.Status",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "Category.Tours",
+        "Type": "System.Collections.Generic.ICollection\u00601[[BookingTour.Model.Tour, BookingTour.Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "MainImage",
+        "Type": "Microsoft.AspNetCore.Http.IFormFile",
+        "IsRequired": false
+      },
+      {
+        "Name": "DetailImages",
+        "Type": "System.Collections.Generic.List\u00601[[Microsoft.AspNetCore.Http.IFormFile, Microsoft.AspNetCore.Http.Features, Version=8.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60]]",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BookingTour.API.Controllers.TourController",
+    "Method": "GetTourById",
+    "RelativePath": "api/Tour/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "BookingTour.Model.ViewModel.TourVm",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "BookingTour.API.Controllers.TourController",
+    "Method": "UpdateTour",
+    "RelativePath": "api/Tour/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "Tour.TourId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Tour.TourName",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Tour.Description",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Tour.MainImage",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Tour.OtherImage",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Tour.City",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Tour.Country",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Tour.IsFullDay",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "Tour.Price",
+        "Type": "System.Double",
+        "IsRequired": false
+      },
+      {
+        "Name": "Tour.VehicleType",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Tour.Created",
+        "Type": "System.DateTime",
+        "IsRequired": false
+      },
+      {
+        "Name": "Tour.Status",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "Tour.CategoryId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Tour.Category.CategoryId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Tour.Category.Name",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Tour.Category.Status",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "Tour.Category.Tours",
+        "Type": "System.Collections.Generic.ICollection\u00601[[BookingTour.Model.Tour, BookingTour.Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "Tour.DateStarts",
+        "Type": "System.Collections.Generic.ICollection\u00601[[BookingTour.Model.DateStart, BookingTour.Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "Tour.TourActivities",
+        "Type": "System.Collections.Generic.ICollection\u00601[[BookingTour.Model.TourActivity, BookingTour.Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "Tour.Bookings",
+        "Type": "System.Collections.Generic.ICollection\u00601[[BookingTour.Model.Booking, BookingTour.Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "Tour.Reviews",
+        "Type": "System.Collections.Generic.ICollection\u00601[[BookingTour.Model.Review, BookingTour.Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "DateStarts",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[BookingTour.Model.DateStart, BookingTour.Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "TourActivities",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[BookingTour.Model.TourActivity, BookingTour.Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "Bookings",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[BookingTour.Model.Booking, BookingTour.Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "Reviews",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[BookingTour.Model.Review, BookingTour.Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "Category.CategoryId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Category.Name",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Category.Status",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "Category.Tours",
+        "Type": "System.Collections.Generic.ICollection\u00601[[BookingTour.Model.Tour, BookingTour.Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "MainImage",
+        "Type": "Microsoft.AspNetCore.Http.IFormFile",
+        "IsRequired": false
+      },
+      {
+        "Name": "DetailImages",
+        "Type": "System.Collections.Generic.List\u00601[[Microsoft.AspNetCore.Http.IFormFile, Microsoft.AspNetCore.Http.Features, Version=8.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60]]",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BookingTour.API.Controllers.TourController",
+    "Method": "DeleteTour",
+    "RelativePath": "api/Tour/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
   }
 ]
