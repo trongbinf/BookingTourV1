@@ -6,11 +6,13 @@ using BookingTour.Model.ViewModel;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.ComponentModel.DataAnnotations;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using System.Text.Json;
 
 namespace BookingTour.API.Controllers
 {
@@ -44,9 +46,26 @@ namespace BookingTour.API.Controllers
             var userExists = await _userManager.FindByEmailAsync(registerVm.Email);
             if (userExists != null)
             {
-                return BadRequest($"User {registerVm.Email} already exists!");
+                if (userExists.EmailConfirmed)
+                {
+                    return BadRequest($"User {registerVm.Email} already exists!");
+                }
+                else
+                {
+                    // Tạo token xác thực email cho người dùng chưa xác thực
+                    var token = await _userManager.GenerateEmailConfirmationTokenAsync(userExists);
+                    var confirmationLink = Url.Action(nameof(ConfirmEmail), "Auth", new { token, email = registerVm.Email }, Request.Scheme);
+
+                    // Gửi lại email xác thực
+                    var message = new Message(new string[] { userExists.Email! }, "Confirmation email link", confirmationLink!);
+                    _emailService.SendEmail(message);
+
+                    // Thông báo rằng tài khoản đã tồn tại nhưng cần xác thực email
+                    return Ok(new { message = $"Confirmation email has been resent to {registerVm.Email}. Please confirm your email to activate your account." });
+                }
             }
 
+            // Tạo mới người dùng
             var user = new AppUser
             {
                 UserName = registerVm.UserName,
@@ -61,17 +80,18 @@ namespace BookingTour.API.Controllers
                 return BadRequest(new { message = "User could not be created" });
             }
 
-            // Tạo token xác thực email
-            var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-            var confirmationLink = Url.Action(nameof(ConfirmEmail), "Auth", new { token, email = registerVm.Email }, Request.Scheme);
+            // Tạo token xác thực email cho người dùng mới
+            var newToken = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+            var newConfirmationLink = Url.Action(nameof(ConfirmEmail), "Auth", new { token = newToken, email = registerVm.Email }, Request.Scheme);
 
             // Gửi email xác thực
-            var message = new Message(new string[] { user.Email! }, "Confirmation email link", confirmationLink!);
-            _emailService.SendEmail(message);
+            var newMessage = new Message(new string[] { user.Email! }, "Confirmation email link", newConfirmationLink!);
+            _emailService.SendEmail(newMessage);
 
             // Thông báo rằng người dùng đã được tạo nhưng cần xác thực email
             return Created(nameof(Register), new { message = $"User {registerVm.Email} created! Please confirm your email to activate your account." });
         }
+
 
         [HttpGet("confirm-email")]
         public async Task<IActionResult> ConfirmEmail(string token, string email)
@@ -86,16 +106,17 @@ namespace BookingTour.API.Controllers
             var result = await _userManager.ConfirmEmailAsync(user, token);
             if (result.Succeeded)
             {
-                // Sau khi xác thực, có thể gán vai trò cho người dùng nếu cần
+                // Gán vai trò cho người dùng nếu cần
                 await _userManager.AddToRoleAsync(user, "User");
-                return Ok(new { message = "Email verified successfully! Your account is now active." });
+
+                // Chuyển hướng người dùng đến trang đăng nhập Angular sau khi xác thực thành công
+                return Redirect($"http://localhost:4200/register?token={token}");
             }
             else
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, new { message = "Email confirmation failed." });
             }
         }
-
 
         [HttpPost("login-user")]
         public async Task<IActionResult> Login([FromBody] LoginVm loginVm)
@@ -116,27 +137,6 @@ namespace BookingTour.API.Controllers
             return BadRequest(new { message = "Email or password is incorrect!" });
         }
 
-        [HttpPost("change-password")]
-        public async Task<IActionResult> ChangePassword([FromBody] ChangePasswordVm model)
-        {
-            // Lấy người dùng hiện tại từ User.Identity
-            var userExit = await _userManager.FindByEmailAsync(model.Email);
-            if (userExit == null)
-            {
-                return Unauthorized("User not found or not logged in.");
-            }
-
-            // Thực hiện đổi mật khẩu
-            var result = await _userManager.ChangePasswordAsync(userExit, model.OldPassword, model.NewPassword);
-            if (!result.Succeeded)
-            {
-                var errors = result.Errors.Select(e => e.Description).ToList();
-                return BadRequest(new { message = "Password change failed", errors });
-            }
-
-            return Ok(new { message = "Password changed successfully!" });
-        }
-
         private async Task<AuthResultVm> GenerateJWTToken(AppUser user)
         {
             var authClaims = new List<Claim>()
@@ -155,11 +155,15 @@ namespace BookingTour.API.Controllers
                 authClaims.Add(new Claim(ClaimTypes.Role, role));
             }
 
-            // Thêm BookingId vào claims từ danh sách Bookings của user
-            var bookingIds = user.Bookings.Select(b => b.BookingId.ToString()); // Giả sử Booking có thuộc tính Id là ID duy nhất
-            foreach (var bookingId in bookingIds)
+            var bookings = await _context.Bookings
+                        .Where(b => b.UserId == user.Id)
+                        .Select(b => new { b.BookingId, b.BookingDate, b.Status, b.TourId})
+                        .ToListAsync();
+
+            if (bookings != null && bookings.Any())
             {
-                authClaims.Add(new Claim("BookingId", bookingId));
+                var bookingsJson = JsonSerializer.Serialize(bookings);
+                authClaims.Add(new Claim("bookings", bookingsJson));
             }
 
             var authSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(_configuration["JWT:Secret"]));
@@ -194,6 +198,27 @@ namespace BookingTour.API.Controllers
             };
 
             return response;
+        }
+
+        [HttpPost("change-password")]
+        public async Task<IActionResult> ChangePassword([FromBody] ChangePasswordVm model)
+        {
+            // Lấy người dùng hiện tại từ User.Identity
+            var userExit = await _userManager.FindByEmailAsync(model.Email);
+            if (userExit == null)
+            {
+                return Unauthorized("User not found or not logged in.");
+            }
+
+            // Thực hiện đổi mật khẩu
+            var result = await _userManager.ChangePasswordAsync(userExit, model.OldPassword, model.NewPassword);
+            if (!result.Succeeded)
+            {
+                var errors = result.Errors.Select(e => e.Description).ToList();
+                return BadRequest(new { message = "Password change failed", errors });
+            }
+
+            return Ok(new { message = "Password changed successfully!" });
         }
 
         [HttpPost]

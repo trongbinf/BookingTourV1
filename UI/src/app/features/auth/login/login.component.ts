@@ -40,16 +40,18 @@ export class LoginComponent {
 
           // Giải mã token để lấy thông tin vai trò
           const decodedToken: any = jwtDecode(response.token);
-
           const role = decodedToken['role'] || decodedToken['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'];
+          const bookings = decodedToken['bookings'] ? JSON.parse(decodedToken['bookings']) : [];
 
-          // Gọi setUser với role lấy từ token
+          // Gọi setUser với role và bookings lấy từ response
           this.authService.setUser({
             email: this.model.email,
-            role: role
+            role: role,
+            bookings: bookings
           });
-          console.log(role); // Kiểm tra vai trò lấy được
-
+          console.log(decodedToken); // Kiểm tra cấu trúc của token sau khi giải mã
+          console.log(role);
+          console.log(bookings)
           this.router.navigateByUrl('/');
         },
         error: err => {
@@ -57,6 +59,7 @@ export class LoginComponent {
         }
       });
   }
+
 
   onForgotPassword() {
     this.authService.forgotpass(this.email).subscribe({
