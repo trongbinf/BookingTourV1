@@ -1,6 +1,8 @@
 
 using BookingTour.Business.Service;
 using BookingTour.Data.Data;
+using BookingTour.Data.Repository.IRepository;
+using BookingTour.Data.Repository;
 using BookingTour.Model;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
@@ -9,6 +11,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Text;
+using BookingTour.Business.Service.IService;
 
 namespace BookingTour
 {
@@ -30,6 +33,9 @@ namespace BookingTour
 
 			builder.Services.AddSingleton<IEmailSender>(sp =>
 			   new EmailSender(sp.GetRequiredService<IConfiguration>()));
+
+			builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+			builder.Services.AddScoped<ITourService, TourService>();
 
 			builder.Services.AddControllers();
 			builder.Services.AddEndpointsApiExplorer();
@@ -86,6 +92,8 @@ namespace BookingTour
 						ValidAudience = builder.Configuration["JWT:Audience"]
 					};
 				});
+
+
 			var app = builder.Build();
 
 			// Configure the HTTP request pipeline.

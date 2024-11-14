@@ -52,5 +52,10 @@ namespace BookingTour.Business.Service
 			_unitOfWork.Category.UpdateAsync(entity);
 			await _unitOfWork.SaveAsync();
 		}
+		public async Task<Category> GetFirstOrDefaultAsync(Expression<Func<Category, bool>> filter, string? includeProperties = null)
+		{
+
+			return await _unitOfWork.Category.GetFirstOrDefaultAsync(filter, includeProperties);
+		}
 	}
 }

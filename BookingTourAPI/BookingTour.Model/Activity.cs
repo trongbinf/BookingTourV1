@@ -1,5 +1,6 @@
 ﻿using BookingTour.Model.Enum;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace BookingTour.Model
 {
@@ -11,7 +12,9 @@ namespace BookingTour.Model
         public ActivityType ActivityType { get; set; }
         public string ActivityName { get; set; }
         public string Description {  get; set; }
+
         public int TourId { get; set; }
-        public ICollection<TourActivity> TourActivities { get; set; } = new List<TourActivity>();
+		[JsonIgnore]
+		public ICollection<TourActivity> TourActivities { get; set; } = new List<TourActivity>();
     }
 }
