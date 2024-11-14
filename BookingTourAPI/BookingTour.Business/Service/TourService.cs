@@ -46,9 +46,16 @@ namespace BookingTour.Business.Service
 		public async Task<Tour> GetByIdAsync(int id)
 		{
 			return await _unitOfWork.Tour.GetFirstOrDefaultAsync(t => t.TourId == id);
-		}
 
 	
+		}
+
+		public async Task<Tour> GetFirstOrDefaultAsync(Expression<Func<Tour, bool>> filter, string? includeProperties = null)
+		{
+		
+			return await _unitOfWork.Tour.GetFirstOrDefaultAsync(filter, includeProperties);
+		}
+
 		public async Task UpdateAsync(Tour entity)
 		{
 			_unitOfWork.Tour.UpdateAsync(entity); 

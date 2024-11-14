@@ -49,5 +49,11 @@ namespace BookingTour.Business.Service
 			_unitOfWork.Booking.UpdateAsync(entity); 
 			await _unitOfWork.SaveAsync(); 
 		}
+		public async Task<Booking> GetFirstOrDefaultAsync(Expression<Func<Booking, bool>> filter, string? includeProperties = null)
+		{
+
+			return await _unitOfWork.Booking.GetFirstOrDefaultAsync(filter, includeProperties);
+		}
+
 	}
 }

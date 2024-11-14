@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.Globalization;
+using System.Text.Json.Serialization;
 
 
 namespace BookingTour.Model
@@ -18,15 +19,20 @@ namespace BookingTour.Model
 		public string VehicleType {  get; set; }
 		public DateTime Created { get; set; } = DateTime.Now;
         public bool Status { get; set; }
-
 		
 		public int CategoryId { get; set; }
+
 		[ForeignKey("CategoryId")]
 		public Category Category { get; set; }
+		[JsonIgnore]
 		public ICollection<DateStart> DateStarts { get; set; } = new List<DateStart>();
-        public ICollection<TourActivity> TourActivities { get; set; } = new List<TourActivity>();
-        public ICollection<Booking> Bookings { get; set; } = new List<Booking>();
+		[JsonIgnore]
+		public ICollection<TourActivity> TourActivities { get; set; } = new List<TourActivity>();
+		[JsonIgnore]
+		public ICollection<Booking> Bookings { get; set; } = new List<Booking>();
+		[JsonIgnore]
 		public ICollection<Review> Reviews { get; set; } = new List<Review>();
+
 
 		public string FormatPrice(double price)
 		{

@@ -47,6 +47,13 @@ namespace BookingTour.Business.Service
 			return await _unitOfWork.Review.GetFirstOrDefaultAsync(r => r.ReviewId == id);
 		}
 
+		public async Task<Review> GetFirstOrDefaultAsync(Expression<Func<Review, bool>> filter, string? includeProperties = null)
+		{
+
+			return await _unitOfWork.Review.GetFirstOrDefaultAsync(filter, includeProperties);
+		}
+
+	
 
 		public async Task UpdateAsync(Review entity)
 		{

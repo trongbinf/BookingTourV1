@@ -36,3 +36,16 @@ D:\CSharp\Project\CPL_BookingTour\BookingTourV1\BookingTourAPI\BookingTour.Model
 D:\CSharp\Project\CPL_BookingTour\BookingTourV1\BookingTourAPI\BookingTour.Model\obj\Debug\net8.0\refint\BookingTour.Model.dll
 D:\CSharp\Project\CPL_BookingTour\BookingTourV1\BookingTourAPI\BookingTour.Model\obj\Debug\net8.0\BookingTour.Model.pdb
 D:\CSharp\Project\CPL_BookingTour\BookingTourV1\BookingTourAPI\BookingTour.Model\obj\Debug\net8.0\ref\BookingTour.Model.dll
+E:\dotritrong\CSharp\BookingTourV1\BookingTourAPI\BookingTour.Model\bin\Debug\net8.0\BookingTour.Model.deps.json
+E:\dotritrong\CSharp\BookingTourV1\BookingTourAPI\BookingTour.Model\bin\Debug\net8.0\BookingTour.Model.dll
+E:\dotritrong\CSharp\BookingTourV1\BookingTourAPI\BookingTour.Model\bin\Debug\net8.0\BookingTour.Model.pdb
+E:\dotritrong\CSharp\BookingTourV1\BookingTourAPI\BookingTour.Model\obj\Debug\net8.0\BookingTour.Model.csproj.AssemblyReference.cache
+E:\dotritrong\CSharp\BookingTourV1\BookingTourAPI\BookingTour.Model\obj\Debug\net8.0\BookingTour.Model.GeneratedMSBuildEditorConfig.editorconfig
+E:\dotritrong\CSharp\BookingTourV1\BookingTourAPI\BookingTour.Model\obj\Debug\net8.0\BookingTour.Model.AssemblyInfoInputs.cache
+E:\dotritrong\CSharp\BookingTourV1\BookingTourAPI\BookingTour.Model\obj\Debug\net8.0\BookingTour.Model.AssemblyInfo.cs
+E:\dotritrong\CSharp\BookingTourV1\BookingTourAPI\BookingTour.Model\obj\Debug\net8.0\BookingTour.Model.csproj.CoreCompileInputs.cache
+E:\dotritrong\CSharp\BookingTourV1\BookingTourAPI\BookingTour.Model\obj\Debug\net8.0\BookingTour.Model.sourcelink.json
+E:\dotritrong\CSharp\BookingTourV1\BookingTourAPI\BookingTour.Model\obj\Debug\net8.0\BookingTour.Model.dll
+E:\dotritrong\CSharp\BookingTourV1\BookingTourAPI\BookingTour.Model\obj\Debug\net8.0\refint\BookingTour.Model.dll
+E:\dotritrong\CSharp\BookingTourV1\BookingTourAPI\BookingTour.Model\obj\Debug\net8.0\BookingTour.Model.pdb
+E:\dotritrong\CSharp\BookingTourV1\BookingTourAPI\BookingTour.Model\obj\Debug\net8.0\ref\BookingTour.Model.dll
