@@ -1,1 +1,41 @@
-<p>tour-list works!</p>
+<div class="container">
+  <div *ngIf="tours && tours.length > 0">
+    <div class="table table-responsive">
+      <table class="table table-striped table-sm fs-9 mb-">
+        <thead>
+          <tr>
+            <th class="sort border-top" data-sort="id">ID</th>
+            <th
+              class="sort border-top border-translucent ps-3"
+              data-sort="name"
+            >
+              Tour Name
+            </th>
+            <th class="sort border-top" data-sort="description">Description</th>
+            <th class="sort border-top" data-sort="city">City</th>
+            <th class="sort border-top" data-sort="country">Country</th>
+            <th class="sort text-end align-middle pe-0 border-top" scope="col">
+              Action
+            </th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr *ngFor="let tour of tours">
+            <td class="align-middle city">{{ tour.tour.tourId }}</td>
+            <td class="align-middle ps-3 name">{{ tour.tour.tourName }}</td>
+            <td class="align-middle description">
+              {{ tour.tour.description }}
+            </td>
+            <td class="align-middle city">{{ tour.tour.city }}</td>
+            <td class="align-middle country">{{ tour.tour.country }}</td>
+            <td class="align-middle text-end">
+              <button class="btn btn-sm btn-primary">View</button>
+              <button class="btn btn-sm btn-danger">Delete</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <p *ngIf="tours && tours.length === 0">No tours available to display.</p>
+</div>

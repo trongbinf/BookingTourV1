@@ -49,3 +49,16 @@ E:\dotritrong\CSharp\BookingTourV1\BookingTourAPI\BookingTour.Model\obj\Debug\ne
 E:\dotritrong\CSharp\BookingTourV1\BookingTourAPI\BookingTour.Model\obj\Debug\net8.0\refint\BookingTour.Model.dll
 E:\dotritrong\CSharp\BookingTourV1\BookingTourAPI\BookingTour.Model\obj\Debug\net8.0\BookingTour.Model.pdb
 E:\dotritrong\CSharp\BookingTourV1\BookingTourAPI\BookingTour.Model\obj\Debug\net8.0\ref\BookingTour.Model.dll
+D:\K17_KTPM\Git_Repo\BookingTourV1\BookingTourAPI\BookingTour.Model\bin\Debug\net8.0\BookingTour.Model.deps.json
+D:\K17_KTPM\Git_Repo\BookingTourV1\BookingTourAPI\BookingTour.Model\bin\Debug\net8.0\BookingTour.Model.dll
+D:\K17_KTPM\Git_Repo\BookingTourV1\BookingTourAPI\BookingTour.Model\bin\Debug\net8.0\BookingTour.Model.pdb
+D:\K17_KTPM\Git_Repo\BookingTourV1\BookingTourAPI\BookingTour.Model\obj\Debug\net8.0\BookingTour.Model.csproj.AssemblyReference.cache
+D:\K17_KTPM\Git_Repo\BookingTourV1\BookingTourAPI\BookingTour.Model\obj\Debug\net8.0\BookingTour.Model.GeneratedMSBuildEditorConfig.editorconfig
+D:\K17_KTPM\Git_Repo\BookingTourV1\BookingTourAPI\BookingTour.Model\obj\Debug\net8.0\BookingTour.Model.AssemblyInfoInputs.cache
+D:\K17_KTPM\Git_Repo\BookingTourV1\BookingTourAPI\BookingTour.Model\obj\Debug\net8.0\BookingTour.Model.AssemblyInfo.cs
+D:\K17_KTPM\Git_Repo\BookingTourV1\BookingTourAPI\BookingTour.Model\obj\Debug\net8.0\BookingTour.Model.csproj.CoreCompileInputs.cache
+D:\K17_KTPM\Git_Repo\BookingTourV1\BookingTourAPI\BookingTour.Model\obj\Debug\net8.0\BookingTour.Model.sourcelink.json
+D:\K17_KTPM\Git_Repo\BookingTourV1\BookingTourAPI\BookingTour.Model\obj\Debug\net8.0\BookingTour.Model.dll
+D:\K17_KTPM\Git_Repo\BookingTourV1\BookingTourAPI\BookingTour.Model\obj\Debug\net8.0\refint\BookingTour.Model.dll
+D:\K17_KTPM\Git_Repo\BookingTourV1\BookingTourAPI\BookingTour.Model\obj\Debug\net8.0\BookingTour.Model.pdb
+D:\K17_KTPM\Git_Repo\BookingTourV1\BookingTourAPI\BookingTour.Model\obj\Debug\net8.0\ref\BookingTour.Model.dll

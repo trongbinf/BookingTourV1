@@ -12,11 +12,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Text;
-<<<<<<< HEAD
 using User.Management.Service.Services;
-=======
-using BookingTour.Business.Service.IService;
->>>>>>> 51be49fc5dd80299671389422910e5ba6e1e2634
 
 namespace BookingTour
 {

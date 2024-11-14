@@ -1,9 +1,18 @@
+import { BASE_URL } from './../../../app.config';
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { Tour } from '../models/tour.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TourService {
+  private apiUrl = `${BASE_URL}/Tour`;
+  constructor(private http: HttpClient) {}
 
-  constructor() { }
+  getAllTours(): Observable<Tour[]> {
+    return this.http.get<Tour[]>(this.apiUrl);
+  }
+
 }
