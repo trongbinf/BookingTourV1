@@ -9,6 +9,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { Register } from '../models/register.model';
 import { ResetPassword } from '../models/reset-password.model';
 import { ChangePassword } from '../models/changepass..models';
+import { Booking } from '../../Booking/models/booking.model';
 
 
 @Injectable({
@@ -45,10 +46,15 @@ export class AuthService {
     return this.http.post<void>(`${BASE_URL}/Auth/register-user`, register);
   }
 
+  confirmEmail(token: string, email: string): Observable<any> {
+    return this.http.get(`${BASE_URL}/confirm-email?token=${token}&email=${email}`);
+  }
+
   setUser(user: User): void {
     this.$user.next(user);
     localStorage.setItem('user-email', user.email);
     localStorage.setItem('user-role', user.role);
+    localStorage.setItem('user-bookings', JSON.stringify(user.bookings)); // Lưu bookings dưới dạng JSON
   }
 
   user(): Observable<User | undefined> {
@@ -58,18 +64,26 @@ export class AuthService {
   getUser(): User | undefined {
     const email = localStorage.getItem('user-email');
     const role = localStorage.getItem('user-role');
+    const bookings = localStorage.getItem('user-bookings');
 
     if (email && role) {
+      let parsedBookings: Booking[] = [];
+      try {
+        parsedBookings = bookings ? JSON.parse(bookings) : [];
+      } catch (e) {
+        console.error("Lỗi khi phân tích JSON bookings từ localStorage:", e);
+      }
+
       const user: User = {
         email: email,
-        role: role
+        role: role,
+        bookings: parsedBookings
       };
 
       return user;
     }
     return undefined;
   }
-
 
   logout(): void {
     localStorage.clear();

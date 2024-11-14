@@ -13,5 +13,5 @@ export interface Booking {
     notes?: string;
     status: StatusType;
     tour?: Tour;
-    user?: User;
+    // user?: User;
 }
