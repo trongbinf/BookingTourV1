@@ -38,7 +38,8 @@ namespace BookingTour.API.Controllers
                     Roles = _context.UserRoles
                     .Where(ur => ur.UserId == user.Id)
                                 .Join(_context.Roles, ur => ur.RoleId, r => r.Id, (ur, r) => r.Name)
-                                .FirstOrDefault()
+                                .FirstOrDefault(),
+                    Status = user.LockoutEnabled
                 })
                 .ToListAsync();
 
