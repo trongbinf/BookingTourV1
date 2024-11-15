@@ -68,7 +68,7 @@ namespace BookingTour.API.Controllers
             );
 
             // Lấy tối đa 5 tour theo category đã chọn
-            var tourVms = tours.Take(5).Select(tour => new TourVm
+            var tourVms = tours.Take(6).Select(tour => new TourVm
             {
                 Tour = tour,
                 DateStarts = tour.DateStarts,
