@@ -28,7 +28,7 @@ export const routes: Routes = [
         component: ChangepasswordComponent
     },
     {
-        path: 'tour',
+        path: 'admin-tour',
         component: TourListComponent
     }
     ,
