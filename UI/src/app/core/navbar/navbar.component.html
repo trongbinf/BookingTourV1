@@ -1,6 +1,7 @@
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container-fluid">
-        <div class="collapse navbar-collapse" id="navbarSupportedContent" style="margin-left: 100px;">
+        <div class="collapse navbar-collapse" id="navbarSupportedContent"
+            style="margin-left: 100px;justify-content: space-around;">
             <div class="d-flex align-items-center" style="display: flex; align-items: center;">
                 <a [routerLink]="['/']" class="d-flex align-items-center text-decoration-none"
                     style="display: flex; align-items: center; text-decoration: none;">
@@ -11,14 +12,6 @@
                         BookingTour</h5>
                 </a>
             </div>
-
-            <div class="d-flex" style="margin-left: 300px;">
-                <form class="d-flex">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Search</button>
-                </form>
-            </div>
-
             <div class="d-flex" style="margin-left: 400px;">
                 <ng-container *ngIf="user===undefined;else showLogout">
                     <a [routerLink]="['/login']" class="btn btn-primary">Login</a>
@@ -33,12 +26,15 @@
                                     alt="avatar" style="width: 50px;">
                             </a>
                             <ul class="dropdown-menu">
-                                <li class="mt-2"><span class="dropdown-item">{{user?.email}}</span></li>
-                                <li class="mt-2"><span class="dropdown-item">Profile</span></li>
-                                <li class="mt-2"><span [routerLink]="['/changepass']" class="dropdown-item">Change
+                                <li class="mt-2" style="cursor: pointer;"><span
+                                        class="dropdown-item">{{user?.email}}</span></li>
+                                <li class="mt-2" style="cursor: pointer;"><span class="dropdown-item">Profile</span>
+                                </li>
+                                <li class="mt-2" style="cursor: pointer;"><span [routerLink]="['/changepass']"
+                                        class="dropdown-item">Change
                                         Password</span></li>
-                                <li class="mt-2"><a class="dropdown-item" (click)="onLogout()">Logout</a></li>
-
+                                <li class="mt-2" style="cursor: pointer;"><a class="dropdown-item"
+                                        (click)="onLogout()">Logout</a></li>
                             </ul>
                         </li>
                     </ul>

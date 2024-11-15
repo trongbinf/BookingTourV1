@@ -62,3 +62,16 @@ D:\K17_KTPM\Git_Repo\BookingTourV1\BookingTourAPI\BookingTour.Model\obj\Debug\ne
 D:\K17_KTPM\Git_Repo\BookingTourV1\BookingTourAPI\BookingTour.Model\obj\Debug\net8.0\refint\BookingTour.Model.dll
 D:\K17_KTPM\Git_Repo\BookingTourV1\BookingTourAPI\BookingTour.Model\obj\Debug\net8.0\BookingTour.Model.pdb
 D:\K17_KTPM\Git_Repo\BookingTourV1\BookingTourAPI\BookingTour.Model\obj\Debug\net8.0\ref\BookingTour.Model.dll
+D:\CSharp\Project\CPL_BookingTour_Clone\BookingTourV1\BookingTourAPI\BookingTour.Model\bin\Debug\net8.0\BookingTour.Model.deps.json
+D:\CSharp\Project\CPL_BookingTour_Clone\BookingTourV1\BookingTourAPI\BookingTour.Model\bin\Debug\net8.0\BookingTour.Model.dll
+D:\CSharp\Project\CPL_BookingTour_Clone\BookingTourV1\BookingTourAPI\BookingTour.Model\bin\Debug\net8.0\BookingTour.Model.pdb
+D:\CSharp\Project\CPL_BookingTour_Clone\BookingTourV1\BookingTourAPI\BookingTour.Model\obj\Debug\net8.0\BookingTour.Model.csproj.AssemblyReference.cache
+D:\CSharp\Project\CPL_BookingTour_Clone\BookingTourV1\BookingTourAPI\BookingTour.Model\obj\Debug\net8.0\BookingTour.Model.GeneratedMSBuildEditorConfig.editorconfig
+D:\CSharp\Project\CPL_BookingTour_Clone\BookingTourV1\BookingTourAPI\BookingTour.Model\obj\Debug\net8.0\BookingTour.Model.AssemblyInfoInputs.cache
+D:\CSharp\Project\CPL_BookingTour_Clone\BookingTourV1\BookingTourAPI\BookingTour.Model\obj\Debug\net8.0\BookingTour.Model.AssemblyInfo.cs
+D:\CSharp\Project\CPL_BookingTour_Clone\BookingTourV1\BookingTourAPI\BookingTour.Model\obj\Debug\net8.0\BookingTour.Model.csproj.CoreCompileInputs.cache
+D:\CSharp\Project\CPL_BookingTour_Clone\BookingTourV1\BookingTourAPI\BookingTour.Model\obj\Debug\net8.0\BookingTour.Model.sourcelink.json
+D:\CSharp\Project\CPL_BookingTour_Clone\BookingTourV1\BookingTourAPI\BookingTour.Model\obj\Debug\net8.0\BookingTour.Model.dll
+D:\CSharp\Project\CPL_BookingTour_Clone\BookingTourV1\BookingTourAPI\BookingTour.Model\obj\Debug\net8.0\refint\BookingTour.Model.dll
+D:\CSharp\Project\CPL_BookingTour_Clone\BookingTourV1\BookingTourAPI\BookingTour.Model\obj\Debug\net8.0\BookingTour.Model.pdb
+D:\CSharp\Project\CPL_BookingTour_Clone\BookingTourV1\BookingTourAPI\BookingTour.Model\obj\Debug\net8.0\ref\BookingTour.Model.dll

@@ -9,10 +9,14 @@ import { Tour } from '../models/tour.model';
 })
 export class TourService {
   private apiUrl = `${BASE_URL}/Tour`;
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   getAllTours(): Observable<Tour[]> {
     return this.http.get<Tour[]>(this.apiUrl);
+  }
+
+  getTourByCategory(name?: string): Observable<Tour[]> {
+    return this.http.get<Tour[]>(`${BASE_URL}/Tour/categories/${name}`);
   }
 
 }

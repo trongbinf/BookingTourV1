@@ -1,10 +1,8 @@
 ﻿using Microsoft.AspNetCore.Http;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BookingTour.Model.ViewModel
 {
-	public class TourVm
+    public class TourVm
 	{
 		public Tour Tour { get; set; } 
 

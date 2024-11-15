@@ -9,6 +9,6 @@ namespace BookingTour.Business.Service.IService
 {
 	public interface  ITourService : IBaseService<Tour>
 	{
-	
+		
 	}
 }

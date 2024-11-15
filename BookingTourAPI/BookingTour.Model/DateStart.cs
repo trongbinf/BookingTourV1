@@ -1,4 +1,5 @@
 using BookingTour.Model.Enum;
+using System.Text.Json.Serialization;
 
 namespace BookingTour.Model
 {
@@ -7,8 +8,8 @@ namespace BookingTour.Model
         public int DateStartId {  get; set; }
         public DateTime StartDate {get;set;}
         public StatusType TypeStatus { get; set; }
-
-		public int TourId { get; set; }
+        public int TourId { get; set; }
+        [JsonIgnore]
 		public Tour Tour { get; set; }
 	}
 }
