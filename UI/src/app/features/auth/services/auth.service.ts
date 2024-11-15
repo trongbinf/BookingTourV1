@@ -10,16 +10,30 @@ import { Register } from '../models/register.model';
 import { ResetPassword } from '../models/reset-password.model';
 import { ChangePassword } from '../models/changepass..models';
 import { Booking } from '../../Booking/models/booking.model';
+import { AppUser } from '../models/appUser.model';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
+
+
   $user = new BehaviorSubject<User | undefined>(undefined);
 
   constructor(private http: HttpClient,
     private cookieService: CookieService) { }
+
+  getAllUser(): Observable<AppUser[]> {
+    return this.http.get<AppUser[]>(`${BASE_URL}/User/get-all-user`);
+  }
+  blockUser(id: string): Observable<void> {
+    return this.http.post<void>(`${BASE_URL}/User/block-user/${id}`, {});
+  }
+  setRole(userId: string, role: string): Observable<void> {
+    return this.http.post<void>(`${BASE_URL}/User/set-role-user/${userId}?roleName=${role}`, {});
+  }
+
 
   login(request: LoginRequest): Observable<LoginResponse> {
     return this.http.post<LoginResponse>(`${BASE_URL}/Auth/login-user`, request);
