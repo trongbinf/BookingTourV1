@@ -15,14 +15,14 @@ namespace BookingTour.Data.Data
 			  new IdentityRole() { Name = "User", ConcurrencyStamp = "2", NormalizedName = "User" }
 			);
 
-			// Thêm dữ liệu cho bảng Category
+			
 			modelBuilder.Entity<Category>().HasData(
 				new Category { CategoryId = 1, Name = "Tour tham quan", Status = true },
 				new Category { CategoryId = 2, Name = "Thiên nhiên", Status = true },
 				new Category { CategoryId = 3, Name = "Biển", Status = true }
 			);
 
-			// Thêm dữ liệu cho bảng Tour và liên kết với Category thông qua CategoryId
+			
 			modelBuilder.Entity<Tour>().HasData(
 				new Tour
 				{
@@ -36,7 +36,7 @@ namespace BookingTour.Data.Data
 					VehicleType = "Xe bus",
 					Status = true,
 					Created = DateTime.Now,
-					CategoryId = 1  // Thuộc Category "Tour tham quan"
+					CategoryId = 1  
 				},
 				new Tour
 				{
@@ -50,7 +50,7 @@ namespace BookingTour.Data.Data
 					VehicleType = "Xe du lịch",
 					Status = true,
 					Created = DateTime.Now,
-					CategoryId = 2  // Thuộc Category "Thiên nhiên"
+					CategoryId = 2  
 				},
 				new Tour
 				{
