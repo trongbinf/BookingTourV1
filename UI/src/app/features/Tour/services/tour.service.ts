@@ -3,16 +3,20 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Tour } from '../models/tour.model';
+import { TourVm } from '../models/tourVm.models';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TourService {
   private apiUrl = `${BASE_URL}/Tour`;
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   getAllTours(): Observable<Tour[]> {
     return this.http.get<Tour[]>(this.apiUrl);
+  }
+  getTourById(id: number): Observable<TourVm> {
+    return this.http.get<TourVm>(`${this.apiUrl}/${id}`);
   }
 
 }

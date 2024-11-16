@@ -107,7 +107,7 @@ namespace BookingTour.API.Controllers
             if (result.Succeeded)
             {
                 // Gán vai trò cho người dùng nếu cần
-                await _userManager.AddToRoleAsync(user, "User");
+                await _userManager.AddToRoleAsync(user, RoleUser.Role_User_Customer);
 
                 // Chuyển hướng người dùng đến trang đăng nhập Angular sau khi xác thực thành công
                 return Redirect($"http://localhost:4200/register?token={token}");

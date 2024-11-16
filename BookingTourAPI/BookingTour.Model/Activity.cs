@@ -9,12 +9,12 @@ namespace BookingTour.Model
     {
         [Key]
         public int ActivityId { get; set; }
-        public ActivityType ActivityType { get; set; }
+		public TimeSpan Duration { get; set; }
+		public ActivityType ActivityType { get; set; }
         public string ActivityName { get; set; }
-        public string Description {  get; set; }
-
+		public string Location { get; set; }
+		public string Description {  get; set; }
         public int TourId { get; set; }
-		[JsonIgnore]
-		public ICollection<TourActivity> TourActivities { get; set; } = new List<TourActivity>();
+		
     }
 }

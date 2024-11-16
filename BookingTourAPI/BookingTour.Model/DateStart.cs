@@ -9,6 +9,6 @@ namespace BookingTour.Model
         public StatusType TypeStatus { get; set; }
 
 		public int TourId { get; set; }
-		public Tour Tour { get; set; }
+		public  Tour Tour { get; set; }
 	}
 }

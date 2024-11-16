@@ -9,6 +9,6 @@ namespace BookingTour.Model
 		public string FullName { get; set; }
 		public List<RefreshToken> RefreshTokens { get; set; }
 
-		public ICollection<Booking> Bookings { get; set; } = new List<Booking>();
+		public ICollection<Booking> Bookings { get; set; }   
 	}
 }

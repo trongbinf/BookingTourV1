@@ -1,12 +1,7 @@
 ﻿using BookingTour.Business.Service.IService;
-using BookingTour.Model;
 using BookingTour.Model.ViewModel;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;  // For Include method
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+
 
 namespace BookingTour.API.Controllers
 {
@@ -26,7 +21,7 @@ namespace BookingTour.API.Controllers
 		public async Task<ActionResult<IEnumerable<TourVm>>> GetAllTours()
 		{
 			var tours = await _tourService.GetAllAsync(
-				includeProperties: "Category,Reviews,TourActivities,Bookings"
+				includeProperties: "Category,DateStarts,Reviews,Activities,Bookings"
 			);
 
 			var tourVms = tours.Select(tour => new TourVm
@@ -34,7 +29,8 @@ namespace BookingTour.API.Controllers
 				Tour = tour,
 				Category = tour.Category,
 				Reviews = tour.Reviews,
-				TourActivities = tour.TourActivities,
+				DateStarts = tour.DateStarts,
+				Activities = tour.Activities,
 				Bookings = tour.Bookings
 			});
 
@@ -46,7 +42,7 @@ namespace BookingTour.API.Controllers
 		public async Task<ActionResult<TourVm>> GetTourById(int id)
 		{
 			var tour = await _tourService.GetFirstOrDefaultAsync( x => x.TourId == id, 
-				includeProperties: "Category,Reviews,TourActivities,Bookings"); 
+				includeProperties: "Category,DateStarts,Reviews,Activities,Bookings"); 
 			if (tour == null)
 			{
 				return NotFound();  
@@ -57,7 +53,8 @@ namespace BookingTour.API.Controllers
 				Tour = tour,
 				Category = tour.Category,
 				Reviews = tour.Reviews,
-				TourActivities = tour.TourActivities,
+				DateStarts = tour.DateStarts,
+				Activities = tour.Activities,
 				Bookings = tour.Bookings
 			};
 

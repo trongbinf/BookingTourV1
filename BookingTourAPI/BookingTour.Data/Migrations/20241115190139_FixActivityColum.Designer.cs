@@ -4,6 +4,7 @@ using BookingTour.Data.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BookingTour.Data.Migrations
 {
     [DbContext(typeof(BookingTourDbContext))]
-    partial class BookingTourDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241115190139_FixActivityColum")]
+    partial class FixActivityColum
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -61,102 +64,122 @@ namespace BookingTour.Data.Migrations
                         new
                         {
                             ActivityId = 1,
-                            ActivityName = "Ăn sáng tại khách sạn",
+                            ActivityName = "Hướng dẫn viên du lịch",
                             ActivityType = 0,
-                            Description = "Thưởng thức bữa sáng buffet tại khách sạn trước khi khởi hành.",
-                            Duration = new TimeSpan(0, 1, 0, 0, 0),
-                            Location = "Khách sạn trung tâm Hà Nội",
+                            Description = "Cung cấp hướng dẫn viên chuyên nghiệp suốt chuyến tham quan.",
+                            Duration = new TimeSpan(0, 4, 0, 0, 0),
+                            Location = "Thành phố Hà Nội",
                             TourId = 1
                         },
                         new
                         {
                             ActivityId = 2,
-                            ActivityName = "Hướng dẫn tham quan",
+                            ActivityName = "Quy định khi tham quan",
                             ActivityType = 1,
-                            Description = "Hướng dẫn viên cung cấp thông tin về các địa điểm nổi bật.",
-                            Duration = new TimeSpan(0, 2, 0, 0, 0),
-                            Location = "Điểm tham quan Hà Nội",
+                            Description = "Du khách không được hút thuốc và giữ trật tự trong khu vực công cộng.",
+                            Duration = new TimeSpan(0, 1, 0, 0, 0),
+                            Location = "Các điểm tham quan",
                             TourId = 1
                         },
                         new
                         {
                             ActivityId = 3,
-                            ActivityName = "Tham quan Văn Miếu Quốc Tử Giám",
+                            ActivityName = "Lịch trình tham quan",
                             ActivityType = 2,
-                            Description = "Khám phá di tích lịch sử với kiến trúc độc đáo.",
-                            Duration = new TimeSpan(0, 3, 0, 0, 0),
-                            Location = "Văn Miếu Quốc Tử Giám",
+                            Description = "Khám phá các địa danh nổi bật trong thành phố trong 4 giờ.",
+                            Duration = new TimeSpan(0, 4, 0, 0, 0),
+                            Location = "Các địa danh nổi bật tại Hà Nội",
                             TourId = 1
                         },
                         new
                         {
                             ActivityId = 4,
-                            ActivityName = "Dùng bữa trưa tại nhà hàng",
+                            ActivityName = "Cắm trại và BBQ",
                             ActivityType = 0,
-                            Description = "Thưởng thức ẩm thực truyền thống tại nhà hàng nổi tiếng.",
-                            Duration = new TimeSpan(0, 1, 30, 0, 0),
-                            Location = "Nhà hàng Phố Cổ Hà Nội",
-                            TourId = 1
+                            Description = "Trải nghiệm nướng BBQ và nghỉ đêm tại khu cắm trại.",
+                            Duration = new TimeSpan(1, 0, 0, 0, 0),
+                            Location = "Rừng nguyên sinh Đà Lạt",
+                            TourId = 2
                         },
                         new
                         {
                             ActivityId = 5,
-                            ActivityName = "Mua sắm tại chợ Đồng Xuân",
-                            ActivityType = 2,
-                            Description = "Tự do tham quan và mua sắm các đặc sản địa phương.",
-                            Duration = new TimeSpan(0, 2, 0, 0, 0),
-                            Location = "Chợ Đồng Xuân, Hà Nội",
-                            TourId = 1
+                            ActivityName = "Bảo vệ môi trường",
+                            ActivityType = 1,
+                            Description = "Du khách cần tuân thủ các quy định bảo vệ môi trường trong khu cắm trại.",
+                            Duration = new TimeSpan(0, 0, 30, 0, 0),
+                            Location = "Khu cắm trại Đà Lạt",
+                            TourId = 2
                         },
                         new
                         {
                             ActivityId = 6,
-                            ActivityName = "Ăn sáng tại khu nghỉ dưỡng",
-                            ActivityType = 0,
-                            Description = "Bữa sáng với các món ăn đặc sản địa phương.",
-                            Duration = new TimeSpan(0, 1, 0, 0, 0),
-                            Location = "Khu nghỉ dưỡng Đà Lạt",
+                            ActivityName = "Đi bộ đường dài",
+                            ActivityType = 2,
+                            Description = "Chuyến đi bộ xuyên rừng kéo dài 3 giờ qua các cảnh quan thiên nhiên.",
+                            Duration = new TimeSpan(0, 3, 0, 0, 0),
+                            Location = "Khu rừng nguyên sinh Đà Lạt",
                             TourId = 2
                         },
                         new
                         {
                             ActivityId = 7,
-                            ActivityName = "Khám phá thác Datanla",
-                            ActivityType = 2,
-                            Description = "Tham quan và chụp ảnh tại thác nước nổi tiếng.",
-                            Duration = new TimeSpan(0, 3, 0, 0, 0),
-                            Location = "Thác Datanla, Đà Lạt",
-                            TourId = 2
+                            ActivityName = "Dịch vụ lặn biển",
+                            ActivityType = 0,
+                            Description = "Hướng dẫn lặn biển chuyên nghiệp và cung cấp trang thiết bị an toàn.",
+                            Duration = new TimeSpan(0, 2, 0, 0, 0),
+                            Location = "Biển Nha Trang",
+                            TourId = 3
                         },
                         new
                         {
                             ActivityId = 8,
-                            ActivityName = "Dùng bữa trưa ngoài trời",
-                            ActivityType = 0,
-                            Description = "Bữa trưa BBQ tại khu vực gần thác nước.",
-                            Duration = new TimeSpan(0, 2, 0, 0, 0),
-                            Location = "Khu vực cắm trại, Đà Lạt",
-                            TourId = 2
+                            ActivityName = "Quy định trên biển",
+                            ActivityType = 1,
+                            Description = "Du khách không được vứt rác bừa bãi trên bãi biển.",
+                            Duration = new TimeSpan(0, 0, 30, 0, 0),
+                            Location = "Bãi biển Nha Trang",
+                            TourId = 3
                         },
                         new
                         {
                             ActivityId = 9,
-                            ActivityName = "Đi xe đạp quanh hồ Tuyền Lâm",
+                            ActivityName = "Tham quan san hô",
                             ActivityType = 2,
-                            Description = "Thư giãn với chuyến đi xe đạp quanh hồ.",
+                            Description = "Lặn biển ngắm san hô và khám phá đáy biển trong 2 giờ.",
                             Duration = new TimeSpan(0, 2, 0, 0, 0),
-                            Location = "Hồ Tuyền Lâm, Đà Lạt",
-                            TourId = 2
+                            Location = "Biển Nha Trang",
+                            TourId = 3
                         },
                         new
                         {
                             ActivityId = 10,
-                            ActivityName = "Hướng dẫn bảo vệ môi trường",
+                            ActivityName = "Hướng dẫn viên bảo tàng",
+                            ActivityType = 0,
+                            Description = "Hướng dẫn chi tiết về các hiện vật quan trọng trong bảo tàng.",
+                            Duration = new TimeSpan(0, 3, 0, 0, 0),
+                            Location = "Bảo tàng Hà Nội",
+                            TourId = 4
+                        },
+                        new
+                        {
+                            ActivityId = 11,
+                            ActivityName = "Quy định tại bảo tàng",
                             ActivityType = 1,
-                            Description = "Thực hiện các quy định bảo vệ môi trường khu tham quan.",
+                            Description = "Không được chạm vào hiện vật và giữ trật tự trong bảo tàng.",
                             Duration = new TimeSpan(0, 0, 30, 0, 0),
-                            Location = "Khu vực thiên nhiên, Đà Lạt",
-                            TourId = 2
+                            Location = "Bảo tàng Hà Nội",
+                            TourId = 4
+                        },
+                        new
+                        {
+                            ActivityId = 12,
+                            ActivityName = "Khám phá lịch sử",
+                            ActivityType = 2,
+                            Description = "Tham quan các khu trưng bày lịch sử trong bảo tàng Hà Nội.",
+                            Duration = new TimeSpan(0, 3, 0, 0, 0),
+                            Location = "Bảo tàng Hà Nội",
+                            TourId = 4
                         });
                 });
 
@@ -388,7 +411,7 @@ namespace BookingTour.Data.Migrations
                             CategoryId = 1,
                             City = "Hà Nội",
                             Country = "Việt Nam",
-                            Created = new DateTime(2024, 11, 16, 2, 12, 53, 395, DateTimeKind.Local).AddTicks(4086),
+                            Created = new DateTime(2024, 11, 16, 2, 1, 38, 861, DateTimeKind.Local).AddTicks(70),
                             Description = "Tour tham quan các danh lam thắng cảnh trong thành phố.",
                             IsFullDay = true,
                             Price = 500000.0,
@@ -402,7 +425,7 @@ namespace BookingTour.Data.Migrations
                             CategoryId = 2,
                             City = "Đà Lạt",
                             Country = "Việt Nam",
-                            Created = new DateTime(2024, 11, 16, 2, 12, 53, 395, DateTimeKind.Local).AddTicks(4091),
+                            Created = new DateTime(2024, 11, 16, 2, 1, 38, 861, DateTimeKind.Local).AddTicks(75),
                             Description = "Tour khám phá các khu rừng nguyên sinh.",
                             IsFullDay = false,
                             Price = 800000.0,
@@ -416,7 +439,7 @@ namespace BookingTour.Data.Migrations
                             CategoryId = 3,
                             City = "Nha Trang",
                             Country = "Việt Nam",
-                            Created = new DateTime(2024, 11, 16, 2, 12, 53, 395, DateTimeKind.Local).AddTicks(4097),
+                            Created = new DateTime(2024, 11, 16, 2, 1, 38, 861, DateTimeKind.Local).AddTicks(78),
                             Description = "Tour du lịch nghỉ dưỡng tại các bãi biển đẹp.",
                             IsFullDay = false,
                             Price = 1200000.0,
@@ -430,7 +453,7 @@ namespace BookingTour.Data.Migrations
                             CategoryId = 1,
                             City = "Hà Nội",
                             Country = "Việt Nam",
-                            Created = new DateTime(2024, 11, 16, 2, 12, 53, 395, DateTimeKind.Local).AddTicks(4102),
+                            Created = new DateTime(2024, 11, 16, 2, 1, 38, 861, DateTimeKind.Local).AddTicks(81),
                             Description = "Tham quan các bảo tàng nổi tiếng.",
                             IsFullDay = true,
                             Price = 300000.0,
@@ -444,7 +467,7 @@ namespace BookingTour.Data.Migrations
                             CategoryId = 2,
                             City = "Sa Pa",
                             Country = "Việt Nam",
-                            Created = new DateTime(2024, 11, 16, 2, 12, 53, 395, DateTimeKind.Local).AddTicks(4105),
+                            Created = new DateTime(2024, 11, 16, 2, 1, 38, 861, DateTimeKind.Local).AddTicks(84),
                             Description = "Tour cắm trại qua đêm trong rừng.",
                             IsFullDay = false,
                             Price = 950000.0,
@@ -458,7 +481,7 @@ namespace BookingTour.Data.Migrations
                             CategoryId = 3,
                             City = "Phú Quốc",
                             Country = "Việt Nam",
-                            Created = new DateTime(2024, 11, 16, 2, 12, 53, 395, DateTimeKind.Local).AddTicks(4108),
+                            Created = new DateTime(2024, 11, 16, 2, 1, 38, 861, DateTimeKind.Local).AddTicks(86),
                             Description = "Tour nghỉ dưỡng và tham quan vùng biển.",
                             IsFullDay = true,
                             Price = 1500000.0,
@@ -497,14 +520,14 @@ namespace BookingTour.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "b4fe1717-8bcf-4e85-80c7-ecf029aff8e2",
+                            Id = "651384b8-391c-4b9d-b473-50f9f9ea5cb3",
                             ConcurrencyStamp = "1",
                             Name = "Admin",
                             NormalizedName = "Admin"
                         },
                         new
                         {
-                            Id = "d82ab177-63bb-4206-9347-82ea9f89fef0",
+                            Id = "99caf18e-2954-41d4-ac06-27f34e6c2dc4",
                             ConcurrencyStamp = "2",
                             Name = "User",
                             NormalizedName = "User"

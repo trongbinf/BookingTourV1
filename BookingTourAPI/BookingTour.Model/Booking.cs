@@ -13,7 +13,7 @@ namespace BookingTour.Model
 		public StatusType Status { get; set; }
 
 		public int TourId { get; set; }
-		public Tour Tour { get; set; }
+		public  Tour Tour { get; set; }
 		public string UserId { get; set; }
 		public AppUser User { get; set; }
 

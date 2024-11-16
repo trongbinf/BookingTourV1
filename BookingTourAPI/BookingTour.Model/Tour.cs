@@ -25,24 +25,16 @@ namespace BookingTour.Model
 		[ForeignKey("CategoryId")]
 		public Category Category { get; set; }
 		[JsonIgnore]
-		public ICollection<DateStart> DateStarts { get; set; } = new List<DateStart>();
+		public  ICollection<DateStart> DateStarts { get; set; }
 		[JsonIgnore]
-		public ICollection<TourActivity> TourActivities { get; set; } = new List<TourActivity>();
+		public  ICollection<Activity> Activities { get; set; } 
 		[JsonIgnore]
-		public ICollection<Booking> Bookings { get; set; } = new List<Booking>();
+		public  ICollection<Booking> Bookings { get; set; }
 		[JsonIgnore]
-		public ICollection<Review> Reviews { get; set; } = new List<Review>();
+		public  ICollection<Review> Reviews { get; set; }
 
 
-		public string FormatPrice(double price)
-		{
-			return price.ToString("C0", new CultureInfo("vi-VN"));
-		}
-
-		public string GetFormattedOriginalPrice()
-		{
-			return FormatPrice(Price);
-		}
+		
 	}
 	
 }
