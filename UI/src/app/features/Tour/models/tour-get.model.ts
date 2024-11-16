@@ -1,3 +1,5 @@
+import { Category } from "../../category/model/category.model";
+
 export interface TourGet {
     tourId: number;
     tourName: string;
@@ -8,7 +10,8 @@ export interface TourGet {
     country: string;
     isFullDay: boolean;
     price: number;
-    vehicleType: string;
+    personNumber: string;
     created?: Date;
     status: boolean;
+    category?: Category;
 }

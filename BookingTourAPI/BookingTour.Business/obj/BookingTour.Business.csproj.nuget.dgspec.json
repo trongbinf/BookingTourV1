@@ -1,24 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "D:\\CSharp\\Project\\CPL_BookingTour_Clone\\BookingTourV1\\BookingTourAPI\\BookingTour.Business\\BookingTour.Business.csproj": {}
+    "E:\\dotritrong\\CSharp\\BookingTourV1\\BookingTourAPI\\BookingTour.Business\\BookingTour.Business.csproj": {}
   },
   "projects": {
-    "D:\\CSharp\\Project\\CPL_BookingTour_Clone\\BookingTourV1\\BookingTourAPI\\BookingTour.Business\\BookingTour.Business.csproj": {
+    "E:\\dotritrong\\CSharp\\BookingTourV1\\BookingTourAPI\\BookingTour.Business\\BookingTour.Business.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\CSharp\\Project\\CPL_BookingTour_Clone\\BookingTourV1\\BookingTourAPI\\BookingTour.Business\\BookingTour.Business.csproj",
+        "projectUniqueName": "E:\\dotritrong\\CSharp\\BookingTourV1\\BookingTourAPI\\BookingTour.Business\\BookingTour.Business.csproj",
         "projectName": "BookingTour.Business",
-        "projectPath": "D:\\CSharp\\Project\\CPL_BookingTour_Clone\\BookingTourV1\\BookingTourAPI\\BookingTour.Business\\BookingTour.Business.csproj",
-        "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-        "outputPath": "D:\\CSharp\\Project\\CPL_BookingTour_Clone\\BookingTourV1\\BookingTourAPI\\BookingTour.Business\\obj\\",
+        "projectPath": "E:\\dotritrong\\CSharp\\BookingTourV1\\BookingTourAPI\\BookingTour.Business\\BookingTour.Business.csproj",
+        "packagesPath": "C:\\Users\\USA\\.nuget\\packages\\",
+        "outputPath": "E:\\dotritrong\\CSharp\\BookingTourV1\\BookingTourAPI\\BookingTour.Business\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\USA\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -26,18 +22,17 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "D:\\CSharp\\Project\\CPL_BookingTour_Clone\\BookingTourV1\\BookingTourAPI\\BookingTour.Data\\BookingTour.Data.csproj": {
-                "projectPath": "D:\\CSharp\\Project\\CPL_BookingTour_Clone\\BookingTourV1\\BookingTourAPI\\BookingTour.Data\\BookingTour.Data.csproj"
+              "E:\\dotritrong\\CSharp\\BookingTourV1\\BookingTourAPI\\BookingTour.Data\\BookingTour.Data.csproj": {
+                "projectPath": "E:\\dotritrong\\CSharp\\BookingTourV1\\BookingTourAPI\\BookingTour.Data\\BookingTour.Data.csproj"
               },
-              "D:\\CSharp\\Project\\CPL_BookingTour_Clone\\BookingTourV1\\BookingTourAPI\\BookingTour.Model\\BookingTour.Model.csproj": {
-                "projectPath": "D:\\CSharp\\Project\\CPL_BookingTour_Clone\\BookingTourV1\\BookingTourAPI\\BookingTour.Model\\BookingTour.Model.csproj"
+              "E:\\dotritrong\\CSharp\\BookingTourV1\\BookingTourAPI\\BookingTour.Model\\BookingTour.Model.csproj": {
+                "projectPath": "E:\\dotritrong\\CSharp\\BookingTourV1\\BookingTourAPI\\BookingTour.Model\\BookingTour.Model.csproj"
               }
             }
           }
@@ -82,21 +77,17 @@
         }
       }
     },
-    "D:\\CSharp\\Project\\CPL_BookingTour_Clone\\BookingTourV1\\BookingTourAPI\\BookingTour.Data\\BookingTour.Data.csproj": {
+    "E:\\dotritrong\\CSharp\\BookingTourV1\\BookingTourAPI\\BookingTour.Data\\BookingTour.Data.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\CSharp\\Project\\CPL_BookingTour_Clone\\BookingTourV1\\BookingTourAPI\\BookingTour.Data\\BookingTour.Data.csproj",
+        "projectUniqueName": "E:\\dotritrong\\CSharp\\BookingTourV1\\BookingTourAPI\\BookingTour.Data\\BookingTour.Data.csproj",
         "projectName": "BookingTour.Data",
-        "projectPath": "D:\\CSharp\\Project\\CPL_BookingTour_Clone\\BookingTourV1\\BookingTourAPI\\BookingTour.Data\\BookingTour.Data.csproj",
-        "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-        "outputPath": "D:\\CSharp\\Project\\CPL_BookingTour_Clone\\BookingTourV1\\BookingTourAPI\\BookingTour.Data\\obj\\",
+        "projectPath": "E:\\dotritrong\\CSharp\\BookingTourV1\\BookingTourAPI\\BookingTour.Data\\BookingTour.Data.csproj",
+        "packagesPath": "C:\\Users\\USA\\.nuget\\packages\\",
+        "outputPath": "E:\\dotritrong\\CSharp\\BookingTourV1\\BookingTourAPI\\BookingTour.Data\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\USA\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -104,15 +95,14 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "D:\\CSharp\\Project\\CPL_BookingTour_Clone\\BookingTourV1\\BookingTourAPI\\BookingTour.Model\\BookingTour.Model.csproj": {
-                "projectPath": "D:\\CSharp\\Project\\CPL_BookingTour_Clone\\BookingTourV1\\BookingTourAPI\\BookingTour.Model\\BookingTour.Model.csproj"
+              "E:\\dotritrong\\CSharp\\BookingTourV1\\BookingTourAPI\\BookingTour.Model\\BookingTour.Model.csproj": {
+                "projectPath": "E:\\dotritrong\\CSharp\\BookingTourV1\\BookingTourAPI\\BookingTour.Model\\BookingTour.Model.csproj"
               }
             }
           }
@@ -165,21 +155,17 @@
         }
       }
     },
-    "D:\\CSharp\\Project\\CPL_BookingTour_Clone\\BookingTourV1\\BookingTourAPI\\BookingTour.Model\\BookingTour.Model.csproj": {
+    "E:\\dotritrong\\CSharp\\BookingTourV1\\BookingTourAPI\\BookingTour.Model\\BookingTour.Model.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\CSharp\\Project\\CPL_BookingTour_Clone\\BookingTourV1\\BookingTourAPI\\BookingTour.Model\\BookingTour.Model.csproj",
+        "projectUniqueName": "E:\\dotritrong\\CSharp\\BookingTourV1\\BookingTourAPI\\BookingTour.Model\\BookingTour.Model.csproj",
         "projectName": "BookingTour.Model",
-        "projectPath": "D:\\CSharp\\Project\\CPL_BookingTour_Clone\\BookingTourV1\\BookingTourAPI\\BookingTour.Model\\BookingTour.Model.csproj",
-        "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-        "outputPath": "D:\\CSharp\\Project\\CPL_BookingTour_Clone\\BookingTourV1\\BookingTourAPI\\BookingTour.Model\\obj\\",
+        "projectPath": "E:\\dotritrong\\CSharp\\BookingTourV1\\BookingTourAPI\\BookingTour.Model\\BookingTour.Model.csproj",
+        "packagesPath": "C:\\Users\\USA\\.nuget\\packages\\",
+        "outputPath": "E:\\dotritrong\\CSharp\\BookingTourV1\\BookingTourAPI\\BookingTour.Model\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\USA\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -187,7 +173,6 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {

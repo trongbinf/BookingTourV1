@@ -1,8 +1,6 @@
-﻿using BookingTour.Business.Service.IService;
-using BookingTour.Data.Data;
+﻿using BookingTour.Data.Data;
 using BookingTour.Model;
 using BookingTour.Model.ViewModel;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;

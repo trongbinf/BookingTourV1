@@ -947,3 +947,7 @@ D:\CSharp\Project\CPL_BookingTour_Clone\BookingTourV1\BookingTourAPI\BookingTour
 D:\CSharp\Project\CPL_BookingTour_Clone\BookingTourV1\BookingTourAPI\BookingTour\obj\Debug\net8.0\BookingTour.API.pdb
 D:\CSharp\Project\CPL_BookingTour_Clone\BookingTourV1\BookingTourAPI\BookingTour\obj\Debug\net8.0\BookingTour.API.genruntimeconfig.cache
 D:\CSharp\Project\CPL_BookingTour_Clone\BookingTourV1\BookingTourAPI\BookingTour\obj\Debug\net8.0\ref\BookingTour.API.dll
+E:\dotritrong\CSharp\BookingTourV1\BookingTourAPI\BookingTour\bin\Debug\net8.0\MailKit.dll
+E:\dotritrong\CSharp\BookingTourV1\BookingTourAPI\BookingTour\bin\Debug\net8.0\MimeKit.dll
+E:\dotritrong\CSharp\BookingTourV1\BookingTourAPI\BookingTour\bin\Debug\net8.0\NETCore.MailKit.dll
+E:\dotritrong\CSharp\BookingTourV1\BookingTourAPI\BookingTour\bin\Debug\net8.0\BouncyCastle.Crypto.dll

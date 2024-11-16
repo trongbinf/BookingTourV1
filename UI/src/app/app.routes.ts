@@ -39,7 +39,7 @@ export const routes: Routes = [
     }
     ,
     {
-        path: 'tourdetail',
+        path: 'tour-detail/:id',
         component: TourDetailComponent
     }
     ,
