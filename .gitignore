@@ -1,0 +1,8 @@
+# Visual Studio cache files
+.vs/
+*.suo
+*.dtbcache.v2
+*.futdcache.v2
+# Temporary build files
+obj/
+bin/

@@ -519,5 +519,52 @@
       }
     ],
     "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BookingTour.API.Controllers.UserController",
+    "Method": "BlockUser",
+    "RelativePath": "api/User/block-user/{userId}",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userId",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BookingTour.API.Controllers.UserController",
+    "Method": "GetAllUsersWithRoles",
+    "RelativePath": "api/User/get-all-user",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BookingTour.API.Controllers.UserController",
+    "Method": "SetUserRole",
+    "RelativePath": "api/User/set-role-user/{userId}",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userId",
+        "Type": "System.String",
+        "IsRequired": true
+      },
+      {
+        "Name": "roleName",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
   }
 ]

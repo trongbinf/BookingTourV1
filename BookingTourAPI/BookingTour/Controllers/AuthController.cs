@@ -128,13 +128,13 @@ namespace BookingTour.API.Controllers
 
             var user = await _userManager.FindByEmailAsync(loginVm.Email);
 
-            if (user != null && await _userManager.CheckPasswordAsync(user, loginVm.Password) && user.EmailConfirmed)
+            if (user != null && await _userManager.CheckPasswordAsync(user, loginVm.Password) && user.EmailConfirmed && user.LockoutEnabled)
             {
                 var tokenValue = await GenerateJWTToken(user);
                 return Ok(tokenValue);
             }
 
-            return BadRequest(new { message = "Email or password is incorrect!" });
+            return BadRequest(new { message = "Login fail!" });
         }
 
         private async Task<AuthResultVm> GenerateJWTToken(AppUser user)

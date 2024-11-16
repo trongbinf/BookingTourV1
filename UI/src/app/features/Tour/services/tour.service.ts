@@ -19,4 +19,8 @@ export class TourService {
     return this.http.get<TourVm>(`${this.apiUrl}/${id}`);
   }
 
+  getTourByCategory(name?: string): Observable<Tour[]> {
+    return this.http.get<Tour[]>(`${BASE_URL}/Tour/categories/${name}`);
+  }
+
 }
