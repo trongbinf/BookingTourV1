@@ -5,13 +5,39 @@
         </div>
         <!--/.bg-holder-->
         <div class="container-medium position-relative pt-11 pb-15">
-            <h2 class="text-center text-white mb-4">Where do you want to go?</h2>
-            <div class="position-relative w-md-70 w-lg-50 mx-auto mb-4 mb-lg-10"><input
-                    class="form-control py-3 ps-4 pe-6 rounded-pill fs-8" type="text"
-                    placeholder="Search for a location" /><span
-                    class="fa-solid fa-search position-absolute top-0 end-0 mt-4 me-4 fs-8 text-body-tertiary"
-                    data-fa-transform="up-3"></span></div>
-            <div class="d-flex justify-content-center">
+            <div
+                class="row gx-0 gy-3 gy-md-0 align-items-center mx-auto p-3 bg-body-emphasis rounded-5 rounded-md-pill position-relative border w-lg-75">
+                <form (ngSubmit)="onSearch()" #searchForm="ngForm" class="d-flex w-100">
+                    <div class="col-12 col-md" style="margin: auto;">
+                        <div
+                            class="form-icon-container border-bottom border-bottom-md-0 border-translucent pb-3 pb-md-0">
+                            <input class="form-control form-icon-input border-0 py-0 shadow-none fs-8" type="text"
+                                name="place" [(ngModel)]="searchData.place" placeholder="Pick a place" required />
+                            <span class="fa-solid fa-map-marker-alt form-icon text-body-tertiary top-0"
+                                data-fa-transform="down-2"></span>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md" style="margin: auto;">
+                        <div class="form-icon-container flatpickr-input-container">
+                            <input
+                                class="form-control datetimepicker form-icon-input border-y-0 border-start-0 border-start-md py-0 shadow-none border-translucent fs-8 rounded-0"
+                                type="text" name="date" [(ngModel)]="searchData.date" placeholder="Pick a date"
+                                data-options='{"mode":"range","dateFormat":"d/m/y","disableMobile":true}' required />
+                            <span class="fa-solid fa-calendar form-icon top-0 text-body-tertiary"
+                                data-fa-transform="down-2"></span>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-auto">
+                        <button type="submit" class="btn btn-lg btn-phoenix-primary rounded-pill w-100">
+                            <span class="fa-solid fa-search me-2"></span>Search
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+
+
+            <div class="d-flex justify-content-center mt-10">
                 <div *ngFor="let cate of categories" class="d-none d-lg-flex gap-2">
                     <button class="btn btn-phoenix-secondary text-nowrap px-3 ms-1"
                         (click)="loadToursByCategory(cate.name)">
@@ -148,210 +174,275 @@
                             for="adventureTravel">Adventure Travel</label></div>
                 </div>
             </div><a class="fw-bold fs-9 mt-3 d-inline-block" href="#!">Show more items</a>
-            <!-- <hr class="my-5" />
-            <h4 class="mb-4">Tags</h4>
-            <h5 class="fw-normal my-3 text-body-quaternary">Destination Type</h5>
-            <div class="row gx-3">
-                <div class="col-6">
-                    <div class="form-check"><input class="form-check-input" id="beach" type="checkbox"
-                            value="beach" /><label class="form-check-label fs-8 text-body-highlight fw-normal"
-                            for="beach">Beach</label></div>
-                </div>
-                <div class="col-6">
-                    <div class="form-check"><input class="form-check-input" id="mountain" type="checkbox"
-                            value="mountain" /><label class="form-check-label fs-8 text-body-highlight fw-normal"
-                            for="mountain">Mountain</label></div>
-                </div>
-                <div class="col-6">
-                    <div class="form-check"><input class="form-check-input" id="city" type="checkbox"
-                            value="city" /><label class="form-check-label fs-8 text-body-highlight fw-normal"
-                            for="city">City</label></div>
-                </div>
-                <div class="col-6">
-                    <div class="form-check"><input class="form-check-input" id="countryside" type="checkbox"
-                            value="countryside" /><label class="form-check-label fs-8 text-body-highlight fw-normal"
-                            for="countryside">Countryside</label></div>
-                </div>
-                <div class="col-6">
-                    <div class="form-check"><input class="form-check-input" id="island" type="checkbox"
-                            value="island" /><label class="form-check-label fs-8 text-body-highlight fw-normal"
-                            for="island">Island</label></div>
-                </div>
-                <div class="col-6">
-                    <div class="form-check"><input class="form-check-input" id="jungle" type="checkbox"
-                            value="jungle" /><label class="form-check-label fs-8 text-body-highlight fw-normal"
-                            for="jungle">Jungle</label></div>
-                </div>
-            </div> -->
-            <!-- <h5 class="fw-normal my-3 text-body-quaternary">Activities</h5>
-            <div class="row gx-3">
-                <div class="col-6">
-                    <div class="form-check"><input class="form-check-input" id="hiking" type="checkbox"
-                            value="hiking" /><label class="form-check-label fs-8 text-body-highlight fw-normal"
-                            for="hiking">Hiking</label></div>
-                </div>
-                <div class="col-6">
-                    <div class="form-check"><input class="form-check-input" id="camping" type="checkbox"
-                            value="camping" /><label class="form-check-label fs-8 text-body-highlight fw-normal"
-                            for="camping">Camping</label></div>
-                </div>
-                <div class="col-6">
-                    <div class="form-check"><input class="form-check-input" id="sightseeing" type="checkbox"
-                            value="sightseeing" /><label class="form-check-label fs-8 text-body-highlight fw-normal"
-                            for="sightseeing">Sightseeing</label></div>
-                </div>
-                <div class="col-6">
-                    <div class="form-check"><input class="form-check-input" id="wildlifeViewing" type="checkbox"
-                            value="wildlifeViewing" /><label class="form-check-label fs-8 text-body-highlight fw-normal"
-                            for="wildlifeViewing">Wildlife Viewing</label></div>
-                </div>
-            </div>
-            <h5 class="fw-normal my-3 text-body-quaternary">Season</h5>
-            <div class="row gx-3">
-                <div class="col-6">
-                    <div class="form-check"><input class="form-check-input" id="summer" type="checkbox"
-                            value="summer" /><label class="form-check-label fs-8 text-body-highlight fw-normal"
-                            for="summer">Summer</label></div>
-                </div>
-                <div class="col-6">
-                    <div class="form-check"><input class="form-check-input" id="winter" type="checkbox"
-                            value="winter" /><label class="form-check-label fs-8 text-body-highlight fw-normal"
-                            for="winter">Winter</label></div>
-                </div>
-                <div class="col-6">
-                    <div class="form-check"><input class="form-check-input" id="spring" type="checkbox"
-                            value="spring" /><label class="form-check-label fs-8 text-body-highlight fw-normal"
-                            for="spring">Spring</label></div>
-                </div>
-                <div class="col-6">
-                    <div class="form-check"><input class="form-check-input" id="fallAutumn" type="checkbox"
-                            value="fallAutumn" /><label class="form-check-label fs-8 text-body-highlight fw-normal"
-                            for="fallAutumn">Fall/Autumn</label></div>
-                </div>
-            </div>
-            <h5 class="fw-normal my-3 text-body-quaternary">Budget</h5>
-            <div class="row gx-3">
-                <div class="col-6">
-                    <div class="form-check"><input class="form-check-input" id="luxury" type="checkbox"
-                            value="luxury" /><label class="form-check-label fs-8 text-body-highlight fw-normal"
-                            for="luxury">Luxury</label></div>
-                </div>
-                <div class="col-6">
-                    <div class="form-check"><input class="form-check-input" id="midRange" type="checkbox"
-                            value="midRange" /><label class="form-check-label fs-8 text-body-highlight fw-normal"
-                            for="midRange">Mid-range</label></div>
-                </div>
-                <div class="col-6">
-                    <div class="form-check"><input class="form-check-input" id="budget" type="checkbox"
-                            value="budget" /><label class="form-check-label fs-8 text-body-highlight fw-normal"
-                            for="budget">Budget</label></div>
-                </div>
-            </div>
-            <h5 class="fw-normal my-3 text-body-quaternary">Accommodation</h5>
-            <div class="row gx-3">
-                <div class="col-6">
-                    <div class="form-check"><input class="form-check-input" id="hotel" type="checkbox"
-                            value="hotel" /><label class="form-check-label fs-8 text-body-highlight fw-normal"
-                            for="hotel">Hotel</label></div>
-                </div>
-                <div class="col-6">
-                    <div class="form-check"><input class="form-check-input" id="resort" type="checkbox"
-                            value="resort" /><label class="form-check-label fs-8 text-body-highlight fw-normal"
-                            for="resort">Resort</label></div>
-                </div>
-                <div class="col-6">
-                    <div class="form-check"><input class="form-check-input" id="vacationRental" type="checkbox"
-                            value="vacationRental" /><label class="form-check-label fs-8 text-body-highlight fw-normal"
-                            for="vacationRental">Vacation Rental</label></div>
-                </div>
-                <div class="col-6">
-                    <div class="form-check"><input class="form-check-input" id="homestay" type="checkbox"
-                            value="homestay" /><label class="form-check-label fs-8 text-body-highlight fw-normal"
-                            for="homestay">Homestay</label></div>
-                </div>
-            </div><a class="fw-bold fs-9 mt-3 d-inline-block" href="#!">Less items</a> -->
         </div>
         <div class="p-4 border-top border-translucent d-flex gap-2"><button class="btn btn-lg btn-phoenix-primary"><span
                     class="fa-solid fa-arrows-rotate me-2 fs-9"></span>Reset</button><button
                 class="btn btn-lg btn-primary flex-1"> <span class="fa-solid fa-search me-2 fs-9"></span>Update
                 result</button></div>
     </div>
-
     <!-- ============================================-->
 
-    <!--     
-    <div class="support-chat-container">
-        <div class="container-fluid support-chat">
-            <div class="card bg-body-emphasis">
-                <div class="card-header d-flex flex-between-center px-4 py-3 border-bottom border-translucent">
-                    <h5 class="mb-0 d-flex align-items-center gap-2">Demo widget<span
-                            class="fa-solid fa-circle text-success fs-11"></span></h5>
-                    <div class="btn-reveal-trigger"><button
-                            class="btn btn-link p-0 dropdown-toggle dropdown-caret-none transition-none d-flex"
-                            type="button" id="support-chat-dropdown" data-bs-toggle="dropdown" data-boundary="window"
-                            aria-haspopup="true" aria-expanded="false" data-bs-reference="parent"><span
-                                class="fas fa-ellipsis-h text-body"></span></button>
-                        <div class="dropdown-menu dropdown-menu-end py-2" aria-labelledby="support-chat-dropdown"><a
-                                class="dropdown-item" href="#!">Request a callback</a><a class="dropdown-item"
-                                href="#!">Search in chat</a><a class="dropdown-item" href="#!">Show history</a><a
-                                class="dropdown-item" href="#!">Report to Admin</a><a
-                                class="dropdown-item btn-support-chat" href="#!">Close Support</a></div>
-                    </div>
-                </div>
-                <div class="card-body chat p-0">
-                    <div class="d-flex flex-column-reverse scrollbar h-100 p-3">
-                        <div class="text-end mt-6"><a
-                                class="mb-2 d-inline-flex align-items-center text-decoration-none text-body-emphasis bg-body-hover rounded-pill border border-primary py-2 ps-4 pe-3"
-                                href="#!">
-                                <p class="mb-0 fw-semibold fs-9">I need help with something</p><span
-                                    class="fa-solid fa-paper-plane text-primary fs-9 ms-3"></span>
-                            </a><a
-                                class="mb-2 d-inline-flex align-items-center text-decoration-none text-body-emphasis bg-body-hover rounded-pill border border-primary py-2 ps-4 pe-3"
-                                href="#!">
-                                <p class="mb-0 fw-semibold fs-9">I can’t reorder a product I previously ordered</p><span
-                                    class="fa-solid fa-paper-plane text-primary fs-9 ms-3"></span>
-                            </a><a
-                                class="mb-2 d-inline-flex align-items-center text-decoration-none text-body-emphasis bg-body-hover rounded-pill border border-primary py-2 ps-4 pe-3"
-                                href="#!">
-                                <p class="mb-0 fw-semibold fs-9">How do I place an order?</p><span
-                                    class="fa-solid fa-paper-plane text-primary fs-9 ms-3"></span>
-                            </a><a
-                                class="false d-inline-flex align-items-center text-decoration-none text-body-emphasis bg-body-hover rounded-pill border border-primary py-2 ps-4 pe-3"
-                                href="#!">
-                                <p class="mb-0 fw-semibold fs-9">My payment method not working</p><span
-                                    class="fa-solid fa-paper-plane text-primary fs-9 ms-3"></span>
-                            </a></div>
-                        <div class="text-center mt-auto">
-                            <div class="avatar avatar-3xl status-online"><img
-                                    class="rounded-circle border border-3 border-light-subtle"
-                                    src="../../../assets/img/team/30.webp" alt="" /></div>
-                            <h5 class="mt-2 mb-3">Eric</h5>
-                            <p class="text-center text-body-emphasis mb-0">Ask us anything – we’ll get back to you here
-                                or by email within 24 hours.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-footer d-flex align-items-center gap-2 border-top border-translucent ps-3 pe-4 py-3">
-                    <div class="d-flex align-items-center flex-1 gap-3 border border-translucent rounded-pill px-4">
-                        <input class="form-control outline-none border-0 flex-1 fs-9 px-0" type="text"
-                            placeholder="Write message" /><label
-                            class="btn btn-link d-flex p-0 text-body-quaternary fs-9 border-0"
-                            for="supportChatPhotos"><span class="fa-solid fa-image"></span></label><input class="d-none"
-                            type="file" accept="image/*" id="supportChatPhotos" /><label
-                            class="btn btn-link d-flex p-0 text-body-quaternary fs-9 border-0"
-                            for="supportChatAttachment"> <span class="fa-solid fa-paperclip"></span></label><input
-                            class="d-none" type="file" id="supportChatAttachment" />
-                    </div><button class="btn p-0 border-0 send-btn"><span
-                            class="fa-solid fa-paper-plane fs-9"></span></button>
-                </div>
-            </div>
-        </div><button class="btn btn-support-chat p-0 border border-translucent"><span
-                class="fs-8 btn-text text-primary text-nowrap">Chat demo</span><span
-                class="ping-icon-wrapper mt-n4 ms-n6 mt-sm-0 ms-sm-2 position-absolute position-sm-relative"><span
-                    class="ping-icon-bg"></span><span class="fa-solid fa-circle ping-icon"></span></span><span
-                class="fa-solid fa-headset text-primary fs-8 d-sm-none"></span><span
-                class="fa-solid fa-chevron-down text-primary fs-7"></span></button>
-    </div> -->
+
+
 </main><!-- ===============================================-->
 <!--    End of Main Content-->
+<!-- <section> begin ============================-->
+<section class="pb-7 pt-0">
+    <div class="container-medium">
+        <div class="text-center mb-5">
+            <h3 class="mb-2 text-body-emphasis">Latest photos from tourists</h3>
+            <p class="mb-0 text-body-tertiary">See how our tourists enjoyed their trip from images captured by them with
+                Team Phoenix!</p>
+        </div>
+        <div class="row g-3">
+            <div class="col-md-6 col-xl-4">
+                <div class="img-zoom-hover rounded-3 overflow-hidden position-relative"><a href="#!"><img
+                            class="latest-img w-100 object-fit-cover" src="../../assets/img/gallery/51.png"
+                            alt="" /></a>
+                    <div class="backdrop-faded"><a class="fw-semibold mb-0 text-secondary-lighter stretched-link"
+                            href="#!"><span class="fa-solid fa-location-dot text-secondary-lighter me-2"></span>Bali
+                            Indonesia</a></div>
+                </div>
+            </div>
+            <div class="col-md-6 col-xl-4">
+                <div class="img-zoom-hover rounded-3 overflow-hidden position-relative"><a href="#!"><img
+                            class="latest-img w-100 object-fit-cover" src="../../assets/img/gallery/52.png"
+                            alt="" /></a>
+                    <div class="backdrop-faded"><a class="fw-semibold mb-0 text-secondary-lighter stretched-link"
+                            href="#!"><span
+                                class="fa-solid fa-location-dot text-secondary-lighter me-2"></span>Barcelona</a></div>
+                </div>
+            </div>
+            <div class="col-md-6 col-xl-4">
+                <div class="img-zoom-hover rounded-3 overflow-hidden position-relative"><a href="#!"><img
+                            class="latest-img w-100 object-fit-cover" src="../../assets/img/gallery/53.png"
+                            alt="" /></a>
+                    <div class="backdrop-faded"><a class="fw-semibold mb-0 text-secondary-lighter stretched-link"
+                            href="#!"><span class="fa-solid fa-location-dot text-secondary-lighter me-2"></span>Bali
+                            Indonesia</a></div>
+                </div>
+            </div>
+            <div class="col-md-6 col-xl-4">
+                <div class="img-zoom-hover rounded-3 overflow-hidden position-relative"><a href="#!"><img
+                            class="latest-img w-100 object-fit-cover" src="../../assets/img/gallery/54.png"
+                            alt="" /></a>
+                    <div class="backdrop-faded"><a class="fw-semibold mb-0 text-secondary-lighter stretched-link"
+                            href="#!"><span
+                                class="fa-solid fa-location-dot text-secondary-lighter me-2"></span>Sydney</a></div>
+                </div>
+            </div>
+            <div class="col-md-6 col-xl-4">
+                <div class="img-zoom-hover rounded-3 overflow-hidden position-relative"><a href="#!"><img
+                            class="latest-img w-100 object-fit-cover" src="../../assets/img/gallery/55.png"
+                            alt="" /></a>
+                    <div class="backdrop-faded"><a class="fw-semibold mb-0 text-secondary-lighter stretched-link"
+                            href="#!"><span class="fa-solid fa-location-dot text-secondary-lighter me-2"></span>Great
+                            Barrier Reef</a></div>
+                </div>
+            </div>
+            <div class="col-md-6 col-xl-4">
+                <div class="img-zoom-hover rounded-3 overflow-hidden position-relative"><a href="#!"><img
+                            class="latest-img w-100 object-fit-cover" src="../../assets/img/gallery/56.png"
+                            alt="" /></a>
+                    <div class="backdrop-faded"><a class="fw-semibold mb-0 text-secondary-lighter stretched-link"
+                            href="#!"><span class="fa-solid fa-location-dot text-secondary-lighter me-2"></span>Grand
+                            Canyon</a></div>
+                </div>
+            </div>
+        </div>
+    </div><!-- end of .container-->
+</section><!-- <section> close ============================-->
+<!-- ============================================-->
+
+
 <!-- ===============================================-->
+<section class="pb-10 pt-0">
+    <div class="bg-holder d-none d-md-block"
+        style="background-image:url(../../assets/img/bg/bg-left-28.png);background-size:7%;background-position:left 27%;">
+    </div>
+    <!--/.bg-holder-->
+    <div class="bg-holder d-none d-md-block"
+        style="background-image:url(../../assets/img/bg/bg-right-28.png);background-size:16%;background-position:right -25px;">
+    </div>
+    <!--/.bg-holder-->
+    <div class="container-medium text-center mb-11 position-relative">
+        <h3 class="mb-2 text-body-emphasis">Travel more, spend less</h3>
+        <p class="text-body-tertiary mb-0">Working with Phoenix means you’ll have all the plans and the perfect price
+            list to help you plan.</p>
+    </div>
+    <div class="container-fluid px-sm-0">
+        <div class="swiper-theme-container swiper-slide-nav-top">
+            <div class="swiper-nav">
+                <div class="swiper-button-next"><span class="fas fa-chevron-right text-primary"
+                        data-fa-transform="shrink-3"></span></div>
+                <div class="swiper-button-prev"><span class="fas fa-chevron-left text-primary"
+                        data-fa-transform="shrink-3"></span></div>
+            </div>
+            <div class="swiper theme-slider"
+                data-swiper='{"loop":true,"centeredSlides":true,"autoplay":true,"centeredSlidesBounds":true,"spaceBetween":16,"slidesPerView":1,"speed":1500,"breakpoints":{"576":{"slidesPerView":"auto"}}}'>
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide w-sm-auto"><a class="position-relative rounded-3 overflow-hidden d-block"
+                            href="#!"><img class="w-100 w-sm-auto object-fit-cover"
+                                src="../../assets/img/gallery/39.png" alt="" height="220" />
+                            <div class="img-backdrop-faded">
+                                <div class="image-reveal-content mb-3">
+                                    <div class="d-flex align-items-center gap-2 mb-2"><span
+                                            class="fa-solid fa-hotel text-secondary-lighter"></span>
+                                        <h6 class="mb-0 text-secondary-lighter fw-semibold">17 Hotels</h6>
+                                    </div>
+                                    <div class="d-flex align-items-center gap-2"><span
+                                            class="fa-solid fa-tree-city text-secondary-lighter"></span>
+                                        <h6 class="mb-0 text-secondary-lighter fw-semibold">22 Tour Package</h6>
+                                    </div>
+                                </div>
+                                <div class="d-flex align-items-center gap-2"><img
+                                        src="../../assets/img/country/thailand.png" alt="" />
+                                    <h4 class="mb-0 text-white">Thailand</h4>
+                                </div>
+                            </div>
+                        </a></div>
+                    <div class="swiper-slide w-sm-auto"><a class="position-relative rounded-3 overflow-hidden d-block"
+                            href="#!"><img class="w-100 w-sm-auto object-fit-cover"
+                                src="../../assets/img/gallery/40.png" alt="" height="220" />
+                            <div class="img-backdrop-faded">
+                                <div class="image-reveal-content mb-3">
+                                    <div class="d-flex align-items-center gap-2 mb-2"><span
+                                            class="fa-solid fa-hotel text-secondary-lighter"></span>
+                                        <h6 class="mb-0 text-secondary-lighter fw-semibold">15 Hotels</h6>
+                                    </div>
+                                    <div class="d-flex align-items-center gap-2"><span
+                                            class="fa-solid fa-tree-city text-secondary-lighter"></span>
+                                        <h6 class="mb-0 text-secondary-lighter fw-semibold">24 Tour Package</h6>
+                                    </div>
+                                </div>
+                                <div class="d-flex align-items-center gap-2"><img
+                                        src="../../assets/img/country/switzerland.png" alt="" />
+                                    <h4 class="mb-0 text-white">Switzerland</h4>
+                                </div>
+                            </div>
+                        </a></div>
+                    <div class="swiper-slide w-sm-auto"><a class="position-relative rounded-3 overflow-hidden d-block"
+                            href="#!"><img class="w-100 w-sm-auto object-fit-cover"
+                                src="../../assets/img/gallery/42.png" alt="" height="220" />
+                            <div class="img-backdrop-faded">
+                                <div class="image-reveal-content mb-3">
+                                    <div class="d-flex align-items-center gap-2 mb-2"><span
+                                            class="fa-solid fa-hotel text-secondary-lighter"></span>
+                                        <h6 class="mb-0 text-secondary-lighter fw-semibold">44 Hotels</h6>
+                                    </div>
+                                    <div class="d-flex align-items-center gap-2"><span
+                                            class="fa-solid fa-tree-city text-secondary-lighter"></span>
+                                        <h6 class="mb-0 text-secondary-lighter fw-semibold">123 Tour Package</h6>
+                                    </div>
+                                </div>
+                                <div class="d-flex align-items-center gap-2"><img
+                                        src="../../assets/img/country/turkey.png" alt="" />
+                                    <h4 class="mb-0 text-white">Turkey</h4>
+                                </div>
+                            </div>
+                        </a></div>
+                    <div class="swiper-slide w-sm-auto"><a class="position-relative rounded-3 overflow-hidden d-block"
+                            href="#!"><img class="w-100 w-sm-auto object-fit-cover"
+                                src="../../assets/img/gallery/41.png" alt="" height="220" />
+                            <div class="img-backdrop-faded">
+                                <div class="image-reveal-content mb-3">
+                                    <div class="d-flex align-items-center gap-2 mb-2"><span
+                                            class="fa-solid fa-hotel text-secondary-lighter"></span>
+                                        <h6 class="mb-0 text-secondary-lighter fw-semibold">55 Hotels</h6>
+                                    </div>
+                                    <div class="d-flex align-items-center gap-2"><span
+                                            class="fa-solid fa-tree-city text-secondary-lighter"></span>
+                                        <h6 class="mb-0 text-secondary-lighter fw-semibold">41 Tour Package</h6>
+                                    </div>
+                                </div>
+                                <div class="d-flex align-items-center gap-2"><img
+                                        src="../../assets/img/country/new-zealand.png" alt="" />
+                                    <h4 class="mb-0 text-white">New Zealand</h4>
+                                </div>
+                            </div>
+                        </a></div>
+                    <div class="swiper-slide w-sm-auto"><a class="position-relative rounded-3 overflow-hidden d-block"
+                            href="#!"><img class="w-100 w-sm-auto object-fit-cover"
+                                src="../../assets/img/gallery/43.png" alt="" height="220" />
+                            <div class="img-backdrop-faded">
+                                <div class="image-reveal-content mb-3">
+                                    <div class="d-flex align-items-center gap-2 mb-2"><span
+                                            class="fa-solid fa-hotel text-secondary-lighter"></span>
+                                        <h6 class="mb-0 text-secondary-lighter fw-semibold">17 Hotels</h6>
+                                    </div>
+                                    <div class="d-flex align-items-center gap-2"><span
+                                            class="fa-solid fa-tree-city text-secondary-lighter"></span>
+                                        <h6 class="mb-0 text-secondary-lighter fw-semibold">22 Tour Package</h6>
+                                    </div>
+                                </div>
+                                <div class="d-flex align-items-center gap-2"><img
+                                        src="../../assets/img/country/sweden.png" alt="" />
+                                    <h4 class="mb-0 text-white">Sweden</h4>
+                                </div>
+                            </div>
+                        </a></div>
+                    <div class="swiper-slide w-sm-auto"><a class="position-relative rounded-3 overflow-hidden d-block"
+                            href="#!"><img class="w-100 w-sm-auto object-fit-cover"
+                                src="../../assets/img/gallery/44.png" alt="" height="220" />
+                            <div class="img-backdrop-faded">
+                                <div class="image-reveal-content mb-3">
+                                    <div class="d-flex align-items-center gap-2 mb-2"><span
+                                            class="fa-solid fa-hotel text-secondary-lighter"></span>
+                                        <h6 class="mb-0 text-secondary-lighter fw-semibold">44 Hotels</h6>
+                                    </div>
+                                    <div class="d-flex align-items-center gap-2"><span
+                                            class="fa-solid fa-tree-city text-secondary-lighter"></span>
+                                        <h6 class="mb-0 text-secondary-lighter fw-semibold">123 Tour Package</h6>
+                                    </div>
+                                </div>
+                                <div class="d-flex align-items-center gap-2"><img
+                                        src="../../assets/img/country/turkey.png" alt="" />
+                                    <h4 class="mb-0 text-white">Turkey</h4>
+                                </div>
+                            </div>
+                        </a></div>
+                    <div class="swiper-slide w-sm-auto"><a class="position-relative rounded-3 overflow-hidden d-block"
+                            href="#!"><img class="w-100 w-sm-auto object-fit-cover"
+                                src="../../assets/img/gallery/58.png" alt="" height="220" />
+                            <div class="img-backdrop-faded">
+                                <div class="image-reveal-content mb-3">
+                                    <div class="d-flex align-items-center gap-2 mb-2"><span
+                                            class="fa-solid fa-hotel text-secondary-lighter"></span>
+                                        <h6 class="mb-0 text-secondary-lighter fw-semibold">54 Hotels</h6>
+                                    </div>
+                                    <div class="d-flex align-items-center gap-2"><span
+                                            class="fa-solid fa-tree-city text-secondary-lighter"></span>
+                                        <h6 class="mb-0 text-secondary-lighter fw-semibold">123 Tour Package</h6>
+                                    </div>
+                                </div>
+                                <div class="d-flex align-items-center gap-2"><img
+                                        src="../../assets/img/country/vietnam.png" alt="" />
+                                    <h4 class="mb-0 text-white">Vietnam</h4>
+                                </div>
+                            </div>
+                        </a></div>
+                    <div class="swiper-slide w-sm-auto"><a class="position-relative rounded-3 overflow-hidden d-block"
+                            href="#!"><img class="w-100 w-sm-auto object-fit-cover"
+                                src="../../assets/img/gallery/57.png" alt="" height="220" />
+                            <div class="img-backdrop-faded">
+                                <div class="image-reveal-content mb-3">
+                                    <div class="d-flex align-items-center gap-2 mb-2"><span
+                                            class="fa-solid fa-hotel text-secondary-lighter"></span>
+                                        <h6 class="mb-0 text-secondary-lighter fw-semibold">17 Hotels</h6>
+                                    </div>
+                                    <div class="d-flex align-items-center gap-2"><span
+                                            class="fa-solid fa-tree-city text-secondary-lighter"></span>
+                                        <h6 class="mb-0 text-secondary-lighter fw-semibold">22 Tour Package</h6>
+                                    </div>
+                                </div>
+                                <div class="d-flex align-items-center gap-2"><img
+                                        src="../../assets/img/country/japan.png" alt="" />
+                                    <h4 class="mb-0 text-white">Japan</h4>
+                                </div>
+                            </div>
+                        </a></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

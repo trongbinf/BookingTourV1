@@ -6,11 +6,12 @@ import { CategoryService } from '../category/services/category.service';
 import { CategoryTours } from '../category/model/category-tour.model';
 import { CommonModule } from '@angular/common';
 import { Subject, takeUntil } from 'rxjs';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
@@ -18,7 +19,10 @@ export class HomeComponent implements OnInit, OnDestroy {
   categories: CategoryTours[] = [];
   tours: Tour[] = [];
   private destroy$ = new Subject<void>();
-
+  searchData = {
+    place: '',
+    date: ''
+  };
 
   constructor(private tourService: TourService, private cateService: CategoryService) {
 
@@ -52,6 +56,9 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.tourService.getTourByCategory(name).pipe(takeUntil(this.destroy$)).subscribe(tour => {
       this.tours = tour;
     })
+  }
+  onSearch() {
+
   }
 
 }
