@@ -205,7 +205,7 @@
         "IsRequired": false
       },
       {
-        "Name": "Tour.VehicleType",
+        "Name": "Tour.PersonNumber",
         "Type": "System.String",
         "IsRequired": false
       },
@@ -250,8 +250,8 @@
         "IsRequired": false
       },
       {
-        "Name": "Tour.TourActivities",
-        "Type": "System.Collections.Generic.ICollection\u00601[[BookingTour.Model.TourActivity, BookingTour.Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Name": "Tour.Activities",
+        "Type": "System.Collections.Generic.ICollection\u00601[[BookingTour.Model.Activity, BookingTour.Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "IsRequired": false
       },
       {
@@ -270,8 +270,8 @@
         "IsRequired": false
       },
       {
-        "Name": "TourActivities",
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[BookingTour.Model.TourActivity, BookingTour.Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Name": "Activities",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[BookingTour.Model.Activity, BookingTour.Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "IsRequired": false
       },
       {
@@ -402,7 +402,7 @@
         "IsRequired": false
       },
       {
-        "Name": "Tour.VehicleType",
+        "Name": "Tour.PersonNumber",
         "Type": "System.String",
         "IsRequired": false
       },
@@ -447,8 +447,8 @@
         "IsRequired": false
       },
       {
-        "Name": "Tour.TourActivities",
-        "Type": "System.Collections.Generic.ICollection\u00601[[BookingTour.Model.TourActivity, BookingTour.Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Name": "Tour.Activities",
+        "Type": "System.Collections.Generic.ICollection\u00601[[BookingTour.Model.Activity, BookingTour.Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "IsRequired": false
       },
       {
@@ -467,8 +467,8 @@
         "IsRequired": false
       },
       {
-        "Name": "TourActivities",
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[BookingTour.Model.TourActivity, BookingTour.Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Name": "Activities",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[BookingTour.Model.Activity, BookingTour.Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "IsRequired": false
       },
       {
