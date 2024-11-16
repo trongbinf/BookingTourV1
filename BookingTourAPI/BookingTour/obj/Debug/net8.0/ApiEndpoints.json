@@ -122,6 +122,16 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "BookingTour.API.Controllers.CategoryController",
+    "Method": "GetAllCategory",
+    "RelativePath": "api/Category/all",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "BookingTour.API.Controllers.TourController",
     "Method": "GetAllTours",
     "RelativePath": "api/Tour",
@@ -195,7 +205,7 @@
         "IsRequired": false
       },
       {
-        "Name": "Tour.VehicleType",
+        "Name": "Tour.PersonNumber",
         "Type": "System.String",
         "IsRequired": false
       },
@@ -240,8 +250,8 @@
         "IsRequired": false
       },
       {
-        "Name": "Tour.TourActivities",
-        "Type": "System.Collections.Generic.ICollection\u00601[[BookingTour.Model.TourActivity, BookingTour.Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Name": "Tour.Activities",
+        "Type": "System.Collections.Generic.ICollection\u00601[[BookingTour.Model.Activity, BookingTour.Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "IsRequired": false
       },
       {
@@ -260,8 +270,8 @@
         "IsRequired": false
       },
       {
-        "Name": "TourActivities",
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[BookingTour.Model.TourActivity, BookingTour.Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Name": "Activities",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[BookingTour.Model.Activity, BookingTour.Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "IsRequired": false
       },
       {
@@ -392,7 +402,7 @@
         "IsRequired": false
       },
       {
-        "Name": "Tour.VehicleType",
+        "Name": "Tour.PersonNumber",
         "Type": "System.String",
         "IsRequired": false
       },
@@ -437,8 +447,8 @@
         "IsRequired": false
       },
       {
-        "Name": "Tour.TourActivities",
-        "Type": "System.Collections.Generic.ICollection\u00601[[BookingTour.Model.TourActivity, BookingTour.Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Name": "Tour.Activities",
+        "Type": "System.Collections.Generic.ICollection\u00601[[BookingTour.Model.Activity, BookingTour.Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "IsRequired": false
       },
       {
@@ -457,8 +467,8 @@
         "IsRequired": false
       },
       {
-        "Name": "TourActivities",
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[BookingTour.Model.TourActivity, BookingTour.Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Name": "Activities",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[BookingTour.Model.Activity, BookingTour.Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "IsRequired": false
       },
       {
@@ -516,6 +526,196 @@
         "Name": "id",
         "Type": "System.Int32",
         "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BookingTour.API.Controllers.TourController",
+    "Method": "GetCategoriesWithTours",
+    "RelativePath": "api/Tour/categories",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[BookingTour.Model.ViewModel.CategoryVm, BookingTour.Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "BookingTour.API.Controllers.TourController",
+    "Method": "GetToursByCategory",
+    "RelativePath": "api/Tour/categories/{categoryName}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "categoryName",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[BookingTour.Model.ViewModel.TourVm, BookingTour.Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "BookingTour.API.Controllers.TourController",
+    "Method": "SearchTour",
+    "RelativePath": "api/Tour/search",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "name",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "city",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "country",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "category",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "minPrice",
+        "Type": "System.Nullable\u00601[[System.Double, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "maxPrice",
+        "Type": "System.Nullable\u00601[[System.Double, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "pageIndex",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "pageSize",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "BookingTour.Model.PaginatedList\u00601[[BookingTour.Model.ViewModel.TourVm, BookingTour.Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "BookingTour.API.Controllers.UserController",
+    "Method": "BlockUser",
+    "RelativePath": "api/User/block-user/{userId}",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userId",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BookingTour.API.Controllers.UserController",
+    "Method": "GetAllUsersWithRoles",
+    "RelativePath": "api/User/get-all-user",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BookingTour.API.Controllers.UserController",
+    "Method": "SearchUser",
+    "RelativePath": "api/User/search-user",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "key",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "pageIndex",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "pageSize",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "BookingTour.Model.PaginatedList\u00601[[BookingTour.Model.ViewModel.AppUserVm, BookingTour.Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "BookingTour.API.Controllers.UserController",
+    "Method": "SetUserRole",
+    "RelativePath": "api/User/set-role-user/{userId}",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userId",
+        "Type": "System.String",
+        "IsRequired": true
+      },
+      {
+        "Name": "roleName",
+        "Type": "System.String",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": []

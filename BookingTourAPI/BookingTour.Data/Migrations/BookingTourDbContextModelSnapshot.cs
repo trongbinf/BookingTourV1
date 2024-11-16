@@ -41,10 +41,19 @@ namespace BookingTour.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<TimeSpan>("Duration")
+                        .HasColumnType("time");
+
+                    b.Property<string>("Location")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("TourId")
                         .HasColumnType("int");
 
                     b.HasKey("ActivityId");
+
+                    b.HasIndex("TourId");
 
                     b.ToTable("Activities");
 
@@ -52,146 +61,102 @@ namespace BookingTour.Data.Migrations
                         new
                         {
                             ActivityId = 1,
-                            ActivityName = "Hướng dẫn viên du lịch",
+                            ActivityName = "Ăn sáng tại khách sạn",
                             ActivityType = 0,
-                            Description = "Cung cấp hướng dẫn viên chuyên nghiệp suốt chuyến tham quan.",
-                            TourId = 0
+                            Description = "Thưởng thức bữa sáng buffet tại khách sạn trước khi khởi hành.",
+                            Duration = new TimeSpan(0, 1, 0, 0, 0),
+                            Location = "Khách sạn trung tâm Hà Nội",
+                            TourId = 1
                         },
                         new
                         {
                             ActivityId = 2,
-                            ActivityName = "Quy định khi tham quan",
+                            ActivityName = "Hướng dẫn tham quan",
                             ActivityType = 1,
-                            Description = "Du khách không được hút thuốc và giữ trật tự trong khu vực công cộng.",
-                            TourId = 0
+                            Description = "Hướng dẫn viên cung cấp thông tin về các địa điểm nổi bật.",
+                            Duration = new TimeSpan(0, 2, 0, 0, 0),
+                            Location = "Điểm tham quan Hà Nội",
+                            TourId = 1
                         },
                         new
                         {
                             ActivityId = 3,
-                            ActivityName = "Lịch trình tham quan",
+                            ActivityName = "Tham quan Văn Miếu Quốc Tử Giám",
                             ActivityType = 2,
-                            Description = "Khám phá các địa danh nổi bật trong thành phố trong 4 giờ.",
-                            TourId = 0
+                            Description = "Khám phá di tích lịch sử với kiến trúc độc đáo.",
+                            Duration = new TimeSpan(0, 3, 0, 0, 0),
+                            Location = "Văn Miếu Quốc Tử Giám",
+                            TourId = 1
                         },
                         new
                         {
                             ActivityId = 4,
-                            ActivityName = "Cắm trại và BBQ",
+                            ActivityName = "Dùng bữa trưa tại nhà hàng",
                             ActivityType = 0,
-                            Description = "Trải nghiệm nướng BBQ và nghỉ đêm tại khu cắm trại.",
-                            TourId = 0
+                            Description = "Thưởng thức ẩm thực truyền thống tại nhà hàng nổi tiếng.",
+                            Duration = new TimeSpan(0, 1, 30, 0, 0),
+                            Location = "Nhà hàng Phố Cổ Hà Nội",
+                            TourId = 1
                         },
                         new
                         {
                             ActivityId = 5,
-                            ActivityName = "Bảo vệ môi trường",
-                            ActivityType = 1,
-                            Description = "Du khách cần tuân thủ các quy định bảo vệ môi trường trong khu cắm trại.",
-                            TourId = 0
+                            ActivityName = "Mua sắm tại chợ Đồng Xuân",
+                            ActivityType = 2,
+                            Description = "Tự do tham quan và mua sắm các đặc sản địa phương.",
+                            Duration = new TimeSpan(0, 2, 0, 0, 0),
+                            Location = "Chợ Đồng Xuân, Hà Nội",
+                            TourId = 1
                         },
                         new
                         {
                             ActivityId = 6,
-                            ActivityName = "Đi bộ đường dài",
-                            ActivityType = 2,
-                            Description = "Chuyến đi bộ xuyên rừng kéo dài 3 giờ qua các cảnh quan thiên nhiên.",
-                            TourId = 0
+                            ActivityName = "Ăn sáng tại khu nghỉ dưỡng",
+                            ActivityType = 0,
+                            Description = "Bữa sáng với các món ăn đặc sản địa phương.",
+                            Duration = new TimeSpan(0, 1, 0, 0, 0),
+                            Location = "Khu nghỉ dưỡng Đà Lạt",
+                            TourId = 2
                         },
                         new
                         {
                             ActivityId = 7,
-                            ActivityName = "Dịch vụ lặn biển",
-                            ActivityType = 0,
-                            Description = "Hướng dẫn lặn biển chuyên nghiệp và cung cấp trang thiết bị an toàn.",
-                            TourId = 0
+                            ActivityName = "Khám phá thác Datanla",
+                            ActivityType = 2,
+                            Description = "Tham quan và chụp ảnh tại thác nước nổi tiếng.",
+                            Duration = new TimeSpan(0, 3, 0, 0, 0),
+                            Location = "Thác Datanla, Đà Lạt",
+                            TourId = 2
                         },
                         new
                         {
                             ActivityId = 8,
-                            ActivityName = "Quy định trên biển",
-                            ActivityType = 1,
-                            Description = "Du khách không được vứt rác bừa bãi trên bãi biển.",
-                            TourId = 0
+                            ActivityName = "Dùng bữa trưa ngoài trời",
+                            ActivityType = 0,
+                            Description = "Bữa trưa BBQ tại khu vực gần thác nước.",
+                            Duration = new TimeSpan(0, 2, 0, 0, 0),
+                            Location = "Khu vực cắm trại, Đà Lạt",
+                            TourId = 2
                         },
                         new
                         {
                             ActivityId = 9,
-                            ActivityName = "Tham quan san hô",
+                            ActivityName = "Đi xe đạp quanh hồ Tuyền Lâm",
                             ActivityType = 2,
-                            Description = "Lặn biển ngắm san hô và khám phá đáy biển trong 2 giờ.",
-                            TourId = 0
+                            Description = "Thư giãn với chuyến đi xe đạp quanh hồ.",
+                            Duration = new TimeSpan(0, 2, 0, 0, 0),
+                            Location = "Hồ Tuyền Lâm, Đà Lạt",
+                            TourId = 2
                         },
                         new
                         {
                             ActivityId = 10,
-                            ActivityName = "Hướng dẫn viên bảo tàng",
-                            ActivityType = 0,
-                            Description = "Hướng dẫn chi tiết về các hiện vật quan trọng trong bảo tàng.",
-                            TourId = 0
-                        },
-                        new
-                        {
-                            ActivityId = 11,
-                            ActivityName = "Quy định tại bảo tàng",
+                            ActivityName = "Hướng dẫn bảo vệ môi trường",
                             ActivityType = 1,
-                            Description = "Không được chạm vào hiện vật và giữ trật tự trong bảo tàng.",
-                            TourId = 0
-                        },
-                        new
-                        {
-                            ActivityId = 12,
-                            ActivityName = "Lịch trình tham quan bảo tàng",
-                            ActivityType = 2,
-                            Description = "Khám phá bảo tàng trong khoảng thời gian 3 giờ.",
-                            TourId = 0
-                        },
-                        new
-                        {
-                            ActivityId = 13,
-                            ActivityName = "Thuê lều và dụng cụ",
-                            ActivityType = 0,
-                            Description = "Cung cấp các dịch vụ thuê lều và dụng cụ cắm trại đầy đủ.",
-                            TourId = 0
-                        },
-                        new
-                        {
-                            ActivityId = 14,
-                            ActivityName = "Quy định cắm trại",
-                            ActivityType = 1,
-                            Description = "Không gây tiếng ồn sau 10 giờ tối và tuân thủ các quy định an toàn.",
-                            TourId = 0
-                        },
-                        new
-                        {
-                            ActivityId = 15,
-                            ActivityName = "Tham quan rừng",
-                            ActivityType = 2,
-                            Description = "Đi bộ ngắm cảnh rừng và nghỉ qua đêm tại khu vực cắm trại.",
-                            TourId = 0
-                        },
-                        new
-                        {
-                            ActivityId = 16,
-                            ActivityName = "Dịch vụ đưa đón",
-                            ActivityType = 0,
-                            Description = "Dịch vụ xe đưa đón từ sân bay và các điểm đón đến khu resort.",
-                            TourId = 0
-                        },
-                        new
-                        {
-                            ActivityId = 17,
-                            ActivityName = "Quy định an toàn",
-                            ActivityType = 1,
-                            Description = "Du khách không được mang theo các vật dụng nguy hiểm vào khu nghỉ dưỡng.",
-                            TourId = 0
-                        },
-                        new
-                        {
-                            ActivityId = 18,
-                            ActivityName = "Nghỉ dưỡng tại resort",
-                            ActivityType = 2,
-                            Description = "Trải nghiệm nghỉ dưỡng và tham gia các hoạt động giải trí tại resort.",
-                            TourId = 0
+                            Description = "Thực hiện các quy định bảo vệ môi trường khu tham quan.",
+                            Duration = new TimeSpan(0, 0, 30, 0, 0),
+                            Location = "Khu vực thiên nhiên, Đà Lạt",
+                            TourId = 2
                         });
                 });
 
@@ -290,50 +255,6 @@ namespace BookingTour.Data.Migrations
                     b.HasIndex("TourId");
 
                     b.ToTable("DateStarts");
-
-                    b.HasData(
-                        new
-                        {
-                            DateStartId = 1,
-                            StartDate = new DateTime(2024, 12, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            TourId = 2,
-                            TypeStatus = 0
-                        },
-                        new
-                        {
-                            DateStartId = 2,
-                            StartDate = new DateTime(2024, 12, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            TourId = 2,
-                            TypeStatus = 0
-                        },
-                        new
-                        {
-                            DateStartId = 3,
-                            StartDate = new DateTime(2024, 12, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            TourId = 3,
-                            TypeStatus = 0
-                        },
-                        new
-                        {
-                            DateStartId = 4,
-                            StartDate = new DateTime(2024, 12, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            TourId = 3,
-                            TypeStatus = 0
-                        },
-                        new
-                        {
-                            DateStartId = 5,
-                            StartDate = new DateTime(2024, 12, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            TourId = 5,
-                            TypeStatus = 0
-                        },
-                        new
-                        {
-                            DateStartId = 6,
-                            StartDate = new DateTime(2024, 12, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            TourId = 5,
-                            TypeStatus = 0
-                        });
                 });
 
             modelBuilder.Entity("BookingTour.Model.RefreshToken", b =>
@@ -440,6 +361,10 @@ namespace BookingTour.Data.Migrations
                     b.Property<string>("OtherImage")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("PersonNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<double>("Price")
                         .HasColumnType("float");
 
@@ -447,10 +372,6 @@ namespace BookingTour.Data.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("TourName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("VehicleType")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -467,13 +388,13 @@ namespace BookingTour.Data.Migrations
                             CategoryId = 1,
                             City = "Hà Nội",
                             Country = "Việt Nam",
-                            Created = new DateTime(2024, 11, 13, 12, 43, 59, 239, DateTimeKind.Local).AddTicks(6722),
+                            Created = new DateTime(2024, 11, 16, 14, 31, 29, 324, DateTimeKind.Local).AddTicks(1660),
                             Description = "Tour tham quan các danh lam thắng cảnh trong thành phố.",
                             IsFullDay = true,
+                            PersonNumber = "1 đến 30 người",
                             Price = 500000.0,
                             Status = true,
-                            TourName = "Tham quan thành phố",
-                            VehicleType = "Xe bus"
+                            TourName = "Tham quan thành phố"
                         },
                         new
                         {
@@ -481,13 +402,13 @@ namespace BookingTour.Data.Migrations
                             CategoryId = 2,
                             City = "Đà Lạt",
                             Country = "Việt Nam",
-                            Created = new DateTime(2024, 11, 13, 12, 43, 59, 239, DateTimeKind.Local).AddTicks(6730),
+                            Created = new DateTime(2024, 11, 16, 14, 31, 29, 324, DateTimeKind.Local).AddTicks(1664),
                             Description = "Tour khám phá các khu rừng nguyên sinh.",
                             IsFullDay = false,
+                            PersonNumber = "1 đến 16 người",
                             Price = 800000.0,
                             Status = true,
-                            TourName = "Khám phá thiên nhiên",
-                            VehicleType = "Xe du lịch"
+                            TourName = "Khám phá thiên nhiên"
                         },
                         new
                         {
@@ -495,13 +416,13 @@ namespace BookingTour.Data.Migrations
                             CategoryId = 3,
                             City = "Nha Trang",
                             Country = "Việt Nam",
-                            Created = new DateTime(2024, 11, 13, 12, 43, 59, 239, DateTimeKind.Local).AddTicks(6740),
+                            Created = new DateTime(2024, 11, 16, 14, 31, 29, 324, DateTimeKind.Local).AddTicks(1667),
                             Description = "Tour du lịch nghỉ dưỡng tại các bãi biển đẹp.",
                             IsFullDay = false,
+                            PersonNumber = "1 đến 19 người",
                             Price = 1200000.0,
                             Status = true,
-                            TourName = "Du lịch biển",
-                            VehicleType = "Xe riêng"
+                            TourName = "Du lịch biển"
                         },
                         new
                         {
@@ -509,13 +430,13 @@ namespace BookingTour.Data.Migrations
                             CategoryId = 1,
                             City = "Hà Nội",
                             Country = "Việt Nam",
-                            Created = new DateTime(2024, 11, 13, 12, 43, 59, 239, DateTimeKind.Local).AddTicks(6746),
+                            Created = new DateTime(2024, 11, 16, 14, 31, 29, 324, DateTimeKind.Local).AddTicks(1670),
                             Description = "Tham quan các bảo tàng nổi tiếng.",
                             IsFullDay = true,
+                            PersonNumber = "1 đến 19 người",
                             Price = 300000.0,
                             Status = true,
-                            TourName = "Tham quan bảo tàng",
-                            VehicleType = "Xe điện"
+                            TourName = "Tham quan bảo tàng"
                         },
                         new
                         {
@@ -523,13 +444,13 @@ namespace BookingTour.Data.Migrations
                             CategoryId = 2,
                             City = "Sa Pa",
                             Country = "Việt Nam",
-                            Created = new DateTime(2024, 11, 13, 12, 43, 59, 239, DateTimeKind.Local).AddTicks(6754),
+                            Created = new DateTime(2024, 11, 16, 14, 31, 29, 324, DateTimeKind.Local).AddTicks(1673),
                             Description = "Tour cắm trại qua đêm trong rừng.",
                             IsFullDay = false,
+                            PersonNumber = "1 đến 15 người",
                             Price = 950000.0,
                             Status = true,
-                            TourName = "Cắm trại rừng",
-                            VehicleType = "Xe du lịch"
+                            TourName = "Cắm trại rừng"
                         },
                         new
                         {
@@ -537,29 +458,14 @@ namespace BookingTour.Data.Migrations
                             CategoryId = 3,
                             City = "Phú Quốc",
                             Country = "Việt Nam",
-                            Created = new DateTime(2024, 11, 13, 12, 43, 59, 239, DateTimeKind.Local).AddTicks(6765),
+                            Created = new DateTime(2024, 11, 16, 14, 31, 29, 324, DateTimeKind.Local).AddTicks(1676),
                             Description = "Tour nghỉ dưỡng và tham quan vùng biển.",
                             IsFullDay = true,
+                            PersonNumber = "1 đến 26 người",
                             Price = 1500000.0,
                             Status = true,
-                            TourName = "Kỳ nghỉ biển",
-                            VehicleType = "Thuyền"
+                            TourName = "Kỳ nghỉ biển"
                         });
-                });
-
-            modelBuilder.Entity("BookingTour.Model.TourActivity", b =>
-                {
-                    b.Property<int>("TourId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ActivityId")
-                        .HasColumnType("int");
-
-                    b.HasKey("TourId", "ActivityId");
-
-                    b.HasIndex("ActivityId");
-
-                    b.ToTable("TourActivities");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -591,14 +497,14 @@ namespace BookingTour.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "4c97ba02-2d6c-4a95-90bb-84e74b6af561",
+                            Id = "eb9e40d0-5e41-4ecc-859f-a10f5dc000ba",
                             ConcurrencyStamp = "1",
                             Name = "Admin",
                             NormalizedName = "Admin"
                         },
                         new
                         {
-                            Id = "47b6cbac-6b28-46cc-a125-a6962d24ae74",
+                            Id = "6c6262a4-f3ea-45c7-abf4-ce43582886e1",
                             ConcurrencyStamp = "2",
                             Name = "User",
                             NormalizedName = "User"
@@ -796,6 +702,15 @@ namespace BookingTour.Data.Migrations
                     b.HasDiscriminator().HasValue("AppUser");
                 });
 
+            modelBuilder.Entity("BookingTour.Model.Activity", b =>
+                {
+                    b.HasOne("BookingTour.Model.Tour", null)
+                        .WithMany("Activities")
+                        .HasForeignKey("TourId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("BookingTour.Model.Booking", b =>
                 {
                     b.HasOne("BookingTour.Model.Tour", "Tour")
@@ -867,25 +782,6 @@ namespace BookingTour.Data.Migrations
                     b.Navigation("Category");
                 });
 
-            modelBuilder.Entity("BookingTour.Model.TourActivity", b =>
-                {
-                    b.HasOne("BookingTour.Model.Activity", "Activity")
-                        .WithMany("TourActivities")
-                        .HasForeignKey("ActivityId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("BookingTour.Model.Tour", "Tour")
-                        .WithMany("TourActivities")
-                        .HasForeignKey("TourId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Activity");
-
-                    b.Navigation("Tour");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -937,11 +833,6 @@ namespace BookingTour.Data.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("BookingTour.Model.Activity", b =>
-                {
-                    b.Navigation("TourActivities");
-                });
-
             modelBuilder.Entity("BookingTour.Model.Category", b =>
                 {
                     b.Navigation("Tours");
@@ -949,13 +840,13 @@ namespace BookingTour.Data.Migrations
 
             modelBuilder.Entity("BookingTour.Model.Tour", b =>
                 {
+                    b.Navigation("Activities");
+
                     b.Navigation("Bookings");
 
                     b.Navigation("DateStarts");
 
                     b.Navigation("Reviews");
-
-                    b.Navigation("TourActivities");
                 });
 
             modelBuilder.Entity("BookingTour.Model.AppUser", b =>

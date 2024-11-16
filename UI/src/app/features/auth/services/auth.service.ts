@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { LoginRequest } from '../models/login-request.model';
 import { BehaviorSubject, Observable } from 'rxjs';
@@ -10,16 +10,40 @@ import { Register } from '../models/register.model';
 import { ResetPassword } from '../models/reset-password.model';
 import { ChangePassword } from '../models/changepass..models';
 import { Booking } from '../../Booking/models/booking.model';
+import { AppUser } from '../models/appUser.model';
+import { PagedResponse } from '../models/PaginatedList';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
+
+
   $user = new BehaviorSubject<User | undefined>(undefined);
 
   constructor(private http: HttpClient,
     private cookieService: CookieService) { }
+
+  getAllUser(): Observable<AppUser[]> {
+    return this.http.get<AppUser[]>(`${BASE_URL}/User/get-all-user`);
+  }
+
+  blockUser(id: string): Observable<void> {
+    return this.http.post<void>(`${BASE_URL}/User/block-user/${id}`, {});
+  }
+  setRole(userId: string, role: string): Observable<void> {
+    return this.http.post<void>(`${BASE_URL}/User/set-role-user/${userId}?roleName=${role}`, {});
+  }
+
+  searchUser(key: string | null, pageIndex: number, pageSize: number): Observable<PagedResponse<AppUser>> {
+    const params = new HttpParams()
+      .set('key', key || '')
+      .set('pageIndex', pageIndex)
+      .set('pageSize', pageSize);
+
+    return this.http.get<PagedResponse<AppUser>>(`${BASE_URL}/User/search-user`, { params });
+  }
 
   login(request: LoginRequest): Observable<LoginResponse> {
     return this.http.post<LoginResponse>(`${BASE_URL}/Auth/login-user`, request);

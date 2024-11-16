@@ -3,6 +3,7 @@
   "WorkspaceRootPath": "D:\\K17_KTPM\\Git_Repo\\BookingTourV1\\BookingTourAPI\\",
   "Documents": [
     {
+<<<<<<< HEAD
       "AbsoluteMoniker": "D:0:0:{A694BB17-9131-4B69-8EFD-64DF073E73A4}|BookingTour.Model\\BookingTour.Model.csproj|d:\\k17_ktpm\\git_repo\\bookingtourv1\\bookingtourapi\\bookingtour.model\\tour.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A694BB17-9131-4B69-8EFD-64DF073E73A4}|BookingTour.Model\\BookingTour.Model.csproj|solutionrelative:bookingtour.model\\tour.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -25,6 +26,22 @@
     {
       "AbsoluteMoniker": "D:0:0:{6C4F1A89-B025-43D3-A92F-13D969C756D6}|BookingTour.Business\\BookingTour.Business.csproj|d:\\k17_ktpm\\git_repo\\bookingtourv1\\bookingtourapi\\bookingtour.business\\service\\tourservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{6C4F1A89-B025-43D3-A92F-13D969C756D6}|BookingTour.Business\\BookingTour.Business.csproj|solutionrelative:bookingtour.business\\service\\tourservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+=======
+      "AbsoluteMoniker": "D:0:0:{78D497F1-6559-4C44-B8AB-6788844A38F2}|BookingTour\\BookingTour.API.csproj|d:\\a\\ky6\\ojt\\5.project\\bookingtourv1\\bookingtourapi\\bookingtour\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{78D497F1-6559-4C44-B8AB-6788844A38F2}|BookingTour\\BookingTour.API.csproj|solutionrelative:bookingtour\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:1:0:{78D497F1-6559-4C44-B8AB-6788844A38F2}|BookingTour\\BookingTour.API.csproj|d:\\a\\ky6\\ojt\\5.project\\bookingtourv1\\bookingtourapi\\bookingtour\\controllers\\tourcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:1:0:{78D497F1-6559-4C44-B8AB-6788844A38F2}|BookingTour\\BookingTour.API.csproj|solutionrelative:bookingtour\\controllers\\tourcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{78D497F1-6559-4C44-B8AB-6788844A38F2}|BookingTour\\BookingTour.API.csproj|d:\\a\\ky6\\ojt\\5.project\\bookingtourv1\\bookingtourapi\\bookingtour\\controllers\\categorycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{78D497F1-6559-4C44-B8AB-6788844A38F2}|BookingTour\\BookingTour.API.csproj|solutionrelative:bookingtour\\controllers\\categorycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:2:0:{78D497F1-6559-4C44-B8AB-6788844A38F2}|BookingTour\\BookingTour.API.csproj|d:\\a\\ky6\\ojt\\5.project\\bookingtourv1\\bookingtourapi\\bookingtour\\controllers\\tourcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:2:0:{78D497F1-6559-4C44-B8AB-6788844A38F2}|BookingTour\\BookingTour.API.csproj|solutionrelative:bookingtour\\controllers\\tourcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+>>>>>>> 8eda729f76ae8754f2e83041fe4025ec989d06ab
     }
   ],
   "DocumentGroupContainers": [
@@ -34,10 +51,11 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Document",
+<<<<<<< HEAD
               "DocumentIndex": 0,
               "Title": "Tour.cs",
               "DocumentMoniker": "D:\\K17_KTPM\\Git_Repo\\BookingTourV1\\BookingTourAPI\\BookingTour.Model\\Tour.cs",
@@ -86,11 +104,48 @@
               "ViewState": "AQIAABgAAAAAAAAAAAAowAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-11-14T09:58:14.677Z"
+=======
+              "DocumentIndex": 1,
+              "Title": "TourController.cs",
+              "DocumentMoniker": "D:\\A\\Ky6\\OJT\\5.Project\\BookingTourV1\\BookingTourAPI\\BookingTour\\Controllers\\TourController.cs",
+              "RelativeDocumentMoniker": "BookingTour\\Controllers\\TourController.cs",
+              "ToolTip": "D:\\A\\Ky6\\OJT\\5.Project\\BookingTourV1\\BookingTourAPI\\BookingTour\\Controllers\\TourController.cs",
+              "RelativeToolTip": "BookingTour\\Controllers\\TourController.cs",
+              "ViewState": "AgIAAAsAAAAAAAAAAAAAwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-16T07:30:09.461Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "CategoryController.cs",
+              "DocumentMoniker": "D:\\A\\Ky6\\OJT\\5.Project\\BookingTourV1\\BookingTourAPI\\BookingTour\\Controllers\\CategoryController.cs",
+              "RelativeDocumentMoniker": "BookingTour\\Controllers\\CategoryController.cs",
+              "ToolTip": "D:\\A\\Ky6\\OJT\\5.Project\\BookingTourV1\\BookingTourAPI\\BookingTour\\Controllers\\CategoryController.cs",
+              "RelativeToolTip": "BookingTour\\Controllers\\CategoryController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-15T03:20:47.157Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "UserController.cs",
+              "DocumentMoniker": "D:\\A\\Ky6\\OJT\\5.Project\\BookingTourV1\\BookingTourAPI\\BookingTour\\Controllers\\UserController.cs",
+              "RelativeDocumentMoniker": "BookingTour\\Controllers\\UserController.cs",
+              "ToolTip": "D:\\A\\Ky6\\OJT\\5.Project\\BookingTourV1\\BookingTourAPI\\BookingTour\\Controllers\\UserController.cs",
+              "RelativeToolTip": "BookingTour\\Controllers\\UserController.cs",
+              "ViewState": "AgIAAHsAAAAAAAAAAAAYwIcAAAAYAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-14T15:33:22.368Z",
+              "EditorCaption": ""
+>>>>>>> 8eda729f76ae8754f2e83041fe4025ec989d06ab
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
               "Title": "TourController.cs",
+<<<<<<< HEAD
               "DocumentMoniker": "D:\\K17_KTPM\\Git_Repo\\BookingTourV1\\BookingTourAPI\\BookingTour\\Controllers\\TourController.cs",
               "RelativeDocumentMoniker": "BookingTour\\Controllers\\TourController.cs",
               "ToolTip": "D:\\K17_KTPM\\Git_Repo\\BookingTourV1\\BookingTourAPI\\BookingTour\\Controllers\\TourController.cs",
@@ -112,6 +167,15 @@
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-11-14T03:32:16.07Z",
               "EditorCaption": ""
+=======
+              "DocumentMoniker": "D:\\A\\Ky6\\OJT\\5.Project\\BookingTourV1\\BookingTourAPI\\BookingTour\\Controllers\\TourController.cs",
+              "RelativeDocumentMoniker": "BookingTour\\Controllers\\TourController.cs",
+              "ToolTip": "D:\\A\\Ky6\\OJT\\5.Project\\BookingTourV1\\BookingTourAPI\\BookingTour\\Controllers\\TourController.cs",
+              "RelativeToolTip": "BookingTour\\Controllers\\TourController.cs",
+              "ViewState": "AgIAABAAAAAAAAAAAAAAAJ0AAAAsAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-14T13:53:06.378Z"
+>>>>>>> 8eda729f76ae8754f2e83041fe4025ec989d06ab
             }
           ]
         }

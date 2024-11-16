@@ -3,20 +3,10 @@ import { Booking } from "../../Booking/models/booking.model";
 import { DateStart } from "../../dateStarts/models/date-start.model";
 import { Category } from "../../category/model/category.model";
 import { Review } from "../../reviews/model/review.model";
+import { TourGet } from "./tour-get.model";
 
 export interface Tour {
-    tourId: number;
-    tourName: string;
-    description: string;
-    mainImage?: string;
-    otherImage?: string;
-    city: string;
-    country: string;
-    isFullDay: boolean;
-    price: number;
-    vehicleType: string;
-    created?: Date;
-    status: boolean;
+    tour: TourGet;
     category?: Category;
     dateStarts?: DateStart[];
     activities?: Activity[];
