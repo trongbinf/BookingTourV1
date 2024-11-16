@@ -3,6 +3,8 @@ export interface Activity {
     activityType: ActivityType;
     activityName: string;
     description: string;
+    location: string;
+    duration: string;
     tourId: number;
 }
 

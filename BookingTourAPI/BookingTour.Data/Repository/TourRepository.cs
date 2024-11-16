@@ -30,7 +30,7 @@ namespace BookingTour.Data.Repository.IRepository
 				objFromDb.Country = tour.Country;
 				objFromDb.IsFullDay = tour.IsFullDay;
 				objFromDb.Price = tour.Price;
-				objFromDb.VehicleType = tour.VehicleType;
+				objFromDb.PersonNumber = tour.PersonNumber;
 				objFromDb.Status = tour.Status;
 
 				if (!string.IsNullOrEmpty(tour.MainImage))

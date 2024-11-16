@@ -5,7 +5,9 @@ export interface Activity {
     activityType: ActivityType;
     activityName: string;
     description: string;
-    tour?: Tour;
+    location: string;
+    duration: string;
+    tourId: number;
 }
 
 export enum ActivityType {

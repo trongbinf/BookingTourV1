@@ -22,7 +22,7 @@ namespace BookingTour.API.Controllers
         {
             // dong adds datestarts
             var tours = await _tourService.GetAllAsync(
-                includeProperties: "Category,Reviews,TourActivities,Bookings,DateStarts"
+                includeProperties: "Category,Reviews,Activities,Bookings,DateStarts"
             );
 
             var tourVms = tours.Select(tour => new TourVm
@@ -31,7 +31,7 @@ namespace BookingTour.API.Controllers
                 DateStarts = tour.DateStarts,
                 Category = tour.Category,
                 Reviews = tour.Reviews,
-                TourActivities = tour.TourActivities,
+				Activities = tour.Activities,
                 Bookings = tour.Bookings
             });
 
@@ -43,8 +43,8 @@ namespace BookingTour.API.Controllers
         {
             // Lấy toàn bộ dữ liệu các tour bao gồm category và các thuộc tính liên quan
             var tours = await _tourService.GetAllAsync(
-                includeProperties: "Category,DateStarts,Reviews,TourActivities,Bookings"
-            );
+                includeProperties: "Category,DateStarts,Reviews,Activities,Bookings"
+			);
 
             // Nhóm các tour theo category và lấy 5 tour mỗi nhóm
             var groupedCategories = tours
@@ -64,8 +64,8 @@ namespace BookingTour.API.Controllers
             string normalName = rm.RemoveUnicode(categoryName);
             var tours = await _tourService.GetAllAsync(
                 filter: t => t.Category.Name == categoryName,
-                includeProperties: "Category,DateStarts,Reviews,TourActivities,Bookings"
-            );
+                includeProperties: "Category,DateStarts,Reviews,Activities,Bookings"
+			);
 
             // Lấy tối đa 5 tour theo category đã chọn
             var tourVms = tours.Take(6).Select(tour => new TourVm
@@ -74,7 +74,7 @@ namespace BookingTour.API.Controllers
                 DateStarts = tour.DateStarts,
                 Category = tour.Category,
                 Reviews = tour.Reviews,
-                TourActivities = tour.TourActivities,
+				Activities = tour.Activities,
                 Bookings = tour.Bookings
             }).ToList();
 
@@ -95,7 +95,7 @@ namespace BookingTour.API.Controllers
             [FromQuery] int pageSize = 5)
         {
             var listTour = await _tourService.GetAllAsync(
-                includeProperties: "Category,Reviews,TourActivities,Bookings,DateStarts");
+                includeProperties: "Category,Reviews,Activities,Bookings,DateStarts");
 
             listTour = listTour.Where(t => t.Status == true).ToList();
             if (!string.IsNullOrEmpty(name))
@@ -137,7 +137,7 @@ namespace BookingTour.API.Controllers
                 Bookings = t.Bookings,
                 Category = t.Category,
                 DateStarts = t.DateStarts,
-                TourActivities = t.TourActivities,
+                Activities = t.Activities,
                 Reviews = t.Reviews,
                 MainImage = null,
                 DetailImages = null
@@ -155,7 +155,7 @@ namespace BookingTour.API.Controllers
         public async Task<ActionResult<TourVm>> GetTourById(int id)
         {
             var tour = await _tourService.GetFirstOrDefaultAsync(x => x.TourId == id,
-                includeProperties: "Category,Reviews,TourActivities,Bookings");
+                includeProperties: "Category,Reviews,Activities,Bookings");
             if (tour == null)
             {
                 return NotFound();
@@ -166,7 +166,7 @@ namespace BookingTour.API.Controllers
                 Tour = tour,
                 Category = tour.Category,
                 Reviews = tour.Reviews,
-                TourActivities = tour.TourActivities,
+				Activities = tour.Activities,
                 Bookings = tour.Bookings
             };
 
