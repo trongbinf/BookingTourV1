@@ -1,4 +1,5 @@
-﻿using BookingTour.Business.Service.IService;
+﻿using BookingTour.Business.Service;
+using BookingTour.Business.Service.IService;
 using BookingTour.Data.Data;
 using BookingTour.Model;
 using BookingTour.Model.ViewModel;
@@ -6,6 +7,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using rm = BookingTour.Business.Service.HandleTextUnicode;
 
 namespace BookingTour.API.Controllers
 {
@@ -111,6 +113,51 @@ namespace BookingTour.API.Controllers
             return Ok(new { Message = $"User '{user.UserName}' has been blocked until {user.LockoutEnd}" });
         }
 
+        [HttpGet("search-user")]
+        public async Task<ActionResult<PaginatedList<AppUserVm>>> SearchUser(
+                      [FromQuery] string? key = null,
+                      [FromQuery] int pageIndex = 1,
+                      [FromQuery] int pageSize = 5)
+        {
+            // Perform join operation first to get users with roles
+            var usersWithRoles = await _context.Users
+                .Select(user => new AppUserVm
+                {
+                    Id = user.Id,
+                    UserName = user.UserName,
+                    Email = user.Email,
+                    Roles = _context.UserRoles
+                        .Where(ur => ur.UserId == user.Id)
+                        .Join(_context.Roles, ur => ur.RoleId, r => r.Id, (ur, r) => r.Name)
+                        .FirstOrDefault(),
+                    Status = user.LockoutEnabled
+                })
+                .ToListAsync();
+
+            // Filter the results if a key is provided
+            if (!string.IsNullOrEmpty(key))
+            {
+                var normalizedKey = rm.RemoveUnicode(key);
+                usersWithRoles = usersWithRoles
+                    .Where(user =>
+                        rm.RemoveUnicode(user.UserName).Contains(normalizedKey, StringComparison.OrdinalIgnoreCase) ||
+                        rm.RemoveUnicode(user.Email).Contains(normalizedKey, StringComparison.OrdinalIgnoreCase))
+                    .ToList();
+            }
+
+            // Get the total count for pagination
+            int totalCount = usersWithRoles.Count;
+
+            // Apply pagination
+            var paginatedUsers = usersWithRoles
+                .Skip((pageIndex - 1) * pageSize)
+                .Take(pageSize)
+                .ToList();
+
+            // Create paginated response
+            var response = new PaginatedList<AppUserVm>(paginatedUsers, totalCount, pageIndex, pageSize);
+            return Ok(response);
+        }
 
     }
 }
