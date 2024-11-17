@@ -1,4 +1,6 @@
-﻿namespace BookingTour.Model.ViewModel
+﻿using BookingTour.Model.Enum;
+
+namespace BookingTour.Model.ViewModel
 {
     public class AppUserVm
     {
@@ -9,5 +11,15 @@
 
         public string Roles { get; set; }
         public bool Status { get; set; }
+        public List<UserBooking> Bookings { get; set; }
+    }
+
+    public class UserBooking
+    {
+        public int BookingId { get; set; }
+        public DateTime BookingDate { get; set; }
+        public StatusType Status { get; set; }
+        public int TourId { get; set; }
+        public string Notes { get; set; }
     }
 }

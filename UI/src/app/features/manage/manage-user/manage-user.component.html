@@ -101,11 +101,8 @@
     <div class="content container">
         <div class="mb-7">
             <h2>Room Listing</h2>
-            <div data-list='{"valueNames":["id","userName","email"],"page":8}'>
-                <div class="d-md-flex mt-5 mb-4"><button class="btn btn-primary me-4"><span
-                            class="fas fa-plus me-2"></span>Create Listing</button><button
-                        class="btn btn-link text-body me-4 px-0"><span
-                            class="fa-solid fa-file-export fs-9 me-2"></span>Export</button>
+            <div data-list='{"valueNames":["id","userName","email"],"page":2}'>
+                <div class="d-md-flex mt-5 mb-4">
                     <div class="d-flex gap-2 ms-md-auto mt-3 mt-md-0">
                         <div class="search-box">
 
@@ -132,7 +129,7 @@
                                     <th data-sort="status">Status</th>
                                 </tr>
                             </thead>
-                            <tbody class="list" id="room-listing-table-body">
+                            <tbody class="list" id="table-body">
                                 <tr *ngFor="let appUser of appUsers">
                                     <td class="id">{{ appUser.id }}</td>
                                     <td class="userName">{{ appUser.userName }}</td>
@@ -157,8 +154,8 @@
                                             <div class="dropdown-menu dropdown-menu-end py-2">
 
                                                 <a href="#" class="dropdown-item link-secondary text-decoration-none"
-                                                    data-bs-toggle="modal" data-bs-target="#forgotPasswordModal"
-                                                    [attr.data-user-id]="appUser.id">
+                                                    data-bs-toggle="modal" data-bs-target="#setRoleModal"
+                                                    (click)="setSelectedUserId(appUser.id)">
                                                     Set Role
                                                 </a>
 
@@ -230,10 +227,9 @@
                             aria-haspopup="true" aria-expanded="false" data-bs-reference="parent"><span
                                 class="fas fa-ellipsis-h text-body"></span></button>
                         <div class="dropdown-menu dropdown-menu-end py-2" aria-labelledby="support-chat-dropdown"><a
-                                class="dropdown-item" href="#!">Request a callback</a><a class="dropdown-item"
-                                href="#!">Search in chat</a><a class="dropdown-item" href="#!">Show history</a><a
-                                class="dropdown-item" href="#!">Report to Admin</a><a
-                                class="dropdown-item btn-support-chat" href="#!">Close Support</a></div>
+                                class="dropdown-item">Request a callback</a><a class="dropdown-item">Search in
+                                chat</a><a class="dropdown-item">Show history</a><a class="dropdown-item">Report to
+                                Admin</a><a class="dropdown-item btn-support-chat">Close Support</a></div>
                     </div>
                 </div>
                 <div class="card-body chat p-0">
@@ -468,12 +464,11 @@
 
 
 <!-- Forgot Password Modal -->
-<div class="modal fade" id="forgotPasswordModal" tabindex="-1" aria-labelledby="forgotPasswordModalLabel"
-    aria-hidden="true">
+<div class="modal fade" id="setRoleModal" tabindex="-1" aria-labelledby="setRoleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="forgotPasswordModalLabel">Forgot Password</h5>
+                <h5 class="modal-title" id="setRoleModalLabel">Set Role User</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">

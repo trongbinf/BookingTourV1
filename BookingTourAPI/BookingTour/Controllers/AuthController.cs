@@ -70,7 +70,9 @@ namespace BookingTour.API.Controllers
             {
                 UserName = registerVm.UserName,
                 Email = registerVm.Email,
-                SecurityStamp = Guid.NewGuid().ToString()
+                SecurityStamp = Guid.NewGuid().ToString(),
+                
+
             };
 
             // Tạo người dùng nhưng không cho phép đăng nhập cho đến khi xác thực email
@@ -144,7 +146,7 @@ namespace BookingTour.API.Controllers
                 new Claim(ClaimTypes.Name, user.UserName),
                 new Claim(ClaimTypes.NameIdentifier, user.Id),
                 new Claim(JwtRegisteredClaimNames.Email, user.Email),
-                new Claim(JwtRegisteredClaimNames.Sub, user.Email),
+                new Claim(JwtRegisteredClaimNames.Sub, user.UserName),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
             };
 
@@ -157,7 +159,7 @@ namespace BookingTour.API.Controllers
 
             var bookings = await _context.Bookings
                         .Where(b => b.UserId == user.Id)
-                        .Select(b => new { b.BookingId, b.BookingDate, b.Status, b.TourId})
+                        .Select(b => new { b.BookingId, b.BookingDate, b.Status, b.TourId,b.Notes})
                         .ToListAsync();
 
             if (bookings != null && bookings.Any())
@@ -199,6 +201,78 @@ namespace BookingTour.API.Controllers
 
             return response;
         }
+
+        [HttpPost("refresh-token")]
+        public async Task<IActionResult> RefreshToken(string refreshToken)
+        {
+            if (!ModelState.IsValid || string.IsNullOrEmpty(refreshToken))
+            {
+                return BadRequest(new { message = "Refresh token is required." });
+            }
+
+            var storedRefreshToken = await _context.RefreshTokens
+                .FirstOrDefaultAsync(rt => rt.Token == refreshToken);
+
+            if (storedRefreshToken == null || storedRefreshToken.IsRevoked || storedRefreshToken.DateExpire < DateTime.UtcNow)
+            {
+                return Unauthorized(new { message = "Invalid or expired refresh token." });
+            }
+
+            // Validate if the JWT token in the refresh token matches any stored token (optional)
+            var user = await _userManager.FindByIdAsync(storedRefreshToken.UserId);
+            if (user == null)
+            {
+                return Unauthorized(new { message = "Invalid user associated with refresh token." });
+            }
+
+            // Revoke the old refresh token
+            storedRefreshToken.IsRevoked = true;
+            _context.RefreshTokens.Update(storedRefreshToken);
+
+            // Generate new tokens
+            var newAuthResult = await GenerateJWTToken(user);
+
+            await _context.SaveChangesAsync();
+
+            return Ok(newAuthResult);
+        }
+
+        [HttpGet("get-user-info")]
+        [Authorize]
+        public async Task<IActionResult> GetUserInfo()
+        {
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+            if (string.IsNullOrEmpty(userId))
+            {
+                return Unauthorized(new { message = "Invalid token." });
+            }
+
+            var user = await _userManager.FindByIdAsync(userId);
+
+            if (user == null)
+            {
+                return NotFound(new { message = "User not found." });
+            }
+
+            var roles = await _userManager.GetRolesAsync(user);
+
+            var bookings = await _context.Bookings
+                .Where(b => b.UserId == user.Id)
+                .Select(b => new { b.BookingId, b.BookingDate, b.Status, b.TourId, b.Notes })
+                .ToListAsync();
+
+            return Ok(new
+            {
+                user.Id,
+                user.Email,
+                user.UserName,
+                Roles = roles,
+                Status = true,
+                Bookings = bookings
+            });
+        }
+
 
         [HttpPost("change-password")]
         public async Task<IActionResult> ChangePassword([FromBody] ChangePasswordVm model)

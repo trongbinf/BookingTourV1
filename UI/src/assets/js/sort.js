@@ -5,7 +5,7 @@ const sortState = {
 };
 
 function sortTable(column) {
-    const tableBody = document.getElementById("room-listing-table-body");
+    const tableBody = document.getElementById("table-body");
     const rows = Array.from(tableBody.querySelectorAll("tr"));
 
     // Cập nhật trạng thái sắp xếp

@@ -1,7 +1,33 @@
-import { Booking } from "../../Booking/models/booking.model";
 
 export interface User {
+    id: string;
+    userName: string;
+    fullName: string;
     email: string;
-    role: string;
-    bookings: Booking[];
+    roles: string;
+    status: boolean;
+    bookings?: Bookings[];
 }
+
+export enum StatusType {
+    Pending = 3,
+    Confirmed = 2,
+    Canceled = 1
+}
+
+export interface Bookings {
+    BookingId: number;
+    BookingDate: Date;
+    Status: StatusType;
+    Notes: string;
+    TourId: number;
+}
+
+// export interface AppUser {
+//     id: string;
+//     userName: string;
+//     fullName: string;
+//     email: string;
+//     roles: string;
+//     status: boolean;
+// }

@@ -28,7 +28,8 @@
                             <ul class="dropdown-menu">
                                 <li class="mt-2" style="cursor: pointer;"><span
                                         class="dropdown-item">{{user?.email}}</span></li>
-                                <li class="mt-2" style="cursor: pointer;"><span class="dropdown-item">Profile</span>
+                                <li class="mt-2" style="cursor: pointer;"><span [routerLink]="['/profile']"
+                                        class="dropdown-item">Profile</span>
                                 </li>
                                 <li class="mt-2" style="cursor: pointer;"><span [routerLink]="['/changepass']"
                                         class="dropdown-item">Change

@@ -33,33 +33,35 @@ export class LoginComponent {
     this.authService.login(this.model)
       .subscribe({
         next: response => {
-          console.log(response);
-
           // Lưu token vào cookie
           this.cookieService.set('Authentication', `Bearer ${response.token}`, undefined, '/', undefined, true, 'Strict');
+          this.cookieService.set('RefreshToken', response.refreshToken, undefined, '/', undefined, true, 'Strict');
 
           // Giải mã token để lấy thông tin vai trò
           const decodedToken: any = jwtDecode(response.token);
           const role = decodedToken['role'] || decodedToken['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'];
           const bookings = decodedToken['bookings'] ? JSON.parse(decodedToken['bookings']) : [];
 
+          const userId = decodedToken['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier'] || decodedToken['Id'];
+          const userName = decodedToken['sub'] || decodedToken['userName'];
+          const fullName = decodedToken['name'] || decodedToken['fullName'];
+          const email = decodedToken['email'] || decodedToken['Email'];
+
           // Gọi setUser với role và bookings lấy từ response
           this.authService.setUser({
-            email: this.model.email,
-            role: role,
+            id: userId,
+            userName: userName,
+            fullName: fullName,
+            email: email,
+            roles: role,
+            status: true,
             bookings: bookings
-          });
-          console.log(decodedToken); // Kiểm tra cấu trúc của token sau khi giải mã
-          console.log(role);
-          console.log(bookings)
+          })
+
           this.router.navigateByUrl('/');
-        },
-        error: err => {
-          console.log(err);
         }
       });
   }
-
 
   onForgotPassword() {
     this.authService.forgotpass(this.email).subscribe({
