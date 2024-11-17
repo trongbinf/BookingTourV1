@@ -1,12 +1,24 @@
 export enum StatusType {
-    Pending = 'Pending',
-    Confirmed = 'Confirmed',
-    Canceled = 'Canceled'
+    Submited,     // Đã gửi
+    Pending,      // Đang chờ duyệt
+    Confirmed,    // Đã xác nhận
+    Canceled,     // Đã hủy
+    Available,    // Có sẵn
+    Unavailable   // Không khả dụng
 }
+
 export interface CreateBooking {
-    bookingDate: Date;
+    pickDate: string;
+    startTime: string;
+    bookingDate: string;
+    personNumber: number;
     notes?: string;
     status: StatusType;
     tourId: number;
     userId: string;
 }
+
+
+
+
+

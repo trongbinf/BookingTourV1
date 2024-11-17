@@ -155,7 +155,7 @@ namespace BookingTour.API.Controllers
         public async Task<ActionResult<TourVm>> GetTourById(int id)
         {
             var tour = await _tourService.GetFirstOrDefaultAsync(x => x.TourId == id,
-                includeProperties: "Category,Reviews,Activities,Bookings");
+                includeProperties: "Category,Reviews,Activities,Bookings,DateStarts");
             if (tour == null)
             {
                 return NotFound();
@@ -167,7 +167,8 @@ namespace BookingTour.API.Controllers
                 Category = tour.Category,
                 Reviews = tour.Reviews,
 				Activities = tour.Activities,
-                Bookings = tour.Bookings
+				DateStarts  = tour.DateStarts,
+				Bookings = tour.Bookings
             };
 
             return Ok(tourVm);

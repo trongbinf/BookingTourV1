@@ -9,11 +9,11 @@ using BookingTour.Business.Service.IService;
 
 namespace BookingTour.Business.Service
 {
-	public class Bookingervice : IBookingService
+	public class BookingService : IBookingService
 	{
 		private readonly IUnitOfWork _unitOfWork;
 
-		public Bookingervice(IUnitOfWork unitOfWork)
+		public BookingService(IUnitOfWork unitOfWork)
 		{
 			_unitOfWork = unitOfWork;
 		}
@@ -38,7 +38,6 @@ namespace BookingTour.Business.Service
 		{
 			return await _unitOfWork.Booking.GetAllAsync(filter, includeProperties);
 		}
-
 		public async Task<Booking> GetByIdAsync(int id)
 		{
 			return await _unitOfWork.Booking.GetFirstOrDefaultAsync(b => b.BookingId == id);

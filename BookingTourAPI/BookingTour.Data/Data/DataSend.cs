@@ -22,6 +22,21 @@ namespace BookingTour.Data.Data
 				new Category { CategoryId = 3, Name = "Biển", Status = true }
 			);
 
+			modelBuilder.Entity<IdentityUser>().HasData(
+		
+				new IdentityUser
+				{
+					Id = "test-user-id",
+					UserName = "user@booking.com",
+					NormalizedUserName = "USER@BOOKING.COM",
+					Email = "user@booking.com",
+					NormalizedEmail = "USER@BOOKING.COM",
+					EmailConfirmed = true, 
+					PasswordHash = new PasswordHasher<IdentityUser>().HashPassword(null, "UserPassword123"),
+					SecurityStamp = Guid.NewGuid().ToString()
+				}
+	            );
+
 
 			modelBuilder.Entity<Tour>().HasData(
 				new Tour
@@ -33,9 +48,10 @@ namespace BookingTour.Data.Data
 					Country = "Việt Nam",
 					IsFullDay = true,
 					Price = 500000,
-					PersonNumber = "1 đến 30 người",
+					PersonNumber = 30,
 					Status = true,
 					Created = DateTime.Now,
+					Duration = "1 ngày 1 đêm",
 					CategoryId = 1
 				},
 				new Tour
@@ -47,9 +63,10 @@ namespace BookingTour.Data.Data
 					Country = "Việt Nam",
 					IsFullDay = false,
 					Price = 800000,
-					PersonNumber = "1 đến 16 người",
+					PersonNumber = 16,
 					Status = true,
 					Created = DateTime.Now,
+					Duration = "2 ngày 1 đêm",
 					CategoryId = 2
 				},
 				new Tour
@@ -61,10 +78,11 @@ namespace BookingTour.Data.Data
 					Country = "Việt Nam",
 					IsFullDay = false,
 					Price = 1200000,
-					PersonNumber = "1 đến 19 người",
+					PersonNumber = 19,
 					Status = true,
 					Created = DateTime.Now,
-					CategoryId = 3  // Thuộc Category "Biển"
+					Duration = "3 ngày 2 đêm",
+					CategoryId = 3
 				},
 				new Tour
 				{
@@ -75,10 +93,11 @@ namespace BookingTour.Data.Data
 					Country = "Việt Nam",
 					IsFullDay = true,
 					Price = 300000,
-					PersonNumber = "1 đến 19 người",
+					PersonNumber = 19,
 					Status = true,
 					Created = DateTime.Now,
-					CategoryId = 1  // Thuộc Category "Tour tham quan"
+					Duration = "1 ngày 1 đêm",
+					CategoryId = 1
 				},
 				new Tour
 				{
@@ -89,10 +108,11 @@ namespace BookingTour.Data.Data
 					Country = "Việt Nam",
 					IsFullDay = false,
 					Price = 950000,
-					PersonNumber = "1 đến 15 người",
+					PersonNumber = 15,
 					Status = true,
 					Created = DateTime.Now,
-					CategoryId = 2  // Thuộc Category "Thiên nhiên"
+					Duration = "2 ngày 2 đêm",
+					CategoryId = 2
 				},
 				new Tour
 				{
@@ -103,10 +123,11 @@ namespace BookingTour.Data.Data
 					Country = "Việt Nam",
 					IsFullDay = true,
 					Price = 1500000,
-					PersonNumber = "1 đến 26 người",
+					PersonNumber = 26,
 					Status = true,
 					Created = DateTime.Now,
-					CategoryId = 3  // Thuộc Category "Biển"
+					Duration = "4 ngày 3 đêm",
+					CategoryId = 3
 				}
 			);
 
@@ -215,6 +236,58 @@ namespace BookingTour.Data.Data
 					TourId = 2
 				}
 			);
+
+			modelBuilder.Entity<DateStart>().HasData(
+				new DateStart
+				{
+					DateStartId = 1,
+					StartDate = new DateOnly(2024, 11, 5), 
+					TypeStatus = Model.Enum.StatusType.Available, 
+					TourId = 2 
+				},
+				new DateStart
+				{
+					DateStartId = 2,
+					StartDate = new DateOnly(2024, 11, 10),
+					TypeStatus = Model.Enum.StatusType.Available,
+					TourId = 2
+				},
+				new DateStart
+				{
+					DateStartId = 3,
+					StartDate = new DateOnly(2024, 11, 15),
+					TypeStatus = Model.Enum.StatusType.Available,
+					TourId = 2
+				}
+			);
+
+			modelBuilder.Entity<Booking>().HasData(
+			  new Booking
+			  {
+				  BookingId = 1,
+				  BookingDate = new DateTime(2024, 11, 17),
+				  PickDate = new DateTime(2024, 11, 20),
+				  StartTime = new TimeSpan(9, 0, 0), 
+				  PersonNumber = 2,
+				  Notes = "Customer requested extra seat",
+				  Status = StatusType.Confirmed,
+				  TourId = 1,  
+				  UserId = "test-user-id"
+			  },
+			  new Booking
+			  {
+				  BookingId = 2,
+				  BookingDate = new DateTime(2024, 11, 17),
+				  PickDate = new DateTime(2024, 11, 21),
+				  StartTime = new TimeSpan(14, 30, 0), 
+				  PersonNumber = 1,
+				  Notes = "No special requests",
+				  Status = StatusType.Pending,
+				  TourId = 2,  
+				  UserId = "test-user-id"
+			  }
+		  );
+
 		}
 	}
 }

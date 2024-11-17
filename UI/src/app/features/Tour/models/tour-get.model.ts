@@ -10,7 +10,8 @@ export interface TourGet {
     country: string;
     isFullDay: boolean;
     price: number;
-    personNumber: string;
+    personNumber: number;
+    duration: string;
     created?: Date;
     status: boolean;
     category?: Category;
