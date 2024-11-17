@@ -1,4 +1,4 @@
-<section class="pt-5 pb-9">
+<section class="pt-5 pb-9" *ngIf="user$ | async as user">
     <div class="container-small">
         <div class="row align-items-center justify-content-between g-3 mb-4">
             <div class="col-auto">
@@ -93,20 +93,20 @@
                                     <tr *ngFor="let booking of user?.bookings"
                                         class="hover-actions-trigger btn-reveal-trigger position-static">
                                         <td class="order align-middle white-space-nowrap py-2 ps-0"><a
-                                                class="fw-semibold text-primary" href="#!">{{booking.BookingId}}</a>
+                                                class="fw-semibold text-primary" href="#!">{{booking.bookingId}}</a>
                                         </td>
 
                                         <td class="notes align-middle white-space-nowrap text-body py-2">
-                                            {{booking.Notes}}</td>
+                                            {{booking.notes}}</td>
 
                                         <td class="date align-middle text-center text-body-tertiary py-2">
-                                            {{booking.BookingDate | date: 'dd/MM/yyyy'}}</td>
+                                            {{booking.bookingDate | date: 'dd/MM/yyyy'}}</td>
                                         <td
                                             class="status align-middle white-space-nowrap text-center fw-bold text-body-tertiary py-2">
                                             <span class="badge badge-phoenix fs-10 badge-phoenix-success"
-                                                *ngIf="getStatusLabel(booking.Status) === 'Confirmed'">
+                                                *ngIf="getStatusLabel(booking.status) === 'Confirmed'">
                                                 <span class="badge-label">
-                                                    {{ getStatusLabel(booking.Status) }}
+                                                    {{ getStatusLabel(booking.status) }}
                                                 </span>
 
                                                 <!-- Trường hợp Confirmed -->
@@ -115,30 +115,30 @@
                                             </span>
 
                                             <span class="badge badge-phoenix fs-10 badge-phoenix-warning"
-                                                *ngIf="getStatusLabel(booking.Status) === 'Pending'">
+                                                *ngIf="getStatusLabel(booking.status) === 'Pending'">
                                                 <span class="badge-label">
-                                                    {{ getStatusLabel(booking.Status) }}
+                                                    {{ getStatusLabel(booking.status) }}
                                                 </span>
                                                 <!-- Trường hợp Pending -->
-                                                <i *ngIf="getStatusLabel(booking.Status) === 'Pending'"
+                                                <i *ngIf="getStatusLabel(booking.status) === 'Pending'"
                                                     class="fas fa-spinner fa-spin ms-1"
                                                     style="color: #ffc107; font-size: 12.8px;"></i>
                                             </span>
 
                                             <span class="badge badge-phoenix fs-10 badge-phoenix-danger"
-                                                *ngIf="getStatusLabel(booking.Status) === 'Canceled'">
+                                                *ngIf="getStatusLabel(booking.status) === 'Canceled'">
                                                 <span class="badge-label">
-                                                    {{ getStatusLabel(booking.Status) }}
+                                                    {{ getStatusLabel(booking.status) }}
                                                 </span>
                                                 <!-- Trường hợp Canceled -->
-                                                <i *ngIf="getStatusLabel(booking.Status) === 'Canceled'"
+                                                <i *ngIf="getStatusLabel(booking.status) === 'Canceled'"
                                                     class="fas fa-times ms-1"
                                                     style="color: red; font-size: 12.8px;"></i>
                                             </span>
 
                                         </td>
                                         <ng-container *ngFor="let tour of listTour">
-                                            <td *ngIf="booking.TourId == tour.tour.tourId"
+                                            <td *ngIf="booking.tourId == tour.tour.tourId"
                                                 class="price align-middle fw-semibold text-end py-2 text-body-highlight">
                                                 {{ (tour.tour.price * 100) |
                                                 currency:'VND':'symbol':'1.0-0'}}</td>

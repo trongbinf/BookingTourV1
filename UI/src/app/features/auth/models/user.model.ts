@@ -16,11 +16,11 @@ export enum StatusType {
 }
 
 export interface Bookings {
-    BookingId: number;
-    BookingDate: Date;
-    Status: StatusType;
-    Notes: string;
-    TourId: number;
+    bookingId: number;
+    bookingDate: Date;
+    status: StatusType;
+    notes: string;
+    tourId: number;
 }
 
 // export interface AppUser {

@@ -7,6 +7,7 @@ import { TourService } from '../../Tour/services/tour.service';
 import { Tour } from '../../Tour/models/tour.model';
 import { CookieService } from 'ngx-cookie-service';
 import { jwtDecode } from 'jwt-decode';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-profile',
@@ -16,59 +17,33 @@ import { jwtDecode } from 'jwt-decode';
   styleUrl: './profile.component.css'
 })
 export class ProfileComponent implements OnInit {
-  user?: User;
+
+  user$?: Observable<User>;
   lastOrder?: string = '';
   listTour: Tour[] = [];
   totalOrderPrice: number = 0;
 
-  page: number = 1;
-
   constructor(private authService: AuthService,
     private tourService: TourService,
-    private cookieService: CookieService,
   ) {
   }
 
   ngOnInit(): void {
-    this.authService.refreshToken().subscribe({
+    this.tourService.getAllTours().subscribe({
       next: (response) => {
+        this.listTour = response;
+        this.calculateTotalOrderPrice();
+      }
+    });
 
-        this.cookieService.set('Authentication', `Bearer ${response.token}`, undefined, '/', undefined, true, 'Strict');
-        this.cookieService.set('RefreshToken', response.refreshToken, undefined, '/', undefined, true, 'Strict');
+    this.user$ = this.authService.getUserInfo();
 
-        const decodedToken: any = jwtDecode(response.token);
-        const role = decodedToken['role'] || decodedToken['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'];
-        const bookings = decodedToken['bookings'] ? JSON.parse(decodedToken['bookings']) : [];
-
-        const userId = decodedToken['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier'] || decodedToken['Id'];
-        const userName = decodedToken['sub'] || decodedToken['userName'];
-        const fullName = decodedToken['name'] || decodedToken['fullName'];
-        const email = decodedToken['email'] || decodedToken['Email'];
-        // Gọi setUser với role và bookings lấy từ response
-        this.authService.setUser({
-          id: userId,
-          userName: userName,
-          fullName: fullName,
-          email: email,
-          roles: role,
-          status: true,
-          bookings: bookings
-        })
-
-        // Refresh token thành công, bắt đầu thực hiện các API khác
-        this.tourService.getAllTours().subscribe({
-          next: (response) => {
-            this.listTour = response;
-            this.calculateTotalOrderPrice();
-          }
-        });
-
-        this.user = this.authService.getUser();
-
+    this.user$.subscribe({
+      next: (user) => {
         // Tìm ngày gần nhất
-        if (this.user?.bookings?.length) {
-          this.lastOrder = this.user.bookings
-            .map((booking) => new Date(booking.BookingDate))
+        if (user?.bookings?.length) {
+          this.lastOrder = user.bookings
+            .map((booking) => new Date(booking.bookingDate))
             .sort((a, b) => b.getTime() - a.getTime())[0]
             .toString();
         } else {
@@ -78,17 +53,22 @@ export class ProfileComponent implements OnInit {
     });
   }
 
+
   calculateTotalOrderPrice(): void {
-    if (this.user?.bookings?.length && this.listTour.length) {
-      this.totalOrderPrice = this.user.bookings
-        .map((booking) => {
-          const tour = this.listTour.find((t) => t.tour.tourId === booking.TourId);
-          return tour ? tour.tour.price : 0;
-        })
-        .reduce((sum, price) => sum + price, 0);
-    } else {
-      this.totalOrderPrice = 0;
-    }
+    this.user$?.subscribe({
+      next: (user) => {
+        if (user?.bookings?.length && this.listTour.length) {
+          this.totalOrderPrice = user.bookings
+            .map((booking) => {
+              const tour = this.listTour.find((t) => t.tour.tourId === booking.tourId);
+              return tour ? tour.tour.price : 0;
+            })
+            .reduce((sum, price) => sum + price, 0);
+        } else {
+          this.totalOrderPrice = 0;
+        }
+      }
+    });
   }
 
   getStatusLabel(status: number): string {

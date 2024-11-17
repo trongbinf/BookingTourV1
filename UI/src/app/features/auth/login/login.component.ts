@@ -58,7 +58,7 @@ export class LoginComponent {
             bookings: bookings
           })
 
-          this.router.navigateByUrl('/');
+          window.location.href = '/'
         }
       });
   }

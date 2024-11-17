@@ -57,9 +57,9 @@ export class AuthService {
   }
 
   refreshToken(): Observable<LoginResponse> {
-    const refreshToken = this.cookieService.get('RefreshToken'); // Lấy refresh token từ cookie
+    const refreshToken = this.cookieService.get('RefreshToken');
     if (!refreshToken) {
-      throw new Error('No refresh token available');
+      this.logout();
     }
 
     return this.http.post<LoginResponse>(
