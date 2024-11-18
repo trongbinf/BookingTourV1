@@ -40,12 +40,17 @@ export const routes: Routes = [
     }
     ,
     {
-        path: 'tourdetail',
+        path: 'tour-detail/:id',
         component: TourDetailComponent
     },
     {
         path: 'search',
         component: ListTourSearchComponent
+    }
+    ,
+    {
+        path: 'adminUser',
+        component: ManageUserComponent
     }
     ,
     {

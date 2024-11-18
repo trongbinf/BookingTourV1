@@ -18,36 +18,30 @@
                         </div>
                     </div>
                     <div class="col-6 col-md" style="margin: auto;">
-                        <div class="form-icon-container flatpickr-input-container">
-                            <input
-                                class="form-control datetimepicker form-icon-input border-y-0 border-start-0 border-start-md py-0 shadow-none border-translucent fs-8 rounded-0"
-                                type="text" name="date" [(ngModel)]="searchData.date" placeholder="Pick a date"
-                                data-options='{"mode":"range","dateFormat":"d/m/y","disableMobile":true}' required />
-                            <span class="fa-solid fa-calendar form-icon top-0 text-body-tertiary"
+                        <div class="form-icon-container flatpickr-input-container"><input
+                                class="form-control date-picker form-icon-input border-y-0 border-start-0 border-start-md py-0 shadow-none border-translucent fs-8 rounded-0"
+                                type="text" placeholder="Pick a date" name="date" [(ngModel)]="searchData.date" /><span
+                                class="fa-solid fa-calendar form-icon top-0 text-body-tertiary"
                                 data-fa-transform="down-2"></span>
                         </div>
+
                     </div>
                     <div class="col-12 col-md-auto">
-                        <button type="submit" class="btn btn-lg btn-phoenix-primary rounded-pill w-100">
+                        <button [disabled]="!searchForm.valid" type="submit"
+                            class="btn btn-lg btn-phoenix-primary rounded-pill w-100">
                             <span class="fa-solid fa-search me-2"></span>Search
                         </button>
                     </div>
                 </form>
             </div>
 
-
-
-            <div class="d-flex justify-content-center mt-10">
+            <div class="d-flex justify-content-start mt-10">
                 <div *ngFor="let cate of categories" class="d-none d-lg-flex gap-2">
-                    <button class="btn btn-phoenix-secondary text-nowrap px-3 ms-1"
-                        (click)="loadToursByCategory(cate.name)">
+                    <button class="btn btn-phoenix-secondary text-nowrap px-3 ms-1 fw-medium "
+                        (click)="loadToursByCategory(cate.name)" [ngClass]="{'text-primary': this.name === cate.name}">
                         {{cate.name}}
                     </button>
                 </div>
-
-                <button class="btn btn-phoenix-secondary ms-lg-auto" type="button" data-bs-toggle="offcanvas"
-                    data-bs-target="#tripFilterOffcanvas" aria-controls="tripFilterOffcanvas"><span
-                        class="fa-solid fa-filter fs-10 me-2"></span>Filter</button>
             </div>
         </div>
     </section>
@@ -57,8 +51,9 @@
     <section class="pt-0 pb-9 mt-n13">
         <div class="container-medium">
             <div class="row g-3">
-                <div *ngFor="let tour of tours" class="col-md-6 col-xl-4">
-                    <div class="hoverbox rounded"><a href="trip-details.html"><img class="img-fluid"
+                <div *ngFor="let tour of tours?.items" class="col-md-6 col-xl-4">
+                    <div class="hoverbox rounded"><a [routerLink]="['/tour-detail',tour.tour.tourId]"
+                            routerLinkActive="router-link-active"><img class="img-fluid"
                                 src="../../../assets/img/trip/1.png" alt="" />
                             <div class="backdrop-faded">
                                 <h3 class="text-underline fs-7 fs-lg-6 text-white fw-bold mb-2">{{tour.tour.tourName}}
@@ -82,106 +77,13 @@
                 </div>
             </div>
             <div class="mt-5 position-relative text-center">
-                <hr class="m-0 position-absolute top-50 translate-middle-y w-100"><button
-                    class="btn btn-phoenix-secondary rounded-pill position-relative">Show more</button>
+                <hr class="m-0 position-absolute top-50 translate-middle-y w-100">
+                <button class="btn btn-phoenix-secondary rounded-pill position-relative" (click)="showMore(this.name)">
+                    Show more
+                </button>
             </div>
         </div><!-- end of .container-->
     </section><!-- <section> close ============================-->
-    <!-- ============================================-->
-
-    <div class="offcanvas offcanvas-end" tabindex="-1" id="tripFilterOffcanvas"
-        aria-labelledby="tripFilterOffcanvasLabel">
-        <div class="offcanvas-header p-4 bg-body-highlight">
-            <h5 class="mb-0 text-body-highlight" id="tripFilterOffcanvasLabel">Filter</h5><button class="btn btn-close"
-                data-bs-dismiss="offcanvas" aria-label="Close"></button>
-        </div>
-        <div class="offcanvas-body scrollbar px-4 pt-4 pb-5">
-            <h4 class="text-body-highlight mb-4">Price Range</h4>
-            <div class="row g-2">
-                <div class="col-6">
-                    <div class="form-icon-container"><input class="form-control form-icon-input" type="text"
-                            placeholder="Minimum amount: $245" /><span
-                            class="fa-solid fa-dollar-sign form-icon text-body-tertiary fs-9"></span></div>
-                </div>
-                <div class="col-6">
-                    <div class="form-icon-container"><input class="form-control form-icon-input" type="text"
-                            placeholder="Maximum amount: $245" /><span
-                            class="fa-solid fa-dollar-sign form-icon text-body-tertiary fs-9"></span></div>
-                </div>
-            </div>
-            <div class="noUi-primary-lighter noUi-slider-large noUi-handle-primary noUi-handle-circle ps-5 pe-3 mt-3"
-                data-nouislider='{"range":{"min":0,"max":250},"start":[20,150],"connect":true}'></div>
-            <hr class="my-5" />
-            <div class="d-lg-none">
-                <h4 class="mb-4 text-body-highlight">Category</h4>
-                <div class="row g-2">
-                    <div class="col-6"><input class="btn-check trip-filter-checkbox" type="checkbox" name="trip-type"
-                            id="attraction-shows-offcanvas" checked="checked" /><label
-                            class="btn btn-phoenix-secondary text-nowrap px-3 w-100"
-                            for="attraction-shows-offcanvas">Attraction &amp; Shows</label></div>
-                    <div class="col-6"><input class="btn-check trip-filter-checkbox" type="checkbox" name="trip-type"
-                            id="activities-offcanvas" /><label class="btn btn-phoenix-secondary text-nowrap px-3 w-100"
-                            for="activities-offcanvas">Activities</label></div>
-                    <div class="col-6"><input class="btn-check trip-filter-checkbox" type="checkbox" name="trip-type"
-                            id="day-tours-offcanvas" /><label class="btn btn-phoenix-secondary text-nowrap px-3 w-100"
-                            for="day-tours-offcanvas">Day-tours</label></div>
-                    <div class="col-6"><input class="btn-check trip-filter-checkbox" type="checkbox" name="trip-type"
-                            id="adventures-offcanvas" /><label class="btn btn-phoenix-secondary text-nowrap px-3 w-100"
-                            for="adventures-offcanvas">Adventures</label></div>
-                    <div class="col-6"><input class="btn-check trip-filter-checkbox" type="checkbox" name="trip-type"
-                            id="Sight-seeing-offcanvas" /><label
-                            class="btn btn-phoenix-secondary text-nowrap px-3 w-100"
-                            for="Sight-seeing-offcanvas">Sight-seeing</label></div>
-                </div>
-                <hr class="my-5" />
-            </div>
-            <h4 class="mb-4 text-body-highlight">Duration</h4>
-            <div class="row g-3">
-                <div class="col-6">
-                    <div class="form-check"><input class="form-check-input" id="durationLess6" type="checkbox"
-                            value="durationLess6" /><label class="form-check-label fs-8 text-body-highlight fw-normal"
-                            for="durationLess6">Less than 6 hours</label></div>
-                    <div class="form-check mb-0"><input class="form-check-input" id="duration12to24" type="checkbox"
-                            value="duration12to24" /><label class="form-check-label fs-8 text-body-highlight fw-normal"
-                            for="duration12to24">12 - 24 hours</label></div>
-                </div>
-                <div class="col-6">
-                    <div class="form-check"><input class="form-check-input" id="duration6to12" type="checkbox"
-                            value="duration6to12" /><label class="form-check-label fs-8 text-body-highlight fw-normal"
-                            for="duration6to12">6 - 12 hours</label></div>
-                    <div class="form-check mb-0"><input class="form-check-input" id="duration24plus" type="checkbox"
-                            value="duration24plus" /><label class="form-check-label fs-8 text-body-highlight fw-normal"
-                            for="duration24plus">24+ hours</label></div>
-                </div>
-            </div>
-            <hr class="my-5" />
-            <h4 class="mb-4 text-body-highlight">Travel Style</h4>
-            <div class="row g-3">
-                <div class="col-6">
-                    <div class="form-check"><input class="form-check-input" id="soloTravel" type="checkbox"
-                            value="soloTravel" /><label class="form-check-label fs-8 text-body-highlight fw-normal"
-                            for="soloTravel">Solo Travel</label></div>
-                    <div class="form-check mb-0"><input class="form-check-input" id="familyFriendly" type="checkbox"
-                            value="familyFriendly" /><label class="form-check-label fs-8 text-body-highlight fw-normal"
-                            for="familyFriendly">Family-Friendly</label></div>
-                </div>
-                <div class="col-6">
-                    <div class="form-check"><input class="form-check-input" id="groupTravel" type="checkbox"
-                            value="groupTravel" /><label class="form-check-label fs-8 text-body-highlight fw-normal"
-                            for="groupTravel">Group Travel</label></div>
-                    <div class="form-check mb-0"><input class="form-check-input" id="adventureTravel" type="checkbox"
-                            value="adventureTravel" /><label class="form-check-label fs-8 text-body-highlight fw-normal"
-                            for="adventureTravel">Adventure Travel</label></div>
-                </div>
-            </div><a class="fw-bold fs-9 mt-3 d-inline-block" href="#!">Show more items</a>
-        </div>
-        <div class="p-4 border-top border-translucent d-flex gap-2"><button class="btn btn-lg btn-phoenix-primary"><span
-                    class="fa-solid fa-arrows-rotate me-2 fs-9"></span>Reset</button><button
-                class="btn btn-lg btn-primary flex-1"> <span class="fa-solid fa-search me-2 fs-9"></span>Update
-                result</button></div>
-    </div>
-    <!-- ============================================-->
-
 
 
 </main><!-- ===============================================-->

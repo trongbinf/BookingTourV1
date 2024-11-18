@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, model, OnDestroy, OnInit } from '@angular/core';
 import { Category } from '../category/model/category.model';
 import { Tour } from '../Tour/models/tour.model';
 import { TourService } from '../Tour/services/tour.service';
@@ -7,24 +7,33 @@ import { CategoryTours } from '../category/model/category-tour.model';
 import { CommonModule } from '@angular/common';
 import { Subject, takeUntil } from 'rxjs';
 import { FormsModule } from '@angular/forms';
-
+import { Router, RouterLink } from '@angular/router';
+import { PaginatedResponse } from '../Tour/models/paginated.model';
+import flatpickr from 'flatpickr'
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, RouterLink],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
 export class HomeComponent implements OnInit, OnDestroy {
   categories: CategoryTours[] = [];
-  tours: Tour[] = [];
+  tours?: PaginatedResponse<Tour>;
+  name: string = '';
+  pageSize: number = 6;
+  pageIndex: number = 1;
+  total: number = 0;
+  today: string = '';
   private destroy$ = new Subject<void>();
   searchData = {
     place: '',
     date: ''
   };
 
-  constructor(private tourService: TourService, private cateService: CategoryService) {
+  constructor(private tourService: TourService, private cateService: CategoryService,
+    private router: Router
+  ) {
 
   }
   ngOnDestroy(): void {
@@ -34,17 +43,28 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.loadCategories();
+    const todayDate = new Date();
+    const year = todayDate.getFullYear();
+    const month = ('0' + (todayDate.getMonth() + 1)).slice(-2);
+    const day = ('0' + todayDate.getDate()).slice(-2);
+    this.today = `${year}-${month}-${day}`;
+
+    flatpickr('.date-picker', {
+      mode: 'range',
+      minDate: this.today,
+      dateFormat: 'd-m-Y'
+    });
+
   }
 
   loadCategories() {
     this.cateService.getAllCategories().pipe(takeUntil(this.destroy$)).subscribe(cate => {
       this.categories = cate;
       if (this.categories.length > 0) {
-        var first = this.categories[0].name;
-        this.tourService.getTourByCategory(first).pipe(takeUntil(this.destroy$)).subscribe(tour => {
+        this.name = this.categories[0].name;
+        this.tourService.getTourByCategory(this.name, this.pageSize, this.pageIndex).pipe(takeUntil(this.destroy$)).subscribe(tour => {
           this.tours = tour;
-          this.tours.forEach(s => console.log(s.tour.tourName));
-          console.log(first);
+          console.log(this.name);
         })
 
       }
@@ -52,13 +72,28 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   }
 
-  loadToursByCategory(name: string) {
-    this.tourService.getTourByCategory(name).pipe(takeUntil(this.destroy$)).subscribe(tour => {
+  loadToursByCategory(nameTour: string) {
+    this.name = nameTour;
+    this.tourService.getTourByCategory(this.name, this.pageSize, this.pageIndex).pipe(takeUntil(this.destroy$)).subscribe(tour => {
       this.tours = tour;
-    })
-  }
-  onSearch() {
+    });
+    console.log(this.name);
 
+  }
+
+  onSearch() {
+    this.router.navigate(['/search'], {
+      queryParams: { name: this.searchData.place, dateRange: this.searchData.date }
+    });
+  }
+
+  showMore(name: string) {
+    this.router.navigate(['/search'], {
+      queryParams: { category: name }
+    }).then(() => {
+      // This will reload the page after navigating
+      window.location.reload();
+    });
   }
 
 }

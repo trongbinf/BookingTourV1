@@ -25,68 +25,27 @@
             </ul>
         </div>
     </div>
-    <div class="bg-body-emphasis sticky-top" data-navbar-shadow-on-scroll="data-navbar-shadow-on-scroll">
-        <nav class="navbar navbar-landing navbar-expand-lg container-medium"><a
-                class="navbar-brand flex-1 flex-lg-grow-0 me-lg-8 me-xl-13" href="../../../index.html">
-                <div class="d-flex align-items-center"><img src="../../../assets/img/icons/logo.png" alt="phoenix"
-                        width="27" />
-                    <h5 class="logo-text ms-2">phoenix</h5>
-                </div>
-            </a>
-            <div class="d-flex align-items-center gap-2 gap-sm-3 gap-md-4 my-2 order-lg-1">
-                <div class="theme-control-toggle fa-icon-wait"><input
-                        class="form-check-input ms-0 theme-control-toggle-input" type="checkbox"
-                        data-theme-control="phoenixTheme" value="dark" id="themeControlToggleSm" /><label
-                        class="mb-0 theme-control-toggle-label theme-control-toggle-light" for="themeControlToggleSm"
-                        data-bs-toggle="tooltip" data-bs-placement="left" data-bs-title="Switch theme"
-                        style="height:32px;width:32px;"><span class="icon" data-feather="moon"></span></label><label
-                        class="mb-0 theme-control-toggle-label theme-control-toggle-dark" for="themeControlToggleSm"
-                        data-bs-toggle="tooltip" data-bs-placement="left" data-bs-title="Switch theme"
-                        style="height:32px;width:32px;"><span class="icon" data-feather="sun"></span></label></div><a
-                    class="btn btn-link text-body-tertiary p-0" href="#!"><span data-feather="map-pin"
-                        style="width: 18px; height: 18px"></span></a><a class="btn btn-link text-body-tertiary p-0"
-                    href="#!"><span data-feather="bell" style="width: 20px; height: 20px"></span></a><a
-                    class="btn btn-link text-body-tertiary p-0 me-2 me-lg-0" href="#!"><span data-feather="user"
-                        style="width: 20px; height: 20px"></span></a>
-            </div><button class="navbar-toggler fs-8 ps-1 ps-sm-3 pe-0" type="button" data-bs-toggle="collapse"
-                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-                aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mt-3 mt-lg-0">
-                    <li class="nav-item border-bottom border-translucent border-bottom-lg-0"><a class="nav-link"
-                            href="../hotel/customer/homepage.html">Hotel</a></li>
-                    <li class="nav-item border-bottom border-translucent border-bottom-lg-0"><a class="nav-link"
-                            href="../flight/homepage.html">Flight</a></li>
-                    <li class="nav-item border-bottom border-translucent border-bottom-lg-0"><a class="nav-link"
-                            href="homepage.html">Trip</a></li>
-                    <li class="nav-item border-bottom border-translucent border-bottom-lg-0"><a class="nav-link"
-                            href="../../events/event-detail.html">Event</a></li>
-                    <li class="nav-item border-bottom border-translucent border-bottom-lg-0"><a class="nav-link"
-                            href="#!">Package</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#!">Trending</a></li>
-                </ul>
-            </div>
-        </nav>
-    </div>
+
 
     <!-- ============================================-->
     <!-- <section> begin ============================-->
     <section class="py-5">
-        <div class="container-medium">
-            <nav class="mb-3" aria-label="breadcrumb">
+        <div class="container-medium" *ngIf="tourVm">
+            <nav class=" mb-3" aria-label="breadcrumb">
                 <ol class="breadcrumb mb-0">
                     <li class="breadcrumb-item"><a href="#">Page 1</a></li>
                     <li class="breadcrumb-item"><a href="#">Page 2</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Default</li>
+                    <li class="breadcrumb-item active" aria-current="page">{{ tourVm.tour.tourName }}</li>
                 </ol>
             </nav>
-            <h2 class="mb-5">Trip Details</h2>
-            <h1 class="fw-bold">Walk where the king walked once in Wakanda <span
-                    class="align-middle text-nowrap fs-8"><span class="text-body-quaternary">by </span><span
-                        class="text-body-tertiary">Panther Travels Limited</span></span></h1>
+            <h1 class="fw-bold"> {{ tourVm.tour.tourName }}<span class="align-middle text-nowrap fs-8"><span
+                        class="text-body-quaternary"> by </span><span class="text-body-tertiary">Booking Tour
+                        Travel</span></span></h1>
             <hr class="bg-secondary-lighter">
             <div class="d-flex align-items-center flex-wrap gap-3">
-                <h2 class="me-3">$300 <span class="fs-8 fw-semibold text-body-tertiary align-middle">/ per person</span>
+                <h2 class="me-3">{{ tourVm.tour.price | currency:'VND':true }}<span
+                        class="fs-8 fw-semibold text-body-tertiary align-middle">/
+                        per person</span>
                 </h2>
                 <div class="me-3"><span class="fa fa-star text-warning me-1 fs-9"></span><span
                         class="fa fa-star text-warning me-1 fs-9"></span><span
@@ -105,21 +64,18 @@
             <div class="p-4 bg-body-highlight rounded-2 mt-3 mb-5">
                 <div class="row gy-4">
                     <div class="col-md-4 col-lg-3 border-end-md">
-                        <h6 class="text-body fw-semibold mb-2"> <span
-                                class="fa-solid fa-map-marker-alt me-2"></span>Birnin Zana, Wakanda</h6>
-                        <h6 class="text-body fw-semibold mb-2"> <span class="fa-solid fa-clock me-2"></span>3 Days, 1
+                        <h6 class="text-body fw-semibold mb-2"> <span class="fa-solid fa-map-marker-alt me-2"></span>{{
+                            tourVm.tour.city }}, {{ tourVm.tour.country }}</h6>
+                        <h6 class="text-body fw-semibold mb-2"> <span class="fa-solid fa-clock me-2"></span>3 Days, 2
                             Night</h6>
                         <h6 class="text-body fw-semibold mb-4"> <span class="fa-solid fa-user me-2"></span>From 1 to 12
-                            people</h6><a class="badge badge-phoenix badge-phoenix-secondary me-2"
-                            href="#!">Sightseeing</a><a class="badge badge-phoenix badge-phoenix-secondary"
-                            href="#!">Eco-tourism</a>
+                            people</h6><a class="badge badge-phoenix badge-phoenix-secondary me-2" href="#!"> {{
+                            tourVm.tour.category?.name }}</a><a class="badge badge-phoenix badge-phoenix-secondary"
+                            href="#!"></a>
                     </div>
                     <div class="col-md-8 col-lg-9 ps-lg-7">
                         <h4 class="text-body mb-3">Overview</h4>
-                        <p class="mb-0">A private guide will allow you to fully experience Wakanda's native culture
-                            without having to worry about getting lost. Set out on a full-day tour that concentrates on
-                            off-the-beaten-path sites like the active wholesale markets for produce and seafood. The
-                            old-fashioned way to get around is via rickshaw...<a href="#!">Read more</a></p>
+                        <p class="mb-0">{{ tourVm.tour.description }}</p>
                     </div>
                 </div>
             </div>
@@ -194,7 +150,7 @@
                                 class="btn px-4 py-3 py-sm-4 d-flex flex-between-center collapse-indicator bg-body-highlight"
                                 data-bs-toggle="collapse" href="#collapseWhatToExpect" role="button"
                                 aria-expanded="true" aria-controls="collapseWhatToExpect">
-                                <h4 class="fs-8 fs-sm-7 mb-0 text-body-highlight">What to expect</h4><span
+                                <h4 class="fs-8 fs-sm-7 mb-0 text-body-highlight">Những gì bạn mong đợi</h4><span
                                     class="fa-solid fa-chevron-down toggle-icon"></span>
                             </a>
                             <div class="collapse show" id="collapseWhatToExpect">
@@ -203,239 +159,103 @@
                                         <div class="d-flex align-items-center gap-2"><span
                                                 class="bg-secondary rounded-pill d-flex flex-center text-white"
                                                 style="width: 27px; height: 27px">1</span>
-                                            <h5 class="text-body-highlight mb-0">Breakfast in Birnin Zana</h5>
+                                            <h5 class="text-body-highlight mb-0">{{ tourVm.activities[0].activityName }}
+                                            </h5>
                                         </div>
-                                        <p class="my-2">Enjoy the traditional Wakandan bread and butter, along with the
-                                            sweet aroma of freshly baked cakes, beside the large streets of Birnin Zana.
+                                        <p class="my-2">{{ tourVm.activities[0].description}}
                                         </p>
                                         <div class="d-flex gap-3 gap-xl-4 flex-wrap">
                                             <h5 class="text-body-highlight fw-semibold mb-0"> <span
                                                     class="fa-solid fa-clock text-body-quaternary me-2"></span>Duration
-                                                : <span class="text-body-tertiary fw-normal">30 min</span></h5>
+                                                : <span class="text-body-tertiary fw-normal">{{
+                                                    tourVm.activities[0].duration}}</span></h5>
                                             <h5 class="text-body-highlight fw-semibold mb-0"> <span
                                                     class="fa-solid fa-map-marker-alt text-body-quaternary me-2"></span>Location
-                                                : <span class="text-body-tertiary fw-normal">Royal street, Birnin
-                                                    Zana</span></h5>
+                                                : <span class="text-body-tertiary fw-normal">{{
+                                                    tourVm.activities[0].location}}
+                                                </span></h5>
                                         </div>
                                     </div>
                                     <div class="mb-5">
                                         <div class="d-flex align-items-center gap-2"><span
                                                 class="bg-secondary rounded-pill d-flex flex-center text-white"
                                                 style="width: 27px; height: 27px">2</span>
-                                            <h5 class="text-body-highlight mb-0">Safari at the Alkama fields</h5>
+                                            <h5 class="text-body-highlight mb-0">{{ tourVm.activities[1].activityName }}
+                                            </h5>
                                         </div>
-                                        <p class="my-2">Observe the Wakandan wildlife in its natural habitat in the
-                                            savanna of Alkama.</p>
+                                        <p class="my-2">{{ tourVm.activities[1].description}}</p>
                                         <div class="d-flex gap-3 gap-xl-4 flex-wrap">
                                             <h5 class="text-body-highlight fw-semibold mb-0"> <span
                                                     class="fa-solid fa-clock text-body-quaternary me-2"></span>Duration
-                                                : <span class="text-body-tertiary fw-normal">2 hours</span></h5>
+                                                : <span class="text-body-tertiary fw-normal">{{
+                                                    tourVm.activities[1].duration}}</span></h5>
                                             <h5 class="text-body-highlight fw-semibold mb-0"> <span
                                                     class="fa-solid fa-map-marker-alt text-body-quaternary me-2"></span>Location
-                                                : <span class="text-body-tertiary fw-normal">Zone 23, Alkama</span></h5>
+                                                : <span class="text-body-tertiary fw-normal">{{
+                                                    tourVm.activities[1].location}}</span></h5>
                                         </div>
                                     </div>
                                     <div class="mb-5">
                                         <div class="d-flex align-items-center gap-2"><span
                                                 class="bg-secondary rounded-pill d-flex flex-center text-white"
                                                 style="width: 27px; height: 27px">3</span>
-                                            <h5 class="text-body-highlight mb-0">Jabari tribe habitats</h5>
+                                            <h5 class="text-body-highlight mb-0">{{ tourVm.activities[2].activityName }}
+                                            </h5>
                                         </div>
-                                        <p class="my-2">See the colorful lifestyle of the people from the Jabari tribe.
-                                            Interact with the locals, visit their shops, and buy famous traditional
-                                            Jabari articles of clothing. </p>
+                                        <p class="my-2">{{ tourVm.activities[2].description}}</p>
                                         <div class="d-flex gap-3 gap-xl-4 flex-wrap">
                                             <h5 class="text-body-highlight fw-semibold mb-0"> <span
                                                     class="fa-solid fa-clock text-body-quaternary me-2"></span>Duration
-                                                : <span class="text-body-tertiary fw-normal">1 hour</span></h5>
+                                                : <span class="text-body-tertiary fw-normal">{{
+                                                    tourVm.activities[2].duration}}</span></h5>
                                             <h5 class="text-body-highlight fw-semibold mb-0"> <span
                                                     class="fa-solid fa-map-marker-alt text-body-quaternary me-2"></span>Location
-                                                : <span class="text-body-tertiary fw-normal">Jabariland</span></h5>
+                                                : <span class="text-body-tertiary fw-normal">{{
+                                                    tourVm.activities[2].location}}</span></h5>
                                         </div>
                                     </div>
                                     <div class="mb-5">
                                         <div class="d-flex align-items-center gap-2"><span
                                                 class="bg-secondary rounded-pill d-flex flex-center text-white"
                                                 style="width: 27px; height: 27px">4</span>
-                                            <h5 class="text-body-highlight mb-0">King T’Challa’s memorial</h5>
+                                            <h5 class="text-body-highlight mb-0">{{ tourVm.activities[3].activityName }}
+                                            </h5>
                                         </div>
-                                        <p class="my-2">Visit the tomb of the greatest king of Wakanda, King T'Challa,
-                                            the black panther.</p>
+                                        <p class="my-2">{{ tourVm.activities[3].description }}</p>
                                         <div class="d-flex gap-3 gap-xl-4 flex-wrap">
                                             <h5 class="text-body-highlight fw-semibold mb-0"> <span
                                                     class="fa-solid fa-clock text-body-quaternary me-2"></span>Duration
-                                                : <span class="text-body-tertiary fw-normal">1 hour</span></h5>
+                                                : <span class="text-body-tertiary fw-normal">{{
+                                                    tourVm.activities[3].duration }}</span></h5>
                                             <h5 class="text-body-highlight fw-semibold mb-0"> <span
                                                     class="fa-solid fa-map-marker-alt text-body-quaternary me-2"></span>Location
-                                                : <span class="text-body-tertiary fw-normal">Birnin Bashenga</span></h5>
+                                                : <span class="text-body-tertiary fw-normal">{{
+                                                    tourVm.activities[3].location }}</span></h5>
                                         </div>
                                     </div>
                                     <div>
                                         <div class="d-flex align-items-center gap-2"><span
                                                 class="bg-secondary rounded-pill d-flex flex-center text-white"
                                                 style="width: 27px; height: 27px">5</span>
-                                            <h5 class="text-body-highlight mb-0">Lunch</h5>
+                                            <h5 class="text-body-highlight mb-0">{{ tourVm.activities[4].activityName }}
+                                            </h5>
                                         </div>
-                                        <p class="my-2">Have lunch with the authentic cuisine of Wakanda at the
-                                            mountaintop restaurant of Mena Ngai.</p>
+                                        <p class="my-2">{{ tourVm.activities[4].description }}</p>
                                         <div class="d-flex gap-3 gap-xl-4 flex-wrap">
                                             <h5 class="text-body-highlight fw-semibold mb-0"> <span
                                                     class="fa-solid fa-clock text-body-quaternary me-2"></span>Duration
-                                                : <span class="text-body-tertiary fw-normal">1 hour</span></h5>
+                                                : <span class="text-body-tertiary fw-normal">{{
+                                                    tourVm.activities[4].duration }}</span></h5>
                                             <h5 class="text-body-highlight fw-semibold mb-0"> <span
                                                     class="fa-solid fa-map-marker-alt text-body-quaternary me-2"></span>Location
-                                                : <span class="text-body-tertiary fw-normal">Vibranium hill top
-                                                    restaurant, the Great Mount</span></h5>
+                                                : <span class="text-body-tertiary fw-normal">{{
+                                                    tourVm.activities[4].location }}</span></h5>
                                         </div>
                                     </div>
                                 </div>
-                            </div><a
-                                class="btn px-4 py-3 py-sm-4 d-flex flex-between-center collapse-indicator bg-body-highlight mt-4"
-                                data-bs-toggle="collapse" href="#collapseIncluded" role="button" aria-expanded="false"
-                                aria-controls="collapseIncluded">
-                                <h4 class="fs-8 fs-sm-7 mb-0 text-body-highlight">What are included or excluded</h4>
-                                <span class="fa-solid fa-chevron-down toggle-icon"></span>
-                            </a>
-                            <div class="collapse" id="collapseIncluded">
-                                <div class="py-6 px-4">
-                                    <h5 class="mb-3 text-body-highlight"> <span
-                                            class="fa-solid me-2 fa-thumbs-up"></span>Included</h5>
-                                    <ul class="list-unstyled mb-4">
-                                        <li class="mb-1 d-flex"><span
-                                                class="fa-solid fa-circle text-secondary-light me-3 fs-11"
-                                                data-fa-transform="down-13 shrink-4"></span>PhoenixTrip experience
-                                            brokerage free</li>
-                                        <li class="mb-1 d-flex"><span
-                                                class="fa-solid fa-circle text-secondary-light me-3 fs-11"
-                                                data-fa-transform="down-13 shrink-4"></span>Bottled water</li>
-                                        <li class="mb-1 d-flex"><span
-                                                class="fa-solid fa-circle text-secondary-light me-3 fs-11"
-                                                data-fa-transform="down-13 shrink-4"></span>Professional guide</li>
-                                        <li class="mb-1 d-flex"><span
-                                                class="fa-solid fa-circle text-secondary-light me-3 fs-11"
-                                                data-fa-transform="down-13 shrink-4"></span>Hotel pickup and drop off
-                                        </li>
-                                        <li class="mb-1 d-flex"><span
-                                                class="fa-solid fa-circle text-secondary-light me-3 fs-11"
-                                                data-fa-transform="down-13 shrink-4"></span>Private tour</li>
-                                    </ul>
-                                    <h5 class="mb-3 text-body-highlight"> <span
-                                            class="fa-solid me-2 fa-thumbs-down"></span>Excluded</h5>
-                                    <ul class="list-unstyled mb-0">
-                                        <li class="mb-1 d-flex"><span
-                                                class="fa-solid fa-circle text-secondary-light me-3 fs-11"
-                                                data-fa-transform="down-13 shrink-4"></span>Gratuities</li>
-                                        <li class="mb-1 d-flex"><span
-                                                class="fa-solid fa-circle text-secondary-light me-3 fs-11"
-                                                data-fa-transform="down-13 shrink-4"></span>Snacks</li>
-                                        <li class="mb-1 d-flex"><span
-                                                class="fa-solid fa-circle text-secondary-light me-3 fs-11"
-                                                data-fa-transform="down-13 shrink-4"></span>Air-conditioned vehicle</li>
-                                    </ul>
-                                </div>
-                            </div><a
-                                class="btn px-4 py-3 py-sm-4 d-flex flex-between-center collapse-indicator bg-body-highlight mt-4"
-                                data-bs-toggle="collapse" href="#collapseDeparture" role="button" aria-expanded="false"
-                                aria-controls="collapseDeparture">
-                                <h4 class="fs-8 fs-sm-7 mb-0 text-body-highlight">Departure and return</h4><span
-                                    class="fa-solid fa-chevron-down toggle-icon"></span>
-                            </a>
-                            <div class="collapse" id="collapseDeparture">
-                                <div class="py-6 px-4">
-                                    <div class="card bg-transparent mb-3">
-                                        <div class="card-body">
-                                            <h5 class="mb-3">Departure details</h5>
-                                            <p class="mb-0">Traveler pickup is offered. We will pickup you all from your
-                                                pickup places even it's home or hotel inside Birnin Zana. Hotel pickup
-                                                is offered. View the hotel list on our checkout page to see if yours is
-                                                included.</p>
-                                        </div>
-                                    </div>
-                                    <div class="card bg-transparent">
-                                        <div class="card-body">
-                                            <h5 class="mb-3">Return details</h5>
-                                            <p class="mb-0">Returns to the original departure point.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div><a
-                                class="btn px-4 py-3 py-sm-4 d-flex flex-between-center collapse-indicator bg-body-highlight mt-4"
-                                data-bs-toggle="collapse" href="#collapseAccessibility" role="button"
-                                aria-expanded="false" aria-controls="collapseAccessibility">
-                                <h4 class="fs-8 fs-sm-7 mb-0 text-body-highlight">Accessibility</h4><span
-                                    class="fa-solid fa-chevron-down toggle-icon"></span>
-                            </a>
-                            <div class="collapse" id="collapseAccessibility">
-                                <div class="py-6 px-4">
-                                    <ul class="list-unstyled">
-                                        <li class="mb-1 d-flex"><span
-                                                class="fa-solid fa-circle text-secondary-light me-3 fs-11"
-                                                data-fa-transform="down-13 shrink-4"></span>Infant seats available</li>
-                                        <li class="mb-1 d-flex"><span
-                                                class="fa-solid fa-circle text-secondary-light me-3 fs-11"
-                                                data-fa-transform="down-13 shrink-4"></span>Wheelchair accessible</li>
-                                        <li class="mb-1 d-flex"><span
-                                                class="fa-solid fa-circle text-secondary-light me-3 fs-11"
-                                                data-fa-transform="down-13 shrink-4"></span>Service animals allowed</li>
-                                        <li class="mb-1 d-flex"><span
-                                                class="fa-solid fa-circle text-secondary-light me-3 fs-11"
-                                                data-fa-transform="down-13 shrink-4"></span>Infants must sit on lap</li>
-                                    </ul>
-                                    <p> If you have questions about accessibility, we’d be happy to help. Just call the
-                                        number below and reference the product code: <span
-                                            class="text-body-emphasis fw-semibold">74936P4</span></p><a
-                                        href="tel:+1800000000">+1 800 000 000</a>
-                                </div>
-                            </div><a
-                                class="btn px-4 py-3 py-sm-4 d-flex flex-between-center collapse-indicator bg-body-highlight mt-4"
-                                data-bs-toggle="collapse" href="#collapseAdditionalInfo" role="button"
-                                aria-expanded="false" aria-controls="collapseAdditionalInfo">
-                                <h4 class="fs-8 fs-sm-7 mb-0 text-body-highlight">Additional Information</h4><span
-                                    class="fa-solid fa-chevron-down toggle-icon"></span>
-                            </a>
-                            <div class="collapse" id="collapseAdditionalInfo">
-                                <div class="py-6 px-4">
-                                    <ul class="list-unstyled mb-0">
-                                        <li class="mb-1 d-flex"><span
-                                                class="fa-solid fa-circle text-secondary-light me-3 fs-11"
-                                                data-fa-transform="down-13 shrink-4"></span>Confirmation will be
-                                            received at time of booking</li>
-                                        <li class="mb-1 d-flex"><span
-                                                class="fa-solid fa-circle text-secondary-light me-3 fs-11"
-                                                data-fa-transform="down-13 shrink-4"></span>Minimum age is 18 years</li>
-                                        <li class="mb-1 d-flex"><span
-                                                class="fa-solid fa-circle text-secondary-light me-3 fs-11"
-                                                data-fa-transform="down-13 shrink-4"></span>Infant meals not included
-                                        </li>
-                                        <li class="mb-1 d-flex"><span
-                                                class="fa-solid fa-circle text-secondary-light me-3 fs-11"
-                                                data-fa-transform="down-13 shrink-4"></span>A minimum if 01 people per
-                                            booking is required</li>
-                                        <li class="mb-1 d-flex"><span
-                                                class="fa-solid fa-circle text-secondary-light me-3 fs-11"
-                                                data-fa-transform="down-13 shrink-4"></span>Most travelers can
-                                            participate</li>
-                                        <li class="mb-1 d-flex"><span
-                                                class="fa-solid fa-circle text-secondary-light me-3 fs-11"
-                                                data-fa-transform="down-13 shrink-4"></span>This tour is to explore the
-                                            city using local transportation like rickshaw , tuktuk, uber.</li>
-                                        <li class="mb-1 d-flex"><span
-                                                class="fa-solid fa-circle text-secondary-light me-3 fs-11"
-                                                data-fa-transform="down-13 shrink-4"></span>Woman's need to cover the
-                                            head during visiting mosque</li>
-                                        <li class="mb-1 d-flex"><span
-                                                class="fa-solid fa-circle text-secondary-light me-3 fs-11"
-                                                data-fa-transform="down-13 shrink-4"></span>This is a private tour /
-                                            activity. Only your group will particiapte.</li>
-                                    </ul>
-                                </div>
-                            </div><a
-                                class="btn px-4 py-3 py-sm-4 d-flex flex-between-center collapse-indicator bg-body-highlight mt-4"
-                                data-bs-toggle="collapse" href="#collapsePolicy" role="button" aria-expanded="false"
-                                aria-controls="collapsePolicy">
-                                <h4 class="fs-8 fs-sm-7 mb-0 text-body-highlight">Policy</h4><span
-                                    class="fa-solid fa-chevron-down toggle-icon"></span>
-                            </a>
+                            </div>
+
+
                             <div class="collapse" id="collapsePolicy">
                                 <div class="py-6 px-4">
                                     <div class="card bg-transparent mb-3">
@@ -513,7 +333,7 @@
                         <div class="col-xl-4">
                             <div class="border border-translucent rounded-2" id="mapbox-cluster" style="height: 240px;">
                             </div>
-                            <h6 class="my-3 py-3 px-2 rounded-2 bg-body-secondary text-center">Day 1</h6>
+                            <h6 class="my-3 py-3 px-2 rounded-2 bg-body-secondary text-center">Ngày 1</h6>
                             <div class="row gx-5 gy-0 position-relative">
                                 <div class="bg-holder tour-direction-bg d-none d-sm-block"
                                     style="background-image:url(../../../assets/img/bg/bg-41.svg);"></div>
@@ -529,9 +349,8 @@
                                                     style="min-width: 23px; height: 23px"><span
                                                         class="fa-solid fa-map-marker-alt fs-9"></span></span>
                                                 <div>
-                                                    <h6 class="mb-2 text-start">Pickup point</h6>
-                                                    <h6 class="text-start fw-normal text-body-tertiary">Birnin Zana bus
-                                                        terminal</h6>
+                                                    <h6 class="mb-2 text-start">Điểm đón</h6>
+                                                    <h6 class="text-start fw-normal text-body-tertiary"></h6>
                                                 </div>
                                             </div><span class="fa-solid fa-chevron-down toggle-icon"
                                                 style="width: 10px; height: 10px"></span>
@@ -539,7 +358,7 @@
                                         <div class="collapse show" id="collapsePicupPoint">
                                             <h6 class="fw-normal text-body-tertiary pt-3 ps-1"><span
                                                     class="fa-solid fa-clock text-body-quaternary me-2"></span>10:00 am
-                                                local time</h6>
+                                                địa phương</h6>
                                         </div>
                                     </div>
                                     <div
@@ -547,21 +366,24 @@
                                         <div class="tour-direction-line border-start border-dashed"></div><span
                                             class="bg-secondary rounded-pill d-flex flex-center text-white fs-9"
                                             style="min-width: 23px; height: 23px">1</span>
-                                        <h6 class="mb-0 text-body-highlight">Breakfast</h6>
+                                        <h6 class="mb-0 text-body-highlight">{{ tourVm.activities[0].activityName }}
+                                        </h6>
                                     </div>
                                     <div
                                         class="p-2 rounded-2 bg-body-highlight d-flex align-items-center gap-2 mb-3 position-relative">
                                         <div class="tour-direction-line border-start border-dashed"></div><span
                                             class="bg-secondary rounded-pill d-flex flex-center text-white fs-9"
                                             style="min-width: 23px; height: 23px">2</span>
-                                        <h6 class="mb-0 text-body-highlight">Desert safari</h6>
+                                        <h6 class="mb-0 text-body-highlight">{{ tourVm.activities[1].activityName }}
+                                        </h6>
                                     </div>
                                     <div
                                         class="p-2 rounded-2 bg-body-highlight d-flex align-items-center gap-2 mb-3 position-relative">
                                         <div class="tour-direction-line border-start border-dashed d-sm-none"></div>
                                         <span class="bg-secondary rounded-pill d-flex flex-center text-white fs-9"
                                             style="min-width: 23px; height: 23px">3</span>
-                                        <h6 class="mb-0 text-body-highlight">Jabari tribe habitats</h6>
+                                        <h6 class="mb-0 text-body-highlight">{{ tourVm.activities[2].activityName }}
+                                        </h6>
                                     </div>
                                 </div>
                                 <div class="col-sm-6 position-relative">
@@ -570,24 +392,26 @@
                                         <div class="tour-direction-line border-start border-dashed"></div><span
                                             class="bg-secondary rounded-pill d-flex flex-center text-white fs-9"
                                             style="min-width: 23px; height: 23px">4</span>
-                                        <h6 class="mb-0 text-body-highlight">King T’Challa’s memorial</h6>
+                                        <h6 class="mb-0 text-body-highlight">{{ tourVm.activities[3].activityName }}
+                                        </h6>
                                     </div>
                                     <div
                                         class="p-2 rounded-2 bg-body-highlight d-flex align-items-center gap-2 mb-3 position-relative">
                                         <div class="tour-direction-line border-start border-dashed"></div><span
                                             class="bg-secondary rounded-pill d-flex flex-center text-white fs-9"
                                             style="min-width: 23px; height: 23px">5</span>
-                                        <h6 class="mb-0 text-body-highlight">Lunch</h6>
+                                        <h6 class="mb-0 text-body-highlight">{{ tourVm.activities[4].activityName }}
+                                        </h6>
                                     </div>
                                     <div class="p-2 rounded-2 bg-body-highlight d-flex align-items-center gap-2 mb-3">
                                         <span class="d-inline-flex flex-center rounded-pill border me-2"
                                             style="min-width: 23px; height: 23px"><span
                                                 class="fa-solid fa-map-marker-alt fs-9"></span></span>
-                                        <h6 class="mb-0 text-body-highlight">Drop-off point</h6>
+                                        <h6 class="mb-0 text-body-highlight">Điểm kết thúc</h6>
                                     </div>
                                 </div>
                             </div>
-                            <h6 class="mb-0 py-3 px-2 rounded-2 bg-body-secondary text-center">Tour ends</h6>
+                            <h6 class="mb-0 py-3 px-2 rounded-2 bg-body-secondary text-center">Kết thúc chuyến </h6>
                         </div>
                     </div>
                 </div>
