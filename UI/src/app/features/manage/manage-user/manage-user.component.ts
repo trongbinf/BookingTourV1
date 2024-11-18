@@ -4,6 +4,9 @@ import { AuthService } from '../../auth/services/auth.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { User } from '../../auth/models/user.model';
+import { Injectable } from '@angular/core';
+import * as XLSX from 'xlsx';
+import * as FileSaver from 'file-saver';
 
 @Component({
   selector: 'app-manage-user',
@@ -120,4 +123,66 @@ export class ManageUserComponent implements OnInit, OnDestroy {
     this.currentPage = 1; // Reset về trang đầu tiên
     this.fetchUsers(); // Cập nhật danh sách
   }
+
+  // exportAsExcelFile(data: any[], fileName: string): void {
+  //   // Tạo WorkSheet từ dữ liệu
+  //   const ws: XLSX.WorkSheet = XLSX.utils.json_to_sheet(data);
+
+  //   // Tạo Workbook và thêm WorkSheet vào
+  //   const wb: XLSX.WorkBook = XLSX.utils.book_new();
+  //   XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+
+  //   // Ghi file Excel dưới dạng buffer
+  //   const excelBuffer: any = XLSX.write(wb, {
+  //     bookType: 'xlsx',
+  //     type: 'array',
+  //   });
+
+  //   // Lưu file
+  //   this.saveAsExcelFile(excelBuffer, fileName);
+  // }
+
+  // private saveAsExcelFile(buffer: any, fileName: string): void {
+  //   const data: Blob = new Blob([buffer], {
+  //     type: 'application/octet-stream',
+  //   });
+  //   FileSaver.saveAs(data, `${fileName}_export_${new Date().getTime()}.xlsx`);
+  // }
+
+  exportTable(): void {
+    // Lấy bảng HTML bằng ID
+    const table = document.getElementById('tableExcel');
+
+    // Chuyển bảng HTML thành WorkSheet
+    const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(table);
+
+    // Lấy tất cả các hàng trong bảng HTML
+    const rows = table?.querySelectorAll('tbody tr');
+
+    if (rows) {
+      rows.forEach((row, rowIndex) => {
+        // Lấy giá trị từ thẻ <input type="hidden"> trong cột "status"
+        const hiddenInput = row.querySelector('input[name="status"]') as HTMLInputElement;
+
+        // Nếu có thẻ <input>, thay giá trị ẩn vào WorkSheet
+        if (hiddenInput && ws) {
+          const cellAddress = XLSX.utils.encode_cell({ r: rowIndex + 1, c: 4 }); // Cột "status" ở vị trí c=4
+          ws[cellAddress] = { v: hiddenInput.value, t: 's' }; // Cập nhật giá trị và kiểu dữ liệu
+        }
+      });
+    }
+
+    // Loại bỏ cột cuối cùng (nếu cần)
+    const range = XLSX.utils.decode_range(ws['!ref']!); // Lấy phạm vi dữ liệu của bảng
+    range.e.c -= 1; // Giảm chỉ số cột kết thúc (e.c) để loại bỏ cột cuối
+    ws['!ref'] = XLSX.utils.encode_range(range); // Cập nhật phạm vi dữ liệu mới
+
+    // Tạo Workbook
+    const wb: XLSX.WorkBook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+
+    // Xuất file Excel
+    XLSX.writeFile(wb, `html_table_export_${new Date().getTime()}.xlsx`);
+  }
+
 }
