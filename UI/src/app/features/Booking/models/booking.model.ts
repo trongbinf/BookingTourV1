@@ -2,16 +2,24 @@ import { User } from "../../auth/models/user.model";
 import { Tour } from "../../Tour/models/tour.model";
 
 export enum StatusType {
-    Pending = 'Pending',
-    Confirmed = 'Confirmed',
-    Canceled = 'Canceled'
+    Submited,     // Đã gửi
+    Pending,      // Đang chờ duyệt
+    Confirmed,    // Đã xác nhận
+    Canceled,     // Đã hủy
+    Available,    // Có sẵn
+    Unavailable   // Không khả dụng
 }
+
 
 export interface Booking {
     bookingId: number;
-    bookingDate: Date;
+    bookingDate: string;
+    pickDate: string;
+    startTime: string;
+    personNumber: number;
     notes?: string;
     status: StatusType;
     tour?: Tour;
-    // user?: User;
+    userId: string;
+    user?: User;
 }

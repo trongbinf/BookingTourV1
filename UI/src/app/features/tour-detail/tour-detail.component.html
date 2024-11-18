@@ -1,31 +1,4 @@
 <main class="main" id="top">
-    <div class="bg-primary-subtle py-2">
-        <div class="container-medium d-flex align-items-center justify-content-between"><a
-                class="btn btn-link p-0 text-body" href="../../../pages/authentication/card/sign-in.html"><span
-                    class="fa-solid fa-arrow-right-to-bracket me-2" data-fa-transform="down-1"></span>Agent Login</a>
-            <div class="dropdown"><button class="btn btn-sm p-0 d-md-none fs-8" type="button" data-bs-toggle="dropdown"
-                    data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent"><span
-                        class="fas fa-ellipsis-h"></span></button>
-                <ul class="dropdown-menu dropdown-menu-end" style="z-index: 9999">
-                    <li><a class="dropdown-item" href="#!">Become a Host</a></li>
-                    <li><a class="dropdown-item" href="#!">Blog</a></li>
-                    <li><a class="dropdown-item" href="#!">Career</a></li>
-                    <li><a class="dropdown-item" href="#!">Support</a></li>
-                    <li><a class="dropdown-item" href="#!">+01 123 581321</a></li>
-                </ul>
-            </div>
-            <ul class="d-none d-md-flex gap-5 list-unstyled mb-0">
-                <li><a class="lh-1 text-body-tertiary fw-semibold fs-9" href="#!">Become a Host</a></li>
-                <li><a class="lh-1 text-body-tertiary fw-semibold fs-9" href="#!">Blog</a></li>
-                <li><a class="lh-1 text-body-tertiary fw-semibold fs-9" href="#!">Career</a></li>
-                <li><a class="lh-1 text-body-tertiary fw-semibold fs-9" href="mailto:example@gmail.com"> <span
-                            class="fa-regular fa-envelope me-2" data-fa-transform="down-1"></span>Support</a></li>
-                <li><a class="lh-1 text-body-tertiary fw-semibold fs-9" href="tel:+01123581321"> <span
-                            class="fa-brands fa-whatsapp me-2"></span>+01 123 581321</a></li>
-            </ul>
-        </div>
-    </div>
-
 
     <!-- ============================================-->
     <!-- <section> begin ============================-->
@@ -33,8 +6,7 @@
         <div class="container-medium" *ngIf="tourVm">
             <nav class=" mb-3" aria-label="breadcrumb">
                 <ol class="breadcrumb mb-0">
-                    <li class="breadcrumb-item"><a href="#">Page 1</a></li>
-                    <li class="breadcrumb-item"><a href="#">Page 2</a></li>
+                    <li class="breadcrumb-item"><a [routerLink]="['']">Home</a></li>
                     <li class="breadcrumb-item active" aria-current="page">{{ tourVm.tour.tourName }}</li>
                 </ol>
             </nav>
@@ -43,7 +15,7 @@
                         Travel</span></span></h1>
             <hr class="bg-secondary-lighter">
             <div class="d-flex align-items-center flex-wrap gap-3">
-                <h2 class="me-3">{{ tourVm.tour.price | currency:'VND':true }}<span
+                <h2 class="me-3">{{ tourVm.tour.price | number }} VNĐ<span
                         class="fs-8 fw-semibold text-body-tertiary align-middle">/
                         per person</span>
                 </h2>
@@ -59,17 +31,19 @@
                             data-fa-transform="down-1"></span></span>Recommended by 25 travellers</h5><button
                     class="btn btn-primary ms-md-auto" type="button" data-bs-toggle="modal"
                     data-bs-target="#trilAvailabilityModal" aria-haspopup="true" aria-expanded="false"
-                    data-bs-reference="parent">Check availability</button>
+                    data-bs-reference="parent">Đặt Lịch Ngay</button>
             </div>
             <div class="p-4 bg-body-highlight rounded-2 mt-3 mb-5">
                 <div class="row gy-4">
                     <div class="col-md-4 col-lg-3 border-end-md">
                         <h6 class="text-body fw-semibold mb-2"> <span class="fa-solid fa-map-marker-alt me-2"></span>{{
                             tourVm.tour.city }}, {{ tourVm.tour.country }}</h6>
-                        <h6 class="text-body fw-semibold mb-2"> <span class="fa-solid fa-clock me-2"></span>3 Days, 2
-                            Night</h6>
-                        <h6 class="text-body fw-semibold mb-4"> <span class="fa-solid fa-user me-2"></span>From 1 to 12
-                            people</h6><a class="badge badge-phoenix badge-phoenix-secondary me-2" href="#!"> {{
+                        <h6 class="text-body fw-semibold mb-2"> <span class="fa-solid fa-clock me-2"></span>
+                            {{ tourVm.tour.duration }}
+                        </h6>
+                        <h6 class="text-body fw-semibold mb-4"> <span class="fa-solid fa-user me-2"></span> 1 đến {{
+                            tourVm.tour.personNumber }} người
+                        </h6><a class="badge badge-phoenix badge-phoenix-secondary me-2" href="#!"> {{
                             tourVm.tour.category?.name }}</a><a class="badge badge-phoenix badge-phoenix-secondary"
                             href="#!"></a>
                     </div>
@@ -357,8 +331,9 @@
                                         </a>
                                         <div class="collapse show" id="collapsePicupPoint">
                                             <h6 class="fw-normal text-body-tertiary pt-3 ps-1"><span
-                                                    class="fa-solid fa-clock text-body-quaternary me-2"></span>10:00 am
-                                                địa phương</h6>
+                                                    class="fa-solid fa-clock text-body-quaternary me-2"></span>{{
+                                                tourVm.bookings[0].startTime }} giờ địa phương
+                                            </h6>
                                         </div>
                                     </div>
                                     <div
@@ -667,62 +642,6 @@
     </section><!-- <section> close ============================-->
     <!-- ============================================-->
 
-
-
-    <!-- ============================================-->
-    <!-- <section> begin ============================-->
-    <section class="py-6">
-        <div class="container-medium">
-            <div class="bg-holder overlay bg-opacity-75"
-                style="background-image:url(../../../assets/img/bg/47.png);background-position: center; background-size: cover;">
-            </div>
-            <!--/.bg-holder-->
-            <div class="row position-relative align-items-center gy-3">
-                <div class="col-xxl-4 order-1 order-xxl-0">
-                    <ul
-                        class="list-unstyled d-flex gap-3 gap-xxl-4 flex-wrap mb-0 justify-content-center justify-content-xxl-start">
-                        <li><a class="text-secondary-lighter" href="#!">Home</a></li>
-                        <li><a class="text-secondary-lighter" href="#!">Terms</a></li>
-                        <li><a class="text-secondary-lighter" href="#!">Talent &amp; culture</a></li>
-                        <li><a class="text-secondary-lighter" href="#!">Destination</a></li>
-                    </ul>
-                </div>
-                <div class="col-sm-8 col-md-7 col-lg-5 col-xl-4 mx-auto mb-3 mb-xxl-0">
-                    <h2 class="mb-4 fw-semibold text-white text-center lh-sm">Subscribe to get notified about the latest
-                        news</h2>
-                    <div class="d-flex gap-2">
-                        <div class="form-icon-container flex-1"><input class="form-control form-icon-input" type="text"
-                                placeholder="Your email address" /><span
-                                class="fa-solid fa-envelope form-icon text-body fs-9"></span></div><button
-                            class="btn btn-primary rounded">Sign up</button>
-                    </div>
-                </div>
-                <div class="col-xxl-4 order-2 order-xxl-0">
-                    <ul
-                        class="list-unstyled d-flex gap-3 gap-xxl-4 flex-wrap mb-0 justify-content-center justify-content-xxl-end">
-                        <li><a class="text-secondary-lighter" href="#!">Refund policy</a></li>
-                        <li><a class="text-secondary-lighter" href="#!">Sitemap</a></li>
-                        <li><a class="text-secondary-lighter" href="#!">EMI Policy</a></li>
-                        <li><a class="text-secondary-lighter" href="#!">Privacy Policy</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div><!-- end of .container-->
-    </section><!-- <section> close ============================-->
-    <!-- ============================================-->
-
-    <footer class="footer position-relative">
-        <div class="row g-0 justify-content-between align-items-center h-100">
-            <div class="col-12 col-sm-auto text-center">
-                <p class="mb-0 mt-2 mt-sm-0 text-body">Thank you for creating with Phoenix<span
-                        class="d-none d-sm-inline-block"></span><span class="d-none d-sm-inline-block mx-1">|</span><br
-                        class="d-sm-none" />2024 &copy;<a class="mx-1" href="https://themewagon.com/">Themewagon</a></p>
-            </div>
-            <div class="col-12 col-sm-auto text-center">
-                <p class="mb-0 text-body-tertiary text-opacity-85">v1.19.0</p>
-            </div>
-        </div>
-    </footer>
     <div class="support-chat-container">
         <div class="container-fluid support-chat">
             <div class="card bg-body-emphasis">
@@ -987,99 +906,104 @@
     </div>
 </a>
 <div class="modal fade" id="trilAvailabilityModal" data-bs-keyboard="false" tabindex="-1"
-    aria-labelledby="trilAvailabilityModal">
+    aria-labelledby="trilAvailabilityModal" *ngIf="tourVm">
     <div class="modal-dialog modal-md modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header justify-content-between align-items-start gap-5 px-4 pt-4 pb-3 border-0">
-                <h2 class="mb-0">Walk where the king walked once in Wakanda</h2><button
-                    class="btn p-0 text-body-quaternary fs-6" data-bs-dismiss="modal" aria-label="Close"><span
-                        class="fas fa-times"></span></button>
+                <h2 class="mb-0">{{ tourVm.tour.tourName }}</h2>
+                <button class="btn p-0 text-body-quaternary fs-6" data-bs-dismiss="modal" aria-label="Đóng">
+                    <span class="fas fa-times"></span>
+                </button>
             </div>
             <div class="modal-body p-4">
                 <div class="row g-5 mb-4">
-                    <div class="col-md-5"> <label class="fw-bold mb-2 fs-7 text-body-emphasis" for="tripDate">Choose
-                            your preferred date</label>
-                        <div class="form-icon-container flatpickr-input-container"><input
-                                class="form-control form-icon-input datetimepicker" id="tripDate" type="text"
-                                placeholder="22 May, 2024" data-options='{"disableMobile":true}' /><span
-                                class="fa-solid fa-calendar text-body fs-9 form-icon"></span></div>
-                    </div>
-                    <div class="col-md-7">
-                        <div class="row g-3">
-                            <div class="col-auto col-sm-6"><label
-                                    class="fw-bold mb-2 fs-7 text-body-emphasis">Adults</label>
-                                <div class="input-group gap-2" data-quantity="data-quantity"><button
-                                        class="btn btn-phoenix-primary rounded px-3" data-type="minus"><span
-                                            class="fa-solid fa-minus"></span></button><input
-                                        class="form-control border-translucent input-spin-none text-center rounded"
-                                        id="adult" type="number" value="2" /><button
-                                        class="btn btn-phoenix-primary rounded px-3" data-type="plus"><span
-                                            class="fa-solid fa-plus"></span></button></div>
-                            </div>
-                            <div class="col-auto col-sm-6"><label
-                                    class="fw-bold mb-2 fs-7 text-body-emphasis">Children</label>
-                                <div class="input-group gap-2" data-quantity="data-quantity"><button
-                                        class="btn btn-phoenix-primary rounded px-3" data-type="minus"><span
-                                            class="fa-solid fa-minus"></span></button><input
-                                        class="form-control border-translucent input-spin-none text-center rounded"
-                                        id="children" type="number" value="2" /><button
-                                        class="btn btn-phoenix-primary rounded px-3" data-type="plus"><span
-                                            class="fa-solid fa-plus"></span></button></div>
+                    <!-- Conditionally display date picker or dropdown based on isFullDay -->
+                    <div class="col-md-6">
+                        <label class="fw-bold mb-2 fs-7 text-body-emphasis" for="tripDate">
+                            Chọn ngày
+                        </label>
+
+                        <div *ngIf="tourVm?.tour?.isFullDay; else selectDateStart">
+                            <!-- Full day picker -->
+                            <div class="form-icon-container flatpickr-input-container">
+                                <input class="form-control form-icon-input datetimepicker" id="tripDate" type="text"
+                                    placeholder="5 Tháng 5, 2024" data-options='{"disableMobile":true}'
+                                    [(ngModel)]="selectedPickDate" />
+                                <span class="fa-solid fa-calendar text-body fs-9 form-icon"></span>
                             </div>
                         </div>
+
+                        <ng-template #selectDateStart>
+                            <!-- Date selection dropdown if not a full day -->
+                            <select class="form-control" id="dateStart" [(ngModel)]="selectedPickDate">
+                                <option *ngFor="let dateStart of tourVm?.dateStarts" [value]="dateStart.dateStartId">
+                                    {{ dateStart.startDate | date: 'd MMM, yyyy' }}
+                                </option>
+                            </select>
+                        </ng-template>
                     </div>
-                </div><input class="card-form-check-input d-none" type="radio" name="availableOption" id="Economy-Plan"
-                    checked="checked" />
-                <div class="position-relative"><label class="stretched-link" for="Economy-Plan"></label>
-                    <div class="card">
-                        <div class="card-body">
-                            <h4 class="mb-4"><span class="radio-circle me-2"></span>Economy Plan</h4>
-                            <ul class="list-unstyled mb-0">
-                                <li class="d-flex mb-1"><span class="fa-solid fa-circle text-secondary-light me-3"
-                                        style="width: 6px; height: 6px" data-fa-transform="down-20"></span>Non A/C
-                                    transport </li>
-                                <li class="d-flex mb-1"><span class="fa-solid fa-circle text-secondary-light me-3"
-                                        style="width: 6px; height: 6px" data-fa-transform="down-20"></span>No extra
-                                    luggage carrier </li>
-                            </ul>
-                            <hr class="my-4" />
-                            <h5 class="fw-normal mb-4">1 adult x $87.00</h5>
-                            <div class="p-3 rounded-2 bg-body-highlight">
-                                <h4>Total $87.00</h4>
-                                <p class="fs-9 mb-0">( No additional taxes or booking fees )</p>
-                            </div>
+                </div>
+
+
+                <!-- People Count Section -->
+                <div class="row g-5 mb-4">
+                    <div class="col-md-6">
+                        <label class="fw-bold mb-2 fs-7 text-body-emphasis">Số người</label>
+                        <div class="input-group gap-2" data-quantity="data-quantity">
+                            <button class="btn btn-phoenix-primary rounded px-3" data-type="minus"
+                                (click)="updateTotal(-1)">
+                                <span class="fa-solid fa-minus"></span>
+                            </button>
+                            <input class="form-control border-translucent input-spin-none text-center rounded"
+                                id="personCount" type="number" [(ngModel)]="personCount" (input)="updateTotal(0)" />
+                            <button class="btn btn-phoenix-primary rounded px-3" data-type="plus"
+                                (click)="updateTotal(1)">
+                                <span class="fa-solid fa-plus"></span>
+                            </button>
                         </div>
                     </div>
-                </div><input class="card-form-check-input d-none" type="radio" name="availableOption"
-                    id="Business/Premium-Plan" />
-                <div class="position-relative"><label class="stretched-link" for="Business/Premium-Plan"></label>
-                    <div class="card">
-                        <div class="card-body">
-                            <h4 class="mb-4"><span class="radio-circle me-2"></span>Business/Premium Plan</h4>
-                            <ul class="list-unstyled mb-0">
-                                <li class="d-flex mb-1"><span class="fa-solid fa-circle text-secondary-light me-3"
-                                        style="width: 6px; height: 6px" data-fa-transform="down-20"></span>A/C transport
-                                </li>
-                                <li class="d-flex mb-1"><span class="fa-solid fa-circle text-secondary-light me-3"
-                                        style="width: 6px; height: 6px" data-fa-transform="down-20"></span>Extra luggage
-                                    carrier </li>
-                            </ul>
-                            <hr class="my-4" />
-                            <h5 class="fw-normal mb-4">1 adult x $120.00</h5>
-                            <div class="p-3 rounded-2 bg-body-highlight">
-                                <h4>Total $120.00</h4>
-                                <p class="fs-9 mb-0">( No additional taxes or booking fees )</p>
-                            </div>
+                </div>
+
+                <!-- Pricing Summary Section -->
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="mb-4">Gói Economy</h4>
+                        <ul class="list-unstyled mb-0">
+                            <li class="d-flex mb-1">
+                                <span class="fa-solid fa-circle text-secondary-light me-3"
+                                    style="width: 6px; height: 6px" data-fa-transform="down-20"></span>Hành lý thêm
+                                không quá 5kg
+                            </li>
+                        </ul>
+                        <hr class="my-4" />
+                        <h5 class="fw-normal mb-4">{{ personCount }} người x {{ tourVm.tour.price | number }} VND</h5>
+                        <div class="p-3 rounded-2 bg-body-highlight">
+                            <h4>Tổng cộng: {{ personCount * tourVm.tour.price | number }} VND</h4>
+                            <p class="fs-9 mb-0">( Không có phí thuế hoặc phí đặt chỗ )</p>
                         </div>
                     </div>
-                </div><label class="fw-bold mb-2 mt-5 fs-7 text-body-emphasis" for="selectTime">Select
-                    time</label><select class="form-select w-sm-50" id="selectTime">
-                    <option value="">8:00 AM</option>
-                    <option value="">12:00 PM</option>
-                    <option value="">3:00 PM</option>
-                </select><a class="btn btn-primary btn-lg w-100 mt-6" href="checkout.html">Proceed to booking<span
-                        class="fa-solid fa-chevron-right fs-9 ms-2"></span></a>
+                </div>
+
+                <!-- Time Selection Section -->
+                <div class="row g-5 mb-4">
+                    <div class="col-md-6">
+                        <label class="fw-bold mb-2 fs-7 text-body-emphasis" for="selectTime">Chọn giờ</label>
+                        <select class="form-select w-100" id="selectTime">
+                            <option value="" disabled selected>Vui lòng chọn giờ</option>
+                            <option value="08:00:00">8:00 Sáng</option>
+                            <option value="09:00:00">9:00 Sáng</option>
+                            <option value="10:00:00">10:00 Sáng</option>
+                        </select>
+                    </div>
+                </div>
+
+
+                <!-- Submit Button Section -->
+                <div class="text-center mt-5">
+                    <button class="btn btn-primary btn-lg w-100" (click)="proceedToBooking()">Đặt vé
+                        <span class="fa-solid fa-chevron-right fs-9 ms-2"></span>
+                    </button>
+                </div>
             </div>
+
         </div>
-    </div>
-</div>

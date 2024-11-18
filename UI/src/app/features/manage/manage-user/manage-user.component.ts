@@ -1,9 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { AppUser } from '../../auth/models/appUser.model';
 import { Observable, Subscription } from 'rxjs';
 import { AuthService } from '../../auth/services/auth.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { User } from '../../auth/models/user.model';
 
 @Component({
   selector: 'app-manage-user',
@@ -14,7 +14,7 @@ import { FormsModule } from '@angular/forms';
 })
 export class ManageUserComponent implements OnInit, OnDestroy {
 
-  appUsers$?: Observable<AppUser[]>
+  appUsers$?: Observable<User[]>
   key: string = '';
   appUserSubcription?: Subscription;
   roles: string[] = ['User', 'Admin'];
@@ -39,6 +39,10 @@ export class ManageUserComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.fetchUsers();
+  }
+
+  setSelectedUserId(userId: string): void {
+    this.selectedUserId = userId;
   }
 
   fetchUsers(): void {
@@ -67,7 +71,7 @@ export class ManageUserComponent implements OnInit, OnDestroy {
       this.appUserSubcription = this.authService.blockUser(id)
         .subscribe({
           next: response => {
-            this.appUsers$ = this.authService.getAllUser();
+            this.fetchUsers();
           }
         });
     }
@@ -77,7 +81,7 @@ export class ManageUserComponent implements OnInit, OnDestroy {
     this.appUserSubcription = this.authService.setRole(this.selectedUserId, this.selectedRole)
       .subscribe({
         next: Response => {
-          this.appUsers$ = this.authService.getAllUser();
+          this.fetchUsers();
         }
       });
   }

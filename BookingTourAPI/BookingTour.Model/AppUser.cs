@@ -1,5 +1,6 @@
 ﻿
 using Microsoft.AspNetCore.Identity;
+using System.Text.Json.Serialization;
 
 
 namespace BookingTour.Model
@@ -9,6 +10,7 @@ namespace BookingTour.Model
 		public string FullName { get; set; }
 		public List<RefreshToken> RefreshTokens { get; set; }
 
-		public ICollection<Booking> Bookings { get; set; } = new List<Booking>();
+		[JsonIgnore]
+		public virtual ICollection<Booking> Bookings { get; set; } 
 	}
 }

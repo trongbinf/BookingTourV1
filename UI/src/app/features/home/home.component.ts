@@ -6,14 +6,16 @@ import { CategoryService } from '../category/services/category.service';
 import { CategoryTours } from '../category/model/category-tour.model';
 import { CommonModule } from '@angular/common';
 import { Subject, takeUntil } from 'rxjs';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterLink],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
+
 export class HomeComponent implements OnInit, OnDestroy {
   categories: CategoryTours[] = [];
   tours: Tour[] = [];

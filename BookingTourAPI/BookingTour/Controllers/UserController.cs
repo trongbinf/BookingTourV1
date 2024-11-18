@@ -30,6 +30,7 @@ namespace BookingTour.API.Controllers
         [HttpGet("get-all-user")]
         public async Task<IActionResult> GetAllUsersWithRoles()
         {
+
             var usersWithRoles = await _context.Users
                 .Select(user => new AppUserVm
                 {
@@ -40,7 +41,17 @@ namespace BookingTour.API.Controllers
                     .Where(ur => ur.UserId == user.Id)
                                 .Join(_context.Roles, ur => ur.RoleId, r => r.Id, (ur, r) => r.Name)
                                 .FirstOrDefault(),
-                    Status = user.LockoutEnabled
+                    Status = user.LockoutEnabled,
+                    Bookings = _context.Bookings
+                                .Where(b => b.UserId == user.Id)
+                                .Select(b => new UserBooking
+                                {
+                                    BookingId = b.BookingId,
+                                    BookingDate = b.BookingDate,
+                                    Status = b.Status,
+                                    Notes = b.Notes
+                                })
+                                .ToList()
                 })
                 .ToListAsync();
 
@@ -129,7 +140,17 @@ namespace BookingTour.API.Controllers
                         .Where(ur => ur.UserId == user.Id)
                         .Join(_context.Roles, ur => ur.RoleId, r => r.Id, (ur, r) => r.Name)
                         .FirstOrDefault(),
-                    Status = user.LockoutEnabled
+                    Status = user.LockoutEnabled,
+                    Bookings = _context.Bookings
+                       .Where(b => b.UserId == user.Id)
+                        .Select(b => new UserBooking
+                        {
+                            BookingId = b.BookingId,
+                            BookingDate = b.BookingDate,
+                            Status = b.Status,
+                            Notes = b.Notes
+                        })
+                       .ToList()
                 })
                 .ToListAsync();
 
@@ -145,7 +166,7 @@ namespace BookingTour.API.Controllers
             }
 
             // Get the total count for pagination
-            int totalCount = usersWithRoles.Count;
+            int totalCount = usersWithRoles.Count();
 
             // Apply pagination
             var paginatedUsers = usersWithRoles
