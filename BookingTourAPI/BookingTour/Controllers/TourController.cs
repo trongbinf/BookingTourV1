@@ -145,8 +145,8 @@ namespace BookingTour.API.Controllers
             {
                 var dates = dateRange.Split("to");
                 if (dates.Length == 2 &&
-                    DateTime.TryParse(dates[0].Trim(), out var dateStart) &&
-                     DateTime.TryParse(dates[1].Trim(), out var dateEnd))
+                    DateOnly.TryParse(dates[0].Trim(), out var dateStart) &&
+                     DateOnly.TryParse(dates[1].Trim(), out var dateEnd))
                 {
                     listTour.Where(t => t.DateStarts.Any(ds => ds.StartDate >= dateStart
                     && ds.StartDate <= dateEnd) || t.IsFullDay == true).ToList();
@@ -178,7 +178,7 @@ namespace BookingTour.API.Controllers
         public async Task<ActionResult<TourVm>> GetTourById(int id)
         {
             var tour = await _tourService.GetFirstOrDefaultAsync(x => x.TourId == id,
-                includeProperties: "Category,Reviews,Activities,Bookings");
+                includeProperties: "Category,Reviews,Activities,Bookings,DateStarts");
             if (tour == null)
             {
                 return NotFound();
@@ -190,7 +190,8 @@ namespace BookingTour.API.Controllers
                 Category = tour.Category,
                 Reviews = tour.Reviews,
                 Activities = tour.Activities,
-                Bookings = tour.Bookings
+                Bookings = tour.Bookings,
+				DateStarts  = tour.DateStarts			
             };
 
             return Ok(tourVm);

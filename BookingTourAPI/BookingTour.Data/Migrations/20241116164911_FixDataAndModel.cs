@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace BookingTour.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class FixModelAndDataSeed : Migration
+    public partial class FixDataAndModel : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -99,7 +99,14 @@ namespace BookingTour.Data.Migrations
             migrationBuilder.RenameColumn(
                 name: "VehicleType",
                 table: "Tours",
-                newName: "PersonNumber");
+                newName: "Duration");
+
+            migrationBuilder.AddColumn<int>(
+                name: "PersonNumber",
+                table: "Tours",
+                type: "int",
+                nullable: false,
+                defaultValue: 0);
 
             migrationBuilder.AddColumn<TimeSpan>(
                 name: "Duration",
@@ -190,51 +197,51 @@ namespace BookingTour.Data.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "6c6262a4-f3ea-45c7-abf4-ce43582886e1", "2", "User", "User" },
-                    { "eb9e40d0-5e41-4ecc-859f-a10f5dc000ba", "1", "Admin", "Admin" }
+                    { "befc6d9c-9980-46be-b1d3-31af1761c9b1", "2", "User", "User" },
+                    { "fcd92d17-30f3-42d8-ba39-6c9e84b5e288", "1", "Admin", "Admin" }
                 });
 
             migrationBuilder.UpdateData(
                 table: "Tours",
                 keyColumn: "TourId",
                 keyValue: 1,
-                columns: new[] { "Created", "PersonNumber" },
-                values: new object[] { new DateTime(2024, 11, 16, 14, 31, 29, 324, DateTimeKind.Local).AddTicks(1660), "1 đến 30 người" });
+                columns: new[] { "Created", "Duration", "PersonNumber" },
+                values: new object[] { new DateTime(2024, 11, 16, 23, 49, 10, 973, DateTimeKind.Local).AddTicks(8633), "1 ngày 1 đêm", 30 });
 
             migrationBuilder.UpdateData(
                 table: "Tours",
                 keyColumn: "TourId",
                 keyValue: 2,
-                columns: new[] { "Created", "PersonNumber" },
-                values: new object[] { new DateTime(2024, 11, 16, 14, 31, 29, 324, DateTimeKind.Local).AddTicks(1664), "1 đến 16 người" });
+                columns: new[] { "Created", "Duration", "PersonNumber" },
+                values: new object[] { new DateTime(2024, 11, 16, 23, 49, 10, 973, DateTimeKind.Local).AddTicks(8638), "2 ngày 1 đêm", 16 });
 
             migrationBuilder.UpdateData(
                 table: "Tours",
                 keyColumn: "TourId",
                 keyValue: 3,
-                columns: new[] { "Created", "PersonNumber" },
-                values: new object[] { new DateTime(2024, 11, 16, 14, 31, 29, 324, DateTimeKind.Local).AddTicks(1667), "1 đến 19 người" });
+                columns: new[] { "Created", "Duration", "PersonNumber" },
+                values: new object[] { new DateTime(2024, 11, 16, 23, 49, 10, 973, DateTimeKind.Local).AddTicks(8641), "3 ngày 2 đêm", 19 });
 
             migrationBuilder.UpdateData(
                 table: "Tours",
                 keyColumn: "TourId",
                 keyValue: 4,
-                columns: new[] { "Created", "PersonNumber" },
-                values: new object[] { new DateTime(2024, 11, 16, 14, 31, 29, 324, DateTimeKind.Local).AddTicks(1670), "1 đến 19 người" });
+                columns: new[] { "Created", "Duration", "PersonNumber" },
+                values: new object[] { new DateTime(2024, 11, 16, 23, 49, 10, 973, DateTimeKind.Local).AddTicks(8644), "1 ngày 1 đêm", 19 });
 
             migrationBuilder.UpdateData(
                 table: "Tours",
                 keyColumn: "TourId",
                 keyValue: 5,
-                columns: new[] { "Created", "PersonNumber" },
-                values: new object[] { new DateTime(2024, 11, 16, 14, 31, 29, 324, DateTimeKind.Local).AddTicks(1673), "1 đến 15 người" });
+                columns: new[] { "Created", "Duration", "PersonNumber" },
+                values: new object[] { new DateTime(2024, 11, 16, 23, 49, 10, 973, DateTimeKind.Local).AddTicks(8646), "2 ngày 2 đêm", 15 });
 
             migrationBuilder.UpdateData(
                 table: "Tours",
                 keyColumn: "TourId",
                 keyValue: 6,
-                columns: new[] { "Created", "PersonNumber" },
-                values: new object[] { new DateTime(2024, 11, 16, 14, 31, 29, 324, DateTimeKind.Local).AddTicks(1676), "1 đến 26 người" });
+                columns: new[] { "Created", "Duration", "PersonNumber" },
+                values: new object[] { new DateTime(2024, 11, 16, 23, 49, 10, 973, DateTimeKind.Local).AddTicks(8649), "4 ngày 3 đêm", 26 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Activities_TourId",
@@ -264,12 +271,16 @@ namespace BookingTour.Data.Migrations
             migrationBuilder.DeleteData(
                 table: "AspNetRoles",
                 keyColumn: "Id",
-                keyValue: "6c6262a4-f3ea-45c7-abf4-ce43582886e1");
+                keyValue: "befc6d9c-9980-46be-b1d3-31af1761c9b1");
 
             migrationBuilder.DeleteData(
                 table: "AspNetRoles",
                 keyColumn: "Id",
-                keyValue: "eb9e40d0-5e41-4ecc-859f-a10f5dc000ba");
+                keyValue: "fcd92d17-30f3-42d8-ba39-6c9e84b5e288");
+
+            migrationBuilder.DropColumn(
+                name: "PersonNumber",
+                table: "Tours");
 
             migrationBuilder.DropColumn(
                 name: "Duration",
@@ -280,7 +291,7 @@ namespace BookingTour.Data.Migrations
                 table: "Activities");
 
             migrationBuilder.RenameColumn(
-                name: "PersonNumber",
+                name: "Duration",
                 table: "Tours",
                 newName: "VehicleType");
 

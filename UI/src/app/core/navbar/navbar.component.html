@@ -5,8 +5,8 @@
             <div class="d-flex align-items-center" style="display: flex; align-items: center;">
                 <a [routerLink]="['/']" class="d-flex align-items-center text-decoration-none"
                     style="display: flex; align-items: center; text-decoration: none;">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRq1w6K5BsmFENpQChzc9kV1gNBFS1Y_KUybQ&s"
-                        alt="phoenix" style="width: 50px; height: 50px; object-fit: contain;">
+                    <img src="../../../assets/img/logos/booking.png" alt="phoenix"
+                        style="width: 50px; height: 50px; object-fit: contain;">
                     <h5 class="logo-text ms-2 d-none d-sm-block"
                         style="font-size: 1.25rem; color: #333; margin-left: 8px;">
                         BookingTour</h5>
@@ -28,7 +28,8 @@
                             <ul class="dropdown-menu">
                                 <li class="mt-2" style="cursor: pointer;"><span
                                         class="dropdown-item">{{user?.email}}</span></li>
-                                <li class="mt-2" style="cursor: pointer;"><span class="dropdown-item">Profile</span>
+                                <li class="mt-2" style="cursor: pointer;"><span [routerLink]="['/profile']"
+                                        class="dropdown-item">Profile</span>
                                 </li>
                                 <li class="mt-2" style="cursor: pointer;"><span [routerLink]="['/changepass']"
                                         class="dropdown-item">Change

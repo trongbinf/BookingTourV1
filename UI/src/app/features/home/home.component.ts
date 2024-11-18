@@ -10,13 +10,15 @@ import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { PaginatedResponse } from '../Tour/models/paginated.model';
 import flatpickr from 'flatpickr'
+
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterLink],
+  imports: [CommonModule, RouterLink, FormsModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
+
 export class HomeComponent implements OnInit, OnDestroy {
   categories: CategoryTours[] = [];
   tours?: PaginatedResponse<Tour>;

@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BookingTour.Data.Migrations
 {
     [DbContext(typeof(BookingTourDbContext))]
-    [Migration("20241116073130_FixModelAndDataSeed")]
-    partial class FixModelAndDataSeed
+    [Migration("20241116164911_FixDataAndModel")]
+    partial class FixDataAndModel
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -355,6 +355,10 @@ namespace BookingTour.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Duration")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<bool>("IsFullDay")
                         .HasColumnType("bit");
 
@@ -364,9 +368,8 @@ namespace BookingTour.Data.Migrations
                     b.Property<string>("OtherImage")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("PersonNumber")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("PersonNumber")
+                        .HasColumnType("int");
 
                     b.Property<double>("Price")
                         .HasColumnType("float");
@@ -391,10 +394,11 @@ namespace BookingTour.Data.Migrations
                             CategoryId = 1,
                             City = "Hà Nội",
                             Country = "Việt Nam",
-                            Created = new DateTime(2024, 11, 16, 14, 31, 29, 324, DateTimeKind.Local).AddTicks(1660),
+                            Created = new DateTime(2024, 11, 16, 23, 49, 10, 973, DateTimeKind.Local).AddTicks(8633),
                             Description = "Tour tham quan các danh lam thắng cảnh trong thành phố.",
+                            Duration = "1 ngày 1 đêm",
                             IsFullDay = true,
-                            PersonNumber = "1 đến 30 người",
+                            PersonNumber = 30,
                             Price = 500000.0,
                             Status = true,
                             TourName = "Tham quan thành phố"
@@ -405,10 +409,11 @@ namespace BookingTour.Data.Migrations
                             CategoryId = 2,
                             City = "Đà Lạt",
                             Country = "Việt Nam",
-                            Created = new DateTime(2024, 11, 16, 14, 31, 29, 324, DateTimeKind.Local).AddTicks(1664),
+                            Created = new DateTime(2024, 11, 16, 23, 49, 10, 973, DateTimeKind.Local).AddTicks(8638),
                             Description = "Tour khám phá các khu rừng nguyên sinh.",
+                            Duration = "2 ngày 1 đêm",
                             IsFullDay = false,
-                            PersonNumber = "1 đến 16 người",
+                            PersonNumber = 16,
                             Price = 800000.0,
                             Status = true,
                             TourName = "Khám phá thiên nhiên"
@@ -419,10 +424,11 @@ namespace BookingTour.Data.Migrations
                             CategoryId = 3,
                             City = "Nha Trang",
                             Country = "Việt Nam",
-                            Created = new DateTime(2024, 11, 16, 14, 31, 29, 324, DateTimeKind.Local).AddTicks(1667),
+                            Created = new DateTime(2024, 11, 16, 23, 49, 10, 973, DateTimeKind.Local).AddTicks(8641),
                             Description = "Tour du lịch nghỉ dưỡng tại các bãi biển đẹp.",
+                            Duration = "3 ngày 2 đêm",
                             IsFullDay = false,
-                            PersonNumber = "1 đến 19 người",
+                            PersonNumber = 19,
                             Price = 1200000.0,
                             Status = true,
                             TourName = "Du lịch biển"
@@ -433,10 +439,11 @@ namespace BookingTour.Data.Migrations
                             CategoryId = 1,
                             City = "Hà Nội",
                             Country = "Việt Nam",
-                            Created = new DateTime(2024, 11, 16, 14, 31, 29, 324, DateTimeKind.Local).AddTicks(1670),
+                            Created = new DateTime(2024, 11, 16, 23, 49, 10, 973, DateTimeKind.Local).AddTicks(8644),
                             Description = "Tham quan các bảo tàng nổi tiếng.",
+                            Duration = "1 ngày 1 đêm",
                             IsFullDay = true,
-                            PersonNumber = "1 đến 19 người",
+                            PersonNumber = 19,
                             Price = 300000.0,
                             Status = true,
                             TourName = "Tham quan bảo tàng"
@@ -447,10 +454,11 @@ namespace BookingTour.Data.Migrations
                             CategoryId = 2,
                             City = "Sa Pa",
                             Country = "Việt Nam",
-                            Created = new DateTime(2024, 11, 16, 14, 31, 29, 324, DateTimeKind.Local).AddTicks(1673),
+                            Created = new DateTime(2024, 11, 16, 23, 49, 10, 973, DateTimeKind.Local).AddTicks(8646),
                             Description = "Tour cắm trại qua đêm trong rừng.",
+                            Duration = "2 ngày 2 đêm",
                             IsFullDay = false,
-                            PersonNumber = "1 đến 15 người",
+                            PersonNumber = 15,
                             Price = 950000.0,
                             Status = true,
                             TourName = "Cắm trại rừng"
@@ -461,10 +469,11 @@ namespace BookingTour.Data.Migrations
                             CategoryId = 3,
                             City = "Phú Quốc",
                             Country = "Việt Nam",
-                            Created = new DateTime(2024, 11, 16, 14, 31, 29, 324, DateTimeKind.Local).AddTicks(1676),
+                            Created = new DateTime(2024, 11, 16, 23, 49, 10, 973, DateTimeKind.Local).AddTicks(8649),
                             Description = "Tour nghỉ dưỡng và tham quan vùng biển.",
+                            Duration = "4 ngày 3 đêm",
                             IsFullDay = true,
-                            PersonNumber = "1 đến 26 người",
+                            PersonNumber = 26,
                             Price = 1500000.0,
                             Status = true,
                             TourName = "Kỳ nghỉ biển"
@@ -500,14 +509,14 @@ namespace BookingTour.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "eb9e40d0-5e41-4ecc-859f-a10f5dc000ba",
+                            Id = "fcd92d17-30f3-42d8-ba39-6c9e84b5e288",
                             ConcurrencyStamp = "1",
                             Name = "Admin",
                             NormalizedName = "Admin"
                         },
                         new
                         {
-                            Id = "6c6262a4-f3ea-45c7-abf4-ce43582886e1",
+                            Id = "befc6d9c-9980-46be-b1d3-31af1761c9b1",
                             ConcurrencyStamp = "2",
                             Name = "User",
                             NormalizedName = "User"

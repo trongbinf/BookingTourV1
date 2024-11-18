@@ -51,10 +51,13 @@
     <section class="pt-0 pb-9 mt-n13">
         <div class="container-medium">
             <div class="row g-3">
+
                 <div *ngFor="let tour of tours?.items" class="col-md-6 col-xl-4">
-                    <div class="hoverbox rounded"><a [routerLink]="['/tour-detail',tour.tour.tourId]"
-                            routerLinkActive="router-link-active"><img class="img-fluid"
-                                src="../../../assets/img/trip/1.png" alt="" />
+                    <div class="hoverbox rounded">
+
+                        <a [routerLink]="['/tour-detail', tour.tour.tourId]">
+
+                            <img class="img-fluid" src="../../../assets/img/trip/1.png" alt="" />
                             <div class="backdrop-faded">
                                 <h3 class="text-underline fs-7 fs-lg-6 text-white fw-bold mb-2">{{tour.tour.tourName}}
                                 </h3>
@@ -73,7 +76,8 @@
                                     </div>
                                 </div>
                             </div>
-                        </a></div>
+                        </a>
+                    </div>
                 </div>
             </div>
             <div class="mt-5 position-relative text-center">

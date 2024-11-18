@@ -15,29 +15,21 @@ export class NavbarComponent implements OnInit {
 
   user?: User;
 
-  isDropdownVisible = false;
-
   constructor(private authService: AuthService,
     private router: Router
   ) {
-
   }
   ngOnInit(): void {
-    this.authService.user()
+    this.authService.getUserInfo()
       .subscribe({
         next: response => {
           this.user = response;
         }
       });
-    this.user = this.authService.getUser();
-  }
-
-  toggleDropdown() {
-    this.isDropdownVisible = !this.isDropdownVisible;
   }
 
   onLogout() {
     this.authService.logout();
-    this.router.navigateByUrl('/');
+    window.location.href = '/login'; // Chuyển hướng đến "/login" và reload lại trang
   }
 }

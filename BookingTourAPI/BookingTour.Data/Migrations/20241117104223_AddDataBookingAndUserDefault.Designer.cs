@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BookingTour.Data.Migrations
 {
     [DbContext(typeof(BookingTourDbContext))]
-    [Migration("20241116092051_ChangeBase")]
-    partial class ChangeBase
+    [Migration("20241117104223_AddDataBookingAndUserDefault")]
+    partial class AddDataBookingAndUserDefault
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -177,6 +177,15 @@ namespace BookingTour.Data.Migrations
                     b.Property<string>("Notes")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("PersonNumber")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("PickDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<TimeSpan>("StartTime")
+                        .HasColumnType("time");
+
                     b.Property<int>("Status")
                         .HasColumnType("int");
 
@@ -194,6 +203,32 @@ namespace BookingTour.Data.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Bookings");
+
+                    b.HasData(
+                        new
+                        {
+                            BookingId = 1,
+                            BookingDate = new DateTime(2024, 11, 17, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Notes = "Customer requested extra seat",
+                            PersonNumber = 2,
+                            PickDate = new DateTime(2024, 11, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            StartTime = new TimeSpan(0, 9, 0, 0, 0),
+                            Status = 2,
+                            TourId = 1,
+                            UserId = "test-user-id"
+                        },
+                        new
+                        {
+                            BookingId = 2,
+                            BookingDate = new DateTime(2024, 11, 17, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Notes = "No special requests",
+                            PersonNumber = 1,
+                            PickDate = new DateTime(2024, 11, 21, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            StartTime = new TimeSpan(0, 14, 30, 0, 0),
+                            Status = 1,
+                            TourId = 2,
+                            UserId = "test-user-id"
+                        });
                 });
 
             modelBuilder.Entity("BookingTour.Model.Category", b =>
@@ -244,8 +279,8 @@ namespace BookingTour.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("DateStartId"));
 
-                    b.Property<DateTime>("StartDate")
-                        .HasColumnType("datetime2");
+                    b.Property<DateOnly>("StartDate")
+                        .HasColumnType("date");
 
                     b.Property<int>("TourId")
                         .HasColumnType("int");
@@ -258,6 +293,29 @@ namespace BookingTour.Data.Migrations
                     b.HasIndex("TourId");
 
                     b.ToTable("DateStarts");
+
+                    b.HasData(
+                        new
+                        {
+                            DateStartId = 1,
+                            StartDate = new DateOnly(2024, 11, 5),
+                            TourId = 2,
+                            TypeStatus = 4
+                        },
+                        new
+                        {
+                            DateStartId = 2,
+                            StartDate = new DateOnly(2024, 11, 10),
+                            TourId = 2,
+                            TypeStatus = 4
+                        },
+                        new
+                        {
+                            DateStartId = 3,
+                            StartDate = new DateOnly(2024, 11, 15),
+                            TourId = 2,
+                            TypeStatus = 4
+                        });
                 });
 
             modelBuilder.Entity("BookingTour.Model.RefreshToken", b =>
@@ -355,6 +413,10 @@ namespace BookingTour.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Duration")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<bool>("IsFullDay")
                         .HasColumnType("bit");
 
@@ -364,9 +426,8 @@ namespace BookingTour.Data.Migrations
                     b.Property<string>("OtherImage")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("PersonNumber")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("PersonNumber")
+                        .HasColumnType("int");
 
                     b.Property<double>("Price")
                         .HasColumnType("float");
@@ -391,10 +452,11 @@ namespace BookingTour.Data.Migrations
                             CategoryId = 1,
                             City = "Hà Nội",
                             Country = "Việt Nam",
-                            Created = new DateTime(2024, 11, 16, 16, 20, 47, 471, DateTimeKind.Local).AddTicks(5953),
+                            Created = new DateTime(2024, 11, 17, 17, 42, 22, 600, DateTimeKind.Local).AddTicks(8424),
                             Description = "Tour tham quan các danh lam thắng cảnh trong thành phố.",
+                            Duration = "1 ngày 1 đêm",
                             IsFullDay = true,
-                            PersonNumber = "1 đến 30 người",
+                            PersonNumber = 30,
                             Price = 500000.0,
                             Status = true,
                             TourName = "Tham quan thành phố"
@@ -405,10 +467,11 @@ namespace BookingTour.Data.Migrations
                             CategoryId = 2,
                             City = "Đà Lạt",
                             Country = "Việt Nam",
-                            Created = new DateTime(2024, 11, 16, 16, 20, 47, 471, DateTimeKind.Local).AddTicks(5957),
+                            Created = new DateTime(2024, 11, 17, 17, 42, 22, 600, DateTimeKind.Local).AddTicks(8431),
                             Description = "Tour khám phá các khu rừng nguyên sinh.",
+                            Duration = "2 ngày 1 đêm",
                             IsFullDay = false,
-                            PersonNumber = "1 đến 16 người",
+                            PersonNumber = 16,
                             Price = 800000.0,
                             Status = true,
                             TourName = "Khám phá thiên nhiên"
@@ -419,10 +482,11 @@ namespace BookingTour.Data.Migrations
                             CategoryId = 3,
                             City = "Nha Trang",
                             Country = "Việt Nam",
-                            Created = new DateTime(2024, 11, 16, 16, 20, 47, 471, DateTimeKind.Local).AddTicks(5960),
+                            Created = new DateTime(2024, 11, 17, 17, 42, 22, 600, DateTimeKind.Local).AddTicks(8439),
                             Description = "Tour du lịch nghỉ dưỡng tại các bãi biển đẹp.",
+                            Duration = "3 ngày 2 đêm",
                             IsFullDay = false,
-                            PersonNumber = "1 đến 19 người",
+                            PersonNumber = 19,
                             Price = 1200000.0,
                             Status = true,
                             TourName = "Du lịch biển"
@@ -433,10 +497,11 @@ namespace BookingTour.Data.Migrations
                             CategoryId = 1,
                             City = "Hà Nội",
                             Country = "Việt Nam",
-                            Created = new DateTime(2024, 11, 16, 16, 20, 47, 471, DateTimeKind.Local).AddTicks(5962),
+                            Created = new DateTime(2024, 11, 17, 17, 42, 22, 600, DateTimeKind.Local).AddTicks(8446),
                             Description = "Tham quan các bảo tàng nổi tiếng.",
+                            Duration = "1 ngày 1 đêm",
                             IsFullDay = true,
-                            PersonNumber = "1 đến 19 người",
+                            PersonNumber = 19,
                             Price = 300000.0,
                             Status = true,
                             TourName = "Tham quan bảo tàng"
@@ -447,10 +512,11 @@ namespace BookingTour.Data.Migrations
                             CategoryId = 2,
                             City = "Sa Pa",
                             Country = "Việt Nam",
-                            Created = new DateTime(2024, 11, 16, 16, 20, 47, 471, DateTimeKind.Local).AddTicks(5965),
+                            Created = new DateTime(2024, 11, 17, 17, 42, 22, 600, DateTimeKind.Local).AddTicks(8454),
                             Description = "Tour cắm trại qua đêm trong rừng.",
+                            Duration = "2 ngày 2 đêm",
                             IsFullDay = false,
-                            PersonNumber = "1 đến 15 người",
+                            PersonNumber = 15,
                             Price = 950000.0,
                             Status = true,
                             TourName = "Cắm trại rừng"
@@ -461,10 +527,11 @@ namespace BookingTour.Data.Migrations
                             CategoryId = 3,
                             City = "Phú Quốc",
                             Country = "Việt Nam",
-                            Created = new DateTime(2024, 11, 16, 16, 20, 47, 471, DateTimeKind.Local).AddTicks(5968),
+                            Created = new DateTime(2024, 11, 17, 17, 42, 22, 600, DateTimeKind.Local).AddTicks(8462),
                             Description = "Tour nghỉ dưỡng và tham quan vùng biển.",
+                            Duration = "4 ngày 3 đêm",
                             IsFullDay = true,
-                            PersonNumber = "1 đến 26 người",
+                            PersonNumber = 26,
                             Price = 1500000.0,
                             Status = true,
                             TourName = "Kỳ nghỉ biển"
@@ -500,14 +567,14 @@ namespace BookingTour.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "dd90a05f-d51d-4dd6-bac2-475b023437f5",
+                            Id = "c680712d-6753-431e-8efc-a72d664e69ad",
                             ConcurrencyStamp = "1",
                             Name = "Admin",
                             NormalizedName = "Admin"
                         },
                         new
                         {
-                            Id = "e2ae9aeb-9999-412a-9948-9bdd9381c3d3",
+                            Id = "69c96014-a2ce-41cd-8b75-ac9f99a5c090",
                             ConcurrencyStamp = "2",
                             Name = "User",
                             NormalizedName = "User"
@@ -611,6 +678,24 @@ namespace BookingTour.Data.Migrations
                     b.HasDiscriminator().HasValue("IdentityUser");
 
                     b.UseTphMappingStrategy();
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "test-user-id",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "e6f31d07-8ea1-4f74-a932-2c97e7614a0d",
+                            Email = "user@booking.com",
+                            EmailConfirmed = true,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "USER@BOOKING.COM",
+                            NormalizedUserName = "USER@BOOKING.COM",
+                            PasswordHash = "AQAAAAIAAYagAAAAEBOYZCuylh9ilF4dpMnSNFD2tlNIXrvxcaJ0geB85KhDhPeyAYVC6Zwj8UL8cb7WQg==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "5ee1f7fb-4343-4730-b74b-0428cff9ccaa",
+                            TwoFactorEnabled = false,
+                            UserName = "user@booking.com"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
