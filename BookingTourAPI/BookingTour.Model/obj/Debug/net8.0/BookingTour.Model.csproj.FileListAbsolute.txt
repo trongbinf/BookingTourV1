@@ -75,16 +75,3 @@ D:\CSharp\Project\CPL_BookingTour_Clone\BookingTourV1\BookingTourAPI\BookingTour
 D:\CSharp\Project\CPL_BookingTour_Clone\BookingTourV1\BookingTourAPI\BookingTour.Model\obj\Debug\net8.0\refint\BookingTour.Model.dll
 D:\CSharp\Project\CPL_BookingTour_Clone\BookingTourV1\BookingTourAPI\BookingTour.Model\obj\Debug\net8.0\BookingTour.Model.pdb
 D:\CSharp\Project\CPL_BookingTour_Clone\BookingTourV1\BookingTourAPI\BookingTour.Model\obj\Debug\net8.0\ref\BookingTour.Model.dll
-D:\A\Ky6\OJT\5.Project\BookingTourV1\BookingTourAPI\BookingTour.Model\bin\Debug\net8.0\BookingTour.Model.deps.json
-D:\A\Ky6\OJT\5.Project\BookingTourV1\BookingTourAPI\BookingTour.Model\bin\Debug\net8.0\BookingTour.Model.dll
-D:\A\Ky6\OJT\5.Project\BookingTourV1\BookingTourAPI\BookingTour.Model\bin\Debug\net8.0\BookingTour.Model.pdb
-D:\A\Ky6\OJT\5.Project\BookingTourV1\BookingTourAPI\BookingTour.Model\obj\Debug\net8.0\BookingTour.Model.csproj.AssemblyReference.cache
-D:\A\Ky6\OJT\5.Project\BookingTourV1\BookingTourAPI\BookingTour.Model\obj\Debug\net8.0\BookingTour.Model.GeneratedMSBuildEditorConfig.editorconfig
-D:\A\Ky6\OJT\5.Project\BookingTourV1\BookingTourAPI\BookingTour.Model\obj\Debug\net8.0\BookingTour.Model.AssemblyInfoInputs.cache
-D:\A\Ky6\OJT\5.Project\BookingTourV1\BookingTourAPI\BookingTour.Model\obj\Debug\net8.0\BookingTour.Model.AssemblyInfo.cs
-D:\A\Ky6\OJT\5.Project\BookingTourV1\BookingTourAPI\BookingTour.Model\obj\Debug\net8.0\BookingTour.Model.csproj.CoreCompileInputs.cache
-D:\A\Ky6\OJT\5.Project\BookingTourV1\BookingTourAPI\BookingTour.Model\obj\Debug\net8.0\BookingTour.Model.sourcelink.json
-D:\A\Ky6\OJT\5.Project\BookingTourV1\BookingTourAPI\BookingTour.Model\obj\Debug\net8.0\BookingTour.Model.dll
-D:\A\Ky6\OJT\5.Project\BookingTourV1\BookingTourAPI\BookingTour.Model\obj\Debug\net8.0\refint\BookingTour.Model.dll
-D:\A\Ky6\OJT\5.Project\BookingTourV1\BookingTourAPI\BookingTour.Model\obj\Debug\net8.0\BookingTour.Model.pdb
-D:\A\Ky6\OJT\5.Project\BookingTourV1\BookingTourAPI\BookingTour.Model\obj\Debug\net8.0\ref\BookingTour.Model.dll
