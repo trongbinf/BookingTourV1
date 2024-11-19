@@ -9,6 +9,7 @@ import { HomeComponent } from './features/home/home.component';
 import { TourDetailComponent } from './features/tour-detail/tour-detail.component';
 import { ManageUserComponent } from './features/manage/manage-user/manage-user.component';
 import { ProfileComponent } from './features/auth/profile/profile.component';
+import { TourAddComponent } from './features/Tour/tour-add/tour-add.component';
 
 export const routes: Routes = [
     {
@@ -32,6 +33,11 @@ export const routes: Routes = [
     {
         path: 'admin-tour',
         component: TourListComponent
+    }
+    ,
+    {
+        path: 'admin-addtour',
+        component: TourAddComponent
     }
     ,
     {

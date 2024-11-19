@@ -1,18 +1,13 @@
-export interface Tour {
-    tourName: string;
-    description: string;
-    mainImage?: string;
-    otherImage?: string;
-    city: string;
-    country: string;
-    isFullDay: boolean;
-    price: number;
-    vehicleType: string;
-    created?: Date;
-    status: boolean;
-    categoryId: number;
-    dateStarts?: [];
-    activities?: [];
-    bookings?: [];
-    reviews?: [];
+export interface CreateTour {
+  tourName: string;
+  description: string;
+  city: string;
+  country: string;
+  duration: string;
+  price: number;
+  personNumber: number;
+  isFullDay: boolean;
+  status: boolean;
+  categoryId: number;  
 }
+

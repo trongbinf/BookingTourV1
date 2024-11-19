@@ -9,15 +9,13 @@
     </ol>
   </nav>
   <div class="mb-7">
-    <h2>Room Listing</h2>
+    <h2>Tour Listing</h2>
     <div
       data-list='{"valueNames":["name","beds","guest","bathRooms","amenities","totalRooms"],"page":8}'
     >
       <div class="d-md-flex mt-5 mb-4">
-        <button class="btn btn-primary me-4">
-          <span class="fas fa-plus me-2"></span>Create Listing</button
-        ><button class="btn btn-link text-body me-4 px-0">
-          <span class="fa-solid fa-file-export fs-9 me-2"></span>Export
+        <button class="btn btn-primary me-4" [routerLink]="['/admin-addtour']">
+          <span class="fas fa-plus me-2"></span>Create
         </button>
         <div class="d-flex gap-2 ms-md-auto mt-3 mt-md-0">
           <div class="search-box">
@@ -75,7 +73,7 @@
                 data-sort="guest"
                 style="width: 200px"
               >
-                COUNTRY
+                DURATION
               </th>
               <th
                 class="sort text-body-tertiary align-middle px-4"
@@ -99,7 +97,7 @@
                 data-sort="totalRooms"
                 style="width: 180px"
               >
-                TOTAL ROOM
+                PERSON NUMBER
               </th>
               <th
                 class="sort text-body-tertiary text-end align-middle pe-0 ps-4"
@@ -147,7 +145,7 @@
                     >
                     <h6 class="fw-seibold text-body text-nowrap mt-1 mb-2">
                       <span class="fa-solid fa-border-all me-2"></span
-                      >{{ tour.tour.category.name }}
+                      >{{ tour.category.name }}
                     </h6>
                     <h4 class="fw-bolder mb-0">
                       {{ tour.tour.price | currency : "VND" : "symbol-narrow" }}
@@ -155,6 +153,7 @@
                   </div>
                 </div>
               </td>
+
               <td class="align-middle px-4 beds">
                 <div class="d-flex align-items-center">
                   <div
@@ -165,16 +164,12 @@
                       class="fa-solid fa-person-shelter text-primary-darker"
                     ></span>
                   </div>
-                  <h5 class="text-body-emphasis fw-semibold mb-0 me-3">01</h5>
-                  <div
-                    class="d-flex align-items-center justify-content-center bg-success-subtle rounded me-2"
-                    style="height: 24px; width: 24px"
-                  >
-                    <span class="fa-solid fa-bed text-success-darker"></span>
-                  </div>
-                  <h5 class="text-body-emphasis fw-semibold mb-0">02</h5>
+                  <h5 class="text-body-emphasis fw-semibold mb-0 me-3">
+                    {{ tour.tour.city }}, {{ tour.tour.country }}
+                  </h5>
                 </div>
               </td>
+
               <td class="align-middle px-4 guest">
                 <div class="d-flex align-items-center">
                   <div
@@ -183,16 +178,12 @@
                   >
                     <span class="fa-solid fa-user text-warning-darker"></span>
                   </div>
-                  <h5 class="text-body-emphasis fw-semibold mb-0 me-3">02</h5>
-                  <div
-                    class="d-flex align-items-center justify-content-center bg-info-subtle rounded me-2"
-                    style="height: 24px; width: 24px"
-                  >
-                    <span class="fa-solid fa-baby text-info-darker"></span>
-                  </div>
-                  <h5 class="text-body-emphasis fw-semibold mb-0">01</h5>
+                  <h5 class="text-body-emphasis fw-semibold mb-0 me-3">
+                    {{ tour.tour.duration }}
+                  </h5>
                 </div>
               </td>
+
               <td class="align-middle px-4 bathRooms">
                 <div class="d-flex align-items-center">
                   <div
@@ -201,55 +192,26 @@
                   >
                     <span class="fa-solid fa-clock text-danger-darker"></span>
                   </div>
-                  <h5 class="text-body-emphasis fw-semibold mb-0 me-3">12</h5>
+                  <h5 class="text-body-emphasis fw-semibold mb-0 me-3">
+                    {{ tour.tour.created | date : "dd/MM/yyyy hh:mm" }}
+                  </h5>
                 </div>
               </td>
               <td class="align-middle ps-4 amenities">
                 <div class="d-flex flex-wrap gap-2">
                   <span
+                    *ngFor="let activity of tour.activities"
                     class="badge badge-phoenix bg-primary-subtle text-body-highlight py-1 fs-10"
-                    >wifi</span
-                  ><span
-                    class="badge badge-phoenix bg-primary-subtle text-body-highlight py-1 fs-10"
-                    >tv</span
-                  ><span
-                    class="badge badge-phoenix bg-primary-subtle text-body-highlight py-1 fs-10"
-                    >common area</span
-                  ><span
-                    class="badge badge-phoenix bg-primary-subtle text-body-highlight py-1 fs-10"
-                    >bathtub</span
-                  ><span
-                    class="badge badge-phoenix bg-primary-subtle text-body-highlight py-1 fs-10"
-                    >Heating</span
-                  ><span
-                    class="badge badge-phoenix bg-primary-subtle text-body-highlight py-1 fs-10"
-                    >Telephone</span
-                  ><span
-                    class="badge badge-phoenix bg-primary-subtle text-body-highlight py-1 fs-10"
-                    >Television</span
-                  ><span
-                    class="badge badge-phoenix bg-primary-subtle text-body-highlight py-1 fs-10"
-                    >common area</span
-                  ><span
-                    class="badge badge-phoenix bg-primary-subtle text-body-highlight py-1 fs-10"
-                    >Kettle</span
-                  ><span
-                    class="badge badge-phoenix bg-primary-subtle text-body-highlight py-1 fs-10"
-                    >iron</span
-                  ><span
-                    class="badge badge-phoenix bg-primary-subtle text-body-highlight py-1 fs-10"
-                    >Coffee maker</span
-                  ><span
-                    class="badge badge-phoenix bg-primary-subtle text-body-highlight py-1 fs-10"
-                    >refrigerator</span
-                  ><span
-                    class="badge badge-phoenix bg-primary-subtle text-body-highlight py-1 fs-10"
-                    >Room service</span
-                  ><a class="fw-bold fs-9" href="#!">+7 More</a>
+                  >
+                    {{ activity.activityName }}
+                  </span>
                 </div>
               </td>
+
               <td class="align-middle text-end ps-4 totalRooms">
-                <h2 class="text-body-secondary">53</h2>
+                <h4 class="text-body-secondary">
+                  {{ tour.tour.personNumber }} People
+                </h4>
               </td>
               <td class="align-middle ps-4">
                 <div class="btn-reveal-trigger position-static">
@@ -312,24 +274,4 @@
       </div>
     </div>
   </div>
-  <footer class="footer position-absolute">
-    <div class="row g-0 justify-content-between align-items-center h-100">
-      <div class="col-12 col-sm-auto text-center">
-        <p class="mb-0 mt-2 mt-sm-0 text-body">
-          Thank you for creating with Phoenix<span
-            class="d-none d-sm-inline-block"
-          ></span
-          ><span class="d-none d-sm-inline-block mx-1">|</span
-          ><br class="d-sm-none" />2024 &copy;<a
-            class="mx-1"
-            href="https://themewagon.com/"
-            >Themewagon</a
-          >
-        </p>
-      </div>
-      <div class="col-12 col-sm-auto text-center">
-        <p class="mb-0 text-body-tertiary text-opacity-85">v1.19.0</p>
-      </div>
-    </div>
-  </footer>
 </div>

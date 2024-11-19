@@ -6,7 +6,7 @@ namespace BookingTour.Model.ViewModel
 	{
 		public Tour Tour { get; set; }
 
-		public IEnumerable<DateStart> DateStarts { get; set; }
+		public IEnumerable<DateStart> DateStarts { get; set; }	
 		public IEnumerable<Activity> Activities { get; set; }
 		public IEnumerable<Booking> Bookings { get; set; }
 		public IEnumerable<Review> Reviews { get; set; }
