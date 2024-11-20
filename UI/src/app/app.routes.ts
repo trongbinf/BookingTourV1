@@ -7,6 +7,7 @@ import { ChangepasswordComponent } from './features/auth/changepassword/changepa
 import { TourListComponent } from './features/Tour/tour-list/tour-list.component';
 import { HomeComponent } from './features/home/home.component';
 import { TourDetailComponent } from './features/tour-detail/tour-detail.component';
+import { ListTourSearchComponent } from './core/list-tour-search/list-tour-search/list-tour-search.component';
 import { ManageUserComponent } from './features/manage/manage-user/manage-user.component';
 import { ProfileComponent } from './features/auth/profile/profile.component';
 import { TourAddComponent } from './features/Tour/tour-add/tour-add.component';
@@ -48,6 +49,15 @@ export const routes: Routes = [
     {
         path: 'tour-detail/:id',
         component: TourDetailComponent
+    },
+    {
+        path: 'search',
+        component: ListTourSearchComponent
+    }
+    ,
+    {
+        path: 'adminUser',
+        component: ManageUserComponent
     }
     ,
     {

@@ -1,14 +1,9 @@
 ﻿using BookingTour.Data.Data;
 using BookingTour.Model;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+using Microsoft.EntityFrameworkCore;
 namespace BookingTour.Data.Repository.IRepository
 {
-	public class TourRepository : Repository<Tour>, ITour
+    public class TourRepository : Repository<Tour>, ITour
 	{
 		private readonly BookingTourDbContext _db;
 		public TourRepository(BookingTourDbContext db) : base(db)
@@ -51,5 +46,16 @@ namespace BookingTour.Data.Repository.IRepository
 			await _db.SaveChangesAsync();
 		}
 
-	}
+        public async Task<IEnumerable<string>> GetAllCountry()
+        {
+			var list = await _db.Tours.Select(t => t.Country).Distinct().ToListAsync();
+			return list;
+		}
+
+        public async Task<IEnumerable<string>> GetAllCityByCountry(string country)
+        {
+            var list = await _db.Tours.Where(t => (t.Country == country)).Select(t => t.City).Distinct().ToListAsync();
+            return list;
+        }
+    }
 }

@@ -11,6 +11,9 @@ namespace BookingTour.Data.Repository.IRepository
 	public interface ITour : IRepository<Tour>
 	{
 		Task UpdateAsync(Tour tour);
-	
-	}
+		Task<IEnumerable<string>> GetAllCountry();
+        Task<IEnumerable<string>> GetAllCityByCountry(string country);
+
+
+    }
 }

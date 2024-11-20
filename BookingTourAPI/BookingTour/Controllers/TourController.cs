@@ -1,4 +1,5 @@
 ﻿using BookingTour.Business.Service.IService;
+using BookingTour.Data.Repository.IRepository;
 using BookingTour.Model;
 using BookingTour.Model.ViewModel;
 using Microsoft.AspNetCore.Mvc;
@@ -31,7 +32,7 @@ namespace BookingTour.API.Controllers
                 DateStarts = tour.DateStarts,
                 Category = tour.Category,
                 Reviews = tour.Reviews,
-				Activities = tour.Activities,
+                Activities = tour.Activities,
                 Bookings = tour.Bookings
             });
 
@@ -39,46 +40,52 @@ namespace BookingTour.API.Controllers
         }
 
         [HttpGet("categories")]
-        public async Task<ActionResult<IEnumerable<CategoryVm>>> GetCategoriesWithTours()
+        public async Task<ActionResult<List<TourVm>>> GetCategoriesWithTours(string categoryName,
+            int pageIndex = 1, int pageSize = 6)
         {
             // Lấy toàn bộ dữ liệu các tour bao gồm category và các thuộc tính liên quan
+            string normalName = rm.RemoveUnicode(categoryName);
             var tours = await _tourService.GetAllAsync(
+                filter: t => t.Category.Name == categoryName,
                 includeProperties: "Category,DateStarts,Reviews,Activities,Bookings"
-			);
+            );
 
-            // Nhóm các tour theo category và lấy 5 tour mỗi nhóm
-            var groupedCategories = tours
-                .GroupBy(t => t.Category)
-                .Select(g => new CategoryVm
-                {
-                    Category = g.Key,
-                    Tours = g.Take(5).ToList()
-                }).ToList();
+            var tourVm = tours.Where(t => t.Status == true).Select(t => new TourVm
+            {
+                Tour = t,
+                Category = t.Category,
+                Activities = t.Activities,
+                DateStarts = t.DateStarts,
+            }).ToList();
 
-            return Ok(groupedCategories);
+            var response = rm.ToPaginatedList<TourVm>(tourVm, pageIndex, pageSize);
+            return Ok(response);
         }
 
         [HttpGet("categories/{categoryName}")]
-        public async Task<ActionResult<IEnumerable<TourVm>>> GetToursByCategory(string categoryName)
+        public async Task<ActionResult<IEnumerable<TourVm>>> GetToursByCategory(string categoryName,
+            int pageIndex = 1, int pageSize = 6)
         {
             string normalName = rm.RemoveUnicode(categoryName);
             var tours = await _tourService.GetAllAsync(
                 filter: t => t.Category.Name == categoryName,
                 includeProperties: "Category,DateStarts,Reviews,Activities,Bookings"
-			);
+            );
 
             // Lấy tối đa 5 tour theo category đã chọn
-            var tourVms = tours.Take(6).Select(tour => new TourVm
+            var tourVms = tours.Select(tour => new TourVm
             {
                 Tour = tour,
                 DateStarts = tour.DateStarts,
                 Category = tour.Category,
                 Reviews = tour.Reviews,
-				Activities = tour.Activities,
+                Activities = tour.Activities,
                 Bookings = tour.Bookings
             }).ToList();
 
-            return Ok(tourVms);
+            var response = rm.ToPaginatedList<TourVm>(tourVms, pageIndex, pageSize);
+
+            return Ok(response);
         }
 
 
@@ -91,18 +98,25 @@ namespace BookingTour.API.Controllers
             [FromQuery] string? category = null,
             [FromQuery] double? minPrice = null,
             [FromQuery] double? maxPrice = null,
+            [FromQuery] string? dateRange = null,
             [FromQuery] int pageIndex = 1,
-            [FromQuery] int pageSize = 5)
+            [FromQuery] int pageSize = 8)
         {
             var listTour = await _tourService.GetAllAsync(
                 includeProperties: "Category,Reviews,Activities,Bookings,DateStarts");
 
-            listTour = listTour.Where(t => t.Status == true).ToList();
+            listTour = listTour.Where(t => (t.Status == true)).ToList();
             if (!string.IsNullOrEmpty(name))
             {
                 var normalizedName = rm.RemoveUnicode(name);
-                listTour = listTour.Where(t =>rm.RemoveUnicode(t.TourName).Contains(normalizedName, StringComparison.OrdinalIgnoreCase)).ToList();
+                listTour = listTour.Where(t =>
+                    rm.RemoveUnicode(t.TourName).Contains(normalizedName, StringComparison.OrdinalIgnoreCase) ||
+                    rm.RemoveUnicode(t.City).Contains(normalizedName, StringComparison.OrdinalIgnoreCase) ||
+                    rm.RemoveUnicode(t.Country).Contains(normalizedName, StringComparison.OrdinalIgnoreCase) ||
+                    rm.RemoveUnicode(t.Category.Name).Contains(normalizedName, StringComparison.OrdinalIgnoreCase)
+                ).ToList();
             }
+
             if (!string.IsNullOrEmpty(city))
             {
                 var normalizedCity = rm.RemoveUnicode(city);
@@ -127,11 +141,20 @@ namespace BookingTour.API.Controllers
                 listTour = listTour.Where(t => t.Price <= maxPrice.Value).ToList();
             }
 
-            int totalCount = listTour.Count();
+            if (!string.IsNullOrEmpty(dateRange))
+            {
+                var dates = dateRange.Split("to");
+                if (dates.Length == 2 &&
+                    DateOnly.TryParse(dates[0].Trim(), out var dateStart) &&
+                     DateOnly.TryParse(dates[1].Trim(), out var dateEnd))
+                {
+                    listTour.Where(t => t.DateStarts.Any(ds => ds.StartDate >= dateStart
+                    && ds.StartDate <= dateEnd) || t.IsFullDay == true).ToList();
+                }
+            }
+            
 
-            var resultFindding = listTour.Skip((pageIndex - 1) * pageSize).Take(pageSize).ToList();
-
-            var resultOutput = resultFindding.Select(t => new TourVm
+            var resultOutput = listTour.Select(t => new TourVm
             {
                 Tour = t,
                 Bookings = t.Bookings,
@@ -144,11 +167,11 @@ namespace BookingTour.API.Controllers
             }).ToList();
 
 
-            var response = new PaginatedList<TourVm>(resultOutput, totalCount, pageIndex, pageSize);
+            var response = rm.ToPaginatedList<TourVm>(resultOutput, pageIndex, pageSize);
             return Ok(response);
         }
 
-       
+
 
 
         [HttpGet("{id}")]
@@ -166,12 +189,26 @@ namespace BookingTour.API.Controllers
                 Tour = tour,
                 Category = tour.Category,
                 Reviews = tour.Reviews,
-				Activities = tour.Activities,
-				DateStarts  = tour.DateStarts,
-				Bookings = tour.Bookings
+                Activities = tour.Activities,
+                Bookings = tour.Bookings,
+				DateStarts  = tour.DateStarts			
             };
 
             return Ok(tourVm);
+        }
+
+        [HttpGet("get-country")]
+        public async Task<IActionResult> GetCountry()
+        {
+            var list = await _tourService.GetAllCountry();
+            return Ok(list);
+        }
+
+        [HttpGet("get-city/{name}")]
+        public async Task<IActionResult> GetCity(string name)
+        {
+            var list = await _tourService.GetAllCityByCountry(name);
+            return Ok(list);
         }
 
 

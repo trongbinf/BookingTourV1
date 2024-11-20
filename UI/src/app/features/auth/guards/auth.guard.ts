@@ -8,8 +8,8 @@ export const authGuard: CanActivateFn = (route, state) => {
 
   if (authService.isLoginedIn()) {
     const user = authService.getUser();
-    console.log(user?.email + "+" + user?.role)
-    if (user && user.role === 'Admin') {
+    console.log(user?.email + "+" + user?.roles)
+    if (user && user.roles === 'Admin') {
       return true;
     } else {
       // Nếu không phải admin, chuyển hướng về trang không có quyền truy cập

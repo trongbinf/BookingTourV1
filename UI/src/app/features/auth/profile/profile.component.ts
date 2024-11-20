@@ -73,11 +73,11 @@ export class ProfileComponent implements OnInit {
 
   getStatusLabel(status: number): string {
     switch (status) {
-      case 3:
-        return 'Confirmed';
       case 2:
+        return 'Confirmed';
+      case 3:
         return 'Pending';
-      case 1:
+      case 4:
         return 'Canceled';
       default:
         return 'Unknown';

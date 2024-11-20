@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BookingTour.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BookingTour.Business.Service
 {
-    public class HandleTextUnicode
+    public static class HandleTextUnicode
     {
         public static string RemoveUnicode(string input)
         {
@@ -24,6 +25,22 @@ namespace BookingTour.Business.Service
             }
 
             return input;
+        }
+
+        public static PaginatedList<T> ToPaginatedList<T>(List<T> source, int currentPage, int pageSize)
+        {
+            if (currentPage < 1) currentPage = 1;
+            if (pageSize < 1) pageSize = 6;
+
+            Console.WriteLine($"page size in handle: {pageSize}");
+            Console.WriteLine($"current page in handle: {currentPage}");
+            Console.WriteLine($"Source: {source.Count()}");
+
+            var totalCount = source.Count();
+            var items = source.Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
+            Console.WriteLine($"page size in handle: {items.Count()}");
+
+            return new PaginatedList<T>(items, totalCount, currentPage, pageSize);
         }
     }
 }
