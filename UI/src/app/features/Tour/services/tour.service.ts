@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 import { Tour } from '../models/tour.model';
 import { TourVm } from '../models/tourVm.model';
 import { PaginatedResponse } from '../models/paginated.model';
+import { Category } from '../../category/model/category.model';
 
 @Injectable({
   providedIn: 'root'
@@ -31,8 +32,8 @@ export class TourService {
   getTourVmById(id: number): Observable<TourVm> {
     return this.http.get<TourVm>(`${this.apiUrl}/${id}`);
   }
-  createTour(tour: CreateTour): Observable<TourVm> {
-    return this.http.post<TourVm>(`${this.apiUrl}`, tour);
+  createTour(tour: FormData): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}`, tour);
   }
   getCategories(): Observable<any[]> {
     return this.http.get<Category[]>(`${BASE_URL}/Category/all`);

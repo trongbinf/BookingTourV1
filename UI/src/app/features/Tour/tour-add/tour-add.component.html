@@ -8,7 +8,7 @@
       <li class="breadcrumb-item active">Add Tour</li>
     </ol>
   </nav>
-  <form class="mb-9" (ngSubmit)="onSubmit()">
+  <form class="mb-9" (ngSubmit)="onSubmit()" enctype="multipart/form-data">
     <div class="row g-3 flex-between-end mb-5">
       <div class="col-auto">
         <h2 class="mb-2">Add a Tour</h2>
@@ -31,7 +31,7 @@
     </div>
     <div class="row g-5">
       <div class="col-12 col-xl-6">
-        <h4 class="mb-3">Tour Name</h4>
+        <h4 class="mb-3">Tour Name <span class="text-danger">*</span></h4>
         <input
           class="form-control mb-5"
           type="text"
@@ -41,7 +41,9 @@
           required
         />
 
-        <h4 class="mb-3">Tour Description</h4>
+        <h4 class="mb-3">
+          Tour Description <span class="text-danger">*</span>
+        </h4>
         <textarea
           class="form-control mb-5"
           name="description"
@@ -51,7 +53,7 @@
           required
         ></textarea>
 
-        <h4 class="mb-3">City</h4>
+        <h4 class="mb-3">City <span class="text-danger">*</span></h4>
         <input
           class="form-control mb-5"
           type="text"
@@ -61,7 +63,7 @@
           required
         />
 
-        <h4 class="mb-3">Country</h4>
+        <h4 class="mb-3">Country <span class="text-danger">*</span></h4>
         <input
           class="form-control mb-5"
           type="text"
@@ -71,7 +73,7 @@
           required
         />
 
-        <h4 class="mb-3">Duration</h4>
+        <h4 class="mb-3">Duration <span class="text-danger">*</span></h4>
         <input
           class="form-control mb-5"
           type="text"
@@ -81,7 +83,7 @@
           required
         />
 
-        <h4 class="mb-3">Price</h4>
+        <h4 class="mb-3">Price <span class="text-danger">*</span></h4>
         <input
           class="form-control mb-5"
           type="number"
@@ -91,7 +93,9 @@
           required
         />
 
-        <h4 class="mb-3">Number of People</h4>
+        <h4 class="mb-3">
+          Number of People <span class="text-danger">*</span>
+        </h4>
         <input
           class="form-control mb-5"
           type="number"
@@ -102,7 +106,7 @@
         />
 
         <div class="mb-5">
-          <h4 class="mb-3">Tour Full Day</h4>
+          <h4 class="mb-3">Tour Full Day <span class="text-danger">*</span></h4>
           <div class="form-check">
             <input
               class="form-check-input"
@@ -118,7 +122,7 @@
         </div>
 
         <div class="mb-5">
-          <h4 class="mb-3">Tour Status</h4>
+          <h4 class="mb-3">Tour Status <span class="text-danger">*</span></h4>
           <div class="form-check">
             <input
               class="form-check-input"
@@ -134,7 +138,7 @@
         </div>
 
         <div class="mb-5">
-          <h4 class="mb-3">Category</h4>
+          <h4 class="mb-3">Category <span class="text-danger">*</span></h4>
           <select
             class="form-select mb-5"
             [(ngModel)]="tour.categoryId"
@@ -147,7 +151,53 @@
           </select>
         </div>
 
-        <h4 class="mb-3">Display images</h4>
+        <div class="mb-5">
+          <h4 class="mb-3">Date Starts <small class="">(optional)</small></h4>
+          <input
+            class="form-control mb-5"
+            type="date"
+            [(ngModel)]="tour.dateStarts"
+            name="dateStarts"
+          />
+          <small class="text-body-tertiary"
+            >Leave empty if no start dates.</small
+          >
+        </div>
+        <div class="mb-5">
+          <h4 class="mb-3">Activities <small class="">(optional)</small></h4>
+          <textarea
+            class="form-control mb-5"
+            placeholder="Enter activities (comma separated)"
+            [(ngModel)]="tour.activities"
+            name="activities"
+          ></textarea>
+          <small class="text-body-tertiary"
+            >Leave empty if no activities.</small
+          >
+        </div>
+        <div class="mb-5">
+          <h4 class="mb-3">Bookings <small class="">(optional)</small></h4>
+          <textarea
+            class="form-control mb-5"
+            placeholder="Enter bookings (comma separated)"
+            [(ngModel)]="tour.bookings"
+            name="bookings"
+          ></textarea>
+          <small class="text-body-tertiary">Leave empty if no bookings.</small>
+        </div>
+        <div class="mb-5">
+          <h4 class="mb-3">Reviews <small class="">(optional)</small></h4>
+          <textarea
+            class="form-control mb-5"
+            placeholder="Enter reviews (comma separated)"
+            [(ngModel)]="tour.reviews"
+            name="reviews"
+          ></textarea>
+          <small class="text-body-tertiary">Leave empty if no reviews.</small>
+        </div>
+      </div>
+      <div class="col-12 col-xl-6">
+        <h4 class="mb-3">Display images <small class="">(optional)</small></h4>
         <div
           class="dropzone dropzone-multiple p-0 mb-5"
           id="my-awesome-dropzone"
@@ -184,8 +234,6 @@
             </div>
           </div>
         </div>
-      </div>
-      <div class="col-12 col-xl-6">
         <h4 class="mb-3">Tour Images</h4>
         <div
           class="mb-5 border-0 bg-light border rounded-3 text-center"

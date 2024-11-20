@@ -152,7 +152,7 @@ namespace BookingTour.API.Controllers
                     && ds.StartDate <= dateEnd) || t.IsFullDay == true).ToList();
                 }
             }
-            
+
 
             var resultOutput = listTour.Select(t => new TourVm
             {
@@ -191,7 +191,7 @@ namespace BookingTour.API.Controllers
                 Reviews = tour.Reviews,
                 Activities = tour.Activities,
                 Bookings = tour.Bookings,
-				DateStarts  = tour.DateStarts			
+                DateStarts = tour.DateStarts
             };
 
             return Ok(tourVm);
@@ -213,23 +213,114 @@ namespace BookingTour.API.Controllers
 
 
         [HttpPost]
-        public async Task<ActionResult> CreateTour(TourVm tour)
+        [DisableRequestSizeLimit]
+        public async Task<ActionResult> CreateTour(TourAddVm tourAddVm)
         {
-            await _tourService.AddAsync(tour.Tour);
-            return CreatedAtAction(nameof(GetTourById), new { id = tour.Tour.TourId }, tour);
+            if (tourAddVm == null)
+            {
+                return BadRequest("Invalid tour data.");
+            }
+            var newTour = new Tour
+            {
+                TourName = tourAddVm.TourName,
+                Description = tourAddVm.Description,
+                City = tourAddVm.City,
+                Country = tourAddVm.Country,
+                Duration = tourAddVm.Duration,
+                IsFullDay = tourAddVm.IsFullDay,
+                Price = tourAddVm.Price,
+                PersonNumber = tourAddVm.PersonNumber,
+                Status = tourAddVm.Status,
+                CategoryId = tourAddVm.CategoryId,
+
+            };
+            if (tourAddVm.MainImage != null)
+            {
+                newTour.MainImage = await SaveImageAsync(tourAddVm.MainImage);
+            }
+            else
+            {
+                Console.WriteLine("Ko thay anh Main Image");
+            }
+
+            if (tourAddVm.DetailImages != null && tourAddVm.DetailImages.Any())
+            {
+                var imagePaths = new List<string>();
+                foreach (var file in tourAddVm.DetailImages)
+                {
+                    imagePaths.Add(await SaveImageAsync(file));
+                }
+                newTour.OtherImage = string.Join("; ", imagePaths);
+            }
+            else
+            {
+                Console.WriteLine("Ko thay anh Detail Image");
+            }
+
+            await _tourService.AddAsync(newTour);
+            return CreatedAtAction(nameof(GetTourById), new { id = newTour.TourId }, newTour);
+
+
+        }
+
+        // Hàm lưu ảnh Tamnx
+        private async Task<string> SaveImageAsync(IFormFile file)
+        {
+            var uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "images");
+
+            if (!Directory.Exists(uploadsFolder))
+            {
+                Directory.CreateDirectory(uploadsFolder);
+            }
+
+            var filePath = Path.Combine(uploadsFolder, file.FileName);
+
+            using (var stream = new FileStream(filePath, FileMode.Create))
+            {
+                await file.CopyToAsync(stream);
+            }
+
+            Console.WriteLine($"File đã được lưu tại: {filePath}");
+
+            return filePath;
         }
 
 
-        [HttpPut("{id}")]
-        public async Task<ActionResult> UpdateTour(int id, TourVm tour)
-        {
-            if (id != tour.Tour.TourId)
-            {
-                return BadRequest("Tour ID mismatch");
-            }
 
-            await _tourService.UpdateAsync(tour.Tour);
-            return NoContent();
+        [HttpPut("{id}")]
+        public async Task<ActionResult> UpdateTour(int id, TourAddVm tourAddVm)
+        {
+            if (tourAddVm.TourId != id)
+                return BadRequest("TourId in request body does not match the route.");
+            var existingTour = await _tourService.GetByIdAsync(id);
+            if (existingTour == null)
+                return NotFound("Tour not found.");
+            existingTour.TourName = tourAddVm.TourName;
+            existingTour.Description = tourAddVm.Description;
+            existingTour.City = tourAddVm.City;
+            existingTour.Country = tourAddVm.Country;
+            existingTour.Duration = tourAddVm.Duration;
+            existingTour.IsFullDay = tourAddVm.IsFullDay;
+            existingTour.Price = tourAddVm.Price;
+            existingTour.PersonNumber = tourAddVm.PersonNumber;
+            existingTour.Status = tourAddVm.Status;
+            existingTour.CategoryId = tourAddVm.CategoryId;
+            if (tourAddVm.MainImage != null)
+            {
+                existingTour.MainImage = await SaveImageAsync(tourAddVm.MainImage);
+            }
+            if (tourAddVm.DetailImages != null && tourAddVm.DetailImages.Any())
+            {
+                var imagePaths = new List<string>();
+                foreach (var file in tourAddVm.DetailImages)
+                {
+                    imagePaths.Add(await SaveImageAsync(file));
+                }
+                existingTour.OtherImage = string.Join("; ", imagePaths);
+            }
+            await _tourService.UpdateAsync(existingTour);
+
+            return Ok(new { message = "Tour updated successfully", tourId = existingTour.TourId });
         }
 
 

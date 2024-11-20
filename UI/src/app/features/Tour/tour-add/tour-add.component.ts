@@ -5,7 +5,6 @@ import { CreateTour } from '../models/create-tour.model';
 import { FormsModule } from '@angular/forms';
 import { Category } from '../../category/model/category.model';
 import { CommonModule } from '@angular/common';
-
 @Component({
   selector: 'app-tour-add',
   standalone: true,
@@ -24,11 +23,19 @@ export class TourAddComponent {
     personNumber: 0,
     isFullDay: false,
     status: true,
-    categoryId: 1
+    categoryId: 1,
+    dateStarts: null,
+    activities: null,
+    bookings: null,
+    reviews: null,
+    mainImage: null,
+    detailImages: null,
   };
   catelist: Category[]= [];
   imagesPreview: string[] = [];
+
   constructor(private tourService: TourService, private router: Router) {}
+
   ngOnInit(): void{
     this.tourService.getCategories().subscribe({
       next: (data) => {
@@ -41,18 +48,46 @@ export class TourAddComponent {
       }
     });
   }
+
   onSubmit() {
-    this.tourService.createTour(this.tour).subscribe({
-      next: (response) => {
-        alert('Tour added successfully!');
-        this.router.navigate(['/admin-tour']);  
-      },
-      error: (err) => {
-        console.error('Error adding tour:', err);
-        alert('Failed to add tour.');
-      }
-    });
+    if (!this.tour.tourName || !this.tour.city || !this.tour.country || !this.tour.duration || !this.tour.description) {
+    alert('Please fill in all required fields.');
+    return;
   }
+  const formData = new FormData();
+
+  formData.append('TourName', this.tour.tourName);
+  formData.append('Description', this.tour.description);
+  formData.append('City', this.tour.city);
+  formData.append('Country', this.tour.country);
+  formData.append('Duration', this.tour.duration);
+  formData.append('IsFullDay', this.tour.isFullDay.toString());
+  formData.append('Price', this.tour.price.toString());
+  formData.append('PersonNumber', this.tour.personNumber.toString());
+  formData.append('Status', this.tour.status.toString());
+  formData.append('CategoryId', this.tour.categoryId.toString());
+  
+  if (this.tour.mainImage) {
+    formData.append('MainImage', this.tour.mainImage, this.tour.mainImage.name);
+  }
+  
+  if (this.tour.detailImages) {
+    for (let file of this.tour.detailImages) {
+      formData.append('DetailImages', file, file.name);
+    }
+  }
+    this.tourService.createTour(formData).subscribe({
+    next: (response) => {
+      alert('Tour added successfully!');
+      this.router.navigate(['/admin-tour']);  
+    },
+    error: (err) => {
+      console.error('Error adding tour:', err);
+      alert('Failed to add tour.');
+    }
+  });
+  }
+
   discardChanges() {
     this.tour = { 
       tourName: '', 
@@ -84,7 +119,7 @@ export class TourAddComponent {
   }
 
   onDragOver(event: any) {
-    event.preventDefault();  // Cho phép drop
+    event.preventDefault();  
   }
 
   createImagePreview(file: File) {
