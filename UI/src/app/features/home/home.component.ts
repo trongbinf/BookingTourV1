@@ -1,4 +1,4 @@
-import { Component, model, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewInit, Component, model, OnDestroy, OnInit } from '@angular/core';
 import { Category } from '../category/model/category.model';
 import { Tour } from '../Tour/models/tour.model';
 import { TourService } from '../Tour/services/tour.service';
@@ -9,7 +9,7 @@ import { Subject, takeUntil } from 'rxjs';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { PaginatedResponse } from '../Tour/models/paginated.model';
-import flatpickr from 'flatpickr'
+import flatpickr from 'flatpickr';
 
 @Component({
   selector: 'app-home',
@@ -22,6 +22,7 @@ import flatpickr from 'flatpickr'
 export class HomeComponent implements OnInit, OnDestroy {
   categories: CategoryTours[] = [];
   tours?: PaginatedResponse<Tour>;
+  toursRandom: Tour[] = [];
   name: string = '';
   pageSize: number = 6;
   pageIndex: number = 1;
@@ -36,8 +37,8 @@ export class HomeComponent implements OnInit, OnDestroy {
   constructor(private tourService: TourService, private cateService: CategoryService,
     private router: Router
   ) {
-
   }
+
   ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.complete();
@@ -56,7 +57,15 @@ export class HomeComponent implements OnInit, OnDestroy {
       minDate: this.today,
       dateFormat: 'd-m-Y'
     });
-
+    this.tourService.tourRandom().pipe(takeUntil(this.destroy$)).subscribe({
+      next: response => {
+        console.log(response);
+        this.toursRandom = response;
+      },
+      error: err => {
+        console.log(err);
+      }
+    })
   }
 
   loadCategories() {
@@ -71,7 +80,6 @@ export class HomeComponent implements OnInit, OnDestroy {
 
       }
     });
-
   }
 
   loadToursByCategory(nameTour: string) {
@@ -92,10 +100,6 @@ export class HomeComponent implements OnInit, OnDestroy {
   showMore(name: string) {
     this.router.navigate(['/search'], {
       queryParams: { category: name }
-    }).then(() => {
-      // This will reload the page after navigating
-      window.location.reload();
-    });
+    })
   }
-
 }

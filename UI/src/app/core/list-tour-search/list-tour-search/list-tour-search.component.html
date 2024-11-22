@@ -29,8 +29,8 @@
 
                 </div>
                 <div class="col-12 col-md-auto">
-                    <button [disabled]="!searchForm.valid" type="submit"
-                        class="btn btn-lg btn-phoenix-primary rounded-pill w-100">
+                    <button [disabled]="!searchForm.valid || !searchParams.name || !searchParams.dateRange"
+                        type="submit" class="btn btn-lg btn-phoenix-primary rounded-pill w-100">
                         <span class="fa-solid fa-search me-2"></span>Search
                     </button>
                 </div>
@@ -45,13 +45,27 @@
     <div class="container-medium">
         <div class="py-6">
             <div class="d-flex">
-                <select class="form-select w-sm-auto me-4" id="category" name="category" [(ngModel)]="category"
-                    (change)=" onCategoryChange($event)">
+                <select class="form-select w-sm-auto me-4" id="category" name="category"
+                    [(ngModel)]="searchParams.category" (change)=" onCategoryChange($event)">
                     <option [value]="''">Select Category</option>
                     <option [value]="''">All Tour</option>
                     <option *ngFor="let item of categories" [value]="item.name">
                         {{item.name}}</option>
                 </select>
+                <!-- List Item -->
+                <!-- <div class="me-4">
+                    <div class="list-group d-flex flex-row flex-wrap">
+                        <span
+                            class="list-group-item d-flex justify-content-between align-items-center flex-grow-1 me-2 mb-2">
+                            <span>Hello</span>
+                            <p class="m-0 justify-content-center ps-2 mb-1"><button
+                                    class="btn btn- btn-close p-0"></button>
+                            </p>
+                        </span>
+                    </div>
+                </div> -->
+
+
                 <button class="btn btn-phoenix-secondary text-nowrap px-3 px-md-4 ms-auto me-2"><span
                         class="fa-solid fa-map me-md-2"></span><span class="d-none d-md-inline-block">Show in
                         map </span></button><button class="btn btn-phoenix-secondary text-nowrap px-3" type="button"
@@ -100,10 +114,10 @@
                     </button>
                 </li>
                 <!-- Page Numbers -->
-                <li class="page-item" *ngFor="let page of [].constructor(tours?.totalPages); let i = index "
-                    [class.active]="i + 1 === tours?.currentPage">
-                    <button class="page-link" (click)="goToPage(i + 1)">
-                        {{ i + 1 }}
+                <li class="page-item" *ngFor="let page of getVisiablePage(); let i = index "
+                    [class.active]="page === tours?.currentPage">
+                    <button class="page-link" (click)="goToPage(page)">
+                        {{ page }}
                     </button>
                 </li>
                 <!-- Next Page -->
@@ -128,138 +142,160 @@
 <div class="offcanvas offcanvas-end" tabindex="-1" id="hotelFilterOffcanvas"
     aria-labelledby="hotelFilterOffcanvasLabel">
     <div class="offcanvas-header p-4 bg-body-highlight">
-        <h5 class="mb-0 text-body-highlight" id="hotelFilterOffcanvasLabel">Filter</h5><button class="btn btn-close"
-            data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        <h5 class="mb-0 text-body-highlight" id="hotelFilterOffcanvasLabel">Filter</h5>
+        <button class="btn btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
-    <div class="offcanvas-body scrollbar p-4">
-        <h4 class="text-body-highlight mb-4">Price Range</h4>
-        <div class="row g-2">
-            <div class="col-6">
-                <div class="form-icon-container"><input class="form-control form-icon-input" type="text"
-                        placeholder="Minimum amount: $245" /><span
-                        class="fa-solid fa-dollar-sign form-icon text-body-tertiary fs-9"></span></div>
-            </div>
-            <div class="col-6">
-                <div class="form-icon-container"><input class="form-control form-icon-input" type="text"
-                        placeholder="Maximum amount: $245" /><span
-                        class="fa-solid fa-dollar-sign form-icon text-body-tertiary fs-9"></span></div>
-            </div>
-        </div>
-        <div class="noUi-primary-lighter noUi-slider-large noUi-handle-primary noUi-handle-circle ps-5 pe-3 mt-3"
-            data-nouislider='{"range":{"min":0,"max":250},"start":[20,150],"connect":true}'></div>
-        <hr class="my-5" />
-        <!--Duration-->
 
-        <h4 class="mb-4 text-body-highlight">Duration</h4>
-        <div class="row g-3">
-            <div class="col-6">
-                <div class="form-check"><input class="form-check-input" id="durationLess6" type="checkbox"
-                        value="durationLess6" /><label class="form-check-label fs-8 text-body-highlight fw-normal"
-                        for="durationLess6">1 Day</label>
+    <form (ngSubmit)="searchNow()" class="d-flex flex-column h-100">
+        <div class="offcanvas-body scrollbar p-4 overflow-auto">
+            <!-- Price Range -->
+            <h4 class="text-body-highlight mb-4">Price Range</h4>
+            <div class="row g-2">
+                <div class="col-6">
+                    <div class="form-icon-container">
+                        <input
+                            [value]="minPrice?.toLocaleString('vi-VN', { style: 'decimal', minimumFractionDigits: 0 })"
+                            class="form-control form-icon-input" type="text" placeholder="Minimum amount" readonly
+                            id="minPrice" name="minPrice" />
+                        <span class="fa-solid fa-dollar-sign form-icon text-body-tertiary fs-9"></span>
+                    </div>
                 </div>
-                <div class="form-check mb-0"><input class="form-check-input" id="duration12to24" type="checkbox"
-                        value="duration12to24" /><label class="form-check-label fs-8 text-body-highlight fw-normal"
-                        for="duration12to24">2-3 days</label>
+                <div class="col-6">
+                    <div class="form-icon-container">
+                        <input [value]="maxPrice?.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })"
+                            class="form-control form-icon-input" type="text" placeholder="Maximum amount" readonly
+                            id="maxPrice" name="maxPrice" />
+                        <span class="fa-solid fa-dollar-sign form-icon text-body-tertiary fs-9"></span>
+                    </div>
                 </div>
             </div>
-            <div class="col-6">
-                <div class="form-check"><input class="form-check-input" id="duration6to12" type="checkbox"
-                        value="duration6to12" /><label class="form-check-label fs-8 text-body-highlight fw-normal"
-                        for="duration6to12"> 6-7 days</label>
+            <div class="noUi-primary-lighter noUi-slider-large noUi-handle-primary noUi-handle-circle ps-5 pe-3 mt-3"
+                #slider></div>
+            <hr class="my-5" />
+            <!-- Duration -->
+            <h4 class="mb-4 text-body-highlight">Duration</h4>
+            <div class="row g-3">
+                <!-- Checkbox options here -->
+                <div class="col-6">
+                    <div class="form-check">
+                        <input class="form-check-input" id="durationLess6" type="checkbox" value="1 Ngày"
+                            name="duration" [ngModel]="duration.includes('1 Ngày')"
+                            (ngModelChange)="onDurationChange('1 Ngày')" />
+                        <label class="form-check-label fs-8 text-body-highlight fw-normal" for="durationLess6">1
+                            Ngày</label>
+                    </div>
+                    <div class="form-check mb-0">
+                        <input class="form-check-input" id="duration12to24" type="checkbox" value="3 Ngày"
+                            [ngModel]="duration.includes('3 Ngày')" (ngModelChange)="onDurationChange('3 Ngày')"
+                            name="duration" />
+                        <label class="form-check-label fs-8 text-body-highlight fw-normal" for="duration12to24">3
+                            Ngày</label>
+                    </div>
                 </div>
-                <div class="form-check mb-0"><input class="form-check-input" id="duration24plus" type="checkbox"
-                        value="duration24plus" /><label class="form-check-label fs-8 text-body-highlight fw-normal"
-                        for="duration24plus">More 7 days</label>
+                <div class="col-6">
+                    <div class="form-check">
+                        <input class="form-check-input" id="duration6to12" type="checkbox" value="5 Ngày"
+                            [ngModel]="duration.includes('5 Ngày')" (ngModelChange)="onDurationChange('5 Ngày')"
+                            name="duration" />
+                        <label class="form-check-label fs-8 text-body-highlight fw-normal" for="duration6to12">5
+                            Ngày</label>
+                    </div>
+                    <div class="form-check mb-0">
+                        <input class="form-check-input" id="duration24plus" type="checkbox" value="7 Ngày"
+                            [ngModel]="duration.includes('7 Ngày')" (ngModelChange)="onDurationChange('7 Ngày')"
+                            name="duration" />
+                        <label class="form-check-label fs-8 text-body-highlight fw-normal" for="duration24plus">7
+                            Ngày</label>
+                    </div>
+                </div>
+            </div>
+
+
+            <hr class="my-5" />
+            <!-- Activity -->
+            <h4 class="mb-4 text-body-highlight">Activity</h4>
+            <div class="row g-3">
+                <!-- Checkbox options here -->
+                <div class="col-6">
+                    <div class="form-check">
+                        <input class="form-check-input" name="activities" id="wifi" type="checkbox"
+                            [ngModel]="activities.includes('Tìm hiểu')" (ngModelChange)="onActivityChange('Tìm hiểu')"
+                            value="Tìm hiểu" />
+                        <label class="form-check-label fs-8 text-body-highlight fw-normal" for="wifi">Tìm hiểu</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" name="activities" id="kitchen" type="checkbox"
+                            [ngModel]="activities.includes('Cắm trại')" (ngModelChange)="onActivityChange('Cắm trại')"
+                            value="Cắm trại" />
+                        <label class="form-check-label fs-8 text-body-highlight fw-normal" for="kitchen">Cắm
+                            trại</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" name="activities" id="air-conditioning" type="checkbox"
+                            [ngModel]="activities.includes('Tham quan')" (ngModelChange)="onActivityChange('Tham quan')"
+                            value="Tham quan" />
+                        <label class="form-check-label fs-8 text-body-highlight fw-normal" for="air-conditioning">Tham
+                            quan</label>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="form-check">
+                        <input class="form-check-input" name="activities" id="washer" type="checkbox"
+                            [ngModel]="activities.includes('biển')" (ngModelChange)="onActivityChange('biển')"
+                            value="biển" />
+                        <label class="form-check-label fs-8 text-body-highlight fw-normal" for="washer">Biển</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" name="activities" id="dryer" type="checkbox"
+                            [ngModel]="activities.includes('Trekking')" (ngModelChange)="onActivityChange('Trekking')"
+                            value="Trekking" />
+                        <label class="form-check-label fs-8 text-body-highlight fw-normal" for="dryer">Trekking</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" name="activities" id="heating" type="checkbox"
+                            [ngModel]="activities.includes('Khám phá')" (ngModelChange)="onActivityChange('Khám phá')"
+                            value="Khám phá" />
+                        <label class="form-check-label fs-8 text-body-highlight fw-normal" for="heating">Khám
+                            phá</label>
+                    </div>
+                </div>
+            </div>
+
+            <hr class="my-5" />
+            <!-- Location -->
+            <h4 class="mb-4 text-body-highlight">Location</h4>
+            <div class="row g-3">
+                <!-- Location-related dropdowns here -->
+                <div class="d-flex">
+                    <div class="me-2 ">
+                        <label class="form-check-label fs-8 text-body-highlight fw-normal" for="country">Country</label>
+                        <select class="form-select w-full me-4 f" id="country" name="country"
+                            [(ngModel)]="selectedCountry" (change)="onCountryChange($event)">
+                            <option value="'">Selected Country</option>
+                            <option *ngFor="let item of country" [value]="item">{{item}}</option>
+                        </select>
+                    </div>
+                    <div class="">
+                        <label for="city">City</label>
+                        <select [(ngModel)]="selectedCity" class="form-select w-full me-4" id="city" name="city">
+                            <option>Select City</option>
+                            <option *ngFor="let city of city" [value]="city">{{city}}</option>
+                        </select>
+                    </div>
                 </div>
             </div>
         </div>
-        <hr class="my-5" />
-        <!--Tien ich-->
-        <h4 class="mb-4 text-body-highlight">Amenities</h4>
-        <p class="text-body-tertiary">Essentials</p>
-        <div class="row g-3">
-            <div class="col-6">
-                <div class="form-check"><input class="form-check-input" id="wifi" type="checkbox" value="wifi" /><label
-                        class="form-check-label fs-8 text-body-highlight fw-normal" for="wifi">Wifi</label></div>
-                <div class="form-check"><input class="form-check-input" id="kitchen" type="checkbox"
-                        value="kitchen" /><label class="form-check-label fs-8 text-body-highlight fw-normal"
-                        for="kitchen">Kitchen</label></div>
-                <div class="form-check"><input class="form-check-input" id="air-conditioning" type="checkbox"
-                        value="air-conditioning" /><label class="form-check-label fs-8 text-body-highlight fw-normal"
-                        for="air-conditioning">Air conditioning</label></div>
-            </div>
-            <div class="col-6">
-                <div class="form-check"><input class="form-check-input" id="washer" type="checkbox"
-                        value="washer" /><label class="form-check-label fs-8 text-body-highlight fw-normal"
-                        for="washer">Washer</label></div>
-                <div class="form-check"><input class="form-check-input" id="dryer" type="checkbox"
-                        value="dryer" /><label class="form-check-label fs-8 text-body-highlight fw-normal"
-                        for="dryer">Dryer</label></div>
-                <div class="form-check"><input class="form-check-input" id="heating" type="checkbox"
-                        value="heating" /><label class="form-check-label fs-8 text-body-highlight fw-normal"
-                        for="heating">Heating</label></div>
-            </div>
+        <div class="p-4 border-top border-translucent d-flex gap-2">
+            <button type="reset" class="btn btn-lg btn-phoenix-primary">Reset</button>
+            <button type="submit" class="btn btn-lg btn-primary flex-1">Search</button>
         </div>
-        <!--Location-->
-        <hr class="my-5" />
-        <h4 class="mb-4 text-body-highlight">Location</h4>
-        <div class="row g-3">
-            <div class="d-flex">
-                <div class="me-2">
-                    <label class="form-check-label fs-8 text-body-highlight fw-normal" for="country">Country</label>
-                    <select class="form-select w-full me-4 f" id="country" name="country" [(ngModel)]="selectedCountry"
-                        (change)="onCountryChange($event)">
-                        <option value="'">Selected Country</option>
-                        <option *ngFor="let item of country" [value]="item">{{item}}</option>
-                    </select>
-                </div>
-                <div>
-                    <label for="city">City</label>
-                    <select [(ngModel)]="selectedCity" class="form-select w-full me-4" id="city" name="city">
-                        <option>Select City</option>
-                        <option *ngFor="let city of city" [value]="city">{{city}}</option>
-                    </select>
-                </div>
-            </div>
+        <div class="p-4 border-top border-translucent d-flex gap-2">
+
         </div>
-        <hr class="my-5" />
-        <h4 class="mb-4">Rating</h4><input class="rating-radio btn-check" type="radio" name="ratingOption" id="option1"
-            autocomplete="off" checked="checked" /><label class="btn w-100 d-flex align-items-center gap-1 mb-2"
-            for="option1"><span class="fa-solid fa-star text-warning"></span><span
-                class="fa-solid fa-star text-warning"></span><span class="fa-solid fa-star text-warning"></span><span
-                class="fa-solid fa-star text-warning"></span><span class="fa-solid fa-star text-warning"></span><span
-                class="fa-solid fa-check ms-auto text-primary check-icon"></span></label><input
-            class="rating-radio btn-check" type="radio" name="ratingOption" id="option2" autocomplete="off" /><label
-            class="btn w-100 d-flex align-items-center gap-1 mb-2" for="option2"><span
-                class="fa-solid fa-star text-warning"></span><span class="fa-solid fa-star text-warning"></span><span
-                class="fa-solid fa-star text-warning"></span><span class="fa-solid fa-star text-warning"></span><span
-                class="fa-regular fa-star text-warning"></span><span class="text-body ms-1 fs-8 fw-normal">and
-                above</span><span class="fa-solid fa-check ms-auto text-primary check-icon"></span></label><input
-            class="rating-radio btn-check" type="radio" name="ratingOption" id="option3" autocomplete="off" /><label
-            class="btn w-100 d-flex align-items-center gap-1 mb-2" for="option3"><span
-                class="fa-solid fa-star text-warning"></span><span class="fa-solid fa-star text-warning"></span><span
-                class="fa-solid fa-star text-warning"></span><span class="fa-regular fa-star text-warning"></span><span
-                class="fa-regular fa-star text-warning"></span><span class="text-body ms-1 fs-8 fw-normal">and
-                above</span><span class="fa-solid fa-check ms-auto text-primary check-icon"></span></label><input
-            class="rating-radio btn-check" type="radio" name="ratingOption" id="option4" autocomplete="off" /><label
-            class="btn w-100 d-flex align-items-center gap-1 mb-2" for="option4"><span
-                class="fa-solid fa-star text-warning"></span><span class="fa-solid fa-star text-warning"></span><span
-                class="fa-regular fa-star text-warning"></span><span
-                class="fa-regular fa-star text-warning"></span><span
-                class="fa-regular fa-star text-warning"></span><span class="text-body ms-1 fs-8 fw-normal">and
-                above</span><span class="fa-solid fa-check ms-auto text-primary check-icon"></span></label><input
-            class="rating-radio btn-check" type="radio" name="ratingOption" id="option5" autocomplete="off" /><label
-            class="btn w-100 d-flex align-items-center gap-1" for="option5"><span
-                class="fa-solid fa-star text-warning"></span><span class="fa-regular fa-star text-warning"></span><span
-                class="fa-regular fa-star text-warning"></span><span
-                class="fa-regular fa-star text-warning"></span><span
-                class="fa-regular fa-star text-warning"></span><span class="text-body ms-1 fs-8 fw-normal">and
-                above</span><span class="fa-solid fa-check ms-auto text-primary check-icon"></span></label>
-    </div>
-    <div class="p-4 border-top border-translucent d-flex gap-2"><button
-            class="btn btn-lg btn-phoenix-primary">Reset</button><button class="btn btn-lg btn-primary flex-1">Show 445
-            items</button></div>
+    </form>
 </div>
+
+
 
 <!-- ===============================================-->
 <!--    End of Main Content-->

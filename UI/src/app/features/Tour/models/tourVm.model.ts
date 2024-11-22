@@ -15,6 +15,6 @@ export interface TourVm {
     bookings: Booking[];
     reviews: Review[];
     category: Category;
-    mainImage?: string;
-    detailImages?: string[];
+    mainImage: string;
+    detailImages: string[];
 }

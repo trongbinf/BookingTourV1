@@ -57,5 +57,7 @@ namespace BookingTour.Data.Repository.IRepository
             var list = await _db.Tours.Where(t => (t.Country == country)).Select(t => t.City).Distinct().ToListAsync();
             return list;
         }
+
+       
     }
 }

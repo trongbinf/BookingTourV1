@@ -66,8 +66,10 @@ namespace BookingTour.Business.Service
 
 		public async Task UpdateAsync(Tour entity)
 		{
-			_unitOfWork.Tour.UpdateAsync(entity); 
+			await _unitOfWork.Tour.UpdateAsync(entity); 
 			await _unitOfWork.SaveAsync(); 
 		}
-	}
+
+        
+    }
 }
