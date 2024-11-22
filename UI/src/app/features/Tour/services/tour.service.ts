@@ -35,6 +35,12 @@ export class TourService {
   createTour(tour: FormData): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}`, tour);
   }
+  updateTour(tourId: number, tour: FormData) :Observable<any>{
+    return this.http.put<any>(`${this.apiUrl}/${tourId}`, tour);
+  }
+  deleteTour(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
+  }
   getCategories(): Observable<any[]> {
     return this.http.get<Category[]>(`${BASE_URL}/Category/all`);
   }

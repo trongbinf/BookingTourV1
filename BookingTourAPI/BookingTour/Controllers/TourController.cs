@@ -238,10 +238,6 @@ namespace BookingTour.API.Controllers
             {
                 newTour.MainImage = await SaveImageAsync(tourAddVm.MainImage);
             }
-            else
-            {
-                Console.WriteLine("Ko thay anh Main Image");
-            }
 
             if (tourAddVm.DetailImages != null && tourAddVm.DetailImages.Any())
             {
@@ -251,10 +247,6 @@ namespace BookingTour.API.Controllers
                     imagePaths.Add(await SaveImageAsync(file));
                 }
                 newTour.OtherImage = string.Join("; ", imagePaths);
-            }
-            else
-            {
-                Console.WriteLine("Ko thay anh Detail Image");
             }
 
             await _tourService.AddAsync(newTour);
@@ -288,8 +280,11 @@ namespace BookingTour.API.Controllers
 
 
         [HttpPut("{id}")]
+        [DisableRequestSizeLimit]
         public async Task<ActionResult> UpdateTour(int id, TourAddVm tourAddVm)
         {
+            if (tourAddVm == null)
+                return BadRequest("Invalid tour data.");
             if (tourAddVm.TourId != id)
                 return BadRequest("TourId in request body does not match the route.");
             var existingTour = await _tourService.GetByIdAsync(id);
@@ -320,7 +315,7 @@ namespace BookingTour.API.Controllers
             }
             await _tourService.UpdateAsync(existingTour);
 
-            return Ok(new { message = "Tour updated successfully", tourId = existingTour.TourId });
+            return Ok(new { message = "Tour updated successfully", updatedTour = existingTour });
         }
 
 
@@ -333,7 +328,9 @@ namespace BookingTour.API.Controllers
                 return NotFound();
             }
 
-            await _tourService.DeleteAsync(id);
+            existingTour.Status = !existingTour.Status;
+
+            await _tourService.UpdateAsync(existingTour);
             return NoContent();
         }
     }

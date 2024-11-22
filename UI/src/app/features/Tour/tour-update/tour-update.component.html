@@ -1,1 +1,268 @@
-<p>tour-update works!</p>
+<div class="content">
+  <nav class="mb-3" aria-label="breadcrumb">
+    <ol class="breadcrumb mb-0">
+      <li class="breadcrumb-item"><a href="#!">Dashboard</a></li>
+      <li class="breadcrumb-item">
+        <a href="/admin-tour">List Tour</a>
+      </li>
+      <li class="breadcrumb-item active">Update Tour</li>
+    </ol>
+  </nav>
+  <form class="mb-9" (ngSubmit)="onUpdate()" enctype="multipart/form-data">
+    <div class="row g-3 flex-between-end mb-5">
+      <div class="col-auto">
+        <h2 class="mb-2">Update Tour</h2>
+        <h5 class="text-body-tertiary fw-semibold">Modify your tour details</h5>
+      </div>
+      <div class="col-auto">
+        <button
+          class="btn btn-phoenix-secondary me-2 mb-2 mb-sm-0"
+          type="button"
+          (click)="discardChanges()"
+        >
+          Clear form
+        </button>
+        <button class="btn btn-primary mb-2 mb-sm-0" type="submit">
+          Update This Tour
+        </button>
+      </div>
+    </div>
+    <div class="row g-5">
+      <div class="col-12 col-xl-6">
+        <h4 class="mb-3">
+          Tour Id: <span class="text-danger">{{ tour.tour.tourId }}</span>
+        </h4>
+        <h4 class="mb-3">Tour Name <span class="text-danger">*</span></h4>
+        <input
+          class="form-control mb-5"
+          type="text"
+          placeholder="Write title here..."
+          [(ngModel)]="tour.tour.tourName"
+          name="tourName"
+          required
+        />
+
+        <h4 class="mb-3">
+          Tour Description <span class="text-danger">*</span>
+        </h4>
+        <textarea
+          class="form-control mb-5"
+          name="description"
+          placeholder="Write a long description here..."
+          [(ngModel)]="tour.tour.description"
+          required
+        ></textarea>
+
+        <h4 class="mb-3">City <span class="text-danger">*</span></h4>
+        <input
+          class="form-control mb-5"
+          type="text"
+          placeholder="Enter city..."
+          [(ngModel)]="tour.tour.city"
+          name="city"
+          required
+        />
+
+        <h4 class="mb-3">Country <span class="text-danger">*</span></h4>
+        <input
+          class="form-control mb-5"
+          type="text"
+          placeholder="Enter country..."
+          [(ngModel)]="tour.tour.country"
+          name="country"
+          required
+        />
+
+        <h4 class="mb-3">Duration <span class="text-danger">*</span></h4>
+        <input
+          class="form-control mb-5"
+          type="text"
+          placeholder="Enter duration..."
+          [(ngModel)]="tour.tour.duration"
+          name="duration"
+          required
+        />
+
+        <h4 class="mb-3">Price <span class="text-danger">*</span></h4>
+        <input
+          class="form-control mb-5"
+          type="number"
+          placeholder="Enter price"
+          [(ngModel)]="tour.tour.price"
+          name="price"
+          required
+        />
+
+        <h4 class="mb-3">
+          Number of People <span class="text-danger">*</span>
+        </h4>
+        <input
+          class="form-control mb-5"
+          type="number"
+          placeholder="Enter number of people"
+          [(ngModel)]="tour.tour.personNumber"
+          name="personNumber"
+          required
+        />
+
+        <div class="mb-5">
+          <h4 class="mb-3">Tour Full Day <span class="text-danger">*</span></h4>
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              id="isFullDayCheck"
+              type="checkbox"
+              [(ngModel)]="tour.tour.isFullDay"
+              name="isFullDay"
+            />
+            <label class="form-check-label text-body" for="isFullDayCheck">
+              Full Day Tour
+            </label>
+          </div>
+        </div>
+
+        <div class="mb-5">
+          <h4 class="mb-3">Tour Status <span class="text-danger">*</span></h4>
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              id="statusCheck"
+              type="checkbox"
+              [(ngModel)]="tour.tour.status"
+              name="status"
+            />
+            <label class="form-check-label text-body" for="statusCheck">
+              Active Tour
+            </label>
+          </div>
+        </div>
+
+        <div class="mb-5">
+          <h4 class="mb-3">Category <span class="text-danger">*</span></h4>
+          <select
+            class="form-select mb-5"
+            [(ngModel)]="tour.category.categoryId"
+            name="categoryId"
+            required
+          >
+            <option *ngFor="let cate of catelist" [value]="cate.categoryId">
+              {{ cate.name }}
+            </option>
+          </select>
+        </div>
+
+        <div class="mb-5">
+          <h4 class="mb-3">Date Starts <small class="">(optional)</small></h4>
+          <input
+            class="form-control mb-5"
+            type="date"
+            [(ngModel)]="tour.dateStarts"
+            name="dateStarts"
+          />
+          <small class="text-body-tertiary"
+            >Leave empty if no start dates.</small
+          >
+        </div>
+        <div class="mb-5">
+          <h4 class="mb-3">Activities <small class="">(optional)</small></h4>
+          <div class="mb-5">
+            <label for="activitiesSelect" class="form-label">Activities</label>
+
+            <!-- Bảng hiển thị danh sách hoạt động -->
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th scope="col">Activity ID</th>
+                  <th scope="col">Activity Name</th>
+                  <th scope="col">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let activity of tour.activities">
+                  <td>{{ activity.activityId }}</td>
+                  <td>{{ activity.activityName }}</td>
+                  <td><Button>edit</Button><Button>delete</Button></td>
+                </tr>
+              </tbody>
+            </table>
+
+            <small class="text-body-tertiary"
+              >Leave empty if no activities.</small
+            >
+          </div>
+        </div>
+        <div class="mb-5">
+          <h4 class="mb-3">Bookings <small class="">(optional)</small></h4>
+          <textarea
+            class="form-control mb-5"
+            placeholder="Enter bookings (comma separated)"
+            [(ngModel)]="tour.bookings"
+            name="bookings"
+          ></textarea>
+          <small class="text-body-tertiary">Leave empty if no bookings.</small>
+        </div>
+        <div class="mb-5">
+          <h4 class="mb-3">Reviews <small class="">(optional)</small></h4>
+          <textarea
+            class="form-control mb-5"
+            placeholder="Enter reviews (comma separated)"
+            [(ngModel)]="tour.reviews"
+            name="reviews"
+          ></textarea>
+          <small class="text-body-tertiary">Leave empty if no reviews.</small>
+        </div>
+      </div>
+      <div class="col-12 col-xl-6">
+        <h4 class="mb-3">Display images <small class="">(optional)</small></h4>
+        <div
+          class="dropzone dropzone-multiple p-0 mb-5"
+          id="my-awesome-dropzone"
+          (drop)="onFileDrop($event)"
+          (dragover)="onDragOver($event)"
+          data-dropzone="data-dropzone"
+        >
+          <div class="fallback">
+            <input
+              name="file"
+              type="file"
+              multiple="multiple"
+              (change)="onFileChange($event)"
+            />
+          </div>
+          <div class="dz-preview d-flex flex-wrap">
+            <div
+              class="border border-translucent bg-body-emphasis rounded-3 d-flex flex-center position-relative me-2 mb-2"
+              *ngFor="let image of imagesPreview"
+              style="height: 80px; width: 80px"
+            >
+              <img
+                class="dz-image"
+                [src]="image"
+                alt="Image preview"
+                data-dz-thumbnail="data-dz-thumbnail"
+              />
+              <a
+                class="dz-remove text-body-quaternary"
+                href="#!"
+                (click)="removeImage(image)"
+                ><span data-feather="x"></span
+              ></a>
+            </div>
+          </div>
+        </div>
+        <h4 class="mb-3">Tour Images</h4>
+        <div
+          class="mb-5 border-0 bg-light border rounded-3 text-center"
+          style="height: 200px"
+        >
+          <h5
+            class="text-body-tertiary"
+            style="line-height: 100%; vertical-align: middle"
+          >
+            Drag & drop image here
+          </h5>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

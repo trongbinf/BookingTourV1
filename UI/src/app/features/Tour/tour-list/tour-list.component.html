@@ -17,20 +17,31 @@
         <button class="btn btn-primary me-4" [routerLink]="['/admin-addtour']">
           <span class="fas fa-plus me-2"></span>Create
         </button>
+        <button class="btn btn-primary me-4" (click)="filterTours(true)">
+          <span class="fas fa-border-all me-2"></span>
+          Public Tour
+        </button>
+        <button
+          class="btn btn-phoenix-secondary me-4"
+          (click)="filterTours(false)"
+        >
+          <span class="fas fa-border-all me-2"></span>
+          Deleted Tour
+        </button>
         <div class="d-flex gap-2 ms-md-auto mt-3 mt-md-0">
           <div class="search-box">
             <form class="position-relative">
               <input
                 class="form-control search-input search"
                 type="search"
-                placeholder="Search products"
+                placeholder="Search tours"
                 aria-label="Search"
               />
               <span class="fas fa-search search-box-icon"></span>
             </form>
           </div>
           <button class="btn btn-phoenix-primary px-3">
-            <span class="fa-solid fa-filter" data-fa-transform="down-2"></span>
+            <span class="fa-solid fa-search" data-fa-transform="down-2"></span>
           </button>
         </div>
       </div>
@@ -116,7 +127,7 @@
               <td></td>
             </tr> -->
             <tr
-              *ngFor="let tour of tours"
+              *ngFor="let tour of filteredTours"
               class="hover-actions-trigger btn-reveal-trigger position-static"
             >
               <td class="fs-9 align-middle ps-0">
@@ -141,6 +152,7 @@
                     <a
                       class="fs-8 fw-bolder text-body-emphasis text-nowrap"
                       href="#!"
+                      [routerLink]="['/admin-tourdetails', tour.tour.tourId]"
                       >{{ tour.tour.tourName }}</a
                     >
                     <h6 class="fw-seibold text-body text-nowrap mt-1 mb-2">
@@ -216,22 +228,21 @@
               <td class="align-middle ps-4">
                 <div class="btn-reveal-trigger position-static">
                   <button
-                    class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10"
+                    *ngIf="tour.tour.status === true"
+                    class="btn btn-sm btn-danger fs-10"
                     type="button"
-                    data-bs-toggle="dropdown"
-                    data-boundary="window"
-                    aria-haspopup="true"
-                    aria-expanded="false"
-                    data-bs-reference="parent"
+                    (click)="onDelete(tour.tour.tourId)"
                   >
-                    <span class="fas fa-ellipsis-h fs-10"></span>
+                    <span class="fas fa-trash fs-10"></span> Delete
                   </button>
-                  <div class="dropdown-menu dropdown-menu-end py-2">
-                    <a class="dropdown-item" href="#!">View</a
-                    ><a class="dropdown-item" href="#!">Export</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item text-danger" href="#!">Remove</a>
-                  </div>
+                  <button
+                    *ngIf="tour.tour.status === false"
+                    class="btn btn-sm btn-success fs-10"
+                    type="button"
+                    (click)="onRestore(tour.tour.tourId)"
+                  >
+                    <span class="fas fa-undo fs-10"></span> Restore
+                  </button>
                 </div>
               </td>
             </tr>

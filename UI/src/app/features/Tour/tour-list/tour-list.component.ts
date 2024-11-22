@@ -12,6 +12,7 @@ import { RouterModule } from '@angular/router';
 })
 export class TourListComponent implements OnInit {
   tours: any[] = [];
+  filteredTours: any[] = [];
   sortedTours: any[] = [];
   currentSortField: string = '';
   currentSortDirection: string = 'asc';
@@ -22,12 +23,17 @@ export class TourListComponent implements OnInit {
     this.tourService.getAllTours().subscribe({
       next: (data) => {
         this.tours = data;
-        console.log(this.tours);  
+        console.log(this.tours); 
+        this.filterTours(true); 
       },
       error: (err) => {
         console.error('Lấy dữ liệu Đéo được', err);
       }
     });
+  }
+
+  filterTours(status: boolean) {
+    this.filteredTours = this.tours.filter((tour) => tour.tour.status === status);
   }
 
   sortData(field: string): void {
@@ -53,5 +59,30 @@ export class TourListComponent implements OnInit {
       return 0;
     });
   }
-
+  onDelete(id: number): void {
+    if (confirm('Are you sure you want to delete this tour?')) {
+      this.tourService.deleteTour(id).subscribe({
+        next: () => {
+          alert('Tour has been deleted.');
+        },
+        error: (err) => {
+          console.error('Error deleting tour:', err);
+          alert('Failed to delete tour.');
+        }
+      });
+    }
+    this.ngOnInit();
+  }
+  onRestore(id: number): void {
+    this.tourService.deleteTour(id).subscribe({
+        next: () => {
+          alert('Tour has been restore.');
+        },
+        error: (err) => {
+          console.error('Error restore tour:', err);
+          alert('Failed to restore tour.');
+        }
+      });
+      this.ngOnInit();
+  }
 }

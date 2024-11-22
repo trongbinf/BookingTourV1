@@ -5,6 +5,7 @@ import { CreateTour } from '../models/create-tour.model';
 import { FormsModule } from '@angular/forms';
 import { Category } from '../../category/model/category.model';
 import { CommonModule } from '@angular/common';
+
 @Component({
   selector: 'app-tour-add',
   standalone: true,

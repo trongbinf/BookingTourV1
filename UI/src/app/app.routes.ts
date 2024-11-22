@@ -11,6 +11,7 @@ import { ListTourSearchComponent } from './core/list-tour-search/list-tour-searc
 import { ManageUserComponent } from './features/manage/manage-user/manage-user.component';
 import { ProfileComponent } from './features/auth/profile/profile.component';
 import { TourAddComponent } from './features/Tour/tour-add/tour-add.component';
+import { TourUpdateComponent } from './features/Tour/tour-update/tour-update.component';
 
 export const routes: Routes = [
     {
@@ -39,6 +40,11 @@ export const routes: Routes = [
     {
         path: 'admin-addtour',
         component: TourAddComponent
+    }
+    ,
+    {
+        path: 'admin-tourdetails/:id',
+        component: TourUpdateComponent
     }
     ,
     {
