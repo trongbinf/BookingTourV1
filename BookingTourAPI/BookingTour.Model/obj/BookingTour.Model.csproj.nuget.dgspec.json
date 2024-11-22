@@ -1,7 +1,6 @@
 {
   "format": 1,
   "restore": {
-<<<<<<< HEAD
     "E:\\dotritrong\\CSharp\\BookingTourV1\\BookingTourAPI\\BookingTour.Model\\BookingTour.Model.csproj": {}
   },
   "projects": {
@@ -13,27 +12,9 @@
         "projectPath": "E:\\dotritrong\\CSharp\\BookingTourV1\\BookingTourAPI\\BookingTour.Model\\BookingTour.Model.csproj",
         "packagesPath": "C:\\Users\\USA\\.nuget\\packages\\",
         "outputPath": "E:\\dotritrong\\CSharp\\BookingTourV1\\BookingTourAPI\\BookingTour.Model\\obj\\",
-=======
-    "D:\\CSharp\\Project\\CPL_BookingTour_Clone\\BookingTourV1\\BookingTourAPI\\BookingTour.Model\\BookingTour.Model.csproj": {}
-  },
-  "projects": {
-    "D:\\CSharp\\Project\\CPL_BookingTour_Clone\\BookingTourV1\\BookingTourAPI\\BookingTour.Model\\BookingTour.Model.csproj": {
-      "version": "1.0.0",
-      "restore": {
-        "projectUniqueName": "D:\\CSharp\\Project\\CPL_BookingTour_Clone\\BookingTourV1\\BookingTourAPI\\BookingTour.Model\\BookingTour.Model.csproj",
-        "projectName": "BookingTour.Model",
-        "projectPath": "D:\\CSharp\\Project\\CPL_BookingTour_Clone\\BookingTourV1\\BookingTourAPI\\BookingTour.Model\\BookingTour.Model.csproj",
-        "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-        "outputPath": "D:\\CSharp\\Project\\CPL_BookingTour_Clone\\BookingTourV1\\BookingTourAPI\\BookingTour.Model\\obj\\",
->>>>>>> 8070bdaf7f781a935dcff34f8108155ff6acbad3
         "projectStyle": "PackageReference",
         "configFilePaths": [
-<<<<<<< HEAD
           "C:\\Users\\USA\\AppData\\Roaming\\NuGet\\NuGet.Config",
-=======
-          "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
->>>>>>> 8070bdaf7f781a935dcff34f8108155ff6acbad3
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [

@@ -144,8 +144,8 @@ namespace BookingTour.API.Controllers
 				return NotFound($"No booking found for BookingId: {bookingId}");
 			}
 
+			// Xác định trạng thái từ giá trị số
 			StatusType statusType;
-	
 			switch (status)
 			{
 				case 0:
@@ -170,14 +170,71 @@ namespace BookingTour.API.Controllers
 					return BadRequest("Invalid status value. Please provide a valid status.");
 			}
 
-			
-		
+			// Cập nhật trạng thái đặt chỗ
 			booking.Status = statusType;
-		
 			await _bookingService.UpdateAsync(booking);
+
+			// Gửi email nếu trạng thái là Confirmed
+			if (statusType == StatusType.Confirmed)
+			{
+				// Lấy thông tin người dùng
+				var user = await _userManager.FindByIdAsync(booking.UserId);
+				if (user == null)
+				{
+					return NotFound($"User with ID {booking.UserId} not found.");
+				}
+
+				// Lấy thông tin tour
+				var tour = await _tourService.GetByIdAsync(booking.TourId);
+				if (tour == null)
+				{
+					return NotFound($"Tour with ID {booking.TourId} not found.");
+				}
+
+				// Tạo nội dung email
+				var reviewLink = $"http://localhost:4200/tour-detail/{tour.TourId}";
+				var reviewContent = $@"
+					<!DOCTYPE html>
+					<html lang='en'>
+					<head>
+						<meta charset='UTF-8'>
+						<meta name='viewport' content='width=device-width, initial-scale=1.0'>
+						<title>Review Your Experience</title>
+						<style>
+							body {{ font-family: Arial, sans-serif; background-color: #f4f4f4; }}
+							.email-container {{ max-width: 600px; margin: 20px auto; background: #ffffff; padding: 20px; border: 1px solid #ddd; border-radius: 5px; }}
+							.header {{ text-align: center; background-color: #4CAF50; color: #ffffff; padding: 10px; }}
+							.content {{ margin: 20px 0; font-size: 16px; color: #333; }}
+							.content a {{ color: #4CAF50; text-decoration: none; font-weight: bold; }}
+							.footer {{ text-align: center; padding: 10px; color: #666; }}
+						</style>
+					</head>
+					<body>
+						<div class='email-container'>
+							<div class='header'>
+								We Value Your Feedback!
+							</div>
+							<div class='content'>
+								<p>Dear {user.UserName},</p>
+								<p>Thank you for choosing <strong>{tour.TourName}</strong>. We hope you had a wonderful experience!</p>
+								<p>We would greatly appreciate it if you could take a moment to leave a review about your experience. Your feedback helps us improve our services and assist other travelers in making informed decisions.</p>
+								<p><a href='{reviewLink}'>Click here to leave your review</a></p>
+							</div>
+							<div class='footer'>
+								&copy; 2024 Booking Tour Travel.
+							</div>
+						</div>
+					</body>
+					</html>";
+
+				// Gửi email
+				var reviewMessage = new Message(new string[] { user.Email }, "We Value Your Feedback!", reviewContent);
+				_emailService.SendEmail(reviewMessage);
+			}
 
 			return Ok(new { message = "Booking status updated successfully." });
 		}
+
 
 		[HttpGet("search")]
 		public async Task<ActionResult<PaginatedList<BookingVm>>> SearchBooking(

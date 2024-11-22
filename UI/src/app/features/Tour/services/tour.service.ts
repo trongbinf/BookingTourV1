@@ -1,4 +1,3 @@
-import { CreateTour } from './../models/create-tour.model';
 import { BASE_URL } from './../../../app.config';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
@@ -24,10 +23,10 @@ export class TourService {
       pageSize: pageSize.toString(),
       pageIndex: pageIndex.toString()
     });
-
     const url = `${this.apiUrl}/categories/${name}?${params.toString()}`
     return this.http.get<PaginatedResponse<Tour>>(url);
   }
+
 
   getTourVmById(id: number): Observable<TourVm> {
     return this.http.get<TourVm>(`${this.apiUrl}/${id}`);
@@ -35,7 +34,7 @@ export class TourService {
   createTour(tour: FormData): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}`, tour);
   }
-  updateTour(tourId: number, tour: FormData) :Observable<any>{
+  updateTour(tourId: number, tour: FormData): Observable<any> {
     return this.http.put<any>(`${this.apiUrl}/${tourId}`, tour);
   }
   deleteTour(id: number): Observable<void> {

@@ -10,6 +10,7 @@ import { FormsModule } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { AuthService } from '../auth/services/auth.service';
 import { Tour } from '../Tour/models/tour.model';
+import { PagedResponse } from '../auth/models/PaginatedList';
 
 @Component({
   selector: 'app-tour-detail',
@@ -26,7 +27,7 @@ export class TourDetailComponent implements OnInit, OnDestroy {
   personCount: number = 1;
   isFullDay: boolean = true;
   selectedPickDate: string | undefined = '';
-  tours: Tour[] = [];
+  tours?: PagedResponse<Tour>;
   private destroy$ = new Subject<void>();
   constructor(
     private route: ActivatedRoute,
@@ -164,7 +165,7 @@ export class TourDetailComponent implements OnInit, OnDestroy {
 
   loadToursByCategory(categoryName: string) {
     console.log("category name:", categoryName);
-    this.tourService.getTourByCategory(categoryName).pipe(takeUntil(this.destroy$)).subscribe(tour => {
+    this.tourService.getTourByCategory(categoryName, 3, 1).pipe(takeUntil(this.destroy$)).subscribe(tour => {
       this.tours = tour;
       console.log('Loaded tours for category:', categoryName, tour);
 

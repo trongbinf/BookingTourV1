@@ -21,7 +21,7 @@
                         <div class="search-box">
                             <form class="position-relative">
                                 <input class="form-control search-input search" type="search"
-                                    placeholder="Search orders" aria-label="Search" />
+                                    placeholder="Search bookings" aria-label="Search" />
                                 <span class="fas fa-search search-box-icon"></span>
                             </form>
                         </div>
@@ -42,35 +42,38 @@
                     <table class="table table-sm fs-9 mb-0">
                         <thead>
                             <tr>
-                                <th class="sort white-space-nowrap align-middle pe-3" scope="col" data-sort="ordere"
-                                    style="width:5%;">ORDER</th>
+                                <th class="sort white-space-nowrap align-middle pe-3" scope="col" data-sort="order"
+                                    onclick="sortTable('order', true)" style="width:5%;">ORDER</th>
 
                                 <th class="sort align-middle ps-8" scope="col" data-sort="customer"
-                                    style="width:16%; min-width: 250px;">CUSTOMER</th>
+                                    style="width:16%; min-width: 250px;" onclick="sortTable('customer', true)">CUSTOMER
+                                </th>
 
                                 <th class="sort align-middle text-start pe-3" scope="col" data-sort="tour_name"
-                                    style="width:12%; min-width: 250px;">TOUR NAME</th>
+                                    style="width:12%; min-width: 250px;" onclick="sortTable('tour_name', true)">TOUR
+                                    NAME</th>
 
                                 <th class="sort align-middle text-start pe-3" scope="col" data-sort="price"
-                                    style="width:12%; min-width: 120px;">PRICE</th>
+                                    style="width:12%; min-width: 120px;" onclick="sortTable('price', true)">PRICE</th>
 
                                 <th class="sort align-middle text-start pe-0" scope="col" data-sort="person"
-                                    style="width:8%; min-width: 100px;">PERSON</th>
+                                    style="width:8%; min-width: 100px;" onclick="sortTable('person', true)">PERSON</th>
 
                                 <th class="sort align-middle" scope="col" data-sort="total"
-                                    style="width:10%;min-width: 100px;">
+                                    style="width:10%;min-width: 100px;" onclick="sortTable('total', true)">
                                     TOTAL</th>
 
                                 <th class="sort align-middle text-end" scope="col" data-sort="status"
-                                    style="width:6%;min-width: 100px;">BOOKING STATUS</th>
+                                    style="width:6%;min-width: 100px;" onclick="sortTable('status', true)">BOOKING
+                                    STATUS</th>
 
                                 <th class="sort align-middle text-end " scope="col" data-sort="date"
-                                    style="width:6%;min-width: 80px;">DATE</th>
+                                    style="width:6%;min-width: 80px;" onclick="sortTable('date', true)">DATE</th>
 
 
                             </tr>
                         </thead>
-                        <tbody class="list" id="order-table-body">
+                        <tbody class="list" id="table-body">
                             <tr class="hover-actions-trigger btn-reveal-trigger position-static"
                                 *ngFor="let booking of bookings">
 

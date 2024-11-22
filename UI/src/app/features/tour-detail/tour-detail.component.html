@@ -575,7 +575,7 @@
             </div>
             <h2 class="mt-5 mb-3">Similar tours</h2>
             <div class="row g-3">
-                <div class="col-md-6 col-xl-4" *ngFor="let tour of tours">
+                <div class="col-md-6 col-xl-4" *ngFor="let tour of tours?.items">
                     <div class="hoverbox rounded">
                         <a href="/tour-detail/{{tour.tour.tourId}}">
                             <img class="img-fluid" src="../../../assets/img/trip/10.png" alt="" />
