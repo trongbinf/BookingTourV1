@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { BASE_URL } from '../../../app.config';
 import { CreateBooking } from '../models/create-booking.model';
 import { Booking } from '../models/booking.model';
+import { PaginatedResponse } from '../../Tour/models/paginated.model';
 
 
 @Injectable({
@@ -15,8 +16,13 @@ export class BookingService {
 
   constructor(private http: HttpClient) { }
 
-  getAll(): Observable<Booking[]> {
-    return this.http.get<Booking[]>(this.apiUrl);
+  getAll(name?: string, pageIndex: number = 1, pageSize: number = 5): Observable<PaginatedResponse<Booking>> {
+    const params = new URLSearchParams();
+    if (name) params.append('key', name);
+    params.append('pageIndex', pageIndex.toString());
+    params.append('pageSize', pageSize.toString());
+
+    return this.http.get<PaginatedResponse<Booking>>(`${this.apiUrl}/search?${params.toString()}`);
   }
 
   getById(id: number): Observable<Booking> {

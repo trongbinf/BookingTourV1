@@ -6,6 +6,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Booking, StatusType } from '../../Booking/models/booking.model';
 import Swal from 'sweetalert2';
+import { PaginatedResponse } from '../../Tour/models/paginated.model';
 
 
 
@@ -20,9 +21,11 @@ import Swal from 'sweetalert2';
 export class ManagerBookingComponent implements OnDestroy, OnInit {
   registerSubscription?: Subscription;
   private destroy$ = new Subject<void>();
-  bookings: Booking[] = [];
-
+  bookings?: PaginatedResponse<Booking>;
+  pageSize: number = 5;
+  pageIndex?: number = 1;
   key: string = '';
+  currentkey: string = '';
   selectedBookingId?: number;
 
 
@@ -36,8 +39,12 @@ export class ManagerBookingComponent implements OnDestroy, OnInit {
 
 
   fetchAllBookings(): void {
-    this.bookingService.getAll().subscribe({
-      next: (data: Booking[]) => {
+    if (this.currentkey != this.key) {
+      this.pageIndex = 1;
+      this.currentkey = this.key;
+    }
+    this.bookingService.getAll(this.key, this.pageIndex, this.pageSize).subscribe({
+      next: (data) => {
         this.bookings = data;
       },
       error: (err) => {
@@ -46,9 +53,46 @@ export class ManagerBookingComponent implements OnDestroy, OnInit {
     });
   }
 
+  goToPage(page?: number) {
+    this.pageIndex = page;
+    this.fetchAllBookings();
+  }
+
+  goToPreviousPage() {
+    if (this.bookings?.currentPage && this.bookings?.currentPage > 1) {
+      this.pageIndex = this.bookings.currentPage - 1;
+      this.fetchAllBookings();
+    }
+  }
+
+  goToNextPage() {
+    if (this.bookings?.currentPage && this.bookings?.currentPage < this.bookings.totalPages) {
+      this.pageIndex = this.bookings.currentPage + 1;
+      this.fetchAllBookings();
+    }
+  }
+
+  // show number page 
+  getVisiablePage(): number[] {
+    if (!this.bookings?.totalPages || !this.bookings.currentPage) {
+      return [];
+    }
+    const totalPage = this.bookings.totalPages;
+    const currentPage = this.bookings.currentPage;
+
+    const startPage = Math.max(1, currentPage - 1);
+    const endPage = Math.min(totalPage, currentPage + 1);
+
+    const pages: number[] = [];
+    for (let page = startPage; page <= endPage; page++) {
+      pages.push(page);
+    }
+    return pages;
+  }
+
+
   getStatusString(status: number): string {
     return StatusType[status] ?? "Unknown";
-
   }
 
 
@@ -73,7 +117,7 @@ export class ManagerBookingComponent implements OnDestroy, OnInit {
     }
 
     // Find the current booking
-    const currentBooking = this.bookings.find(b => b.bookingId === this.selectedBookingId);
+    const currentBooking = this.bookings?.items.find(b => b.bookingId === this.selectedBookingId);
     if (!currentBooking) {
       console.error('Booking not found');
       return;
