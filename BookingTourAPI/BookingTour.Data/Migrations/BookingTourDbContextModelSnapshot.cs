@@ -449,7 +449,7 @@ namespace BookingTour.Data.Migrations
                             CategoryId = 1,
                             City = "Hà Nội",
                             Country = "Việt Nam",
-                            Created = new DateTime(2024, 11, 17, 17, 42, 22, 600, DateTimeKind.Local).AddTicks(8424),
+                            Created = new DateTime(2024, 11, 16, 14, 31, 29, 324, DateTimeKind.Local).AddTicks(1660),
                             Description = "Tour tham quan các danh lam thắng cảnh trong thành phố.",
                             Duration = "1 ngày 1 đêm",
                             IsFullDay = true,
@@ -464,7 +464,7 @@ namespace BookingTour.Data.Migrations
                             CategoryId = 2,
                             City = "Đà Lạt",
                             Country = "Việt Nam",
-                            Created = new DateTime(2024, 11, 17, 17, 42, 22, 600, DateTimeKind.Local).AddTicks(8431),
+                            Created = new DateTime(2024, 11, 16, 14, 31, 29, 324, DateTimeKind.Local).AddTicks(1664),
                             Description = "Tour khám phá các khu rừng nguyên sinh.",
                             Duration = "2 ngày 1 đêm",
                             IsFullDay = false,
@@ -479,7 +479,7 @@ namespace BookingTour.Data.Migrations
                             CategoryId = 3,
                             City = "Nha Trang",
                             Country = "Việt Nam",
-                            Created = new DateTime(2024, 11, 17, 17, 42, 22, 600, DateTimeKind.Local).AddTicks(8439),
+                            Created = new DateTime(2024, 11, 16, 14, 31, 29, 324, DateTimeKind.Local).AddTicks(1667),
                             Description = "Tour du lịch nghỉ dưỡng tại các bãi biển đẹp.",
                             Duration = "3 ngày 2 đêm",
                             IsFullDay = false,
@@ -494,7 +494,7 @@ namespace BookingTour.Data.Migrations
                             CategoryId = 1,
                             City = "Hà Nội",
                             Country = "Việt Nam",
-                            Created = new DateTime(2024, 11, 17, 17, 42, 22, 600, DateTimeKind.Local).AddTicks(8446),
+                            Created = new DateTime(2024, 11, 16, 14, 31, 29, 324, DateTimeKind.Local).AddTicks(1670),
                             Description = "Tham quan các bảo tàng nổi tiếng.",
                             Duration = "1 ngày 1 đêm",
                             IsFullDay = true,
@@ -509,7 +509,7 @@ namespace BookingTour.Data.Migrations
                             CategoryId = 2,
                             City = "Sa Pa",
                             Country = "Việt Nam",
-                            Created = new DateTime(2024, 11, 17, 17, 42, 22, 600, DateTimeKind.Local).AddTicks(8454),
+                            Created = new DateTime(2024, 11, 16, 14, 31, 29, 324, DateTimeKind.Local).AddTicks(1673),
                             Description = "Tour cắm trại qua đêm trong rừng.",
                             Duration = "2 ngày 2 đêm",
                             IsFullDay = false,
@@ -524,7 +524,7 @@ namespace BookingTour.Data.Migrations
                             CategoryId = 3,
                             City = "Phú Quốc",
                             Country = "Việt Nam",
-                            Created = new DateTime(2024, 11, 17, 17, 42, 22, 600, DateTimeKind.Local).AddTicks(8462),
+                            Created = new DateTime(2024, 11, 16, 14, 31, 29, 324, DateTimeKind.Local).AddTicks(1676),
                             Description = "Tour nghỉ dưỡng và tham quan vùng biển.",
                             Duration = "4 ngày 3 đêm",
                             IsFullDay = true,
@@ -564,14 +564,14 @@ namespace BookingTour.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "c680712d-6753-431e-8efc-a72d664e69ad",
+                            Id = "eb9e40d0-5e41-4ecc-859f-a10f5dc000ba",
                             ConcurrencyStamp = "1",
                             Name = "Admin",
                             NormalizedName = "Admin"
                         },
                         new
                         {
-                            Id = "69c96014-a2ce-41cd-8b75-ac9f99a5c090",
+                            Id = "6c6262a4-f3ea-45c7-abf4-ce43582886e1",
                             ConcurrencyStamp = "2",
                             Name = "User",
                             NormalizedName = "User"

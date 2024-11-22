@@ -1,7 +1,7 @@
 import { CreateTour } from './../models/create-tour.model';
 import { BASE_URL } from './../../../app.config';
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Tour } from '../models/tour.model';
 import { TourVm } from '../models/tourVm.model';
@@ -53,21 +53,56 @@ export class TourService {
     return this.http.get<string[]>(`${this.apiUrl}/get-city/${name}`,);
   }
 
-  getTourSearch(nameSearch?: string, city?: string, country?: string, categories?: string,
-    minPrice?: string, maxPrice?: string, dateRange?: string, pageIndex = 1, pageSize = 8
+  filterTour(city?: string, country?: string, category?: string,
+    minPrice?: string, maxPrice?: string, duration: string[] = [], activities: string[] = [],
+    pageIndex = 1, pageSize = 8
   ): Observable<PaginatedResponse<Tour>> {
     const params = new URLSearchParams();
-    if (nameSearch) params.append('name', nameSearch);
     if (city) params.append('city', city);
     if (country) params.append('country', country);
-    if (categories) params.append('categories', categories);
+    if (category) params.append('category', category);
     if (minPrice) params.append('minPrice', minPrice);
     if (maxPrice) params.append('maxPrice', maxPrice);
-    if (dateRange) params.append('dateRange', dateRange);
+    if (duration.length) {
+      params.append('durations', duration.join(','));
+      console.log(params.toString());
+    }
+    if (activities.length) {
+      params.append('activity', activities.join(','));
+      console.log(params.toString());
+    }
     params.append('pageIndex', pageIndex.toString());
     params.append('pageSize', pageSize.toString());
-    const url = `${this.apiUrl}/search?${params.toString()}`;
+    const url = `${this.apiUrl}/filter?${params.toString()}`;
+    console.log(params.toString());
     return this.http.get<PaginatedResponse<Tour>>(url);
+  }
+
+  searchTour(
+    name: string | null = null,
+    dateRange: string | null = null,
+    pageIndex: number = 1,
+    pageSize: number = 8
+  ): Observable<PaginatedResponse<Tour>> {
+    let params = new HttpParams();
+
+    if (name) {
+      params = params.append('name', name);
+    }
+    if (dateRange) {
+      params = params.append('dateRange', dateRange);
+    }
+    params = params.append('pageIndex', pageIndex.toString());
+    params = params.append('pageSize', pageSize.toString());
+
+    console.log(params.toString());
+    return this.http.get<PaginatedResponse<Tour>>(`${this.apiUrl}/search`, {
+      params,
+    });
+  }
+
+  tourRandom(): Observable<Tour[]> {
+    return this.http.get<Tour[]>(`${this.apiUrl}/random`);
   }
 
 }

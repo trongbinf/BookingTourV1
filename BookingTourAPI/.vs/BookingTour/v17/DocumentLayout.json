@@ -1,22 +1,42 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "D:\\K17_KTPM\\Git_Repo\\BookingTourV1\\BookingTourAPI\\",
+  "WorkspaceRootPath": "D:\\CSharp\\Project\\CPL_BookingTour_Clone\\BookingTourV1\\BookingTourAPI\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{78D497F1-6559-4C44-B8AB-6788844A38F2}|BookingTour\\BookingTour.API.csproj|d:\\k17_ktpm\\git_repo\\bookingtourv1\\bookingtourapi\\bookingtour\\controllers\\tourcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{78D497F1-6559-4C44-B8AB-6788844A38F2}|BookingTour\\BookingTour.API.csproj|d:\\csharp\\project\\cpl_bookingtour_clone\\bookingtourv1\\bookingtourapi\\bookingtour\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{78D497F1-6559-4C44-B8AB-6788844A38F2}|BookingTour\\BookingTour.API.csproj|solutionrelative:bookingtour\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{78D497F1-6559-4C44-B8AB-6788844A38F2}|BookingTour\\BookingTour.API.csproj|d:\\csharp\\project\\cpl_bookingtour_clone\\bookingtourv1\\bookingtourapi\\bookingtour\\controllers\\tourcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{78D497F1-6559-4C44-B8AB-6788844A38F2}|BookingTour\\BookingTour.API.csproj|solutionrelative:bookingtour\\controllers\\tourcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A694BB17-9131-4B69-8EFD-64DF073E73A4}|BookingTour.Model\\BookingTour.Model.csproj|d:\\k17_ktpm\\git_repo\\bookingtourv1\\bookingtourapi\\bookingtour.model\\tour.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A694BB17-9131-4B69-8EFD-64DF073E73A4}|BookingTour.Model\\BookingTour.Model.csproj|solutionrelative:bookingtour.model\\tour.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{78D497F1-6559-4C44-B8AB-6788844A38F2}|BookingTour\\BookingTour.API.csproj|D:\\CSharp\\Project\\CPL_BookingTour_Clone\\BookingTourV1\\BookingTourAPI\\bookingtour\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{78D497F1-6559-4C44-B8AB-6788844A38F2}|BookingTour\\BookingTour.API.csproj|solutionrelative:bookingtour\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A694BB17-9131-4B69-8EFD-64DF073E73A4}|BookingTour.Model\\BookingTour.Model.csproj|d:\\k17_ktpm\\git_repo\\bookingtourv1\\bookingtourapi\\bookingtour.model\\viewmodel\\touraddvm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A694BB17-9131-4B69-8EFD-64DF073E73A4}|BookingTour.Model\\BookingTour.Model.csproj|solutionrelative:bookingtour.model\\viewmodel\\touraddvm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{78D497F1-6559-4C44-B8AB-6788844A38F2}|BookingTour\\BookingTour.API.csproj|D:\\CSharp\\Project\\CPL_BookingTour_Clone\\BookingTourV1\\BookingTourAPI\\bookingtour\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{78D497F1-6559-4C44-B8AB-6788844A38F2}|BookingTour\\BookingTour.API.csproj|solutionrelative:bookingtour\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A694BB17-9131-4B69-8EFD-64DF073E73A4}|BookingTour.Model\\BookingTour.Model.csproj|d:\\k17_ktpm\\git_repo\\bookingtourv1\\bookingtourapi\\bookingtour.model\\viewmodel\\resetpassword.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A694BB17-9131-4B69-8EFD-64DF073E73A4}|BookingTour.Model\\BookingTour.Model.csproj|solutionrelative:bookingtour.model\\viewmodel\\resetpassword.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{78D497F1-6559-4C44-B8AB-6788844A38F2}|BookingTour\\BookingTour.API.csproj|D:\\CSharp\\Project\\CPL_BookingTour_Clone\\BookingTourV1\\BookingTourAPI\\bookingtour\\controllers\\categorycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{78D497F1-6559-4C44-B8AB-6788844A38F2}|BookingTour\\BookingTour.API.csproj|solutionrelative:bookingtour\\controllers\\categorycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A694BB17-9131-4B69-8EFD-64DF073E73A4}|BookingTour.Model\\BookingTour.Model.csproj|D:\\CSharp\\Project\\CPL_BookingTour_Clone\\BookingTourV1\\BookingTourAPI\\bookingtour.model\\category.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A694BB17-9131-4B69-8EFD-64DF073E73A4}|BookingTour.Model\\BookingTour.Model.csproj|solutionrelative:bookingtour.model\\category.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A694BB17-9131-4B69-8EFD-64DF073E73A4}|BookingTour.Model\\BookingTour.Model.csproj|D:\\CSharp\\Project\\CPL_BookingTour_Clone\\BookingTourV1\\BookingTourAPI\\bookingtour.model\\viewmodel\\tourvm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A694BB17-9131-4B69-8EFD-64DF073E73A4}|BookingTour.Model\\BookingTour.Model.csproj|solutionrelative:bookingtour.model\\viewmodel\\tourvm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A694BB17-9131-4B69-8EFD-64DF073E73A4}|BookingTour.Model\\BookingTour.Model.csproj|D:\\CSharp\\Project\\CPL_BookingTour_Clone\\BookingTourV1\\BookingTourAPI\\bookingtour.model\\viewmodel\\bookingvm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A694BB17-9131-4B69-8EFD-64DF073E73A4}|BookingTour.Model\\BookingTour.Model.csproj|solutionrelative:bookingtour.model\\viewmodel\\bookingvm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6C4F1A89-B025-43D3-A92F-13D969C756D6}|BookingTour.Business\\BookingTour.Business.csproj|D:\\CSharp\\Project\\CPL_BookingTour_Clone\\BookingTourV1\\BookingTourAPI\\bookingtour.business\\service\\iservice\\ibaseservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6C4F1A89-B025-43D3-A92F-13D969C756D6}|BookingTour.Business\\BookingTour.Business.csproj|solutionrelative:bookingtour.business\\service\\iservice\\ibaseservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -26,58 +46,211 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 6,
           "Children": [
             {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Tour.cs",
-              "DocumentMoniker": "D:\\K17_KTPM\\Git_Repo\\BookingTourV1\\BookingTourAPI\\BookingTour.Model\\Tour.cs",
-              "RelativeDocumentMoniker": "BookingTour.Model\\Tour.cs",
-              "ToolTip": "D:\\K17_KTPM\\Git_Repo\\BookingTourV1\\BookingTourAPI\\BookingTour.Model\\Tour.cs",
-              "RelativeToolTip": "BookingTour.Model\\Tour.cs",
-              "ViewState": "AQIAAAIAAAAAAAAAAAAQwBQAAAA3AAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-20T03:38:41.608Z",
-              "EditorCaption": ""
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{b1e99781-ab81-11d0-b683-00aa00a3ee26}"
             },
             {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "ResetPassword.cs",
-              "DocumentMoniker": "D:\\K17_KTPM\\Git_Repo\\BookingTourV1\\BookingTourAPI\\BookingTour.Model\\ViewModel\\ResetPassword.cs",
-              "RelativeDocumentMoniker": "BookingTour.Model\\ViewModel\\ResetPassword.cs",
-              "ToolTip": "D:\\K17_KTPM\\Git_Repo\\BookingTourV1\\BookingTourAPI\\BookingTour.Model\\ViewModel\\ResetPassword.cs",
-              "RelativeToolTip": "BookingTour.Model\\ViewModel\\ResetPassword.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-20T03:28:10.511Z"
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{eefa5220-e298-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "TourController.cs",
-              "DocumentMoniker": "D:\\K17_KTPM\\Git_Repo\\BookingTourV1\\BookingTourAPI\\BookingTour\\Controllers\\TourController.cs",
-              "RelativeDocumentMoniker": "BookingTour\\Controllers\\TourController.cs",
-              "ToolTip": "D:\\K17_KTPM\\Git_Repo\\BookingTourV1\\BookingTourAPI\\BookingTour\\Controllers\\TourController.cs",
-              "RelativeToolTip": "BookingTour\\Controllers\\TourController.cs",
-              "ViewState": "AQIAAP0AAAAAAAAAAAAYwAoBAAAIAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-20T02:43:15.623Z",
+              "Title": "appsettings.json",
+              "DocumentMoniker": "D:\\CSharp\\Project\\CPL_BookingTour_Clone\\BookingTourV1\\BookingTourAPI\\BookingTour\\appsettings.json",
+              "RelativeDocumentMoniker": "BookingTour\\appsettings.json",
+              "ToolTip": "D:\\CSharp\\Project\\CPL_BookingTour_Clone\\BookingTourV1\\BookingTourAPI\\BookingTour\\appsettings.json",
+              "RelativeToolTip": "BookingTour\\appsettings.json",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAA1AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2024-11-22T05:57:01.411Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "TourAddVm.cs",
-              "DocumentMoniker": "D:\\K17_KTPM\\Git_Repo\\BookingTourV1\\BookingTourAPI\\BookingTour.Model\\ViewModel\\TourAddVm.cs",
-              "RelativeDocumentMoniker": "BookingTour.Model\\ViewModel\\TourAddVm.cs",
-              "ToolTip": "D:\\K17_KTPM\\Git_Repo\\BookingTourV1\\BookingTourAPI\\BookingTour.Model\\ViewModel\\TourAddVm.cs",
-              "RelativeToolTip": "BookingTour.Model\\ViewModel\\TourAddVm.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAqwBsAAAA7AAAA",
+              "Title": "UserController.cs",
+              "DocumentMoniker": "D:\\CSharp\\Project\\CPL_BookingTour_Clone\\BookingTourV1\\BookingTourAPI\\BookingTour\\Controllers\\UserController.cs",
+              "RelativeDocumentMoniker": "BookingTour\\Controllers\\UserController.cs",
+              "ToolTip": "D:\\CSharp\\Project\\CPL_BookingTour_Clone\\BookingTourV1\\BookingTourAPI\\BookingTour\\Controllers\\UserController.cs",
+              "RelativeToolTip": "BookingTour\\Controllers\\UserController.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-20T02:12:16.207Z",
+              "WhenOpened": "2024-11-22T05:48:33.557Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\CSharp\\Project\\CPL_BookingTour_Clone\\BookingTourV1\\BookingTourAPI\\BookingTour\\Program.cs",
+              "RelativeDocumentMoniker": "BookingTour\\Program.cs",
+              "ToolTip": "D:\\CSharp\\Project\\CPL_BookingTour_Clone\\BookingTourV1\\BookingTourAPI\\BookingTour\\Program.cs",
+              "RelativeToolTip": "BookingTour\\Program.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAHIAAAAXAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-22T05:48:33.729Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Category.cs",
+              "DocumentMoniker": "D:\\CSharp\\Project\\CPL_BookingTour_Clone\\BookingTourV1\\BookingTourAPI\\BookingTour.Model\\Category.cs",
+              "RelativeDocumentMoniker": "BookingTour.Model\\Category.cs",
+              "ToolTip": "D:\\CSharp\\Project\\CPL_BookingTour_Clone\\BookingTourV1\\BookingTourAPI\\BookingTour.Model\\Category.cs",
+              "RelativeToolTip": "BookingTour.Model\\Category.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAAiAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-22T05:48:33.73Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "CategoryController.cs",
+              "DocumentMoniker": "D:\\CSharp\\Project\\CPL_BookingTour_Clone\\BookingTourV1\\BookingTourAPI\\BookingTour\\Controllers\\CategoryController.cs",
+              "RelativeDocumentMoniker": "BookingTour\\Controllers\\CategoryController.cs",
+              "ToolTip": "D:\\CSharp\\Project\\CPL_BookingTour_Clone\\BookingTourV1\\BookingTourAPI\\BookingTour\\Controllers\\CategoryController.cs",
+              "RelativeToolTip": "BookingTour\\Controllers\\CategoryController.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABUAAAA9AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-22T05:48:33.732Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "TourController.cs",
+              "DocumentMoniker": "D:\\CSharp\\Project\\CPL_BookingTour_Clone\\BookingTourV1\\BookingTourAPI\\BookingTour\\Controllers\\TourController.cs",
+              "RelativeDocumentMoniker": "BookingTour\\Controllers\\TourController.cs",
+              "ToolTip": "D:\\CSharp\\Project\\CPL_BookingTour_Clone\\BookingTourV1\\BookingTourAPI\\BookingTour\\Controllers\\TourController.cs",
+              "RelativeToolTip": "BookingTour\\Controllers\\TourController.cs",
+              "ViewState": "AQIAAFcBAAAAAAAAAAAIwAkAAAATAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-22T05:48:34.527Z",
               "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "BookingVm.cs",
+              "DocumentMoniker": "D:\\CSharp\\Project\\CPL_BookingTour_Clone\\BookingTourV1\\BookingTourAPI\\BookingTour.Model\\ViewModel\\BookingVm.cs",
+              "RelativeDocumentMoniker": "BookingTour.Model\\ViewModel\\BookingVm.cs",
+              "ToolTip": "D:\\CSharp\\Project\\CPL_BookingTour_Clone\\BookingTourV1\\BookingTourAPI\\BookingTour.Model\\ViewModel\\BookingVm.cs",
+              "RelativeToolTip": "BookingTour.Model\\ViewModel\\BookingVm.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-22T05:48:36.341Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "TourVm.cs",
+              "DocumentMoniker": "D:\\CSharp\\Project\\CPL_BookingTour_Clone\\BookingTourV1\\BookingTourAPI\\BookingTour.Model\\ViewModel\\TourVm.cs",
+              "RelativeDocumentMoniker": "BookingTour.Model\\ViewModel\\TourVm.cs",
+              "ToolTip": "D:\\CSharp\\Project\\CPL_BookingTour_Clone\\BookingTourV1\\BookingTourAPI\\BookingTour.Model\\ViewModel\\TourVm.cs",
+              "RelativeToolTip": "BookingTour.Model\\ViewModel\\TourVm.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABEAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-22T05:48:36.343Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "IBaseService.cs",
+              "DocumentMoniker": "D:\\CSharp\\Project\\CPL_BookingTour_Clone\\BookingTourV1\\BookingTourAPI\\BookingTour.Business\\Service\\IService\\IBaseService.cs",
+              "RelativeDocumentMoniker": "BookingTour.Business\\Service\\IService\\IBaseService.cs",
+              "ToolTip": "D:\\CSharp\\Project\\CPL_BookingTour_Clone\\BookingTourV1\\BookingTourAPI\\BookingTour.Business\\Service\\IService\\IBaseService.cs",
+              "RelativeToolTip": "BookingTour.Business\\Service\\IService\\IBaseService.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAQAAAAPAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-22T05:48:36.345Z"
+            }
+          ]
+        },
+        {
+          "DockedWidth": 468,
+          "SelectedChildIndex": -1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{0ad07096-bba9-4900-a651-0598d26f6d24}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:11:0:{e8034f19-ab72-4f06-83fd-f6832b41aa63}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:12:0:{e8034f19-ab72-4f06-83fd-f6832b41aa63}"
+            }
+          ]
+        },
+        {
+          "DockedWidth": 258,
+          "SelectedChildIndex": -1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:2:0:{e8034f19-ab72-4f06-83fd-f6832b41aa63}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:3:0:{e8034f19-ab72-4f06-83fd-f6832b41aa63}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:4:0:{e8034f19-ab72-4f06-83fd-f6832b41aa63}"
+            }
+          ]
+        },
+        {
+          "DockedWidth": 258,
+          "SelectedChildIndex": -1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:1:0:{d212f56b-c48a-434c-a121-1c5d80b59b9f}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:2:0:{d212f56b-c48a-434c-a121-1c5d80b59b9f}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:3:0:{d212f56b-c48a-434c-a121-1c5d80b59b9f}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:4:0:{d212f56b-c48a-434c-a121-1c5d80b59b9f}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:5:0:{d212f56b-c48a-434c-a121-1c5d80b59b9f}"
             }
           ]
         }
