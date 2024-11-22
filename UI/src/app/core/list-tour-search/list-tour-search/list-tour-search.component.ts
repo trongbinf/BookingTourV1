@@ -1,14 +1,15 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { TourService } from '../../../features/Tour/services/tour.service';
 import { CategoryService } from '../../../features/category/services/category.service';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-import { filter, Subject, takeUntil } from 'rxjs';
+import { filter, min, Subject, take, takeUntil } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { CategoryTours } from '../../../features/category/model/category-tour.model';
 import { PaginatedResponse } from '../../../features/Tour/models/paginated.model';
 import { Tour } from '../../../features/Tour/models/tour.model';
 import flatpickr from 'flatpickr';
+import * as noUiSlider from 'nouislider';
 
 @Component({
   selector: 'app-list-tour-search',
@@ -18,33 +19,38 @@ import flatpickr from 'flatpickr';
   styleUrl: './list-tour-search.component.css'
 })
 export class ListTourSearchComponent implements OnInit, OnDestroy {
+  @ViewChild('slider', { static: true }) slider!: ElementRef;
   searchParams: any = {};
   name: string = '';
-  fliterParams: any = {};
   country: string[] = [];
   tours?: PaginatedResponse<Tour>;
   city?: string[] = [];
   categories: CategoryTours[] = [];
   category?: string = '';
-  minPrice?: number;
-  maxPrice?: number;
+  minPrice?: number = 50000;
+  maxPrice?: number = 1000000000;
   selectedCountry: string = '';
   selectedCity: string = '';
   pageIndex?: number = 1;
   pageSize: number = 8;
   today: string = '';
   isFliter: boolean = false;
+  activities: string[] = [];
+  duration: string[] = [];
   private destroy$: Subject<void> = new Subject<void>();
 
   constructor(private tourSerive: TourService, private cateServive: CategoryService,
     private route: ActivatedRoute, private router: Router) {
   }
 
+
+
   ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.complete();
   }
   ngOnInit(): void {
+    this.initializeSlider();
     this.tourSerive.getAllCountry().pipe(takeUntil(this.destroy$)).subscribe(data => {
       this.country = data;
     });
@@ -74,6 +80,11 @@ export class ListTourSearchComponent implements OnInit, OnDestroy {
 
   onCategoryChange(event: Event) {
     const selectedCate = (event.target as HTMLSelectElement).value;
+    this.duration = [];
+    this.activities = [];
+    this.selectedCity = '';
+    this.selectedCountry = '';
+    this.pageIndex = 1;
     if (selectedCate) {
       // Chỉ cập nhật tham số category
       this.searchParams = { category: selectedCate };
@@ -88,78 +99,45 @@ export class ListTourSearchComponent implements OnInit, OnDestroy {
     } else {
       this.updateUrl({ category: selectedCate }, false);
     }
-    if (this.searchParams.category == undefined) {
-      this.updateUrl({ name: '' }, false);
-    }
     this.searchNow();
   }
 
   searchNow() {
-    const paramKeys = Object.keys(this.searchParams); // Lấy danh sách các key của searchParams
-    // Nếu chỉ có duy nhất một key và đó là 'category'
+    const paramKeys = Object.keys(this.searchParams);
     if (paramKeys.length === 1 && paramKeys[0] === 'category') {
-      const category = this.searchParams.category;
-      if (!category) {
-        this.tourSerive.getTourSearch('', '', '', '', '', '', '', this.pageIndex, this.pageSize)
-          .pipe(takeUntil(this.destroy$))
-          .subscribe({
-            next: response => {
-              this.tours = response;
-              // Cập nhật URL để xóa mọi tham số, đưa về trạng thái ban đầu
-              this.updateUrl({ category: '' }, true);
-            },
-            error: err => console.log(`Err: ${err}`)
-          });
-      } else {
-        this.tourSerive.getTourByCategory(category, this.pageSize, this.pageIndex)
-          .pipe(takeUntil(this.destroy$))
-          .subscribe({
-            next: response => {
-              this.category = category;
-              this.tours = response;
-              // Cập nhật URL sau khi tìm kiếm xong
-              if (this.isFliter) {
-                this.updateUrl({ category: `${category}` }, true);
-              } else {
-                this.updateUrl({ category: `${category}` }, false);
-              }
-              this.isFliter = false;
-            },
-            error: err => console.log(err)
-          });
-      }
-    }
-    else {
-      // Nếu có nhiều key hơn hoặc không chỉ chứa 'category'
-      const {
-        name = '',
-        city = '',
-        country = '',
-        dateRange = '',
-        categories = '',
-        minPrice = '',
-        maxPrice = '',
-        pageIndex = 1,
-        pageSize = 8
-      } = this.searchParams;
-      this.tourSerive.getTourSearch(name, city, country, categories, minPrice, maxPrice, dateRange, pageIndex, pageSize)
-        .pipe(takeUntil(this.destroy$))
+      this.category = this.searchParams.category;
+      this.tourSerive.filterTour(this.selectedCity, this.selectedCountry, this.category,
+        this.minPrice?.toString(), this.maxPrice?.toString(), this.duration, this.activities, this.pageIndex, this.pageSize).pipe(takeUntil(this.destroy$))
         .subscribe({
           next: response => {
             this.tours = response;
-            // Cập nhật URL sau khi tìm kiếm xong
+          },
+          error: err => {
+            console.log(err);
+          }
+        })
+    } else {
+      this.pageIndex = 1;
+      console.log(this.searchParams.name);
+      console.log(this.searchParams.dateRange);
+      this.tourSerive.searchTour(this.searchParams.name, this.searchParams.dateRange, this.pageIndex, this.pageSize)
+        .pipe(takeUntil(this.destroy$)).subscribe({
+          next: response => {
+            this.tours = response;
             if (this.isFliter) {
-              this.updateUrl({ name: `${name}`, dateRange: `${dateRange}` }, false);
+              this.updateUrl({ name: this.searchParams.name, dateRange: this.searchParams.dateRange }, false);
             } else {
-              this.updateUrl({ name: `${name}`, dateRange: `${dateRange}` }, true);
+              this.updateUrl({ name: this.searchParams.name, dateRange: this.searchParams.dateRange }, true);
             }
             this.isFliter = true;
+
           },
-          error: err => console.log(`Err: ${err}`)
-        });
+          error: err => {
+            console.log(err);
+          }
+        })
     }
   }
-
 
 
   goToPage(page?: number) {
@@ -187,7 +165,6 @@ export class ListTourSearchComponent implements OnInit, OnDestroy {
       this.tourSerive.getCityByCountry(selectedCountry).subscribe({
         next: response => {
           this.city = response;
-          console.log(response);
         },
         error: err => {
           console.log(err);
@@ -226,6 +203,66 @@ export class ListTourSearchComponent implements OnInit, OnDestroy {
     } else {
       console.error('searchParams is not extensible');
     }
+  }
+
+  // show number page 
+  getVisiablePage(): number[] {
+    if (!this.tours?.totalPages || !this.tours.currentPage) {
+      return [];
+    }
+    const totalPage = this.tours.totalPages;
+    const currentPage = this.tours.currentPage;
+
+    const startPage = Math.max(1, currentPage - 1);
+    const endPage = Math.min(totalPage, currentPage + 1);
+
+    const pages: number[] = [];
+    for (let page = startPage; page <= endPage; page++) {
+      pages.push(page);
+    }
+    return pages;
+  }
+
+
+
+  onActivityChange(activity: string) {
+    const index = this.activities.indexOf(activity);
+    if (index === -1) {
+      this.activities.push(activity);  // Nếu chưa có, thêm vào mảng
+    } else {
+      this.activities.splice(index, 1);  // Nếu đã có, xóa khỏi mảng
+    }
+  }
+
+  onDurationChange(day: string) {
+    const index = this.duration.indexOf(day);
+    if (index === -1) {
+      this.duration.push(day);  // Nếu chưa có, thêm vào mảng
+    } else {
+      this.duration.splice(index, 1);  // Nếu đã có, xóa khỏi mảng
+    }
+  }
+
+
+  // slider
+  initializeSlider() {
+    const sliderElement = this.slider.nativeElement;
+    noUiSlider.create(sliderElement, {
+      //! make sure that is not null or underfind
+      start: [this.minPrice!, 10000000],
+      connect: true,
+      range: {
+        min: 50000,
+        max: 30000000,
+      },
+      step: 50000
+    });
+
+    // Lắng nghe sự kiện khi giá trị slider thay đổi
+    sliderElement.noUiSlider?.on('update', (values: string[]) => {
+      this.minPrice = parseFloat(values[0]);
+      this.maxPrice = parseFloat(values[1]);
+    });
   }
 
 

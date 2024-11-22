@@ -65,9 +65,9 @@
                                         class="fa-solid fa-map-marker-alt text-primary me-2"></span>{{tour.tour.city}} -
                                     {{tour.tour.country}}</h5>
                                 <div class="d-sm-flex d-md-block d-lg-flex flex-between-center">
-                                    <h3 class="text-white fw-bold mb-3 mb-sm-0 mb-md-3 mb-lg-0 fs-7 fs-lg-6">
-                                        {{tour.tour.price}}
-                                    </h3>
+                                    <h6 class="text-white fw-bold mb-3 mb-sm-0 mb-md-3 mb-lg-0 fs-7 fs-lg-6">
+                                        {{tour.tour.price | number}}
+                                    </h6>
                                     <div class="d-flex gap-3">
                                         <h5 class="text-secondary-lighter fw-normal"> <span
                                                 class="fa-solid fa-clock fs-9 me-2"></span>3 days</h5>
@@ -101,58 +101,14 @@
                 Team Phoenix!</p>
         </div>
         <div class="row g-3">
-            <div class="col-md-6 col-xl-4">
-                <div class="img-zoom-hover rounded-3 overflow-hidden position-relative"><a href="#!"><img
-                            class="latest-img w-100 object-fit-cover" src="../../assets/img/gallery/51.png"
-                            alt="" /></a>
+            <div *ngFor="let item of toursRandom" class="col-md-6 col-xl-4">
+                <div class="img-zoom-hover rounded-3 overflow-hidden position-relative"><a
+                        [routerLink]="['/tour-detail',item.tour.tourId]"><img class="latest-img w-100 object-fit-cover"
+                            src="../../assets/img/gallery/51.png" alt="" /></a>
                     <div class="backdrop-faded"><a class="fw-semibold mb-0 text-secondary-lighter stretched-link"
-                            href="#!"><span class="fa-solid fa-location-dot text-secondary-lighter me-2"></span>Bali
-                            Indonesia</a></div>
-                </div>
-            </div>
-            <div class="col-md-6 col-xl-4">
-                <div class="img-zoom-hover rounded-3 overflow-hidden position-relative"><a href="#!"><img
-                            class="latest-img w-100 object-fit-cover" src="../../assets/img/gallery/52.png"
-                            alt="" /></a>
-                    <div class="backdrop-faded"><a class="fw-semibold mb-0 text-secondary-lighter stretched-link"
-                            href="#!"><span
-                                class="fa-solid fa-location-dot text-secondary-lighter me-2"></span>Barcelona</a></div>
-                </div>
-            </div>
-            <div class="col-md-6 col-xl-4">
-                <div class="img-zoom-hover rounded-3 overflow-hidden position-relative"><a href="#!"><img
-                            class="latest-img w-100 object-fit-cover" src="../../assets/img/gallery/53.png"
-                            alt="" /></a>
-                    <div class="backdrop-faded"><a class="fw-semibold mb-0 text-secondary-lighter stretched-link"
-                            href="#!"><span class="fa-solid fa-location-dot text-secondary-lighter me-2"></span>Bali
-                            Indonesia</a></div>
-                </div>
-            </div>
-            <div class="col-md-6 col-xl-4">
-                <div class="img-zoom-hover rounded-3 overflow-hidden position-relative"><a href="#!"><img
-                            class="latest-img w-100 object-fit-cover" src="../../assets/img/gallery/54.png"
-                            alt="" /></a>
-                    <div class="backdrop-faded"><a class="fw-semibold mb-0 text-secondary-lighter stretched-link"
-                            href="#!"><span
-                                class="fa-solid fa-location-dot text-secondary-lighter me-2"></span>Sydney</a></div>
-                </div>
-            </div>
-            <div class="col-md-6 col-xl-4">
-                <div class="img-zoom-hover rounded-3 overflow-hidden position-relative"><a href="#!"><img
-                            class="latest-img w-100 object-fit-cover" src="../../assets/img/gallery/55.png"
-                            alt="" /></a>
-                    <div class="backdrop-faded"><a class="fw-semibold mb-0 text-secondary-lighter stretched-link"
-                            href="#!"><span class="fa-solid fa-location-dot text-secondary-lighter me-2"></span>Great
-                            Barrier Reef</a></div>
-                </div>
-            </div>
-            <div class="col-md-6 col-xl-4">
-                <div class="img-zoom-hover rounded-3 overflow-hidden position-relative"><a href="#!"><img
-                            class="latest-img w-100 object-fit-cover" src="../../assets/img/gallery/56.png"
-                            alt="" /></a>
-                    <div class="backdrop-faded"><a class="fw-semibold mb-0 text-secondary-lighter stretched-link"
-                            href="#!"><span class="fa-solid fa-location-dot text-secondary-lighter me-2"></span>Grand
-                            Canyon</a></div>
+                            [routerLink]="['/tour-detail',item.tour.tourId]"><span
+                                class="fa-solid fa-location-dot text-secondary-lighter me-2"></span>
+                            {{item.tour.city}} - {{item.tour.country}}</a></div>
                 </div>
             </div>
         </div>
