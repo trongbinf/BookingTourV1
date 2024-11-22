@@ -1,13 +1,13 @@
 import { User } from "../../auth/models/user.model";
-import { Tour } from "../../Tour/models/tour.model";
+import { TourGet } from "../../Tour/models/tour-get.model";
 
 export enum StatusType {
-    Submited,     // Đã gửi
-    Pending,      // Đang chờ duyệt
-    Confirmed,    // Đã xác nhận
-    Canceled,     // Đã hủy
-    Available,    // Có sẵn
-    Unavailable   // Không khả dụng
+    Submited = 0,      // Đã gửi
+    Pending = 1,       // Đang chờ duyệt
+    Confirmed = 2,     // Đã xác nhận
+    Canceled = 3,      // Đã hủy
+    Available = 4,     // Có sẵn
+    Unavailable = 5    // Không khả dụng
 }
 
 
@@ -19,7 +19,9 @@ export interface Booking {
     personNumber: number;
     notes?: string;
     status: StatusType;
-    tour?: Tour;
+    tour?: TourGet;
     userId: string;
+    tourId: number;
     user?: User;
 }
+

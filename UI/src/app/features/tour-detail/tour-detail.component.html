@@ -575,67 +575,32 @@
             </div>
             <h2 class="mt-5 mb-3">Similar tours</h2>
             <div class="row g-3">
-                <div class="col-md-6 col-xl-4">
-                    <div class="hoverbox rounded"><a href="trip-details.html"><img class="img-fluid"
-                                src="../../../assets/img/trip/7.png" alt="" />
+                <div class="col-md-6 col-xl-4" *ngFor="let tour of tours">
+                    <div class="hoverbox rounded">
+                        <a href="/tour-detail/{{tour.tour.tourId}}">
+                            <img class="img-fluid" src="../../../assets/img/trip/10.png" alt="" />
                             <div class="backdrop-faded">
-                                <h3 class="text-underline fs-7 fs-lg-6 text-white fw-bold mb-2">Stormtrooper for a day
+                                <h3 class="text-underline fs-7 fs-lg-6 text-white fw-bold mb-2">{{tour.tour.tourName}}
                                 </h3>
                                 <h5 class="text-secondary-lighter fw-normal mb-3"><span
-                                        class="fa-solid fa-map-marker-alt text-primary me-2"></span>The Death Star</h5>
+                                        class="fa-solid fa-map-marker-alt text-primary me-2"></span>{{tour.tour.city}},
+                                    {{tour.tour.country}} </h5>
                                 <div class="d-sm-flex d-md-block d-lg-flex flex-between-center">
-                                    <h3 class="text-white fw-bold mb-3 mb-sm-0 mb-md-3 mb-lg-0 fs-7 fs-lg-6">$ 2,899
+                                    <h3 class="text-white fw-bold mb-3 mb-sm-0 mb-md-3 mb-lg-0 fs-7 fs-lg-6">
+                                        {{tour.tour.price| number}} VNĐ
                                     </h3>
                                     <div class="d-flex gap-3">
                                         <h5 class="text-secondary-lighter fw-normal"> <span
-                                                class="fa-solid fa-clock fs-9 me-2"></span>3 days</h5>
+                                                class="fa-solid fa-clock fs-9 me-2"></span>{{tour.tour.duration}}</h5>
                                         <h5 class="text-secondary-lighter fw-normal"> <span
-                                                class="fa-solid fa-user fs-9 me-2"></span>From 1 to people</h5>
+                                                class="fa-solid fa-user fs-9 me-2"></span>From 1 to
+                                            {{tour.tour.personNumber}} people</h5>
                                     </div>
                                 </div>
                             </div>
-                        </a></div>
-                </div>
-                <div class="col-md-6 col-xl-4">
-                    <div class="hoverbox rounded"><a href="trip-details.html"><img class="img-fluid"
-                                src="../../../assets/img/trip/8.png" alt="" />
-                            <div class="backdrop-faded">
-                                <h3 class="text-underline fs-7 fs-lg-6 text-white fw-bold mb-2">Walk where the king
-                                    walked</h3>
-                                <h5 class="text-secondary-lighter fw-normal mb-3"><span
-                                        class="fa-solid fa-map-marker-alt text-primary me-2"></span>Wakanda</h5>
-                                <div class="d-sm-flex d-md-block d-lg-flex flex-between-center">
-                                    <h3 class="text-white fw-bold mb-3 mb-sm-0 mb-md-3 mb-lg-0 fs-7 fs-lg-6">$ 5,999
-                                    </h3>
-                                    <div class="d-flex gap-3">
-                                        <h5 class="text-secondary-lighter fw-normal"> <span
-                                                class="fa-solid fa-clock fs-9 me-2"></span>3 days</h5>
-                                        <h5 class="text-secondary-lighter fw-normal"> <span
-                                                class="fa-solid fa-user fs-9 me-2"></span>From 1 to people</h5>
-                                    </div>
-                                </div>
-                            </div>
-                        </a></div>
-                </div>
-                <div class="col-md-6 col-xl-4">
-                    <div class="hoverbox rounded"><a href="trip-details.html"><img class="img-fluid"
-                                src="../../../assets/img/trip/9.png" alt="" />
-                            <div class="backdrop-faded">
-                                <h3 class="text-underline fs-7 fs-lg-6 text-white fw-bold mb-2">Petting the ghost</h3>
-                                <h5 class="text-secondary-lighter fw-normal mb-3"><span
-                                        class="fa-solid fa-map-marker-alt text-primary me-2"></span>Winterfell</h5>
-                                <div class="d-sm-flex d-md-block d-lg-flex flex-between-center">
-                                    <h3 class="text-white fw-bold mb-3 mb-sm-0 mb-md-3 mb-lg-0 fs-7 fs-lg-6">$ 2,999
-                                    </h3>
-                                    <div class="d-flex gap-3">
-                                        <h5 class="text-secondary-lighter fw-normal"> <span
-                                                class="fa-solid fa-clock fs-9 me-2"></span>3 days</h5>
-                                        <h5 class="text-secondary-lighter fw-normal"> <span
-                                                class="fa-solid fa-user fs-9 me-2"></span>From 1 to people</h5>
-                                    </div>
-                                </div>
-                            </div>
-                        </a></div>
+
+                        </a>
+                    </div>
                 </div>
             </div>
         </div><!-- end of .container-->
@@ -942,12 +907,9 @@
                             </select>
                         </ng-template>
                     </div>
-                </div>
 
-
-                <!-- People Count Section -->
-                <div class="row g-5 mb-4">
-                    <div class="col-md-6">
+                    <!-- Số người (People Count) -->
+                    <div class="col-md-4">
                         <label class="fw-bold mb-2 fs-7 text-body-emphasis">Số người</label>
                         <div class="input-group gap-2" data-quantity="data-quantity">
                             <button class="btn btn-phoenix-primary rounded px-3" data-type="minus"
@@ -963,7 +925,6 @@
                         </div>
                     </div>
                 </div>
-
                 <!-- Pricing Summary Section -->
                 <div class="card">
                     <div class="card-body">

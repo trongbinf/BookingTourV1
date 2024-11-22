@@ -23,19 +23,20 @@ namespace BookingTour.Data.Data
 			);
 
 			modelBuilder.Entity<IdentityUser>().HasData(
-		
+
 				new IdentityUser
 				{
-					Id = "test-user-id",
+					Id = Guid.NewGuid().ToString(),
 					UserName = "user@booking.com",
 					NormalizedUserName = "USER@BOOKING.COM",
 					Email = "user@booking.com",
 					NormalizedEmail = "USER@BOOKING.COM",
-					EmailConfirmed = true, 
+					EmailConfirmed = true,
 					PasswordHash = new PasswordHasher<IdentityUser>().HashPassword(null, "UserPassword123"),
-					SecurityStamp = Guid.NewGuid().ToString()
+					SecurityStamp = Guid.NewGuid().ToString(),
+					LockoutEnabled = true
 				}
-	            );
+				); ; 
 
 
 			modelBuilder.Entity<Tour>().HasData(

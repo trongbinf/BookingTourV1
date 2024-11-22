@@ -43,8 +43,7 @@ namespace BookingTour
 
             builder.Services.AddScoped<IEmailService, EmailService>();
 
-            builder.Services.AddSingleton<IEmailSender>(sp =>
-			   new EmailSender(sp.GetRequiredService<IConfiguration>()));
+         
 
 			builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 			builder.Services.AddScoped<ITourService, TourService>();

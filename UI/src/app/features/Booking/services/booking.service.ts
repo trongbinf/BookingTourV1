@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { BASE_URL } from '../../../app.config';
 import { CreateBooking } from '../models/create-booking.model';
-import { BookingVM } from '../models/bookingVm.model';
+import { Booking } from '../models/booking.model';
 
 
 @Injectable({
@@ -15,20 +15,19 @@ export class BookingService {
 
   constructor(private http: HttpClient) { }
 
-  getAll(): Observable<BookingVM[]> {
-    return this.http.get<BookingVM[]>(this.apiUrl);
+  getAll(): Observable<Booking[]> {
+    return this.http.get<Booking[]>(this.apiUrl);
   }
 
-  getById(id: number): Observable<BookingVM> {
-    return this.http.get<BookingVM>(`${this.apiUrl}/${id}`);
-  }
-
-  update(id: number, booking: BookingVM): Observable<void> {
-    return this.http.put<void>(`${this.apiUrl}/${id}`, booking);
+  getById(id: number): Observable<Booking> {
+    return this.http.get<Booking>(`${this.apiUrl}/${id}`);
   }
 
   insert(booking: CreateBooking): Observable<void> {
     return this.http.post<void>(`${this.apiUrl}/add`, booking);
   }
 
+  updateStatus(bookingId: number, status: number): Observable<void> {
+    return this.http.put<void>(`${this.apiUrl}/update-status/${bookingId}?status=${status}`, {});
+  }
 }

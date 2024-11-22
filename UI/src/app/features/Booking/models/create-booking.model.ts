@@ -15,7 +15,7 @@ export interface CreateBooking {
     notes?: string;
     status: StatusType;
     tourId: number;
-    userId: string;
+    userId: string | null;
 }
 
 

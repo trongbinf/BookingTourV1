@@ -46,7 +46,7 @@ export class LoginComponent {
           const userName = decodedToken['sub'] || decodedToken['userName'];
           const fullName = decodedToken['name'] || decodedToken['fullName'];
           const email = decodedToken['email'] || decodedToken['Email'];
-
+          sessionStorage.setItem('userId', userId);
           // Gọi setUser với role và bookings lấy từ response
           this.authService.setUser({
             id: userId,

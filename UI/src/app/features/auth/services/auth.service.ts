@@ -139,4 +139,8 @@ export class AuthService {
     this.cookieService.delete('RefreshToken', '/')
     this.$user.next(undefined);
   }
+
+  getUserId(): string | null {
+    return sessionStorage.getItem('userId');
+  }
 }
