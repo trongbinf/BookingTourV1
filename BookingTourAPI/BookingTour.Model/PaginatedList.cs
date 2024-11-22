@@ -32,5 +32,6 @@
             PageSize = pageSize;
             TotalPages = (int)Math.Ceiling(totalCount / (double)pageSize);
         }
+        
     }
 }

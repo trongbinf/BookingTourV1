@@ -1,4 +1,5 @@
 ﻿using BookingTour.Model;
+using BookingTour.Model.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +12,8 @@ namespace BookingTour.Data.Repository.IRepository
 	public interface ITour : IRepository<Tour>
 	{
 		Task UpdateAsync(Tour tour);
-	
-	}
+		Task<IEnumerable<string>> GetAllCountry();
+        Task<IEnumerable<string>> GetAllCityByCountry(string country);
+
+    }
 }

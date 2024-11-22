@@ -2,11 +2,11 @@
 {
 	public enum StatusType
 	{
-		Submited,     // Đã gửi
-		Pending,      // Đang chờ duyệt
-		Confirmed,    // Đã xác nhận
-		Canceled,     // Đã hủy
-		Available,    // Có sẵn
-		Unavailable   // Không khả dụng
+		Submited,     // Đã gửi 0
+		Pending,      // Đang chờ duyệt 1
+		Confirmed,    // Đã xác nhận 2
+		Canceled,     // Đã hủy 3
+		Available,    // Có sẵn 4
+		Unavailable   // Không khả dụng 5
 	}
 }

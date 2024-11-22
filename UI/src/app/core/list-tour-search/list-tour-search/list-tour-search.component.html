@@ -1,0 +1,302 @@
+<!-- ============================================-->
+
+<div class="container-medium-md px-0 px-md-3 mt-5">
+    <div class="px-3 py-8 position-relative">
+        <div class="bg-holder overlay rounded-md-2"
+            style="background-image:url(../../../../assets/img/bg/42.png);background-position: center; background-size: cover;">
+        </div>
+        <!--/.bg-holder-->
+        <div
+            class="row gx-0 gy-3 gy-md-0 align-items-center mx-auto p-3 bg-body-emphasis rounded-5 rounded-md-pill position-relative border w-lg-75">
+            <form (ngSubmit)="searchNow()" #searchForm="ngForm" class="d-flex w-100">
+                <div class="col-12 col-md" style="margin: auto;">
+                    <div class="form-icon-container border-bottom border-bottom-md-0 border-translucent pb-3 pb-md-0">
+                        <input class="form-control form-icon-input border-0 py-0 shadow-none fs-8" type="text"
+                            name="name" [(ngModel)]="searchParams.name"
+                            (ngModelChange)="updateSearchParam('name', $event)" placeholder="Pick a place" required />
+                        <span class="fa-solid fa-map-marker-alt form-icon text-body-tertiary top-0"
+                            data-fa-transform="down-2"></span>
+                    </div>
+                </div>
+                <div class="col-6 col-md" style="margin: auto;">
+                    <div class="form-icon-container flatpickr-input-container"><input
+                            class="form-control date-picker form-icon-input border-y-0 border-start-0 border-start-md py-0 shadow-none border-translucent fs-8 rounded-0"
+                            type="text" placeholder="Pick a date" name="dateRange" [(ngModel)]="searchParams.dateRange"
+                            (ngModelChange)="updateSearchParam('dateRange', $event)" /><span
+                            class="fa-solid fa-calendar form-icon top-0 text-body-tertiary"
+                            data-fa-transform="down-2"></span>
+                    </div>
+
+                </div>
+                <div class="col-12 col-md-auto">
+                    <button [disabled]="!searchForm.valid || !searchParams.name || !searchParams.dateRange"
+                        type="submit" class="btn btn-lg btn-phoenix-primary rounded-pill w-100">
+                        <span class="fa-solid fa-search me-2"></span>Search
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- ============================================-->
+<!-- <section> begin ============================-->
+<section class="py-0">
+    <div class="container-medium">
+        <div class="py-6">
+            <div class="d-flex">
+                <select class="form-select w-sm-auto me-4" id="category" name="category"
+                    [(ngModel)]="searchParams.category" (change)=" onCategoryChange($event)">
+                    <option [value]="''">Select Category</option>
+                    <option [value]="''">All Tour</option>
+                    <option *ngFor="let item of categories" [value]="item.name">
+                        {{item.name}}</option>
+                </select>
+                <!-- List Item -->
+                <!-- <div class="me-4">
+                    <div class="list-group d-flex flex-row flex-wrap">
+                        <span
+                            class="list-group-item d-flex justify-content-between align-items-center flex-grow-1 me-2 mb-2">
+                            <span>Hello</span>
+                            <p class="m-0 justify-content-center ps-2 mb-1"><button
+                                    class="btn btn- btn-close p-0"></button>
+                            </p>
+                        </span>
+                    </div>
+                </div> -->
+
+
+                <button class="btn btn-phoenix-secondary text-nowrap px-3 px-md-4 ms-auto me-2"><span
+                        class="fa-solid fa-map me-md-2"></span><span class="d-none d-md-inline-block">Show in
+                        map </span></button><button class="btn btn-phoenix-secondary text-nowrap px-3" type="button"
+                    data-bs-toggle="offcanvas" data-bs-target="#hotelFilterOffcanvas"
+                    aria-controls="hotelFilterOffcanvas"><span class="fa-solid fa-filter me-md-2"></span><span
+                        class="d-none d-md-inline-block">Filters</span></button>
+            </div>
+        </div>
+        <div class="row g-3 mb-6">
+            <div class="col-sm-6 col-lg-4 col-xl-3" *ngFor="let tour of tours?.items">
+                <div class="hover-actions-trigger mx-auto rounded-3 overflow-hidden"><img class="img-fluid"
+                        src="../../../../assets/img/hotels/1.png" alt="" />
+                    <div class="hover-actions top-0 end-0 mt-4 me-4 z-5"><button class="btn btn-wish"><span
+                                class="far fa-heart" data-fa-transform="down-1"></span></button></div>
+                    <div class="backdrop-faded backdrop-secondary-dark h-100 d-flex flex-column justify-content-end"><a
+                            class="stretched-link fs-7 text-white fw-bold"
+                            [routerLink]="['/tour-detail',tour.tour.tourId]">{{tour.tour.tourName}}</a>
+                        <p class="mb-2 text-secondary-lighter"><span
+                                class="fa-solid fa-map-marker-alt me-2"></span>{{tour.tour.city}}-{{tour.tour.country}}
+                        </p>
+                        <div class="d-flex align-items-center gap-3"><span
+                                class="badge badge-phoenix badge-phoenix-warning fs-8 fw-normal"><span
+                                    class="fa-solid fa-star me-1 fs-9" data-fa-transform="up-1"></span><span
+                                    class="badge-label">3.8</span></span>
+                            <h4 class="mb-0 text-white fw-bold text-nowrap">{{tour.tour.price|number}} VNĐ<span
+                                    class="text-secondary-lighter fs-8 fw-normal">/ 1 person</span></h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pagination Section -->
+        <nav aria-label="Page navigation" class="mt-4">
+            <ul class="pagination justify-content-center">
+                <!-- First Page -->
+                <li class="page-item" [class.disabled]="tours?.currentPage === 1">
+                    <button class="page-link" (click)="goToPage(1)" aria-label="First">
+                        <span aria-hidden="true">&laquo;&laquo;</span> First
+                    </button>
+                </li>
+                <!-- Previous Page -->
+                <li class="page-item" [class.disabled]="tours?.currentPage === 1">
+                    <button class="page-link" (click)="goToPreviousPage()" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span> Previous
+                    </button>
+                </li>
+                <!-- Page Numbers -->
+                <li class="page-item" *ngFor="let page of getVisiablePage(); let i = index "
+                    [class.active]="page === tours?.currentPage">
+                    <button class="page-link" (click)="goToPage(page)">
+                        {{ page }}
+                    </button>
+                </li>
+                <!-- Next Page -->
+                <li class="page-item" [class.disabled]="tours?.currentPage === tours?.totalPages">
+                    <button class="page-link" (click)="goToNextPage()" aria-label="Next">
+                        Next <span aria-hidden="true">&raquo;</span>
+                    </button>
+                </li>
+                <!-- Last Page -->
+                <li class="page-item" [class.disabled]="tours?.currentPage === tours?.totalPages">
+                    <button class="page-link" (click)="goToPage(tours?.totalPages)" aria-label="Last">
+                        Last <span aria-hidden="true">&raquo;&raquo;</span>
+                    </button>
+                </li>
+            </ul>
+        </nav>
+    </div><!-- end of .container-->
+</section>
+<!-- <section> close ============================-->
+<!-- ============================================-->
+
+<div class="offcanvas offcanvas-end" tabindex="-1" id="hotelFilterOffcanvas"
+    aria-labelledby="hotelFilterOffcanvasLabel">
+    <div class="offcanvas-header p-4 bg-body-highlight">
+        <h5 class="mb-0 text-body-highlight" id="hotelFilterOffcanvasLabel">Filter</h5>
+        <button class="btn btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+
+    <form (ngSubmit)="searchNow()" class="d-flex flex-column h-100">
+        <div class="offcanvas-body scrollbar p-4 overflow-auto">
+            <!-- Price Range -->
+            <h4 class="text-body-highlight mb-4">Price Range</h4>
+            <div class="row g-2">
+                <div class="col-6">
+                    <div class="form-icon-container">
+                        <input
+                            [value]="minPrice?.toLocaleString('vi-VN', { style: 'decimal', minimumFractionDigits: 0 })"
+                            class="form-control form-icon-input" type="text" placeholder="Minimum amount" readonly
+                            id="minPrice" name="minPrice" />
+                        <span class="fa-solid fa-dollar-sign form-icon text-body-tertiary fs-9"></span>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="form-icon-container">
+                        <input [value]="maxPrice?.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })"
+                            class="form-control form-icon-input" type="text" placeholder="Maximum amount" readonly
+                            id="maxPrice" name="maxPrice" />
+                        <span class="fa-solid fa-dollar-sign form-icon text-body-tertiary fs-9"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="noUi-primary-lighter noUi-slider-large noUi-handle-primary noUi-handle-circle ps-5 pe-3 mt-3"
+                #slider></div>
+            <hr class="my-5" />
+            <!-- Duration -->
+            <h4 class="mb-4 text-body-highlight">Duration</h4>
+            <div class="row g-3">
+                <!-- Checkbox options here -->
+                <div class="col-6">
+                    <div class="form-check">
+                        <input class="form-check-input" id="durationLess6" type="checkbox" value="1 Ngày"
+                            name="duration" [ngModel]="duration.includes('1 Ngày')"
+                            (ngModelChange)="onDurationChange('1 Ngày')" />
+                        <label class="form-check-label fs-8 text-body-highlight fw-normal" for="durationLess6">1
+                            Ngày</label>
+                    </div>
+                    <div class="form-check mb-0">
+                        <input class="form-check-input" id="duration12to24" type="checkbox" value="3 Ngày"
+                            [ngModel]="duration.includes('3 Ngày')" (ngModelChange)="onDurationChange('3 Ngày')"
+                            name="duration" />
+                        <label class="form-check-label fs-8 text-body-highlight fw-normal" for="duration12to24">3
+                            Ngày</label>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="form-check">
+                        <input class="form-check-input" id="duration6to12" type="checkbox" value="5 Ngày"
+                            [ngModel]="duration.includes('5 Ngày')" (ngModelChange)="onDurationChange('5 Ngày')"
+                            name="duration" />
+                        <label class="form-check-label fs-8 text-body-highlight fw-normal" for="duration6to12">5
+                            Ngày</label>
+                    </div>
+                    <div class="form-check mb-0">
+                        <input class="form-check-input" id="duration24plus" type="checkbox" value="7 Ngày"
+                            [ngModel]="duration.includes('7 Ngày')" (ngModelChange)="onDurationChange('7 Ngày')"
+                            name="duration" />
+                        <label class="form-check-label fs-8 text-body-highlight fw-normal" for="duration24plus">7
+                            Ngày</label>
+                    </div>
+                </div>
+            </div>
+
+
+            <hr class="my-5" />
+            <!-- Activity -->
+            <h4 class="mb-4 text-body-highlight">Activity</h4>
+            <div class="row g-3">
+                <!-- Checkbox options here -->
+                <div class="col-6">
+                    <div class="form-check">
+                        <input class="form-check-input" name="activities" id="wifi" type="checkbox"
+                            [ngModel]="activities.includes('Tìm hiểu')" (ngModelChange)="onActivityChange('Tìm hiểu')"
+                            value="Tìm hiểu" />
+                        <label class="form-check-label fs-8 text-body-highlight fw-normal" for="wifi">Tìm hiểu</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" name="activities" id="kitchen" type="checkbox"
+                            [ngModel]="activities.includes('Cắm trại')" (ngModelChange)="onActivityChange('Cắm trại')"
+                            value="Cắm trại" />
+                        <label class="form-check-label fs-8 text-body-highlight fw-normal" for="kitchen">Cắm
+                            trại</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" name="activities" id="air-conditioning" type="checkbox"
+                            [ngModel]="activities.includes('Tham quan')" (ngModelChange)="onActivityChange('Tham quan')"
+                            value="Tham quan" />
+                        <label class="form-check-label fs-8 text-body-highlight fw-normal" for="air-conditioning">Tham
+                            quan</label>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="form-check">
+                        <input class="form-check-input" name="activities" id="washer" type="checkbox"
+                            [ngModel]="activities.includes('biển')" (ngModelChange)="onActivityChange('biển')"
+                            value="biển" />
+                        <label class="form-check-label fs-8 text-body-highlight fw-normal" for="washer">Biển</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" name="activities" id="dryer" type="checkbox"
+                            [ngModel]="activities.includes('Trekking')" (ngModelChange)="onActivityChange('Trekking')"
+                            value="Trekking" />
+                        <label class="form-check-label fs-8 text-body-highlight fw-normal" for="dryer">Trekking</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" name="activities" id="heating" type="checkbox"
+                            [ngModel]="activities.includes('Khám phá')" (ngModelChange)="onActivityChange('Khám phá')"
+                            value="Khám phá" />
+                        <label class="form-check-label fs-8 text-body-highlight fw-normal" for="heating">Khám
+                            phá</label>
+                    </div>
+                </div>
+            </div>
+
+            <hr class="my-5" />
+            <!-- Location -->
+            <h4 class="mb-4 text-body-highlight">Location</h4>
+            <div class="row g-3">
+                <!-- Location-related dropdowns here -->
+                <div class="d-flex">
+                    <div class="me-2 ">
+                        <label class="form-check-label fs-8 text-body-highlight fw-normal" for="country">Country</label>
+                        <select class="form-select w-full me-4 f" id="country" name="country"
+                            [(ngModel)]="selectedCountry" (change)="onCountryChange($event)">
+                            <option value="'">Selected Country</option>
+                            <option *ngFor="let item of country" [value]="item">{{item}}</option>
+                        </select>
+                    </div>
+                    <div class="">
+                        <label for="city">City</label>
+                        <select [(ngModel)]="selectedCity" class="form-select w-full me-4" id="city" name="city">
+                            <option>Select City</option>
+                            <option *ngFor="let city of city" [value]="city">{{city}}</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="p-4 border-top border-translucent d-flex gap-2">
+            <button type="reset" class="btn btn-lg btn-phoenix-primary">Reset</button>
+            <button type="submit" class="btn btn-lg btn-primary flex-1">Search</button>
+        </div>
+        <div class="p-4 border-top border-translucent d-flex gap-2">
+
+        </div>
+    </form>
+</div>
+
+
+
+<!-- ===============================================-->
+<!--    End of Main Content-->
+<!-- ===============================================-->

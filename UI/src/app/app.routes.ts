@@ -7,9 +7,15 @@ import { ChangepasswordComponent } from './features/auth/changepassword/changepa
 import { TourListComponent } from './features/Tour/tour-list/tour-list.component';
 import { HomeComponent } from './features/home/home.component';
 import { TourDetailComponent } from './features/tour-detail/tour-detail.component';
+import { ListTourSearchComponent } from './core/list-tour-search/list-tour-search/list-tour-search.component';
 import { ManageUserComponent } from './features/manage/manage-user/manage-user.component';
 import { ProfileComponent } from './features/auth/profile/profile.component';
+<<<<<<< HEAD
 import { ManagerBookingComponent } from './features/manage/manager-booking/manager-booking.component';
+=======
+import { TourAddComponent } from './features/Tour/tour-add/tour-add.component';
+import { TourUpdateComponent } from './features/Tour/tour-update/tour-update.component';
+>>>>>>> 8070bdaf7f781a935dcff34f8108155ff6acbad3
 
 export const routes: Routes = [
     {
@@ -31,8 +37,18 @@ export const routes: Routes = [
         component: ChangepasswordComponent
     },
     {
-        path: 'tour',
+        path: 'admin-tour',
         component: TourListComponent
+    }
+    ,
+    {
+        path: 'admin-addtour',
+        component: TourAddComponent
+    }
+    ,
+    {
+        path: 'admin-tourdetails/:id',
+        component: TourUpdateComponent
     }
     ,
     {
@@ -43,6 +59,15 @@ export const routes: Routes = [
     {
         path: 'tour-detail/:id',
         component: TourDetailComponent
+    },
+    {
+        path: 'search',
+        component: ListTourSearchComponent
+    }
+    ,
+    {
+        path: 'adminUser',
+        component: ManageUserComponent
     }
     ,
     {

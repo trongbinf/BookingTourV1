@@ -1,15 +1,11 @@
 ﻿using BookingTour.Business.Service.IService;
-using BookingTour.Model;
 using BookingTour.Data.Repository.IRepository;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+using BookingTour.Model;
 using System.Linq.Expressions;
-using System.Threading.Tasks;
-
+using rm = BookingTour.Business.Service.HandleTextUnicode;
 namespace BookingTour.Business.Service
 {
-	public class TourService : ITourService
+    public class TourService : ITourService
 	{
 		private readonly IUnitOfWork _unitOfWork;
 
@@ -42,8 +38,20 @@ namespace BookingTour.Business.Service
 			return await _unitOfWork.Tour.GetAllAsync(filter, includeProperties);
 		}
 
-		
-		public async Task<Tour> GetByIdAsync(int id)
+
+        public async Task<IEnumerable<string>> GetAllCountry()
+        {
+			var list = await _unitOfWork.Tour.GetAllCountry();
+			return list;
+		}
+        public async Task<IEnumerable<string>> GetAllCityByCountry(string country)
+        {
+			var handleText = rm.RemoveUnicode(country);
+			var list = await _unitOfWork.Tour.GetAllCityByCountry(handleText);
+			return list;
+		}
+
+        public async Task<Tour> GetByIdAsync(int id)
 		{
 			return await _unitOfWork.Tour.GetFirstOrDefaultAsync(t => t.TourId == id);
 
@@ -58,8 +66,10 @@ namespace BookingTour.Business.Service
 
 		public async Task UpdateAsync(Tour entity)
 		{
-			_unitOfWork.Tour.UpdateAsync(entity); 
+			await _unitOfWork.Tour.UpdateAsync(entity); 
 			await _unitOfWork.SaveAsync(); 
 		}
-	}
+
+        
+    }
 }

@@ -103,9 +103,10 @@
             <h2>Room Listing</h2>
             <div data-list='{"valueNames":["id","userName","email"],"page":2}'>
                 <div class="d-md-flex mt-5 mb-4">
+                    <button (click)="exportTable()" class="btn btn-link text-body me-4 px-0"><span
+                            class="fa-solid fa-file-export fs-9 me-2"></span>Export</button>
                     <div class="d-flex gap-2 ms-md-auto mt-3 mt-md-0">
                         <div class="search-box">
-
                             <form class="position-relative" (submit)="searchUser($event)">
                                 <input class="form-control search-input search" (input)="searchUser()" name="key"
                                     type="search" [(ngModel)]="key" placeholder="Search products" aria-label="Search" />
@@ -118,7 +119,7 @@
                 </div>
                 <div class="table-responsive scrollbar mx-n1 px-1">
                     <ng-container *ngIf="appUsers$ | async as appUsers">
-                        <table class="table fs-9 mb-0">
+                        <table id="tableExcel" class="table fs-9 mb-0">
                             <thead>
                                 <tr>
                                     <th class="sort" data-sort="id" onclick="sortTable('id', true)">ID</th>
@@ -136,6 +137,7 @@
                                     <td class="email">{{ appUser.email }}</td>
                                     <td class="role">{{ appUser.roles == null ? 'Unverified' : appUser.roles }}</td>
                                     <td class="status">
+                                        <input name="status" [(ngModel)]="appUser.status" type="hidden">
                                         <div [ngStyle]="{
                                                             'width': '10px',
                                                             'height': '10px',
