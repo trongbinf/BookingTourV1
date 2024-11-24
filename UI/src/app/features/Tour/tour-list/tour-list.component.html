@@ -3,7 +3,7 @@
     <ol class="breadcrumb mb-0">
       <li class="breadcrumb-item"><a href="http://localhost:4200/">Home</a></li>
       <li class="breadcrumb-item">
-        <a href="http://localhost:4200/admin">Dashboard</a>
+        <a href="http://localhost:4200/admin-tour">Dashboard</a>
       </li>
       <li class="breadcrumb-item active">List Tour</li>
     </ol>
@@ -30,17 +30,27 @@
         </button>
         <div class="d-flex gap-2 ms-md-auto mt-3 mt-md-0">
           <div class="search-box">
-            <form class="position-relative">
+            <form
+              class="position-relative"
+              (submit)="searchTours(currentStatus); $event.preventDefault()"
+            >
               <input
+                [(ngModel)]="searchKeyword"
                 class="form-control search-input search"
                 type="search"
                 placeholder="Search tours"
                 aria-label="Search"
+                name="searchKeyword"
+                (input)="searchTours(currentStatus)"
               />
               <span class="fas fa-search search-box-icon"></span>
             </form>
           </div>
-          <button class="btn btn-phoenix-primary px-3">
+
+          <button
+            class="btn btn-phoenix-primary px-3"
+            (click)="searchTours(currentStatus)"
+          >
             <span class="fa-solid fa-search" data-fa-transform="down-2"></span>
           </button>
         </div>
@@ -49,19 +59,6 @@
         <table class="table fs-9 mb-0">
           <thead>
             <tr>
-              <th
-                class="white-space-nowrap fs-9 align-middle ps-0"
-                style="max-width: 20px; width: 18px"
-              >
-                <div class="form-check mb-0 fs-8">
-                  <input
-                    class="form-check-input"
-                    id="checkbox-bulk-products-select"
-                    type="checkbox"
-                    data-bulk-select='{"body":"room-listing-table-body"}'
-                  />
-                </div>
-              </th>
               <th
                 class="sort text-body-tertiary align-middle white-space-nowrap"
                 scope="col"
@@ -117,35 +114,17 @@
             </tr>
           </thead>
           <tbody class="list" id="room-listing-table-body">
-            <!-- <tr class="d-none">
-              <td class="name"></td>
-              <td class="beds"></td>
-              <td class="guest"></td>
-              <td class="bathRooms"></td>
-              <td class="amenities"></td>
-              <td class="totalRooms"></td>
-              <td></td>
-            </tr> -->
             <tr
               *ngFor="let tour of filteredTours"
               class="hover-actions-trigger btn-reveal-trigger position-static"
             >
-              <td class="fs-9 align-middle ps-0">
-                <div class="form-check mb-0 fs-8">
-                  <input
-                    class="form-check-input"
-                    type="checkbox"
-                    data-bulk-select-row='{"name":"Bunk Bed","category":"Standard Room","price":332.67,"img":"/img/hotels/17.png","bedRooms":"01","beds":"02","guest":"02","child":"01","bathRooms":"01","totalRooms":65,"amenities":["wifi","tv","common area","bathtub","Heating","Telephone","Television","common area","Kettle","iron","Coffee maker","refrigerator","Room service","Coffee maker","refrigerator","Room service","common area","bathtub","Heating","Telephone"]}'
-                  />
-                </div>
-              </td>
               <td class="align-middle py-4 name">
                 <div class="d-flex align-items-center gap-3">
-                  <a href="#!">
+                  <a [routerLink]="['/admin-tourdetails', tour.tour.tourId]">
                     <img
                       class="rounded-1 border border-translucent"
-                      src="../../../../assets/img/hotels/17.png"
-                      alt=""
+                      src="/{{ tour.tour.mainImage }}"
+                      alt="mainImg"
                       width="80"
                   /></a>
                   <div>
@@ -153,7 +132,7 @@
                       class="fs-8 fw-bolder text-body-emphasis text-nowrap"
                       href="#!"
                       [routerLink]="['/admin-tourdetails', tour.tour.tourId]"
-                      >{{ tour.tour.tourName }}</a
+                      >{{ tour.tour.tourId }}. {{ tour.tour.tourName }}</a
                     >
                     <h6 class="fw-seibold text-body text-nowrap mt-1 mb-2">
                       <span class="fa-solid fa-border-all me-2"></span
@@ -168,31 +147,17 @@
 
               <td class="align-middle px-4 beds">
                 <div class="d-flex align-items-center">
-                  <div
-                    class="d-flex align-items-center justify-content-center bg-primary-subtle rounded me-2"
-                    style="height: 24px; width: 24px"
-                  >
-                    <span
-                      class="fa-solid fa-person-shelter text-primary-darker"
-                    ></span>
-                  </div>
-                  <h5 class="text-body-emphasis fw-semibold mb-0 me-3">
+                  <p class="text-body-emphasis mb-0 me-3">
                     {{ tour.tour.city }}, {{ tour.tour.country }}
-                  </h5>
+                  </p>
                 </div>
               </td>
 
               <td class="align-middle px-4 guest">
                 <div class="d-flex align-items-center">
-                  <div
-                    class="d-flex align-items-center justify-content-center bg-warning-subtle rounded me-2"
-                    style="height: 24px; width: 24px"
-                  >
-                    <span class="fa-solid fa-user text-warning-darker"></span>
-                  </div>
-                  <h5 class="text-body-emphasis fw-semibold mb-0 me-3">
+                  <p class="text-body-emphasis mb-0 me-3">
                     {{ tour.tour.duration }}
-                  </h5>
+                  </p>
                 </div>
               </td>
 
@@ -222,7 +187,7 @@
 
               <td class="align-middle text-end ps-4 totalRooms">
                 <h4 class="text-body-secondary">
-                  {{ tour.tour.personNumber }} People
+                  {{ tour.tour.personNumber }}
                 </h4>
               </td>
               <td class="align-middle ps-4">

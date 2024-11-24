@@ -361,7 +361,9 @@ namespace BookingTour.API.Controllers
         // Hàm lưu ảnh Tamnx
         private async Task<string> SaveImageAsync(IFormFile file)
         {
-            var uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "images");
+            var currentDirectory = Directory.GetCurrentDirectory();
+
+            var uploadsFolder = Path.Combine( currentDirectory,"..","..","UI","src","assets","img","tour");
 
             if (!Directory.Exists(uploadsFolder))
             {
@@ -375,9 +377,8 @@ namespace BookingTour.API.Controllers
                 await file.CopyToAsync(stream);
             }
 
-            Console.WriteLine($"File đã được lưu tại: {filePath}");
 
-            return filePath;
+            return Path.Combine("assets", "img", "tour", file.FileName);
         }
 
 

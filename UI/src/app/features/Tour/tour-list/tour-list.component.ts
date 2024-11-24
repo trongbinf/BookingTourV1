@@ -2,20 +2,25 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TourService } from '../services/tour.service';
 import { RouterModule } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-tour-list',
   standalone: true,
-  imports: [ CommonModule, RouterModule],
+  imports: [ CommonModule, RouterModule, FormsModule],
   templateUrl: './tour-list.component.html',
   styleUrl: './tour-list.component.css'
 })
 export class TourListComponent implements OnInit {
   tours: any[] = [];
   filteredTours: any[] = [];
+  currentStatus: boolean = true; 
+
   sortedTours: any[] = [];
+
   currentSortField: string = '';
   currentSortDirection: string = 'asc';
+  searchKeyword: string = '';
 
   constructor(private tourService: TourService) {}
 
@@ -27,12 +32,25 @@ export class TourListComponent implements OnInit {
         this.filterTours(true); 
       },
       error: (err) => {
-        console.error('Lấy dữ liệu Đéo được', err);
+        console.error('Không lấy được dữ liệu', err);
       }
     });
   }
+  searchTours(status: boolean): void {
+    this.currentStatus = status;
+    this.filteredTours = this.tours.filter((tour) => tour.tour.status === this.currentStatus);
+    const keyword = this.searchKeyword.toLowerCase().trim(); 
+    this.filteredTours = this.filteredTours.filter((tour) =>
+      tour.tour.tourName.toLowerCase().includes(keyword) ||    
+    tour.tour.city.toLowerCase().includes(keyword) ||       
+    tour.tour.country.toLowerCase().includes(keyword) ||   
+    tour.tour.duration.toLowerCase().includes(keyword) ||
+    tour.tour.personNumber == keyword
+    );
+  }
 
   filterTours(status: boolean) {
+    this.currentStatus = status;
     this.filteredTours = this.tours.filter((tour) => tour.tour.status === status);
   }
 

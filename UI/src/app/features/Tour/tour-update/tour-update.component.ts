@@ -18,10 +18,14 @@ import { Category } from '../../category/model/category.model';
 export class TourUpdateComponent  {
   tour!: TourVm
   catelist: Category[] = [];
-  imagesPreview: string[] = [];
   tourId!: number; // Lấy từ URL
   category!:Category
   tourT!: TourGet
+
+  mainImagePreview: string | null = null;
+  detailImagesPreview: string[] = [];
+  newMainImage: File | null = null;
+  newDetailImages: File[] = [];
 
   constructor(
     private tourService: TourService,
@@ -64,8 +68,36 @@ export class TourUpdateComponent  {
     });
 
   }
+  onMainImageChange(event: Event): void {
+    const file = (event.target as HTMLInputElement)?.files?.[0];
+    if (file) {
+      this.newMainImage = file;
+      const reader = new FileReader();
+      reader.onload = (e) => (this.mainImagePreview = e.target?.result as string);
+      reader.readAsDataURL(file);
+    }
+  }
 
+  onDetailImagesChange(event: Event): void {
+    const files = (event.target as HTMLInputElement)?.files;
+    if (files) {
+      this.newDetailImages = Array.from(files);
+      this.detailImagesPreview = [];
+      for (let file of this.newDetailImages) {
+        const reader = new FileReader();
+        reader.onload = (e) =>
+          this.detailImagesPreview.push(e.target?.result as string);
+        reader.readAsDataURL(file);
+      }
+    }
+  }
   onUpdate() {
+    if (!this.tour.tour.tourName || !this.tour.tour.city || !this.tour.tour.country || !this.tour.tour.duration || !this.tour.tour.description) {
+    alert('Please fill in all required fields.');
+    if(this.tour.tour.mainImage) alert('đã nhận được Main Image'); 
+    if(this.tour.detailImages && this.tour.detailImages.length > 0) alert('đã nhận được detali Image'); 
+    return;
+  }
     const formData = new FormData();
 
     formData.append('TourId', this.tour.tour.tourId.toString());
@@ -80,15 +112,15 @@ export class TourUpdateComponent  {
     formData.append('Status', this.tour.tour.status.toString());
     formData.append('CategoryId', this.tour.category.categoryId.toString());
 
-    // if (this.tour.mainImage) {
-    //   formData.append('MainImage', this.tour.mainImage, this.tour.mainImage.name);
-    // }
+    if (this.newMainImage) {
+      formData.append('MainImage', this.newMainImage);
+    }
 
-    // if (this.tour.detailImages) {
-    //   for (let file of this.tour.detailImages) {
-    //     formData.append('DetailImages', file, file.name);
-    //   }
-    // }
+    if (this.newDetailImages.length > 0) {
+      for (let file of this.newDetailImages) {
+        formData.append('DetailImages', file);
+      }
+    }
 
     // Gửi yêu cầu cập nhật
     this.tourService.updateTour(this.tourId, formData).subscribe({
@@ -106,34 +138,5 @@ export class TourUpdateComponent  {
   discardChanges() {
     this.ngOnInit(); 
   }
-  onFileChange(event: any) {
-    const files = event.target.files;
-    for (let i = 0; i < files.length; i++) {
-      this.createImagePreview(files[i]);
-    }
-  }
-
-  onFileDrop(event: any) {
-    event.preventDefault();
-    const files = event.dataTransfer.files;
-    for (let i = 0; i < files.length; i++) {
-      this.createImagePreview(files[i]);
-    }
-  }
-
-  onDragOver(event: any) {
-    event.preventDefault();  
-  }
-
-  createImagePreview(file: File) {
-    const reader = new FileReader();
-    reader.onload = (e: any) => {
-      this.imagesPreview.push(e.target.result);
-    };
-    reader.readAsDataURL(file);
-  }
-
-  removeImage(image: string) {
-    this.imagesPreview = this.imagesPreview.filter((img) => img !== image);
-  }
+  
 }

@@ -187,54 +187,42 @@
         </div>
       </div>
       <div class="col-12 col-xl-6">
-        <h4 class="mb-3">Display images <small class="">(optional)</small></h4>
-        <div
-          class="dropzone dropzone-multiple p-0 mb-5"
-          id="my-awesome-dropzone"
-          (drop)="onFileDrop($event)"
-          (dragover)="onDragOver($event)"
-          data-dropzone="data-dropzone"
-        >
-          <div class="fallback">
-            <input
-              name="file"
-              type="file"
-              multiple="multiple"
-              (change)="onFileChange($event)"
+        <!-- Khối Main Image -->
+        <h4 class="mb-3">Main Image <small>(optional)</small></h4>
+        <input
+          type="file"
+          class="form-control mb-5"
+          (change)="onMainImageChange($event)"
+          accept="image/*"
+        />
+        <div *ngIf="mainImagePreview">
+          <h5>Preview:</h5>
+          <img
+            [src]="mainImagePreview"
+            alt="Main Image Preview"
+            class="img-fluid"
+            style="max-width: 200px; max-height: 200px"
+          />
+        </div>
+
+        <h4 class="mb-3">Details Images <small>(optional)</small></h4>
+        <input
+          type="file"
+          class="form-control mb-5"
+          (change)="onDetailImagesChange($event)"
+          accept="image/*"
+          multiple
+        />
+        <div *ngIf="detailImagesPreview.length > 0">
+          <h5>Preview:</h5>
+          <div *ngFor="let image of detailImagesPreview">
+            <img
+              [src]="image"
+              alt="Detail Image Preview"
+              class="img-fluid"
+              style="max-width: 200px; max-height: 200px"
             />
           </div>
-          <div class="dz-preview d-flex flex-wrap">
-            <div
-              class="border border-translucent bg-body-emphasis rounded-3 d-flex flex-center position-relative me-2 mb-2"
-              *ngFor="let image of imagesPreview"
-              style="height: 80px; width: 80px"
-            >
-              <img
-                class="dz-image"
-                [src]="image"
-                alt="Image preview"
-                data-dz-thumbnail="data-dz-thumbnail"
-              />
-              <a
-                class="dz-remove text-body-quaternary"
-                href="#!"
-                (click)="removeImage(image)"
-                ><span data-feather="x"></span
-              ></a>
-            </div>
-          </div>
-        </div>
-        <h4 class="mb-3">Tour Images</h4>
-        <div
-          class="mb-5 border-0 bg-light border rounded-3 text-center"
-          style="height: 200px"
-        >
-          <h5
-            class="text-body-tertiary"
-            style="line-height: 100%; vertical-align: middle"
-          >
-            Drag & drop image here
-          </h5>
         </div>
       </div>
     </div>

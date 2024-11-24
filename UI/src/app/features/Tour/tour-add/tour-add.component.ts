@@ -30,10 +30,12 @@ export class TourAddComponent {
     bookings: null,
     reviews: null,
     mainImage: null,
-    detailImages: null,
+    detailImages: []
   };
   catelist: Category[]= [];
-  imagesPreview: string[] = [];
+
+  mainImagePreview: string | null = null;
+  detailImagesPreview: string[] = [];
 
   constructor(private tourService: TourService, private router: Router) {}
 
@@ -53,8 +55,10 @@ export class TourAddComponent {
   onSubmit() {
     if (!this.tour.tourName || !this.tour.city || !this.tour.country || !this.tour.duration || !this.tour.description) {
     alert('Please fill in all required fields.');
+    if(this.tour.mainImage) alert('đã nhận được Main Image'); 
+    if(this.tour.detailImages && this.tour.detailImages.length > 0) alert('đã nhận được detali Image'); 
     return;
-  }
+    }
   const formData = new FormData();
 
   formData.append('TourName', this.tour.tourName);
@@ -72,7 +76,7 @@ export class TourAddComponent {
     formData.append('MainImage', this.tour.mainImage, this.tour.mainImage.name);
   }
   
-  if (this.tour.detailImages) {
+  if (this.tour.detailImages && this.tour.detailImages.length > 0) {
     for (let file of this.tour.detailImages) {
       formData.append('DetailImages', file, file.name);
     }
@@ -100,39 +104,38 @@ export class TourAddComponent {
       personNumber: 0, 
       isFullDay: false, 
       status: true, 
-      categoryId: 1 
+      categoryId: 1,
+      mainImage: null, 
+    detailImages: []
     };
+    this.mainImagePreview = null;
+  this.detailImagesPreview = [];
   }
 
-  onFileChange(event: any) {
+  onMainImageChange(event: any) {
+    const file = event.target.files[0];
+    if (file) {
+      this.tour.mainImage = file;
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.mainImagePreview = reader.result as string;
+      };
+      reader.readAsDataURL(file);
+    }
+  }
+
+  onDetailImagesChange(event: any) {
     const files = event.target.files;
-    for (let i = 0; i < files.length; i++) {
-      this.createImagePreview(files[i]);
+    this.tour.detailImages = Array.from(files);
+    this.detailImagesPreview = [];
+
+    for (let file of files) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.detailImagesPreview.push(reader.result as string);
+      };
+      reader.readAsDataURL(file);
     }
-  }
-
-  onFileDrop(event: any) {
-    event.preventDefault();
-    const files = event.dataTransfer.files;
-    for (let i = 0; i < files.length; i++) {
-      this.createImagePreview(files[i]);
-    }
-  }
-
-  onDragOver(event: any) {
-    event.preventDefault();  
-  }
-
-  createImagePreview(file: File) {
-    const reader = new FileReader();
-    reader.onload = (e: any) => {
-      this.imagesPreview.push(e.target.result);
-    };
-    reader.readAsDataURL(file);
-  }
-
-  removeImage(image: string) {
-    this.imagesPreview = this.imagesPreview.filter((img) => img !== image);
   }
 
 }
