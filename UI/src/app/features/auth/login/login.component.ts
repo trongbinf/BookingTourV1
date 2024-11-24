@@ -6,6 +6,7 @@ import { AuthService } from '../services/auth.service';
 import { CookieService } from 'ngx-cookie-service';
 import { Router, RouterLink } from '@angular/router';
 import { jwtDecode } from "jwt-decode";
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-login',
@@ -59,6 +60,9 @@ export class LoginComponent {
           })
 
           window.location.href = '/'
+        },
+        error: err => {
+          Swal.fire('Login fail!', 'Vui lòng kiểm tra lại tài khoản và mật khẩu!', 'warning');
         }
       });
   }
@@ -66,7 +70,7 @@ export class LoginComponent {
   onForgotPassword() {
     this.authService.forgotpass(this.email).subscribe({
       next: respose => {
-        alert("Đã gửi xác thực về mail")
+        Swal.fire('Forgot Password!', 'Đã gửi xác thực về mail!', 'success');
       }
     })
   }

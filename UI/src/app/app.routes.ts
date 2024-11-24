@@ -14,6 +14,7 @@ import { ManagerBookingComponent } from './features/manage/manager-booking/manag
 
 import { TourAddComponent } from './features/Tour/tour-add/tour-add.component';
 import { TourUpdateComponent } from './features/Tour/tour-update/tour-update.component';
+import { authGuard } from './features/auth/guards/auth.guard';
 
 
 export const routes: Routes = [
@@ -37,17 +38,17 @@ export const routes: Routes = [
     },
     {
         path: 'admin-tour',
-        component: TourListComponent
+        component: TourListComponent, canActivate: [authGuard]
     }
     ,
     {
         path: 'admin-addtour',
-        component: TourAddComponent
+        component: TourAddComponent, canActivate: [authGuard]
     }
     ,
     {
         path: 'admin-tourdetails/:id',
-        component: TourUpdateComponent
+        component: TourUpdateComponent, canActivate: [authGuard]
     }
     ,
     {
@@ -66,12 +67,7 @@ export const routes: Routes = [
     ,
     {
         path: 'adminUser',
-        component: ManageUserComponent
-    }
-    ,
-    {
-        path: 'adminUser',
-        component: ManageUserComponent
+        component: ManageUserComponent, canActivate: [authGuard]
     }
     ,
     {
@@ -80,7 +76,6 @@ export const routes: Routes = [
     },
     {
         path: 'adminBooking',
-        component: ManagerBookingComponent
+        component: ManagerBookingComponent, canActivate: [authGuard]
     }
-    ,
 ];

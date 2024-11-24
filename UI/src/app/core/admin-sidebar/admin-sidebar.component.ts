@@ -15,7 +15,7 @@ import { RouterModule, Router, NavigationEnd } from '@angular/router';
 export class AdminSidebarComponent {
   showSidebar: boolean = false;
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit() {
     this.router.events.subscribe((event) => {
