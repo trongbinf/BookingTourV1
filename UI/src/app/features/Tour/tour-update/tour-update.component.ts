@@ -26,6 +26,7 @@ export class TourUpdateComponent  {
   detailImagesPreview: string[] = [];
   newMainImage: File | null = null;
   newDetailImages: File[] = [];
+  otherImageArray: string[] = [];
 
   constructor(
     private tourService: TourService,
@@ -51,8 +52,14 @@ export class TourUpdateComponent  {
       this.tourService.getTourVmById(this.tourId).subscribe({
         next: (data) => {
           this.tour = data;
+          if (this.tour.tour.otherImage) {
+            this.otherImageArray = this.tour.tour.otherImage
+              .split(';')
+              .map((img) => img.trim());
+          }
           console.log(this.tour);
         },
+        
         error: (err) => {
           console.error('Error fetching tour details:', err);
           alert('Failed to load tour details.');
@@ -122,7 +129,6 @@ export class TourUpdateComponent  {
       }
     }
 
-    // Gửi yêu cầu cập nhật
     this.tourService.updateTour(this.tourId, formData).subscribe({
       next: () => {
         alert('Tour updated successfully!');

@@ -213,9 +213,7 @@
         </div>
       </div>
       <div class="col-12 col-xl-6">
-        <h4 class="mb-3">
-          Main Image <small class="">(current and new)</small>
-        </h4>
+        <h4 class="mb-3">Main Image <small class=""></small></h4>
         <div class="mb-3">
           <img
             *ngIf="tour.tour.mainImage"
@@ -236,30 +234,31 @@
           class="img-thumbnail"
         />
         <h4 class="mb-3">Detail Images</h4>
-        <div class="mb-3">
-          <div class="row">
-            <div class="col-4" *ngFor="let detailImage of tour.tour.otherImage">
-              <img
-                [src]="detailImage"
-                alt="Current Detail Image"
-                class="img-thumbnail mb-3"
-              />
-            </div>
+        <div class="row">
+          <div class="col-4" *ngFor="let preview of otherImageArray">
+            <img
+              [src]="preview"
+              alt="Preview Detail Image"
+              class="img-thumbnail"
+            />
           </div>
         </div>
+
         <input
           type="file"
           class="form-control mb-5"
           multiple
           (change)="onDetailImagesChange($event)"
         />
-        <div class="row">
-          <div class="col-4" *ngFor="let preview of detailImagesPreview">
-            <img
-              [src]="preview"
-              alt="Preview Detail Image"
-              class="img-thumbnail"
-            />
+        <div class="mb-3">
+          <div class="row">
+            <div class="col-4" *ngFor="let detailImage of detailImagesPreview">
+              <img
+                [src]="detailImage"
+                alt="detailImage"
+                class="img-thumbnail mb-3"
+              />
+            </div>
           </div>
         </div>
       </div>
