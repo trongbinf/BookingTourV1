@@ -124,31 +124,6 @@ export class ManageUserComponent implements OnInit, OnDestroy {
     this.fetchUsers(); // Cập nhật danh sách
   }
 
-  // exportAsExcelFile(data: any[], fileName: string): void {
-  //   // Tạo WorkSheet từ dữ liệu
-  //   const ws: XLSX.WorkSheet = XLSX.utils.json_to_sheet(data);
-
-  //   // Tạo Workbook và thêm WorkSheet vào
-  //   const wb: XLSX.WorkBook = XLSX.utils.book_new();
-  //   XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
-
-  //   // Ghi file Excel dưới dạng buffer
-  //   const excelBuffer: any = XLSX.write(wb, {
-  //     bookType: 'xlsx',
-  //     type: 'array',
-  //   });
-
-  //   // Lưu file
-  //   this.saveAsExcelFile(excelBuffer, fileName);
-  // }
-
-  // private saveAsExcelFile(buffer: any, fileName: string): void {
-  //   const data: Blob = new Blob([buffer], {
-  //     type: 'application/octet-stream',
-  //   });
-  //   FileSaver.saveAs(data, `${fileName}_export_${new Date().getTime()}.xlsx`);
-  // }
-
   exportTable(): void {
     // Lấy bảng HTML bằng ID
     const table = document.getElementById('tableExcel');

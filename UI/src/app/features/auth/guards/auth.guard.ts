@@ -12,12 +12,10 @@ export const authGuard: CanActivateFn = (route, state) => {
     if (user && user.roles === 'Admin') {
       return true;
     } else {
-      // Nếu không phải admin, chuyển hướng về trang không có quyền truy cập
-      router.navigateByUrl('/admin/posts');
+      router.navigateByUrl('/');
       return false;
     }
   } else {
-    // Chuyển hướng về trang đăng nhập nếu chưa đăng nhập
     router.navigateByUrl('/login');
     return false;
   }
