@@ -1,0 +1,28 @@
+<div *ngIf="showSidebar" class="row">
+  <div class="col-md-2 bg-light border-end">
+    <nav class="p-3">
+      <h5 class="text-primary mb-4">Admin Menu</h5>
+      <ul class="nav flex-column">
+        <li class="nav-item">
+          <a class="nav-link active text-dark" routerLink="/admin-tour">
+            <i class="bi bi-card-list"></i> Tour List
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-dark" routerLink="/adminBooking">
+            <i class="bi bi-calendar-check"></i> Manager Booking
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-dark" routerLink="/adminUser">
+            <i class="bi bi-people"></i> Manager User
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+
+  <div class="col-md-10">
+    <router-outlet></router-outlet>
+  </div>
+</div>
