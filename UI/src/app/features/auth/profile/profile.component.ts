@@ -2,12 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { User } from '../models/user.model';
 import { AuthService } from '../services/auth.service';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, NgForm } from '@angular/forms';
 import { TourService } from '../../Tour/services/tour.service';
 import { Tour } from '../../Tour/models/tour.model';
-import { CookieService } from 'ngx-cookie-service';
-import { jwtDecode } from 'jwt-decode';
 import { Observable } from 'rxjs';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-profile',
@@ -18,6 +17,8 @@ import { Observable } from 'rxjs';
 })
 export class ProfileComponent implements OnInit {
 
+  model: User
+
   user$?: Observable<User>;
   lastOrder?: string = '';
   listTour: Tour[] = [];
@@ -26,6 +27,15 @@ export class ProfileComponent implements OnInit {
   constructor(private authService: AuthService,
     private tourService: TourService,
   ) {
+    this.model = {
+      id: '',
+      fullName: '',
+      userName: '',
+      email: '',
+      roles: '',
+      status: true,
+      bookings: [],
+    }
   }
 
   ngOnInit(): void {
@@ -40,6 +50,8 @@ export class ProfileComponent implements OnInit {
 
     this.user$.subscribe({
       next: (user) => {
+        this.model.fullName = user.fullName;
+        this.model.userName = user.userName;
         // Tìm ngày gần nhất
         if (user?.bookings?.length) {
           this.lastOrder = user.bookings
@@ -52,7 +64,6 @@ export class ProfileComponent implements OnInit {
       }
     });
   }
-
 
   calculateTotalOrderPrice(): void {
     this.user$?.subscribe({
@@ -83,4 +94,33 @@ export class ProfileComponent implements OnInit {
         return 'Unknown';
     }
   }
+
+  isEditingFullName = false;
+  isEditingUserName = false;
+
+  toggleEdit(field: string): void {
+    if (field === 'fullName' || field === 'userName') {
+      this.isEditingFullName = !this.isEditingFullName;
+      this.isEditingUserName = !this.isEditingUserName;
+    } else {
+      this.isEditingFullName = false;
+      this.isEditingUserName = false;
+    }
+  }
+
+  updateProfile(form: NgForm) {
+    if (!form.invalid) {
+      console.log(this.model.fullName + '' + this.model.userName)
+      this.authService.updateProfile(this.model).subscribe({
+        next: respose => {
+          Swal.fire('Update success!', 'Cập nhật profile thành công!', 'success');
+          this.isEditingFullName = false;
+          this.isEditingUserName = false;
+        }
+      })
+    } else {
+      alert("Vui lòng nhập đủ thông tin!")
+    }
+  }
+
 }

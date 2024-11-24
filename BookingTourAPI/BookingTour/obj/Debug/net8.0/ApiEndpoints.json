@@ -148,6 +148,22 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "BookingTour.API.Controllers.AuthController",
+    "Method": "UpdateUserInfo",
+    "RelativePath": "api/Auth/update-user-info",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "BookingTour.Model.ViewModel.AppUserVm",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "BookingTour.API.Controllers.BookingController",
     "Method": "GetAllBookings",
     "RelativePath": "api/Booking",
