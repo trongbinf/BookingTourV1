@@ -1,0 +1,22 @@
+/* Custom CSS for smaller form */
+.small-form {
+    max-width: 500px;
+    /* Make the form more compact */
+    margin: 0 auto;
+    /* Center the form */
+}
+
+/* Reduce the font size for form elements */
+.form-control-sm {
+    font-size: 14px;
+    /* Smaller text for inputs */
+    padding: 0.375rem 0.75rem;
+    /* Smaller padding */
+}
+
+/* Reduce button size */
+.btn-sm {
+    padding: 0.375rem 0.75rem;
+    font-size: 14px;
+    /* Smaller font size for button */
+}

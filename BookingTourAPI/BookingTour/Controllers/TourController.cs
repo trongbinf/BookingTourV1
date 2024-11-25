@@ -39,58 +39,42 @@ namespace BookingTour.API.Controllers
             return Ok(tourVms);
         }
 
-        [HttpGet("categories")]
-        public async Task<ActionResult<List<TourVm>>> GetCategoriesWithTours(string categoryName,
-            int pageIndex = 1, int pageSize = 6)
-        {
-            // Lấy toàn bộ dữ liệu các tour bao gồm category và các thuộc tính liên quan
-            string normalName = rm.RemoveUnicode(categoryName);
-            var tours = await _tourService.GetAllAsync(
-                filter: t => t.Category.Name == categoryName,
-                includeProperties: "Category,DateStarts,Reviews,Activities,Bookings"
-            );
+		[HttpGet("categories")]
+		public async Task<ActionResult<List<TourVm>>> GetToursByCategory(
+			string categoryName,
+			int pageIndex = 1,
+			int pageSize = 6,
+			int? tourId = null) // Thêm tham số tourId
+		{
+			string normalName = rm.RemoveUnicode(categoryName);
+			var tours = await _tourService.GetAllAsync(
+				filter: t => t.Category.Name == categoryName && (!tourId.HasValue || t.TourId != tourId.Value),
+				includeProperties: "Category,DateStarts,Reviews,Activities,Bookings"
+			);
 
-            var tourVm = tours.Where(t => t.Status == true).Select(t => new TourVm
-            {
-                Tour = t,
-                Category = t.Category,
-                Activities = t.Activities,
-                DateStarts = t.DateStarts,
-            }).ToList();
+			// Lọc các tour dựa trên trạng thái và loại bỏ tourID nếu có
+			var tourVms = tours
+				.Where(t => t.Status)
+				.Select(tour => new TourVm
+				{
+					Tour = tour,
+					DateStarts = tour.DateStarts,
+					Category = tour.Category,
+					Reviews = tour.Reviews,
+					Activities = tour.Activities,
+					Bookings = tour.Bookings
+				})
+				.ToList();
 
-            var response = rm.ToPaginatedList<TourVm>(tourVm, pageIndex, pageSize);
-            return Ok(response);
-        }
+			var response = rm.ToPaginatedList(tourVms, pageIndex, pageSize);
 
-        [HttpGet("categories/{categoryName}")]
-        public async Task<ActionResult<IEnumerable<TourVm>>> GetToursByCategory(string categoryName,
-            int pageIndex = 1, int pageSize = 6)
-        {
-            string normalName = rm.RemoveUnicode(categoryName);
-            var tours = await _tourService.GetAllAsync(
-                filter: t => t.Category.Name == categoryName,
-                includeProperties: "Category,DateStarts,Reviews,Activities,Bookings"
-            );
-
-            // Lấy tối đa 5 tour theo category đã chọn
-            var tourVms = tours.Select(tour => new TourVm
-            {
-                Tour = tour,
-                DateStarts = tour.DateStarts,
-                Category = tour.Category,
-                Reviews = tour.Reviews,
-                Activities = tour.Activities,
-                Bookings = tour.Bookings
-            }).ToList();
-
-            var response = rm.ToPaginatedList<TourVm>(tourVms, pageIndex, pageSize);
-
-            return Ok(response);
-        }
+			return Ok(response);
+		}
 
 
-        // code's dong
-        [HttpGet("filter")]
+
+		// code's dong
+		[HttpGet("filter")]
         public async Task<ActionResult<PaginatedList<TourVm>>> FilterTour(
             [FromQuery] string? city = null,
             [FromQuery] string? country = null,

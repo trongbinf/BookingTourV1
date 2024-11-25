@@ -1,10 +1,19 @@
 <section class="pt-5 pb-9" *ngIf="user$ | async as user">
+
     <div class="container-small">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a [routerLink]="['']">Home</a></li>
+                <li class="breadcrumb-item active" aria-current="page">History Booking</li>
+            </ol>
+        </nav>
         <div class="row align-items-center justify-content-between g-3 mb-4">
             <div class="col-auto">
-                <h2 class="mb-0">Profile</h2>
+                <h2 class="mb-0">History Booking</h2>
             </div>
         </div>
+
+
         <div class="row g-3 mb-6">
             <div class="col-12">
                 <div class="card h-100">
@@ -30,8 +39,8 @@
                         <div class="d-flex flex-between-center pt-4">
                             <div>
                                 <h6 class="mb-2 text-body-secondary">Total Spent</h6>
-                                <h4 class="fs-7 text-body-highlight mb-0">{{ totalOrderPrice*100 |
-                                    currency:'VND':'symbol':'1.0-0' }}</h4>
+                                <h4 class="fs-7 text-body-highlight mb-0">{{ totalOrderPrice |
+                                    number}} VNĐ</h4>
                             </div>
                             <div class="text-end">
                                 <h6 class="mb-2 text-body-secondary">Last Order</h6>
@@ -57,260 +66,92 @@
                             data-bs-toggle="tab" href="#tab-orders" role="tab" aria-controls="tab-orders"
                             aria-selected="true"><span class="fas fa-shopping-cart me-2"></span>Orders <span
                                 class="text-body-tertiary fw-normal"> ({{user?.bookings?.length}})</span></a></li>
-                    <li class="nav-item me-3"><a class="nav-link text-nowrap" id="reviews-tab" data-bs-toggle="tab"
-                            href="#tab-reviews" role="tab" aria-controls="tab-orders" aria-selected="true"><span
-                                class="fas fa-star me-2"></span>Reviews<span class="text-body-tertiary fw-normal">
-                                (24)</span></a></li>
+
                 </ul>
             </div>
             <div class="tab-content" id="profileTabContent">
                 <div class="tab-pane fade show active" id="tab-orders" role="tabpanel" aria-labelledby="orders-tab">
                     <div class="border-top border-bottom border-translucent">
                         <div class="table-responsive scrollbar"
-                            data-list='{"valueNames":["order","notes","date","status","price"],"page":1}'>
+                            data-list='{"valueNames":["order","tour","date","status","price"],"page":1}'>
                             <table class="table fs-9 mb-0">
                                 <thead>
                                     <tr>
                                         <th class="sort white-space-nowrap align-middle pe-3 ps-0" scope="col"
                                             onclick="sortTable('order', true)" data-sort="order"
-                                            style="width:15%; min-width:100px">ORDER</th>
+                                            style="width:6%; min-width:100px">ORDER</th>
                                         <th class="sort align-middle" scope="col" data-sort="notes"
-                                            onclick="sortTable('notes', true)" style="width:10%; min-width:50px">Notes
+                                            onclick="sortTable('tour', true)" style="width:8%; min-width:50px">TOUR NAME
                                         </th>
                                         <th class="sort align-middle text-center" scope="col" data-sort="date"
-                                            onclick="sortTable('date', true)" style="width:10%; min-width:200px">Date
+                                            onclick="sortTable('date', true)" style="width:8%; min-width:140px">CREATED
+                                            DATE
                                         </th>
                                         <th class="sort align-middle pe-0 text-center" scope="col" data-sort="status"
-                                            onclick="sortTable('status', true)" style="width:15%; min-width:180px">
+                                            onclick="sortTable('status', true)" style="width:2%; min-width:4u0px">
                                             STATUS</th>
                                         <th class="sort align-middle text-end" scope="col" data-sort="price"
-                                            onclick="sortTable('price', true)" style="width:15%; min-width:160px">TOTAL
+                                            onclick="sortTable('price', true)" style="width:10%; min-width:80px">TOTAL
                                         </th>
+                                        <th class="sort align-middle text-center" scope="col"
+                                            style="width:10%; min-width:80px">FEEDBACK</th>
                                     </tr>
                                 </thead>
                                 <tbody class="list" id="table-body">
 
-                                    <tr *ngFor="let booking of user?.bookings"
-                                        class="hover-actions-trigger btn-reveal-trigger position-static">
+                                    <tr class="order hover-actions-trigger btn-reveal-trigger position-static"
+                                        *ngFor="let booking of bookings?.items">
                                         <td class="order align-middle white-space-nowrap py-2 ps-0"><a
-                                                class="fw-semibold text-primary" href="#!">{{booking.bookingId}}</a>
+                                                class="fw-semibold text-primary"
+                                                [routerLink]="['/booking-detail', booking.bookingId]">{{booking.bookingId}}</a>
                                         </td>
 
-                                        <td class="notes align-middle white-space-nowrap text-body py-2">
-                                            {{booking.notes}}</td>
+                                        <td class="tour align-middle white-space-nowrap text-body py-2">
+                                            {{booking.tour?.tourName}}</td>
 
                                         <td class="date align-middle text-center text-body-tertiary py-2">
                                             {{booking.bookingDate | date: 'dd/MM/yyyy'}}</td>
-                                        <td
-                                            class="status align-middle white-space-nowrap text-center fw-bold text-body-tertiary py-2">
-                                            <span class="badge badge-phoenix fs-10 badge-phoenix-success"
-                                                *ngIf="getStatusLabel(booking.status) === 'Confirmed'">
-                                                <span class="badge-label">
-                                                    {{ getStatusLabel(booking.status) }}
-                                                </span>
-
-                                                <!-- Trường hợp Confirmed -->
-                                                <span class="ms-1" data-feather="check"
-                                                    style="height:12.8px;width:12.8px;"></span>
-                                            </span>
-
-                                            <span class="badge badge-phoenix fs-10 badge-phoenix-warning"
-                                                *ngIf="getStatusLabel(booking.status) === 'Pending'">
-                                                <span class="badge-label">
-                                                    {{ getStatusLabel(booking.status) }}
-                                                </span>
-                                                <!-- Trường hợp Pending -->
-                                                <i *ngIf="getStatusLabel(booking.status) === 'Pending'"
-                                                    class="fas fa-spinner fa-spin ms-1"
-                                                    style="color: #ffc107; font-size: 12.8px;"></i>
-                                            </span>
-
-                                            <span class="badge badge-phoenix fs-10 badge-phoenix-danger"
-                                                *ngIf="getStatusLabel(booking.status) === 'Canceled'">
-                                                <span class="badge-label">
-                                                    {{ getStatusLabel(booking.status) }}
-                                                </span>
-                                                <!-- Trường hợp Canceled -->
-                                                <i *ngIf="getStatusLabel(booking.status) === 'Canceled'"
-                                                    class="fas fa-times ms-1"
-                                                    style="color: red; font-size: 12.8px;"></i>
-                                            </span>
+                                        <td class="status  align-middle white-space-nowrap text-body py-2 text-end">
+                                            <span class="badge badge-phoenix fs-10 badge-phoenix-secondary"
+                                                [ngClass]="getStatusColor(booking.status)"><span class="badge-label">{{
+                                                    getStatusString(booking.status) }}</span><span class="ms-1"
+                                                    data-feather="x" style="height:12.8px;width:12.8px;"></span></span>
 
                                         </td>
-                                        <ng-container *ngFor="let tour of listTour">
-                                            <td *ngIf="booking.tourId == tour.tour.tourId"
-                                                class="price align-middle fw-semibold text-end py-2 text-body-highlight">
-                                                {{ (tour.tour.price * 100) |
-                                                currency:'VND':'symbol':'1.0-0'}}</td>
-                                        </ng-container>
+
+                                        <td class="price align-middle white-space-nowrap text-body py-2 text-end">
+                                            <span class="badge badge-phoenix fs-10 badge-phoenix-secondary"><span
+                                                    class="badge-label">{{ booking.personNumber * (booking.tour?.price
+                                                    ?? 0) |
+                                                    number }} VNĐ</span><span class="ms-1" data-feather="x"
+                                                    style="height:12.8px;width:12.8px;"></span></span>
+
+                                        </td>
+
+                                        <td class="feedback align-middle text-center text-body py-2">
+                                            <span>
+                                                <a href="javascript:void(0)" class="text-primary"
+                                                    [ngClass]="{'text-muted': booking.isReviewed || booking.status !== 6}"
+                                                    (click)="handleFeedbackClick(booking)">
+                                                    Feedback
+                                                </a>
+                                            </span>
+                                        </td>
+
                                     </tr>
                                 </tbody>
                             </table>
                         </div>
                     </div>
                 </div>
-                <div class="tab-pane fade" id="tab-reviews" role="tabpanel" aria-labelledby="reviews-tab">
-                    <div class="border-y" id="profileRatingTable"
-                        data-list='{"valueNames":["product","rating","review","status","date"],"page":6,"pagination":true}'>
-                        <div class="table-responsive scrollbar">
-                            <table class="table fs-9 mb-0">
-                                <thead>
-                                    <tr>
-                                        <th class="sort white-space-nowrap align-middle" scope="col"
-                                            style="min-width:220px;" data-sort="product">PRODUCT</th>
-                                        <th class="sort align-middle" scope="col" data-sort="rating"
-                                            style="max-width:10%;">RATING</th>
-                                        <th class="sort align-middle" scope="col" style="min-width:480px"
-                                            data-sort="review">REVIEW</th>
-                                        <th class="sort align-middle" scope="col" style="max-width:12%;"
-                                            data-sort="status">STATUS</th>
-                                        <th class="sort text-end align-middle" scope="col" style="max-width:10%;"
-                                            data-sort="date">DATE</th>
-                                        <th class="sort text-end pe-0 align-middle" scope="col" style="width: 7%">
-                                        </th>
-                                    </tr>
-                                </thead>
-                                <tbody class="list" id="profile-review-table-body">
-                                    <tr class="hover-actions-trigger btn-reveal-trigger position-static">
-                                        <td class="align-middle product pe-3"><a class="fw-semibold line-clamp-1"
-                                                href="product-details.html">Fitbit Sense Advanced Smartwatch
-                                                with Tools for Heart Health, Stress Management &amp; Skin
-                                                Temperature Trends, Carbon/Graphite, One Size (S &amp; L
-                                                Bands)</a></td>
-                                        <td class="align-middle rating white-space-nowrap fs-10"><span
-                                                class="fa fa-star text-warning"></span><span
-                                                class="fa fa-star text-warning"></span><span
-                                                class="fa fa-star text-warning"></span><span
-                                                class="fa fa-star text-warning"></span><span
-                                                class="fa-regular fa-star text-warning-light"
-                                                data-bs-theme="light"></span></td>
-                                        <td class="align-middle review pe-7">
-                                            <p class="fw-semibold text-body-highlight mb-0 line-clamp-2">This
-                                                Fitbit is fantastic! I was trying to be in better shape and
-                                                needed some motivation, so I decided to treat myself to a new
-                                                Fitbit.</p>
-                                        </td>
-                                        <td class="align-middle status pe-9"><span
-                                                class="badge badge-phoenix fs-10 badge-phoenix-success">Approaved<span
-                                                    class="ms-1" data-feather="check"
-                                                    style="height:12.8px;width:12.8px;"></span></span></td>
-                                        <td class="align-middle text-end date white-space-nowrap">
-                                            <p class="text-body-tertiary mb-0">Just now</p>
-                                        </td>
-                                        <td class="align-middle white-space-nowrap text-end pe-0">
-                                            <div class="btn-reveal-trigger position-static"><button
-                                                    class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal"
-                                                    type="button" data-bs-toggle="dropdown" data-boundary="window"
-                                                    aria-haspopup="true" aria-expanded="false"
-                                                    data-bs-reference="parent"><span
-                                                        class="fas fa-ellipsis-h fs-10"></span></button>
-                                                <div class="dropdown-menu dropdown-menu-end py-2"><a
-                                                        class="dropdown-item" href="#!">View</a><a class="dropdown-item"
-                                                        href="#!">Export</a>
-                                                    <div class="dropdown-divider"></div><a
-                                                        class="dropdown-item text-danger" href="#!">Remove</a>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        <div class="row align-items-center justify-content-between py-2 pe-0 fs-9">
-                            <div class="col-auto d-flex">
-                                <p class="mb-0 d-none d-sm-block me-3 fw-semibold text-body"
-                                    data-list-info="data-list-info"></p><a class="fw-semibold" href="#!"
-                                    data-list-view="*">View all<span class="fas fa-angle-right ms-1"
-                                        data-fa-transform="down-1"></span></a><a class="fw-semibold d-none" href="#!"
-                                    data-list-view="less">View Less<span class="fas fa-angle-right ms-1"
-                                        data-fa-transform="down-1"></span></a>
-                            </div>
-                            <div class="col-auto d-flex"><button class="page-link" data-list-pagination="prev"><span
-                                        class="fas fa-chevron-left"></span></button>
-                                <ul class="mb-0 pagination"></ul><button class="page-link pe-0"
-                                    data-list-pagination="next"><span class="fas fa-chevron-right"></span></button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+
+
             </div>
         </div>
     </div><!-- end of .container-->
 </section><!-- <section> close ============================-->
 <!-- ============================================-->
 
-<div class="support-chat-container">
-    <div class="container-fluid support-chat">
-        <div class="card bg-body-emphasis">
-            <div class="card-header d-flex flex-between-center px-4 py-3 border-bottom border-translucent">
-                <h5 class="mb-0 d-flex align-items-center gap-2">Demo widget<span
-                        class="fa-solid fa-circle text-success fs-11"></span></h5>
-                <div class="btn-reveal-trigger"><button
-                        class="btn btn-link p-0 dropdown-toggle dropdown-caret-none transition-none d-flex"
-                        type="button" id="support-chat-dropdown" data-bs-toggle="dropdown" data-boundary="window"
-                        aria-haspopup="true" aria-expanded="false" data-bs-reference="parent"><span
-                            class="fas fa-ellipsis-h text-body"></span></button>
-                    <div class="dropdown-menu dropdown-menu-end py-2" aria-labelledby="support-chat-dropdown"><a
-                            class="dropdown-item" href="#!">Request a callback</a><a class="dropdown-item"
-                            href="#!">Search in chat</a><a class="dropdown-item" href="#!">Show history</a><a
-                            class="dropdown-item" href="#!">Report to Admin</a><a class="dropdown-item btn-support-chat"
-                            href="#!">Close Support</a></div>
-                </div>
-            </div>
-            <div class="card-body chat p-0">
-                <div class="d-flex flex-column-reverse scrollbar h-100 p-3">
-                    <div class="text-end mt-6"><a
-                            class="mb-2 d-inline-flex align-items-center text-decoration-none text-body-emphasis bg-body-hover rounded-pill border border-primary py-2 ps-4 pe-3"
-                            href="#!">
-                            <p class="mb-0 fw-semibold fs-9">I need help with something</p><span
-                                class="fa-solid fa-paper-plane text-primary fs-9 ms-3"></span>
-                        </a><a
-                            class="mb-2 d-inline-flex align-items-center text-decoration-none text-body-emphasis bg-body-hover rounded-pill border border-primary py-2 ps-4 pe-3"
-                            href="#!">
-                            <p class="mb-0 fw-semibold fs-9">I can’t reorder a product I previously ordered</p>
-                            <span class="fa-solid fa-paper-plane text-primary fs-9 ms-3"></span>
-                        </a><a
-                            class="mb-2 d-inline-flex align-items-center text-decoration-none text-body-emphasis bg-body-hover rounded-pill border border-primary py-2 ps-4 pe-3"
-                            href="#!">
-                            <p class="mb-0 fw-semibold fs-9">How do I place an order?</p><span
-                                class="fa-solid fa-paper-plane text-primary fs-9 ms-3"></span>
-                        </a><a
-                            class="false d-inline-flex align-items-center text-decoration-none text-body-emphasis bg-body-hover rounded-pill border border-primary py-2 ps-4 pe-3"
-                            href="#!">
-                            <p class="mb-0 fw-semibold fs-9">My payment method not working</p><span
-                                class="fa-solid fa-paper-plane text-primary fs-9 ms-3"></span>
-                        </a></div>
-                    <div class="text-center mt-auto">
-                        <div class="avatar avatar-3xl status-online"><img
-                                class="rounded-circle border border-3 border-light-subtle"
-                                src="../../../assets/img/team/30.webp" alt="" /></div>
-                        <h5 class="mt-2 mb-3">Eric</h5>
-                        <p class="text-center text-body-emphasis mb-0">Ask us anything – we’ll get back to you
-                            here or by email within 24 hours.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="card-footer d-flex align-items-center gap-2 border-top border-translucent ps-3 pe-4 py-3">
-                <div class="d-flex align-items-center flex-1 gap-3 border border-translucent rounded-pill px-4">
-                    <input class="form-control outline-none border-0 flex-1 fs-9 px-0" type="text"
-                        placeholder="Write message" /><label
-                        class="btn btn-link d-flex p-0 text-body-quaternary fs-9 border-0" for="supportChatPhotos"><span
-                            class="fa-solid fa-image"></span></label><input class="d-none" type="file" accept="image/*"
-                        id="supportChatPhotos" /><label
-                        class="btn btn-link d-flex p-0 text-body-quaternary fs-9 border-0" for="supportChatAttachment">
-                        <span class="fa-solid fa-paperclip"></span></label><input class="d-none" type="file"
-                        id="supportChatAttachment" />
-                </div><button class="btn p-0 border-0 send-btn"><span
-                        class="fa-solid fa-paper-plane fs-9"></span></button>
-            </div>
-        </div>
-    </div><button class="btn btn-support-chat p-0 border border-translucent"><span
-            class="fs-8 btn-text text-primary text-nowrap">Chat demo</span><span
-            class="ping-icon-wrapper mt-n4 ms-n6 mt-sm-0 ms-sm-2 position-absolute position-sm-relative"><span
-                class="ping-icon-bg"></span><span class="fa-solid fa-circle ping-icon"></span></span><span
-            class="fa-solid fa-headset text-primary fs-8 d-sm-none"></span><span
-            class="fa-solid fa-chevron-down text-primary fs-7"></span></button>
-</div>
 
 <!-- ============================================-->
 <!-- <section> begin ============================-->
@@ -357,6 +198,11 @@
                         class="text-body-tertiary fw-semibold fs-9 mb-1" href="#!">Installment</a></div>
             </div>
         </div>
+        <ng-template #noBookings>
+            <div class="text-center mb-4">
+                <strong>No bookings found.</strong> You have no bookings yet. Please make a reservation.
+            </div>
+        </ng-template>
     </div><!-- end of .container-->
 </section><!-- <section> close ============================-->
 <!-- ============================================-->

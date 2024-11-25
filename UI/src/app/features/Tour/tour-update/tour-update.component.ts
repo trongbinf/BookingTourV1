@@ -15,12 +15,12 @@ import { Category } from '../../category/model/category.model';
   templateUrl: './tour-update.component.html',
   styleUrl: './tour-update.component.css'
 })
-export class TourUpdateComponent  {
+export class TourUpdateComponent {
   tour!: TourVm
   catelist: Category[] = [];
   imagesPreview: string[] = [];
   tourId!: number; // Lấy từ URL
-  category!:Category
+  category!: Category
   tourT!: TourGet
 
   constructor(
@@ -28,22 +28,22 @@ export class TourUpdateComponent  {
     private route: ActivatedRoute,
     private router: Router
   ) {
-    this.tour={
-    activities:[],
-    bookings:[],
-    category:this.category,
-    dateStarts:[],
-    detailImages:[],
-    mainImage:'',
-    reviews:[],
-    tour:this.tourT
-  };
+    this.tour = {
+      activities: [],
+      bookings: [],
+      category: this.category,
+      dateStarts: [],
+      detailImages: [],
+      mainImage: '',
+      reviews: [],
+      tour: this.tourT
+    };
   }
 
   ngOnInit(): void {
-    const id = this.route.snapshot.paramMap.get('id'); 
+    const id = this.route.snapshot.paramMap.get('id');
     if (id) {
-      this.tourId = +id; 
+      this.tourId = +id;
       this.tourService.getTourVmById(this.tourId).subscribe({
         next: (data) => {
           this.tour = data;
@@ -52,7 +52,7 @@ export class TourUpdateComponent  {
         error: (err) => {
           console.error('Error fetching tour details:', err);
           alert('Failed to load tour details.');
-      },
+        },
       });
     }
     this.tourService.getCategories().subscribe({
@@ -104,7 +104,7 @@ export class TourUpdateComponent  {
   }
 
   discardChanges() {
-    this.ngOnInit(); 
+    this.ngOnInit();
   }
   onFileChange(event: any) {
     const files = event.target.files;
@@ -122,7 +122,7 @@ export class TourUpdateComponent  {
   }
 
   onDragOver(event: any) {
-    event.preventDefault();  
+    event.preventDefault();
   }
 
   createImagePreview(file: File) {

@@ -22,22 +22,6 @@ namespace BookingTour.Data.Data
 				new Category { CategoryId = 3, Name = "Biển", Status = true }
 			);
 
-			modelBuilder.Entity<IdentityUser>().HasData(
-
-				new IdentityUser
-				{
-					Id = Guid.NewGuid().ToString(),
-					UserName = "user@booking.com",
-					NormalizedUserName = "USER@BOOKING.COM",
-					Email = "user@booking.com",
-					NormalizedEmail = "USER@BOOKING.COM",
-					EmailConfirmed = true,
-					PasswordHash = new PasswordHasher<IdentityUser>().HashPassword(null, "UserPassword123"),
-					SecurityStamp = Guid.NewGuid().ToString(),
-					LockoutEnabled = true
-				}
-				); ; 
-
 
 			modelBuilder.Entity<Tour>().HasData(
 				new Tour
@@ -262,32 +246,7 @@ namespace BookingTour.Data.Data
 				}
 			);
 
-			modelBuilder.Entity<Booking>().HasData(
-			  new Booking
-			  {
-				  BookingId = 1,
-				  BookingDate = new DateTime(2024, 11, 17),
-				  PickDate = new DateTime(2024, 11, 20),
-				  StartTime = new TimeSpan(9, 0, 0), 
-				  PersonNumber = 2,
-				  Notes = "Customer requested extra seat",
-				  Status = StatusType.Confirmed,
-				  TourId = 1,  
-				  UserId = "test-user-id"
-			  },
-			  new Booking
-			  {
-				  BookingId = 2,
-				  BookingDate = new DateTime(2024, 11, 17),
-				  PickDate = new DateTime(2024, 11, 21),
-				  StartTime = new TimeSpan(14, 30, 0), 
-				  PersonNumber = 1,
-				  Notes = "No special requests",
-				  Status = StatusType.Pending,
-				  TourId = 2,  
-				  UserId = "test-user-id"
-			  }
-		  );
+		
 
 		}
 	}

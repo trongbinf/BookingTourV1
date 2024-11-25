@@ -22,7 +22,7 @@ export class ManagerBookingComponent implements OnDestroy, OnInit {
   registerSubscription?: Subscription;
   private destroy$ = new Subject<void>();
   bookings?: PaginatedResponse<Booking>;
-  pageSize: number = 5;
+  pageSize: number = 10;
   pageIndex?: number = 1;
   key: string = '';
   currentkey: string = '';
@@ -36,6 +36,13 @@ export class ManagerBookingComponent implements OnDestroy, OnInit {
     this.fetchAllBookings();
   }
 
+  onKeyChange(): void {
+    if (this.currentkey !== this.key) {
+      this.pageIndex = 1; // Reset về trang đầu khi tìm kiếm mới
+      this.currentkey = this.key;
+      this.fetchAllBookings();
+    }
+  }
 
 
   fetchAllBookings(): void {
@@ -100,7 +107,6 @@ export class ManagerBookingComponent implements OnDestroy, OnInit {
   setSelectedBooking(bookingId: number): void {
     this.selectedBookingId = bookingId;
   }
-
   updateStatus(): void {
     const selectStatus = Number(
       (document.getElementById('selectStatus') as HTMLSelectElement)?.value || ''
@@ -123,21 +129,24 @@ export class ManagerBookingComponent implements OnDestroy, OnInit {
       return;
     }
 
-    // Validate status transitions
+
     const isValidTransition =
-      (currentBooking.status === StatusType.Submited && (selectStatus === StatusType.Pending || selectStatus === StatusType.Canceled)) || // Submited -> Pending or Canceled
-      (currentBooking.status === StatusType.Pending && selectStatus === StatusType.Confirmed); // Pending -> Confirmed only
+      (currentBooking.status === StatusType.Submited &&
+        (selectStatus === StatusType.Pending || selectStatus === StatusType.Canceled)) || // Submited -> Pending or Canceled
+      (currentBooking.status === StatusType.Pending &&
+        selectStatus === StatusType.Confirmed) || // Pending -> Confirmed only
+      (currentBooking.status === StatusType.Confirmed &&
+        selectStatus === StatusType.Completed); // Confirmed -> Completed only
 
     if (!isValidTransition) {
       Swal.fire({
         icon: 'error',
         title: 'Không hợp lệ',
-        text: 'Trạng thái chỉ có thể chuyển từ "Submited" sang "Pending" hoặc "Canceled", và từ "Pending" sang "Confirmed".',
+        text: 'Trạng thái chỉ có thể chuyển từ "Submited" sang "Pending" hoặc "Canceled", từ "Pending" sang "Confirmed", và từ "Confirmed" sang "Completed".',
         confirmButtonText: 'OK',
       });
       return;
     }
-
 
     this.bookingService.updateStatus(this.selectedBookingId, selectStatus).subscribe({
       next: () => {
@@ -155,27 +164,26 @@ export class ManagerBookingComponent implements OnDestroy, OnInit {
       }
     });
   }
+  getStatusColor(status: number | undefined): string {
+    if (status === undefined) return 'badge-phoenix-dark'; // Default color for undefined status
 
-
-  getStatusColor(status: number): string {
     switch (status) {
-      case 0: // Submited
-        return 'badge-phoenix-primary'; // Màu xanh dương 
-      case 1: // Pending
-        return 'badge-phoenix-warning'; // Màu vàng
-      case 2: // Confirmed
-        return 'badge-phoenix-success'; // Màu xanh lá
-      case 3: // Canceled
-        return 'badge-phoenix-danger'; // Màu đỏ
-      case 4: // Available
-        return 'badge-phoenix-info'; // Màu xanh nhạt
-      case 5: // Unavailable
-        return 'badge-phoenix-secondary'; // Màu xám
+      case StatusType.Submited: // 0
+        return 'badge-phoenix-primary'; // Blue
+      case StatusType.Pending: // 1
+        return 'badge-phoenix-warning'; // Yellow
+      case StatusType.Confirmed: // 2
+        return 'badge-phoenix-success'; // Green
+      case StatusType.Canceled: // 3
+        return 'badge-phoenix-danger'; // Red
+      case StatusType.Available: // 4
+        return 'badge-phoenix-info'; // Light Blue
+      case StatusType.Unavailable: // 5
+        return 'badge-phoenix-secondary'; // Gray
       default:
-        return 'badge-phoenix-dark'; // Màu tối cho trạng thái không xác định
+        return 'badge-phoenix-dark'; // Dark for unknown states
     }
   }
-
 
 
 
