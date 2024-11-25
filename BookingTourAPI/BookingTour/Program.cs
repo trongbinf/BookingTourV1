@@ -48,6 +48,7 @@ namespace BookingTour
 			builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 			builder.Services.AddScoped<ITourService, TourService>();
 			builder.Services.AddScoped<IBookingService, BookingService>();
+			builder.Services.AddScoped<IReviewService, ReviewService>();
 
 			builder.Services.AddControllers();
 			builder.Services.AddEndpointsApiExplorer();

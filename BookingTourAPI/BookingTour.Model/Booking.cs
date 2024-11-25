@@ -1,5 +1,6 @@
 ﻿
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 using BookingTour.Model.Enum;
 
 
@@ -20,6 +21,9 @@ namespace BookingTour.Model
 		public virtual Tour Tour { get; set; }
 		public string UserId { get; set; }
 		public virtual AppUser User { get; set; }
+
+		[JsonIgnore]
+		public virtual ICollection<Review> Reviews { get; set; }
 
 	}
 }

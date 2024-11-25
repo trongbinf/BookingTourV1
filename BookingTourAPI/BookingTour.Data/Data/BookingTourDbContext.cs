@@ -20,9 +20,11 @@ namespace BookingTour.Data.Data
 
 		protected override void OnModelCreating(ModelBuilder builder)
 		{
-
+			
 			DataSend.InsertData(builder);
+
 			base.OnModelCreating(builder);
 		}
+
 	}
 }

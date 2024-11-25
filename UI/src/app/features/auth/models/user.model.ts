@@ -1,3 +1,4 @@
+import { Booking } from "../../Booking/models/booking.model";
 
 export interface User {
     id: string;
@@ -6,28 +7,9 @@ export interface User {
     email: string;
     roles: string;
     status: boolean;
-    bookings?: Bookings[];
+    bookings?: Booking[];
 }
 
-export enum StatusType {
-    Pending = 3,
-    Confirmed = 2,
-    Canceled = 1
-}
 
-export interface Bookings {
-    bookingId: number;
-    bookingDate: Date;
-    status: StatusType;
-    notes: string;
-    tourId: number;
-}
 
-// export interface AppUser {
-//     id: string;
-//     userName: string;
-//     fullName: string;
-//     email: string;
-//     roles: string;
-//     status: boolean;
-// }
+

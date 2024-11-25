@@ -7,6 +7,7 @@
 		Confirmed,    // Đã xác nhận 2
 		Canceled,     // Đã hủy 3
 		Available,    // Có sẵn 4
-		Unavailable   // Không khả dụng 5
+		Unavailable,   // Không khả dụng 5,
+		Completed    // Hoàn thành 6
 	}
 }

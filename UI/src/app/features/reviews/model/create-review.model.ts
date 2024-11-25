@@ -1,7 +1,11 @@
+import { StatusType } from "../../Booking/models/booking.model";
+
 export interface CretaReview {
-    tourId: number;
-    userId: string;
+    tourId?: number | null;
+    userId: string | null;
+    bookingId?: number | null;
     rating: number;
     comment?: string;
-    reviewDate: Date;
+    reviewDate: string;
+    status: StatusType;
 }

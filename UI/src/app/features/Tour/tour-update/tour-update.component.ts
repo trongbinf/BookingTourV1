@@ -15,11 +15,11 @@ import { Category } from '../../category/model/category.model';
   templateUrl: './tour-update.component.html',
   styleUrl: './tour-update.component.css'
 })
-export class TourUpdateComponent  {
+export class TourUpdateComponent {
   tour!: TourVm
   catelist: Category[] = [];
   tourId!: number; // Lấy từ URL
-  category!:Category
+  category!: Category
   tourT!: TourGet
 
   mainImagePreview: string | null = null;
@@ -33,22 +33,22 @@ export class TourUpdateComponent  {
     private route: ActivatedRoute,
     private router: Router
   ) {
-    this.tour={
-    activities:[],
-    bookings:[],
-    category:this.category,
-    dateStarts:[],
-    detailImages:[],
-    mainImage:'',
-    reviews:[],
-    tour:this.tourT
-  };
+    this.tour = {
+      activities: [],
+      bookings: [],
+      category: this.category,
+      dateStarts: [],
+      detailImages: [],
+      mainImage: '',
+      reviews: [],
+      tour: this.tourT
+    };
   }
 
   ngOnInit(): void {
-    const id = this.route.snapshot.paramMap.get('id'); 
+    const id = this.route.snapshot.paramMap.get('id');
     if (id) {
-      this.tourId = +id; 
+      this.tourId = +id;
       this.tourService.getTourVmById(this.tourId).subscribe({
         next: (data) => {
           this.tour = data;
@@ -59,11 +59,11 @@ export class TourUpdateComponent  {
           }
           console.log(this.tour);
         },
-        
+
         error: (err) => {
           console.error('Error fetching tour details:', err);
           alert('Failed to load tour details.');
-      },
+        },
       });
     }
     this.tourService.getCategories().subscribe({
@@ -101,8 +101,8 @@ export class TourUpdateComponent  {
   onUpdate() {
     if (!this.tour.tour.tourName || !this.tour.tour.city || !this.tour.tour.country || !this.tour.tour.duration || !this.tour.tour.description) {
     alert('Please fill in all required fields.');
-    if(this.tour.tour.mainImage) alert('đã nhận được Main Image'); 
-    if(this.tour.detailImages && this.tour.detailImages.length > 0) alert('đã nhận được detali Image'); 
+    if(this.tour.tour.mainImage) alert('đã nhận được Main Image');
+    if(this.tour.detailImages && this.tour.detailImages.length > 0) alert('đã nhận được detali Image');
     return;
   }
     const formData = new FormData();
@@ -142,7 +142,37 @@ export class TourUpdateComponent  {
   }
 
   discardChanges() {
-    this.ngOnInit(); 
+    this.ngOnInit();
   }
-  
+
+  onFileChange(event: any) {
+    const files = event.target.files;
+    for (let i = 0; i < files.length; i++) {
+      this.createImagePreview(files[i]);
+    }
+  }
+
+  onFileDrop(event: any) {
+    event.preventDefault();
+    const files = event.dataTransfer.files;
+    for (let i = 0; i < files.length; i++) {
+      this.createImagePreview(files[i]);
+    }
+  }
+
+  onDragOver(event: any) {
+    event.preventDefault();
+  }
+
+  createImagePreview(file: File) {
+    const reader = new FileReader();
+    reader.onload = (e: any) => {
+      this.imagesPreview.push(e.target.result);
+    };
+    reader.readAsDataURL(file);
+  }
+
+  removeImage(image: string) {
+    this.imagesPreview = this.imagesPreview.filter((img) => img !== image);
+  }
 }

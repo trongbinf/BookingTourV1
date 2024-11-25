@@ -7,7 +7,8 @@ export enum StatusType {
     Confirmed = 2,     // Đã xác nhận
     Canceled = 3,      // Đã hủy
     Available = 4,     // Có sẵn
-    Unavailable = 5    // Không khả dụng
+    Unavailable = 5,    // Không khả dụng
+    Completed = 6    // Đã hoàn thành
 }
 
 
@@ -25,3 +26,6 @@ export interface Booking {
     user?: User;
 }
 
+export interface BookingWithReviewStatus extends Booking {
+    isReviewed?: boolean;
+}

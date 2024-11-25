@@ -7,6 +7,7 @@ import { TourVm } from '../models/tourVm.model';
 import { PaginatedResponse } from '../models/paginated.model';
 import { Category } from '../../category/model/category.model';
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -18,12 +19,23 @@ export class TourService {
     return this.http.get<Tour[]>(this.apiUrl);
   }
 
-  getTourByCategory(name?: string, pageSize = 6, pageIndex = 1): Observable<PaginatedResponse<Tour>> {
+  getTourByCategory(
+    name?: string,
+    pageSize = 6,
+    pageIndex = 1,
+    tourId?: number
+  ): Observable<PaginatedResponse<Tour>> {
     const params = new URLSearchParams({
+      categoryName: name || '',
       pageSize: pageSize.toString(),
       pageIndex: pageIndex.toString()
     });
-    const url = `${this.apiUrl}/categories/${name}?${params.toString()}`
+
+    if (tourId) {
+      params.append('tourId', tourId.toString());
+    }
+
+    const url = `${this.apiUrl}/categories?${params.toString()}`;
     return this.http.get<PaginatedResponse<Tour>>(url);
   }
 
