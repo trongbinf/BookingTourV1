@@ -9,11 +9,11 @@ namespace BookingTour.Data.Data
 	{
 		public static void InsertData(ModelBuilder modelBuilder)
 		{
-			modelBuilder.Entity<IdentityRole>().HasData
-			(
-			  new IdentityRole() { Name = "Admin", ConcurrencyStamp = "1", NormalizedName = "Admin" },
-			  new IdentityRole() { Name = "User", ConcurrencyStamp = "2", NormalizedName = "User" }
-			);
+			//modelBuilder.Entity<IdentityRole>().HasData
+			//(
+			//  new IdentityRole() { Name = "Admin", ConcurrencyStamp = "1", NormalizedName = "Admin" },
+			//  new IdentityRole() { Name = "User", ConcurrencyStamp = "2", NormalizedName = "User" }
+			//);
 
 
 			modelBuilder.Entity<Category>().HasData(

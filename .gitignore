@@ -4,5 +4,8 @@
 *.dtbcache.v2
 *.futdcache.v2
 # Temporary build files
-obj/
-bin/
+**/bin/
+**/obj/
+**/obj
+**/.vs
+**/.cache

@@ -1,4 +1,4 @@
-import { Booking } from "../../Booking/models/booking.model";
+import { StatusType } from "../../Booking/models/booking.model";
 
 export interface User {
     id: string;
@@ -7,7 +7,7 @@ export interface User {
     email: string;
     roles: string;
     status: boolean;
-    bookings?: Booking[];
+    bookings?: Bookings[];
 }
 
 export interface Bookings {

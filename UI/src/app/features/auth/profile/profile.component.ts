@@ -2,8 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { User } from '../models/user.model';
 import { AuthService } from '../services/auth.service';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { Tour } from '../../Tour/models/tour.model';
+import { FormsModule, NgForm } from '@angular/forms';
 import { Observable, Subject, Subscription, forkJoin, takeUntil, map } from 'rxjs';
 import { Router, RouterLink } from '@angular/router';
 import { Booking, BookingWithReviewStatus, StatusType } from '../../Booking/models/booking.model';
@@ -11,8 +10,8 @@ import { PaginatedResponse } from '../../Tour/models/paginated.model';
 import { BookingService } from '../../Booking/services/booking.service';
 import { ReviewService } from '../../reviews/services/review.service';
 import { TourService } from '../../Tour/services/tour.service';
-import { Tour } from '../../Tour/models/tour.model';
 import Swal from 'sweetalert2';
+import { Tour } from '../../Tour/models/tour.model';
 
 @Component({
   selector: 'app-profile',
@@ -105,7 +104,10 @@ export class ProfileComponent implements OnInit, OnDestroy {
           });
         },
         error: (err) => {
-          console.error('Error loading bookings:', err);}}
+          console.error('Error loading bookings:', err);
+        }
+      })
+  }
 
   calculateTotalOrderPrice(): void {
     this.user$?.subscribe({
@@ -120,7 +122,8 @@ export class ProfileComponent implements OnInit, OnDestroy {
         } else {
           this.totalOrderPrice = 0;
         }
-      });
+      }
+    });
   }
 
 

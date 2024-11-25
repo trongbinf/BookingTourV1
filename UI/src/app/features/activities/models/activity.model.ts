@@ -11,7 +11,8 @@ export interface Activity {
 }
 
 export enum ActivityType {
-    Services = 'Services',
-    Rules = 'Rules',
-    Schedule = 'Schedule'
+    Services = 0,
+    Rules = 1,
+    Schedule = 2
 }
+

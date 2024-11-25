@@ -1,12 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { TourService } from '../services/tour.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { CreateTour } from '../models/create-tour.model';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { TourVm } from '../models/tourVm.model';
 import { TourGet } from '../models/tour-get.model';
 import { Category } from '../../category/model/category.model';
+import { ActivityType } from '../../activities/models/activity.model';
+import { ActivityAdd } from '../../activities/models/create-activity.model';
+import { ActivityService } from '../../activities/services/activity.service';
+import { Subject, take, takeUntil } from 'rxjs';
+import Swal from 'sweetalert2';
+import { DateStart, TypeStatus } from '../../dateStarts/models/date-start.model';
+import { DateStartService } from '../../dateStarts/services/date-start.service';
+
 
 @Component({
   selector: 'app-tour-update',
@@ -15,12 +22,41 @@ import { Category } from '../../category/model/category.model';
   templateUrl: './tour-update.component.html',
   styleUrl: './tour-update.component.css'
 })
-export class TourUpdateComponent {
+export class TourUpdateComponent implements OnDestroy {
   tour!: TourVm
   catelist: Category[] = [];
   tourId!: number; // Lấy từ URL
   category!: Category
-  tourT!: TourGet
+  tourT!: TourGet;
+  idActivity?: number;
+  idDateStart?: number;
+  minDate: string = '';
+  openActivity: boolean = false;
+  openDateStart: boolean = false;
+  isEditActivity: boolean = false;
+  isEditDate: boolean = false;
+  isDateDuplicate: boolean = false;
+  selectedDates: DateStart[] = [];
+  private destroy$: Subject<void> = new Subject<void>();
+  dateStartSelect: DateStart = {
+    dateStartId: 0,
+    startDate: new Date(),
+    typeStatus: TypeStatus.Available,
+    tour: this.tour
+  }
+  activityTour: ActivityAdd = {
+    activityName: '',
+    activityType: ActivityType.Services,
+    description: '',
+    duration: '',
+    location: '',
+    tourId: this.tourId
+  };
+
+  activityTypes = Object.keys(ActivityType)
+    .filter(key => isNaN(Number(key))); // Chỉ lấy các tên của enum
+
+  dateStatus = Object.keys(TypeStatus).filter(key => isNaN(Number(key)));
 
   mainImagePreview: string | null = null;
   detailImagesPreview: string[] = [];
@@ -30,6 +66,8 @@ export class TourUpdateComponent {
 
   constructor(
     private tourService: TourService,
+    private activityService: ActivityService,
+    private dateStartService: DateStartService,
     private route: ActivatedRoute,
     private router: Router
   ) {
@@ -43,6 +81,12 @@ export class TourUpdateComponent {
       reviews: [],
       tour: this.tourT
     };
+    const today = new Date().toISOString().split('T')[0];
+    this.minDate = today;
+  }
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
   ngOnInit(): void {
@@ -100,11 +144,11 @@ export class TourUpdateComponent {
   }
   onUpdate() {
     if (!this.tour.tour.tourName || !this.tour.tour.city || !this.tour.tour.country || !this.tour.tour.duration || !this.tour.tour.description) {
-    alert('Please fill in all required fields.');
-    if(this.tour.tour.mainImage) alert('đã nhận được Main Image');
-    if(this.tour.detailImages && this.tour.detailImages.length > 0) alert('đã nhận được detali Image');
-    return;
-  }
+      alert('Please fill in all required fields.');
+      if (this.tour.tour.mainImage) alert('đã nhận được Main Image');
+      if (this.tour.detailImages && this.tour.detailImages.length > 0) alert('đã nhận được detali Image');
+      return;
+    }
     const formData = new FormData();
 
     formData.append('TourId', this.tour.tour.tourId.toString());
@@ -145,34 +189,268 @@ export class TourUpdateComponent {
     this.ngOnInit();
   }
 
-  onFileChange(event: any) {
-    const files = event.target.files;
-    for (let i = 0; i < files.length; i++) {
-      this.createImagePreview(files[i]);
+  realoadTour() {
+    this.tourService.getTourVmById(this.tourId).pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: response => {
+          this.tour = response;
+        },
+        error: err => {
+          console.log(err);
+        }
+      });
+  }
+
+  updateActivity() {
+    console.log(this.activityTour);
+    this.activityTour.activityType = this.activityTour.activityType.valueOf();
+    if (this.isEditActivity) {
+      //update Activity
+      this.activityService.updateActivity(this.idActivity!, this.activityTour).
+        pipe(takeUntil(this.destroy$)).subscribe({
+          next: response => {
+            this.realoadTour();
+            Swal.fire({
+              icon: 'success',
+              title: 'Cập nhật thành công',
+              text: 'Thông tin đã được lưu.',
+              confirmButtonText: 'OK',
+            });
+          },
+          error: err => {
+            Swal.fire({
+              icon: 'error',
+              title: 'Cập nhật thất bại',
+              text: 'Hãy chỉnh sửa lại.',
+              confirmButtonText: 'OK',
+            });
+            console.log(err);
+          }
+        });
+
+    } else {
+      //add Activity
+      console.log(this.activityTour);
+      this.activityService.addActivity(this.activityTour).pipe(takeUntil(this.destroy$)).subscribe({
+        next: response => {
+          this.realoadTour();
+          Swal.fire({
+            icon: 'success',
+            title: 'Cập nhật thành công',
+            text: 'Thông tin đã được lưu.',
+            confirmButtonText: 'OK',
+          });
+
+        },
+        error: err => {
+          Swal.fire({
+            icon: 'error',
+            title: 'Cập nhật thất bại',
+            text: 'Hãy chỉnh sửa lại.',
+            confirmButtonText: 'OK',
+          });
+          console.log(err);
+        }
+      })
+    }
+
+
+  }
+
+  onSubmitDateStart() {
+    if (this.isEditDate) {
+      // update datestart
+      console.log(this.dateStartSelect);
+      this.dateStartService.updateDateStart(this.idDateStart!, this.dateStartSelect).pipe(takeUntil(this.destroy$))
+        .subscribe({
+          next: response => {
+            this.realoadTour();
+            Swal.fire({
+              icon: 'success',
+              title: 'Cập nhật thành công',
+              text: 'Thông tin đã được lưu.',
+              confirmButtonText: 'OK',
+            });
+          },
+          error: err => {
+            Swal.fire({
+              icon: 'error',
+              title: 'Cập nhật thất bại',
+              text: 'Hãy chỉnh sửa lại.',
+              confirmButtonText: 'OK',
+            });
+            console.log(err);
+          }
+        })
+    } else {
+      // add
+      this.selectedDates.push(this.dateStartSelect);
+      console.log(this.dateStartSelect);
+      this.dateStartService.addDateStart(this.tourId, this.selectedDates).pipe(takeUntil(this.destroy$))
+        .subscribe({
+          next: Response => {
+            this.realoadTour();
+            Swal.fire({
+              icon: 'success',
+              title: 'Cập nhật thành công',
+              text: 'Thông tin đã được lưu.',
+              confirmButtonText: 'OK',
+            });
+            console.log(Response);
+          },
+          error: err => {
+            Swal.fire({
+              icon: 'error',
+              title: 'Cập nhật thất bại',
+              text: 'Hãy chỉnh sửa lại.',
+              confirmButtonText: 'OK',
+            });
+            console.log(err);
+          }
+        })
     }
   }
 
-  onFileDrop(event: any) {
-    event.preventDefault();
-    const files = event.dataTransfer.files;
-    for (let i = 0; i < files.length; i++) {
-      this.createImagePreview(files[i]);
+  showActivity() {
+    if (!this.openActivity) {
+      this.openDateStart = false;
+      this.openActivity = true;
+    } else {
+      this.openActivity = false;
     }
   }
 
-  onDragOver(event: any) {
-    event.preventDefault();
+  showDateStart() {
+    if (!this.openDateStart) {
+      this.openActivity = false;
+      this.openDateStart = true;
+    } else {
+      this.openDateStart = false;
+    }
   }
 
-  createImagePreview(file: File) {
-    const reader = new FileReader();
-    reader.onload = (e: any) => {
-      this.imagesPreview.push(e.target.result);
-    };
-    reader.readAsDataURL(file);
+  editActivity(id: number) {
+    var findding = this.tour.activities.find(a => a.activityId == id);
+    if (findding) {
+      this.isEditActivity = true;
+      this.idActivity = findding.activityId;
+      this.activityTour = {
+        activityName: findding.activityName,
+        description: findding.description,
+        activityType: findding.activityType,
+        location: findding.location,
+        duration: findding.duration,
+        tourId: findding.tourId
+      };
+    }
+    console.log(this.activityTour);
   }
 
-  removeImage(image: string) {
-    this.imagesPreview = this.imagesPreview.filter((img) => img !== image);
+  openAddActivity() {
+    this.isEditActivity = false;
+    this.activityTour = {
+      activityName: '',
+      activityType: ActivityType.Services,
+      description: '',
+      duration: '',
+      location: '',
+      tourId: this.tourId
+    }
   }
+
+  openAddDateStart() {
+    this.isEditDate = false;
+    this.dateStartSelect = {
+      dateStartId: 0,
+      startDate: new Date(),
+      typeStatus: TypeStatus.Available,
+      tour: this.tour
+    }
+  }
+
+  editDate(id: number) {
+    var findding = this.tour.dateStarts.find(d => d.dateStartId == id);
+    if (findding) {
+      this.isEditDate = true;
+      this.idDateStart = findding.dateStartId;
+      this.dateStartSelect = {
+        dateStartId: findding.dateStartId,
+        startDate: findding.startDate,
+        typeStatus: findding.typeStatus,
+      }
+    }
+  }
+
+  deleteActivity(id: number) {
+    var findding = this.tour.activities.find(d => d.activityId == id);
+    if (findding) {
+      this.activityService.deleteActivity(id).pipe(takeUntil(this.destroy$)).subscribe({
+        next: response => {
+          this.realoadTour();
+          Swal.fire({
+            icon: 'success',
+            title: 'Đã xoá thành công',
+            text: 'Thông tin đã được lưu.',
+            confirmButtonText: 'OK',
+          });
+        },
+        error: err => {
+          Swal.fire({
+            icon: 'error',
+            title: 'Cập nhật thất bại',
+            text: 'Hãy chỉnh sửa lại.',
+            confirmButtonText: 'OK',
+          });
+          console.log(err);
+        }
+      })
+    } else {
+      console.log("not found");
+    }
+  }
+
+  deleteDateStart(id: number) {
+    var findding = this.tour.dateStarts.find(d => d.dateStartId == id);
+    if (findding) {
+      this.dateStartService.deleteDateStart(id).pipe(takeUntil(this.destroy$)).subscribe({
+        next: response => {
+          this.realoadTour();
+          Swal.fire({
+            icon: 'success',
+            title: 'Đã xoá thành công',
+            text: 'Thông tin đã được lưu.',
+            confirmButtonText: 'OK',
+          });
+        },
+        error: err => {
+          Swal.fire({
+            icon: 'error',
+            title: 'Cập nhật thất bại',
+            text: 'Hãy chỉnh sửa lại.',
+            confirmButtonText: 'OK',
+          });
+          console.log(err);
+        }
+      })
+    } else {
+      console.log("not found");
+    }
+  }
+
+  validateDate() {
+    const selectedDate = new Date(this.dateStartSelect.startDate);
+    const min = selectedDate > new Date(this.minDate);
+    const isDup = this.tour.dateStarts.some(d => {
+      const tourDate = new Date(d.startDate);
+      return tourDate.getTime() === selectedDate.getTime();
+    });
+
+    if (isDup || !min) {
+      this.isDateDuplicate = true;
+    } else {
+      this.isDateDuplicate = false;
+    }
+  }
+
+
 }

@@ -1,5 +1,4 @@
-export interface Activity {
-    activityId: number;
+export interface ActivityAdd {
     activityType: ActivityType;
     activityName: string;
     description: string;
@@ -9,7 +8,7 @@ export interface Activity {
 }
 
 export enum ActivityType {
-    Services = 'Services',
-    Rules = 'Rules',
-    Schedule = 'Schedule'
+    Services,
+    Rules,
+    Schedule
 }
