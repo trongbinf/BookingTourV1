@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TourService } from '../services/tour.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { CreateTour } from '../models/create-tour.model';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { TourVm } from '../models/tourVm.model';
@@ -100,11 +99,11 @@ export class TourUpdateComponent {
   }
   onUpdate() {
     if (!this.tour.tour.tourName || !this.tour.tour.city || !this.tour.tour.country || !this.tour.tour.duration || !this.tour.tour.description) {
-    alert('Please fill in all required fields.');
-    if(this.tour.tour.mainImage) alert('đã nhận được Main Image');
-    if(this.tour.detailImages && this.tour.detailImages.length > 0) alert('đã nhận được detali Image');
-    return;
-  }
+      alert('Please fill in all required fields.');
+      if (this.tour.tour.mainImage) alert('đã nhận được Main Image');
+      if (this.tour.detailImages && this.tour.detailImages.length > 0) alert('đã nhận được detali Image');
+      return;
+    }
     const formData = new FormData();
 
     formData.append('TourId', this.tour.tour.tourId.toString());
@@ -145,34 +144,34 @@ export class TourUpdateComponent {
     this.ngOnInit();
   }
 
-  onFileChange(event: any) {
-    const files = event.target.files;
-    for (let i = 0; i < files.length; i++) {
-      this.createImagePreview(files[i]);
-    }
-  }
+  // onFileChange(event: any) {
+  //   const files = event.target.files;
+  //   for (let i = 0; i < files.length; i++) {
+  //     this.createImagePreview(files[i]);
+  //   }
+  // }
 
-  onFileDrop(event: any) {
-    event.preventDefault();
-    const files = event.dataTransfer.files;
-    for (let i = 0; i < files.length; i++) {
-      this.createImagePreview(files[i]);
-    }
-  }
+  // onFileDrop(event: any) {
+  //   event.preventDefault();
+  //   const files = event.dataTransfer.files;
+  //   for (let i = 0; i < files.length; i++) {
+  //     this.createImagePreview(files[i]);
+  //   }
+  // }
 
-  onDragOver(event: any) {
-    event.preventDefault();
-  }
+  // onDragOver(event: any) {
+  //   event.preventDefault();
+  // }
 
-  createImagePreview(file: File) {
-    const reader = new FileReader();
-    reader.onload = (e: any) => {
-      this.imagesPreview.push(e.target.result);
-    };
-    reader.readAsDataURL(file);
-  }
+  // createImagePreview(file: File) {
+  //   const reader = new FileReader();
+  //   reader.onload = (e: any) => {
+  //     this.imagesPreview.push(e.target.result);
+  //   };
+  //   reader.readAsDataURL(file);
+  // }
 
-  removeImage(image: string) {
-    this.imagesPreview = this.imagesPreview.filter((img) => img !== image);
-  }
+  // removeImage(image: string) {
+  //   this.imagesPreview = this.imagesPreview.filter((img) => img !== image);
+  // }
 }

@@ -4,13 +4,12 @@ import { LoginRequest } from '../models/login-request.model';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { LoginResponse } from '../models/login-response.model';
 import { BASE_URL } from '../../../app.config';
-import { User } from '../models/user.model';
+import { Bookings, User } from '../models/user.model';
 import { CookieService } from 'ngx-cookie-service';
 import { Register } from '../models/register.model';
 import { ResetPassword } from '../models/reset-password.model';
 import { ChangePassword } from '../models/changepass..models';
 import { PagedResponse } from '../models/PaginatedList';
-import { Booking } from '../../Booking/models/booking.model';
 
 
 @Injectable({
@@ -119,7 +118,7 @@ export class AuthService {
     const bookings = localStorage.getItem('user-bookings');
 
     if (id && userName && email && role) {
-      let parsedBookings: Booking[] = [];
+      let parsedBookings: Bookings[] = [];
       try {
         parsedBookings = bookings ? JSON.parse(bookings) : [];
       } catch (e) {

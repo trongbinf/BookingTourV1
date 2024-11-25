@@ -14,7 +14,6 @@ import { ManagerBookingComponent } from './features/manage/manager-booking/manag
 
 import { TourAddComponent } from './features/Tour/tour-add/tour-add.component';
 import { TourUpdateComponent } from './features/Tour/tour-update/tour-update.component';
-import { authGuard } from './features/auth/guards/auth.guard';
 import { BookingDetailComponent } from './features/Booking/booking-detail/booking-detail.component';
 import { ReviewAddComponent } from './features/reviews/review-add/review-add.component';
 
@@ -41,17 +40,17 @@ export const routes: Routes = [
     },
     {
         path: 'admin-tour',
-        component: TourListComponent, canActivate: [authGuard]
+        component: TourListComponent
     }
     ,
     {
         path: 'admin-addtour',
-        component: TourAddComponent, canActivate: [authGuard]
+        component: TourAddComponent
     }
     ,
     {
         path: 'admin-tourdetails/:id',
-        component: TourUpdateComponent, canActivate: [authGuard]
+        component: TourUpdateComponent
     }
     ,
     {
@@ -70,7 +69,7 @@ export const routes: Routes = [
     ,
     {
         path: 'adminUser',
-        component: ManageUserComponent, canActivate: [authGuard]
+        component: ManageUserComponent
     }
     ,
     {
@@ -79,7 +78,7 @@ export const routes: Routes = [
     },
     {
         path: 'adminBooking',
-        component: ManagerBookingComponent, canActivate: [authGuard]
+        component: ManagerBookingComponent
     }
     , {
         path: 'booking-detail/:id',
