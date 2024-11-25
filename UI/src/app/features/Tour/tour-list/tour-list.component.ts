@@ -16,10 +16,6 @@ export class TourListComponent implements OnInit {
   filteredTours: any[] = [];
   currentStatus: boolean = true; 
 
-  sortedTours: any[] = [];
-
-  currentSortField: string = '';
-  currentSortDirection: string = 'asc';
   searchKeyword: string = '';
 
   constructor(private tourService: TourService) {}
@@ -30,6 +26,7 @@ export class TourListComponent implements OnInit {
         this.tours = data;
         console.log(this.tours); 
         this.filterTours(true); 
+        this.calculateTotalPages();
       },
       error: (err) => {
         console.error('Không lấy được dữ liệu', err);
@@ -54,29 +51,26 @@ export class TourListComponent implements OnInit {
     this.filteredTours = this.tours.filter((tour) => tour.tour.status === status);
   }
 
-  sortData(field: string): void {
-    if (this.currentSortField === field) {
+  currentPage: number = 1;
+itemsPerPage: number = 5; 
+totalPages: number = 0;
 
-      this.currentSortDirection = this.currentSortDirection === 'asc' ? 'desc' : 'asc';
-    } else {
+calculateTotalPages(): void {
+  this.totalPages = Math.ceil(this.filteredTours.length / this.itemsPerPage);
+}
 
-      this.currentSortDirection = 'asc';
-      this.currentSortField = field;
-    }
+getPaginatedTours(): any[] {
+  const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+  const endIndex = startIndex + this.itemsPerPage;
+  return this.filteredTours.slice(startIndex, endIndex);
+}
 
-    this.sortedTours = [...this.tours].sort((a, b) => {
-      const aValue = a[field];
-      const bValue = b[field];
-
-      if (aValue < bValue) {
-        return this.currentSortDirection === 'asc' ? -1 : 1;
-      }
-      if (aValue > bValue) {
-        return this.currentSortDirection === 'asc' ? 1 : -1;
-      }
-      return 0;
-    });
+changePage(page: number): void {
+  if (page >= 1 && page <= this.totalPages) {
+    this.currentPage = page;
   }
+}
+
   onDelete(id: number): void {
     if (confirm('Are you sure you want to delete this tour?')) {
       this.tourService.deleteTour(id).subscribe({
@@ -103,4 +97,30 @@ export class TourListComponent implements OnInit {
       });
       this.ngOnInit();
   }
+
+  sortField: string = ''; 
+sortDirection: string = 'asc'; 
+
+sortData(field: string): void {
+  if (this.sortField === field) {
+    this.sortDirection = this.sortDirection === 'asc' ? 'desc' : 'asc';
+  } else {
+    this.sortField = field;
+    this.sortDirection = 'asc';
+  }
+
+  this.filteredTours.sort((a: any, b: any) => {
+    const aValue = a.tour[field];
+    const bValue = b.tour[field];
+
+    if (aValue < bValue) {
+      return this.sortDirection === 'asc' ? -1 : 1;
+    }
+    if (aValue > bValue) {
+      return this.sortDirection === 'asc' ? 1 : -1;
+    }
+    return 0;
+  });
+}
+
 }
