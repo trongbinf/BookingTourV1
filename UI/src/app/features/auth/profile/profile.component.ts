@@ -142,7 +142,13 @@ export class ProfileComponent implements OnInit, OnDestroy {
       });
     } else if (booking.status === StatusType.Completed) {
       // Navigate to the review page if status is Completed
-      this.router.navigate(['/review-add', booking.tour?.tourId, booking.bookingId]);
+      this.router.navigate([
+        '/review-add',
+        booking.tour?.tourId || 'default-tourId',
+        booking.bookingId || 'default-bookingId',
+        booking.user?.id || 'default-userId'
+      ]);
+
     } else {
       // Show an error message if the status is not valid for review
       Swal.fire({

@@ -23,6 +23,7 @@ export class ReviewAddComponent implements OnInit, OnDestroy {
   comment?: string;
   tourId?: number;
   bookingId?: number;
+  userId!: string | null;
   registerSubscription?: Subscription;
 
   constructor(
@@ -33,13 +34,16 @@ export class ReviewAddComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
-
+    const sessionUserId = this.auth.getUserId();
     this.route.params.subscribe(params => {
       this.tourId = +params['tourId'];
       this.bookingId = +params['bookingId'];
 
+      this.userId = sessionUserId ?? params['userId'];
+
       console.log('Tour ID:', this.tourId);
       console.log('Booking ID:', this.bookingId);
+      console.log('User ID:', this.userId);
     });
   }
 
@@ -78,11 +82,11 @@ export class ReviewAddComponent implements OnInit, OnDestroy {
       return;
     }
 
-    const sessionUserId = this.auth.getUserId();
+
 
     const reviewData: CretaReview = {
       tourId: this.tourId,
-      userId: sessionUserId,
+      userId: this.userId,
       bookingId: this.bookingId,
       rating: this.rating,
       comment: this.comment,

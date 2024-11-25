@@ -88,5 +88,10 @@ export const routes: Routes = [
     {
         path: 'review-add/:tourId/:bookingId',
         component: ReviewAddComponent
+    },
+
+    {
+        path: 'review-add/:tourId/:bookingId/:userId',
+        component: ReviewAddComponent
     }
 ];
