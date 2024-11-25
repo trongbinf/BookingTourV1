@@ -53,6 +53,10 @@ export class AuthService {
     });
   }
 
+  updateProfile(model: User): Observable<void> {
+    return this.http.post<void>(`${BASE_URL}/Auth/update-user-info`, model);
+  }
+
   login(request: LoginRequest): Observable<LoginResponse> {
     return this.http.post<LoginResponse>(`${BASE_URL}/Auth/login-user`, request);
   }

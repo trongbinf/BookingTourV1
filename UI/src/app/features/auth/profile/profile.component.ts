@@ -10,6 +10,8 @@ import { Booking, BookingWithReviewStatus, StatusType } from '../../Booking/mode
 import { PaginatedResponse } from '../../Tour/models/paginated.model';
 import { BookingService } from '../../Booking/services/booking.service';
 import { ReviewService } from '../../reviews/services/review.service';
+import { TourService } from '../../Tour/services/tour.service';
+import { Tour } from '../../Tour/models/tour.model';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -21,6 +23,8 @@ import Swal from 'sweetalert2';
 })
 export class ProfileComponent implements OnInit, OnDestroy {
   bookings?: PaginatedResponse<BookingWithReviewStatus>;
+  model: User
+
   user$?: Observable<User>;
   lastOrder?: string = '';
   listTour: Tour[] = [];
@@ -33,14 +37,26 @@ export class ProfileComponent implements OnInit, OnDestroy {
     private authService: AuthService,
     private bookingService: BookingService,
     private reviewService: ReviewService,
-    private router: Router
-  ) { }
+    private router: Router,
+    private tourService: TourService
+  ) {
+    this.model = {
+      id: '',
+      fullName: '',
+      userName: '',
+      email: '',
+      roles: '',
+      status: true,
+      bookings: [],
+    }
+  }
 
   ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.complete();
     this.registerSubscription?.unsubscribe();
   }
+
 
   ngOnInit(): void {
     const sessionUserId = this.authService.getUserId();
@@ -55,6 +71,9 @@ export class ProfileComponent implements OnInit, OnDestroy {
     this.user$ = this.authService.getUserInfo();
     this.user$.subscribe({
       next: (user) => {
+        this.model.fullName = user.fullName;
+        this.model.userName = user.userName;
+        // Tìm ngày gần nhất
         if (user?.bookings?.length) {
           this.lastOrder = user.bookings
             .map((booking) => new Date(booking.bookingDate))
@@ -86,7 +105,20 @@ export class ProfileComponent implements OnInit, OnDestroy {
           });
         },
         error: (err) => {
-          console.error('Error loading bookings:', err);
+          console.error('Error loading bookings:', err);}}
+
+  calculateTotalOrderPrice(): void {
+    this.user$?.subscribe({
+      next: (user) => {
+        if (user?.bookings?.length && this.listTour.length) {
+          this.totalOrderPrice = user.bookings
+            .map((booking) => {
+              const tour = this.listTour.find((t) => t.tour.tourId === booking.tourId);
+              return tour ? tour.tour.price : 0;
+            })
+            .reduce((sum, price) => sum + price, 0);
+        } else {
+          this.totalOrderPrice = 0;
         }
       });
   }
@@ -162,4 +194,33 @@ export class ProfileComponent implements OnInit, OnDestroy {
         return 'badge-phoenix-dark';
     }
   }
+
+  isEditingFullName = false;
+  isEditingUserName = false;
+
+  toggleEdit(field: string): void {
+    if (field === 'fullName' || field === 'userName') {
+      this.isEditingFullName = !this.isEditingFullName;
+      this.isEditingUserName = !this.isEditingUserName;
+    } else {
+      this.isEditingFullName = false;
+      this.isEditingUserName = false;
+    }
+  }
+
+  updateProfile(form: NgForm) {
+    if (!form.invalid) {
+      console.log(this.model.fullName + '' + this.model.userName)
+      this.authService.updateProfile(this.model).subscribe({
+        next: respose => {
+          Swal.fire('Update success!', 'Cập nhật profile thành công!', 'success');
+          this.isEditingFullName = false;
+          this.isEditingUserName = false;
+        }
+      })
+    } else {
+      alert("Vui lòng nhập đủ thông tin!")
+    }
+  }
+
 }

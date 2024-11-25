@@ -267,12 +267,58 @@ namespace BookingTour.API.Controllers
                 user.Id,
                 user.Email,
                 user.UserName,
+                user.FullName,
                 Roles = roles,
                 Status = true,
                 Bookings = bookings
             });
         }
 
+        [HttpPost("update-user-info")]
+        [Authorize]
+        public async Task<IActionResult> UpdateUserInfo([FromBody] AppUserVm model)
+        {
+            // Lấy userId từ token
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+            if (string.IsNullOrEmpty(userId))
+            {
+                return Unauthorized(new { message = "Invalid token." });
+            }
+
+            // Tìm user theo userId
+            var user = await _userManager.FindByIdAsync(userId);
+
+            if (user == null)
+            {
+                return NotFound(new { message = "User not found." });
+            }
+
+            // Cập nhật thông tin UserName và FullName
+            user.UserName = model.UserName ?? user.UserName; // Nếu không cung cấp UserName, giữ nguyên giá trị cũ
+            user.FullName = model.FullName ?? user.FullName; // Nếu không cung cấp FullName, giữ nguyên giá trị cũ
+
+            // Lưu thay đổi
+            var result = await _userManager.UpdateAsync(user);
+
+            if (!result.Succeeded)
+            {
+                return BadRequest(new
+                {
+                    message = "Failed to update user information.",
+                    errors = result.Errors.Select(e => e.Description)
+                });
+            }
+
+            return Ok(new
+            {
+                message = "User information updated successfully.",
+                user.Id,
+                user.Email,
+                user.UserName,
+                user.FullName
+            });
+        }
 
         [HttpPost("change-password")]
         public async Task<IActionResult> ChangePassword([FromBody] ChangePasswordVm model)

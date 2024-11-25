@@ -10,6 +10,10 @@ export interface User {
     bookings?: Booking[];
 }
 
-
-
-
+export interface Bookings {
+    bookingId: number;
+    bookingDate: Date;
+    status: StatusType;
+    notes: string;
+    tourId: number;
+}
