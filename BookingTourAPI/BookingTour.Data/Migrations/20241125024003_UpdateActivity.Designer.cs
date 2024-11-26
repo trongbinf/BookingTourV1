@@ -4,6 +4,7 @@ using BookingTour.Data.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BookingTour.Data.Migrations
 {
     [DbContext(typeof(BookingTourDbContext))]
-    partial class BookingTourDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241125024003_UpdateActivity")]
+    partial class UpdateActivity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -359,9 +362,6 @@ namespace BookingTour.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ReviewId"));
 
-                    b.Property<int>("BookingId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Comment")
                         .HasColumnType("nvarchar(max)");
 
@@ -371,9 +371,6 @@ namespace BookingTour.Data.Migrations
                     b.Property<DateTime>("ReviewDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("Status")
-                        .HasColumnType("int");
-
                     b.Property<int>("TourId")
                         .HasColumnType("int");
 
@@ -382,8 +379,6 @@ namespace BookingTour.Data.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("ReviewId");
-
-                    b.HasIndex("BookingId");
 
                     b.HasIndex("TourId");
 
@@ -568,21 +563,6 @@ namespace BookingTour.Data.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles", (string)null);
-                    b.HasData(
-                        new
-                        {
-                            Id = "ce8e8595-5df8-40e4-8606-792a23a0a7e2",
-                            ConcurrencyStamp = "1",
-                            Name = "Admin",
-                            NormalizedName = "Admin"
-                        },
-                        new
-                        {
-                            Id = "5826a0c5-af0f-4c57-b49c-386ffce22aa9",
-                            ConcurrencyStamp = "2",
-                            Name = "User",
-                            NormalizedName = "User"
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -848,12 +828,6 @@ namespace BookingTour.Data.Migrations
 
             modelBuilder.Entity("BookingTour.Model.Review", b =>
                 {
-                    b.HasOne("BookingTour.Model.Booking", "Booking")
-                        .WithMany("Reviews")
-                        .HasForeignKey("BookingId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("BookingTour.Model.Tour", "Tour")
                         .WithMany("Reviews")
                         .HasForeignKey("TourId")
@@ -865,8 +839,6 @@ namespace BookingTour.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Booking");
 
                     b.Navigation("Tour");
 
@@ -933,11 +905,6 @@ namespace BookingTour.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("BookingTour.Model.Booking", b =>
-                {
-                    b.Navigation("Reviews");
                 });
 
             modelBuilder.Entity("BookingTour.Model.Category", b =>

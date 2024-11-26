@@ -4,6 +4,7 @@ using BookingTour.Data.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BookingTour.Data.Migrations
 {
     [DbContext(typeof(BookingTourDbContext))]
-    partial class BookingTourDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241124143146_AddTourInActivity")]
+    partial class AddTourInActivity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -359,9 +362,6 @@ namespace BookingTour.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ReviewId"));
 
-                    b.Property<int>("BookingId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Comment")
                         .HasColumnType("nvarchar(max)");
 
@@ -371,9 +371,6 @@ namespace BookingTour.Data.Migrations
                     b.Property<DateTime>("ReviewDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("Status")
-                        .HasColumnType("int");
-
                     b.Property<int>("TourId")
                         .HasColumnType("int");
 
@@ -382,8 +379,6 @@ namespace BookingTour.Data.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("ReviewId");
-
-                    b.HasIndex("BookingId");
 
                     b.HasIndex("TourId");
 
@@ -457,7 +452,7 @@ namespace BookingTour.Data.Migrations
                             CategoryId = 1,
                             City = "Hà Nội",
                             Country = "Việt Nam",
-                            Created = new DateTime(2024, 11, 25, 9, 40, 2, 728, DateTimeKind.Local).AddTicks(4979),
+                            Created = new DateTime(2024, 11, 24, 21, 31, 39, 929, DateTimeKind.Local).AddTicks(7860),
                             Description = "Tour tham quan các danh lam thắng cảnh trong thành phố.",
                             Duration = "1 ngày 1 đêm",
                             IsFullDay = true,
@@ -472,7 +467,7 @@ namespace BookingTour.Data.Migrations
                             CategoryId = 2,
                             City = "Đà Lạt",
                             Country = "Việt Nam",
-                            Created = new DateTime(2024, 11, 25, 9, 40, 2, 728, DateTimeKind.Local).AddTicks(4984),
+                            Created = new DateTime(2024, 11, 24, 21, 31, 39, 929, DateTimeKind.Local).AddTicks(7870),
                             Description = "Tour khám phá các khu rừng nguyên sinh.",
                             Duration = "2 ngày 1 đêm",
                             IsFullDay = false,
@@ -487,7 +482,7 @@ namespace BookingTour.Data.Migrations
                             CategoryId = 3,
                             City = "Nha Trang",
                             Country = "Việt Nam",
-                            Created = new DateTime(2024, 11, 25, 9, 40, 2, 728, DateTimeKind.Local).AddTicks(4987),
+                            Created = new DateTime(2024, 11, 24, 21, 31, 39, 929, DateTimeKind.Local).AddTicks(7875),
                             Description = "Tour du lịch nghỉ dưỡng tại các bãi biển đẹp.",
                             Duration = "3 ngày 2 đêm",
                             IsFullDay = false,
@@ -502,7 +497,7 @@ namespace BookingTour.Data.Migrations
                             CategoryId = 1,
                             City = "Hà Nội",
                             Country = "Việt Nam",
-                            Created = new DateTime(2024, 11, 25, 9, 40, 2, 728, DateTimeKind.Local).AddTicks(4992),
+                            Created = new DateTime(2024, 11, 24, 21, 31, 39, 929, DateTimeKind.Local).AddTicks(7884),
                             Description = "Tham quan các bảo tàng nổi tiếng.",
                             Duration = "1 ngày 1 đêm",
                             IsFullDay = true,
@@ -517,7 +512,7 @@ namespace BookingTour.Data.Migrations
                             CategoryId = 2,
                             City = "Sa Pa",
                             Country = "Việt Nam",
-                            Created = new DateTime(2024, 11, 25, 9, 40, 2, 728, DateTimeKind.Local).AddTicks(4995),
+                            Created = new DateTime(2024, 11, 24, 21, 31, 39, 929, DateTimeKind.Local).AddTicks(7888),
                             Description = "Tour cắm trại qua đêm trong rừng.",
                             Duration = "2 ngày 2 đêm",
                             IsFullDay = false,
@@ -532,7 +527,7 @@ namespace BookingTour.Data.Migrations
                             CategoryId = 3,
                             City = "Phú Quốc",
                             Country = "Việt Nam",
-                            Created = new DateTime(2024, 11, 25, 9, 40, 2, 728, DateTimeKind.Local).AddTicks(4997),
+                            Created = new DateTime(2024, 11, 24, 21, 31, 39, 929, DateTimeKind.Local).AddTicks(7895),
                             Description = "Tour nghỉ dưỡng và tham quan vùng biển.",
                             Duration = "4 ngày 3 đêm",
                             IsFullDay = true,
@@ -568,21 +563,6 @@ namespace BookingTour.Data.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles", (string)null);
-                    b.HasData(
-                        new
-                        {
-                            Id = "ce8e8595-5df8-40e4-8606-792a23a0a7e2",
-                            ConcurrencyStamp = "1",
-                            Name = "Admin",
-                            NormalizedName = "Admin"
-                        },
-                        new
-                        {
-                            Id = "5826a0c5-af0f-4c57-b49c-386ffce22aa9",
-                            ConcurrencyStamp = "2",
-                            Name = "User",
-                            NormalizedName = "User"
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -686,17 +666,17 @@ namespace BookingTour.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "1987f970-51b3-42fb-a3dc-0fe4d651aaca",
+                            Id = "4a4cb8ca-e94e-4951-8466-960e15007f14",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "7442ac48-9fa9-4f6f-845b-35d6cd7eb44b",
+                            ConcurrencyStamp = "8753e06c-00b9-44fe-9bb2-6ac3aa06ae87",
                             Email = "user@booking.com",
                             EmailConfirmed = true,
                             LockoutEnabled = true,
                             NormalizedEmail = "USER@BOOKING.COM",
                             NormalizedUserName = "USER@BOOKING.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEDpUX0d5qdEgxD7BBfRgPA1xDjYPSKadAug62Qkb6YudznMkYjEtlLZUry9MkJeWSQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEHfyM3wS/qquViiWG7lf2P5iyuXw/YEkV4DpO/sVgUy6LNuNDjkQxb1WLEv8nyZHbA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "54216e9a-e929-4927-9732-2c0a2581e1fb",
+                            SecurityStamp = "f5daa429-53bb-4a48-9770-fdcb053e0f1e",
                             TwoFactorEnabled = false,
                             UserName = "user@booking.com"
                         });
@@ -848,12 +828,6 @@ namespace BookingTour.Data.Migrations
 
             modelBuilder.Entity("BookingTour.Model.Review", b =>
                 {
-                    b.HasOne("BookingTour.Model.Booking", "Booking")
-                        .WithMany("Reviews")
-                        .HasForeignKey("BookingId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("BookingTour.Model.Tour", "Tour")
                         .WithMany("Reviews")
                         .HasForeignKey("TourId")
@@ -865,8 +839,6 @@ namespace BookingTour.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Booking");
 
                     b.Navigation("Tour");
 
@@ -933,11 +905,6 @@ namespace BookingTour.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("BookingTour.Model.Booking", b =>
-                {
-                    b.Navigation("Reviews");
                 });
 
             modelBuilder.Entity("BookingTour.Model.Category", b =>

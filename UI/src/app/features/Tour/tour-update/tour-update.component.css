@@ -1,0 +1,32 @@
+/* Đảm bảo bố cục bên trái cho các nút và bên phải cho bảng */
+.row.g-3.flex-between-end {
+  display: flex;
+  justify-content: space-between; /* Chia đều không gian giữa nút và bảng */
+  align-items: flex-start;
+}
+
+/* Các phần tử bên trái (nút) */
+.col-12.col-xl-6 {
+  display: flex;
+  flex-direction: column; /* Đặt các phần tử theo chiều dọc */
+}
+
+/* Các phần tử nút (activity và date start) nằm trên cùng một hàng */
+.d-flex.justify-content-start {
+  display: flex;
+  justify-content: flex-start; /* Căn chỉnh các nút sang bên trái */
+  gap: 10px; /* Tạo khoảng cách giữa các nút */
+  align-items: center; /* Căn chỉnh các nút theo chiều ngang */
+  position: sticky; /* Đặt các nút bám vào phía trên */
+  top: 0; /* Cố định vị trí từ trên cùng */
+  z-index: 10; /* Đảm bảo các nút nằm trên bảng */
+  padding: 10px 0; /* Thêm khoảng cách cho các nút */
+  margin-bottom: 15px; /* Đảm bảo không bị dính vào bảng */
+}
+
+/* Bảng cuộn nếu dài */
+.activity-list, .date-list {
+  max-height: 400px; /* Chiều cao tối đa cho bảng */
+  overflow-y: auto; /* Bật cuộn dọc */
+  margin-top: 15px;
+}

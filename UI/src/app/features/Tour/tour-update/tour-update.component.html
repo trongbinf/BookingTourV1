@@ -1,4 +1,4 @@
-<div class="content">
+<div class="p-5">
   <nav class="mb-3" aria-label="breadcrumb">
     <ol class="breadcrumb mb-0">
       <li class="breadcrumb-item"><a href="#!">Dashboard</a></li>
@@ -8,18 +8,14 @@
       <li class="breadcrumb-item active">Update Tour</li>
     </ol>
   </nav>
-  <form class="mb-9" (ngSubmit)="onUpdate()" enctype="multipart/form-data">
+  <form class="mb-3" (ngSubmit)="onUpdate()" enctype="multipart/form-data">
     <div class="row g-3 flex-between-end mb-5">
       <div class="col-auto">
         <h2 class="mb-2">Update Tour</h2>
         <h5 class="text-body-tertiary fw-semibold">Modify your tour details</h5>
       </div>
       <div class="col-auto">
-        <button
-          class="btn btn-phoenix-secondary me-2 mb-2 mb-sm-0"
-          type="button"
-          (click)="discardChanges()"
-        >
+        <button class="btn btn-phoenix-secondary me-2 mb-2 mb-sm-0" type="button" (click)="discardChanges()">
           Clear form
         </button>
         <button class="btn btn-primary mb-2 mb-sm-0" type="submit">
@@ -32,236 +28,319 @@
         <h4 class="mb-3">
           Tour Id: <span class="text-danger">{{ tour.tour.tourId }}</span>
         </h4>
-        <h4 class="mb-3">Tour Name <span class="text-danger">*</span></h4>
-        <input
-          class="form-control mb-5"
-          type="text"
-          placeholder="Write title here..."
-          [(ngModel)]="tour.tour.tourName"
-          name="tourName"
-          required
-        />
+        <!-- Tour Name and Description -->
+        <div class="row mb-3">
+          <div class="col-md-6">
+            <h4 class="mb-3">Tour Name <span class="text-danger">*</span></h4>
+            <input class="form-control" type="text" placeholder="Write title here..." [(ngModel)]="tour.tour.tourName"
+              name="tourName" required />
+          </div>
+          <div class="col-md-6">
 
-        <h4 class="mb-3">
-          Tour Description <span class="text-danger">*</span>
-        </h4>
-        <textarea
-          class="form-control mb-5"
-          name="description"
-          placeholder="Write a long description here..."
-          [(ngModel)]="tour.tour.description"
-          required
-        ></textarea>
-
-        <h4 class="mb-3">City <span class="text-danger">*</span></h4>
-        <input
-          class="form-control mb-5"
-          type="text"
-          placeholder="Enter city..."
-          [(ngModel)]="tour.tour.city"
-          name="city"
-          required
-        />
-
-        <h4 class="mb-3">Country <span class="text-danger">*</span></h4>
-        <input
-          class="form-control mb-5"
-          type="text"
-          placeholder="Enter country..."
-          [(ngModel)]="tour.tour.country"
-          name="country"
-          required
-        />
-
-        <h4 class="mb-3">Duration <span class="text-danger">*</span></h4>
-        <input
-          class="form-control mb-5"
-          type="text"
-          placeholder="Enter duration..."
-          [(ngModel)]="tour.tour.duration"
-          name="duration"
-          required
-        />
-
-        <h4 class="mb-3">Price <span class="text-danger">*</span></h4>
-        <input
-          class="form-control mb-5"
-          type="number"
-          placeholder="Enter price"
-          [(ngModel)]="tour.tour.price"
-          name="price"
-          required
-        />
-
-        <h4 class="mb-3">
-          Number of People <span class="text-danger">*</span>
-        </h4>
-        <input
-          class="form-control mb-5"
-          type="number"
-          placeholder="Enter number of people"
-          [(ngModel)]="tour.tour.personNumber"
-          name="personNumber"
-          required
-        />
-
-        <div class="mb-5">
-          <h4 class="mb-3">Tour Full Day <span class="text-danger">*</span></h4>
-          <div class="form-check">
-            <input
-              class="form-check-input"
-              id="isFullDayCheck"
-              type="checkbox"
-              [(ngModel)]="tour.tour.isFullDay"
-              name="isFullDay"
-            />
-            <label class="form-check-label text-body" for="isFullDayCheck">
-              Full Day Tour
-            </label>
+            <h4 class="mb-3">Category <span class="text-danger">*</span></h4>
+            <select class="form-select" [(ngModel)]="tour.category.categoryId" name="categoryId" required>
+              <option *ngFor="let cate of catelist" [value]="cate.categoryId">
+                {{ cate.name }}
+              </option>
+            </select>
           </div>
         </div>
-
-        <div class="mb-5">
-          <h4 class="mb-3">Tour Status <span class="text-danger">*</span></h4>
-          <div class="form-check">
-            <input
-              class="form-check-input"
-              id="statusCheck"
-              type="checkbox"
-              [(ngModel)]="tour.tour.status"
-              name="status"
-            />
-            <label class="form-check-label text-body" for="statusCheck">
-              Active Tour
-            </label>
+        <div class="row mb-3">
+          <div class="col-md-12">
+            <h4 class="mb-3">Tour Description <span class="text-danger">*</span></h4>
+            <textarea class="form-control w-90" name="description" placeholder="Write a long description here..."
+              [(ngModel)]="tour.tour.description" required></textarea>
           </div>
         </div>
-
-        <div class="mb-5">
-          <h4 class="mb-3">Category <span class="text-danger">*</span></h4>
-          <select
-            class="form-select mb-5"
-            [(ngModel)]="tour.category.categoryId"
-            name="categoryId"
-            required
-          >
-            <option *ngFor="let cate of catelist" [value]="cate.categoryId">
-              {{ cate.name }}
-            </option>
-          </select>
-        </div>
-
-        <div class="mb-5">
-          <h4 class="mb-3">Date Starts <small class="">(optional)</small></h4>
-          <input
-            class="form-control mb-5"
-            type="date"
-            [(ngModel)]="tour.dateStarts"
-            name="dateStarts"
-          />
-          <small class="text-body-tertiary"
-            >Leave empty if no start dates.</small
-          >
-        </div>
-        <div class="mb-5">
-          <h4 class="mb-3">Activities <small class="">(optional)</small></h4>
-          <div class="mb-5">
-            <label for="activitiesSelect" class="form-label">Activities</label>
-
-            <!-- Bảng hiển thị danh sách hoạt động -->
-            <table class="table table-bordered">
-              <thead>
-                <tr>
-                  <th scope="col">Activity ID</th>
-                  <th scope="col">Activity Name</th>
-                  <th scope="col">Action</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr *ngFor="let activity of tour.activities">
-                  <td>{{ activity.activityId }}</td>
-                  <td>{{ activity.activityName }}</td>
-                  <td><Button>edit</Button><Button>delete</Button></td>
-                </tr>
-              </tbody>
-            </table>
-
-            <small class="text-body-tertiary"
-              >Leave empty if no activities.</small
-            >
+        <!-- Location -->
+        <div class="row mb-3">
+          <div class="col-md-6">
+            <h4 class="mb-3">Country <span class="text-danger">*</span></h4>
+            <input class="form-control" type="text" placeholder="Enter country..." [(ngModel)]="tour.tour.country"
+              name="country" required />
+          </div>
+          <div class="col-md-6">
+            <h4 class="mb-3">City <span class="text-danger">*</span></h4>
+            <input class="form-control" type="text" placeholder="Enter city..." [(ngModel)]="tour.tour.city" name="city"
+              required />
           </div>
         </div>
-        <div class="mb-5">
-          <h4 class="mb-3">Bookings <small class="">(optional)</small></h4>
-          <textarea
-            class="form-control mb-5"
-            placeholder="Enter bookings (comma separated)"
-            [(ngModel)]="tour.bookings"
-            name="bookings"
-          ></textarea>
-          <small class="text-body-tertiary">Leave empty if no bookings.</small>
+        <!-- Duration and Price -->
+        <div class="row mb-3">
+          <div class="col-md-6">
+            <h4 class="mb-3">Duration <span class="text-danger">*</span></h4>
+            <input class="form-control" type="text" placeholder="Enter duration..." [(ngModel)]="tour.tour.duration"
+              name="duration" required />
+          </div>
+          <div class="col-md-6">
+            <h4 class="mb-3">Price <span class="text-danger">*</span></h4>
+            <input class="form-control" type="number" placeholder="Enter price" [(ngModel)]="tour.tour.price"
+              name="price" required />
+          </div>
         </div>
-        <div class="mb-5">
-          <h4 class="mb-3">Reviews <small class="">(optional)</small></h4>
-          <textarea
-            class="form-control mb-5"
-            placeholder="Enter reviews (comma separated)"
-            [(ngModel)]="tour.reviews"
-            name="reviews"
-          ></textarea>
-          <small class="text-body-tertiary">Leave empty if no reviews.</small>
+        <!-- Number of People and status -->
+        <div class="row mb-3">
+          <div class="col-md-6">
+            <h4 class="mb-3">Number of People <span class="text-danger">*</span></h4>
+            <input class="form-control" type="number" placeholder="Enter number of people"
+              [(ngModel)]="tour.tour.personNumber" name="personNumber" required />
+          </div>
+          <div class="col-md-6">
+            <h4 class="mb-3">Tour Status <span class="text-danger">*</span></h4>
+            <div class="d-flex justify-content-between">
+              <div class="form-check">
+                <input class="form-check-input" id="statusActive" type="radio" [(ngModel)]="tour.tour.status"
+                  [value]="true" name="status" />
+                <label class="form-check-label" for="statusActive">
+                  Active Tour
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" id="statusInactive" type="radio" [(ngModel)]="tour.tour.status"
+                  [value]="false" name="status" />
+                <label class="form-check-label" for="statusInactive">
+                  Inactive Tour
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- isfullday and Activity -->
+        <div class="row mb-3">
+          <div class="col-md-6">
+            <h4 class="mb-3">Tour Full Day <span class="text-danger">*</span></h4>
+            <div class="d-flex justify-content-between">
+              <div class="form-check">
+                <input class="form-check-input" id="fullDay" type="radio" [(ngModel)]="tour.tour.isFullDay"
+                  [value]="true" name="isFullDay" />
+                <label class="form-check-label" for="fullDay">
+                  Active Tour
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" id="notFullDay" type="radio" [(ngModel)]="tour.tour.isFullDay"
+                  [value]="false" name="isFullDay" />
+                <label class="form-check-label" for="notFullDay">
+                  Inactive Tour
+                </label>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
+      <!-- image -->
       <div class="col-12 col-xl-6">
         <h4 class="mb-3">Main Image <small class=""></small></h4>
         <div class="mb-3">
-          <img
-            *ngIf="tour.tour.mainImage"
-            [src]="tour.tour.mainImage"
-            alt="Current Main Image"
-            class="img-thumbnail mb-3"
-          />
+          <img *ngIf="tour.tour.mainImage" [src]="tour.tour.mainImage" alt="Current Main Image"
+            class="img-thumbnail mb-3" />
         </div>
-        <input
-          type="file"
-          class="form-control mb-5"
-          (change)="onMainImageChange($event)"
-        />
-        <img
-          *ngIf="mainImagePreview"
-          [src]="mainImagePreview"
-          alt="Preview Main Image"
-          class="img-thumbnail"
-        />
+        <input type="file" class="form-control mb-5" (change)="onMainImageChange($event)" />
+        <img *ngIf="mainImagePreview" [src]="mainImagePreview" alt="Preview Main Image" class="img-thumbnail" />
         <h4 class="mb-3">Detail Images</h4>
         <div class="row">
           <div class="col-4" *ngFor="let preview of otherImageArray">
-            <img
-              [src]="preview"
-              alt="Preview Detail Image"
-              class="img-thumbnail"
-            />
+            <img [src]="preview" alt="Preview Detail Image" class="img-thumbnail" />
           </div>
-        </div>
-
-        <input
-          type="file"
-          class="form-control mb-5"
-          multiple
-          (change)="onDetailImagesChange($event)"
-        />
-        <div class="mb-3">
-          <div class="row">
-            <div class="col-4" *ngFor="let detailImage of detailImagesPreview">
-              <img
-                [src]="detailImage"
-                alt="detailImage"
-                class="img-thumbnail mb-3"
-              />
-            </div>
+          <h4 class="mb-3">Tour Images</h4>
+          <div class="mb-5 border-0 bg-light border rounded-3 text-center" style="height: 200px">
+            <h5 class="text-body-tertiary" style="line-height: 100%; vertical-align: middle">
+              Drag & drop image here
+            </h5>
           </div>
         </div>
       </div>
     </div>
   </form>
+  <!-- Khu vực hiển thị activity -->
+  <div class="row g-3 flex-between-end mb-5">
+    <!-- button  -->
+    <div class="col-12 col-xl-6">
+      <!-- activity -->
+      <div class="d-flex justify-content-start align-items-center mb-3 sticky-buttons">
+        <button class="btn btn-primary me-3" data-bs-toggle="modal" data-bs-target="#updateActivityModal"
+          id="addActivityBtn" (click)="openAddActivity()">
+          Add Activity
+        </button>
+        <button class="btn btn-secondary me-3" id="showActivityBtn" (click)="showActivity()">
+          {{ openActivity ? 'Hide Activity' : 'Show Activity' }}
+        </button>
+
+        <!--  date start -->
+        <div *ngIf="!tour.tour.isFullDay">
+          <button class="btn btn-primary me-3" data-bs-toggle="modal" data-bs-target="#updateDateStartModal"
+            id="addDateBtn" (click)="openAddDateStart()">Add Date</button>
+          <button class="btn btn-secondary" id="showDateBtn" (click)="showDateStart()">
+            {{ openDateStart ? 'Hide Date Start' : 'Show Date Start' }}
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Activity List -->
+    <div class="col-12 col-xl-6">
+      <div class="activity-list mt-3" *ngIf="openActivity">
+        <h4>Activity List</h4>
+        <table class="table table-bordered table-hover">
+          <thead class="table-light">
+            <tr class="text-center align-middle">
+              <th>#</th>
+              <th>Activity Name</th>
+              <th>Activity Type</th>
+              <th>Description</th>
+              <th>Location</th>
+              <th>Time</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let activity of tour.activities; let i = index" class="align-middle">
+              <td class="text-center align-middle">{{ i + 1 }}</td>
+              <td>{{ activity.activityName }}</td>
+              <td class="text-center">{{ activity.activityType}}</td>
+              <td>{{ activity.description }}</td>
+              <td>{{ activity.location }}</td>
+              <td class="text-center">{{ activity.duration }}</td>
+              <td class="text-center align-middle">
+                <button class="btn btn-danger btn-sm" (click)="deleteActivity(activity.activityId)">Remove</button>
+                <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#updateActivityModal"
+                  (click)="editActivity(activity.activityId)">Edit</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Date Start List -->
+      <div class="date-list mt-3" *ngIf="openDateStart">
+        <h4>Date Start List</h4>
+        <table class="table table-bordered table-hover">
+          <thead class="table-light">
+            <tr class="text-center align-middle">
+              <th>#</th>
+              <th>Date Start</th>
+              <th>Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let date of tour.dateStarts; let i = index" class="align-middle">
+              <td class="text-center align-middle">{{ i + 1 }}</td>
+              <td>{{ date.startDate }}</td>
+              <td class="text-center">{{date.typeStatus}}</td>
+              <td class="text-center align-middle">
+                <button class="btn btn-danger btn-sm" (click)="deleteDateStart(date.dateStartId)">Remove</button>
+                <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#updateDateStartModal"
+                  (click)="editDate(date.dateStartId)">Edit</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Modal Update Activity -->
+  <div class="modal fade" id="updateActivityModal" tabindex="-1" aria-labelledby="updateActivityModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="updateActivityModalLabel">Update Activity</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form (ngSubmit)="updateActivity()">
+            <!-- Activity Name -->
+            <div class="mb-3">
+              <label for="activityName" class="form-label">Activity Name</label>
+              <input type="text" id="activityName" class="form-control" [(ngModel)]="activityTour.activityName"
+                name="activityName" placeholder="Enter activity name" required>
+            </div>
+
+            <!-- Activity Type -->
+            <div class="mb-3">
+              <label for="activityType" class="form-label">Activity Type</label>
+              <select id="activityType" class="form-select" [(ngModel)]="activityTour.activityType" name="activityType"
+                required>
+                <option value="" disabled selected>Select activity type</option>
+                <option *ngFor="let type of activityTypes" [value]="type">{{type}}</option>
+              </select>
+            </div>
+
+            <!-- Description -->
+            <div class="mb-3">
+              <label for="description" class="form-label">Description</label>
+              <textarea id="description" class="form-control" [(ngModel)]="activityTour.description" name="description"
+                rows="3" placeholder="Enter activity description" required></textarea>
+            </div>
+
+            <!-- Location -->
+            <div class="mb-3">
+              <label for="location" class="form-label">Location</label>
+              <input type="text" id="location" class="form-control" [(ngModel)]="activityTour.location" name="location"
+                placeholder="Enter location" required>
+            </div>
+
+            <!-- Time -->
+            <div class="mb-3">
+              <label for="time" class="form-label">Time</label>
+              <input type="time" id="time" class="form-control" [(ngModel)]="activityTour.duration" name="time"
+                required>
+            </div>
+
+            <!-- Modal Footer -->
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary">Save Changes</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- update DateStart -->
+  <div class="modal fade" id="updateDateStartModal" tabindex="-1" aria-labelledby="updateDateStartModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Chọn Ngày</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <form (ngSubmit)="onSubmitDateStart()" #dateForm="ngForm">
+          <div class="modal-body">
+            <!-- Date Input -->
+            <div class="mb-3">
+              <label for="dateInput">Ngày</label>
+              <div *ngIf="isDateDuplicate" class="text-danger mt-2">
+                Ngày chọn không hợp lệ, vui lòng chọn ngày khác.
+              </div>
+              <input type="date" id="dateInput" (change)="validateDate()" [(ngModel)]="dateStartSelect.startDate"
+                [min]="minDate" name="startDate" class="form-control" required>
+            </div>
+
+            <!-- Status Input -->
+            <div class="mb-3">
+              <label for="satusInput">Status</label>
+              <select id="dateStatus" class="form-select" [(ngModel)]="dateStartSelect.typeStatus" name="dateStatus"
+                required>
+                <option value="" disabled selected>Select activity type</option>
+                <option *ngFor="let type of dateStatus" [value]="type">{{ type }}</option>
+              </select>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="mb-3">
+              <button type="submit" class="btn btn-primary"
+                [disabled]="!dateForm.form.valid || isDateDuplicate">Submit</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
 </div>
