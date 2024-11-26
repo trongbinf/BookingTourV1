@@ -132,7 +132,9 @@
                                         </td>
 
                                         <td class="tour align-middle white-space-nowrap text-body py-2">
-                                            {{booking.tour?.tourName}}</td>
+                                            <a
+                                                [routerLink]="['/tour-detail', booking.tour?.tourId]">{{booking.tour?.tourName}}</a>
+                                        </td>
 
                                         <td class="date align-middle text-center text-body-tertiary py-2">
                                             {{booking.bookingDate | date: 'dd/MM/yyyy'}}</td>

@@ -56,20 +56,19 @@ export class ProfileComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    const sessionUserId = this.authService.getUserId();
-
-    if (sessionUserId) {
-      this.loadBookingByUserId(sessionUserId);
-      this.loadTotalMoneyByUser(sessionUserId);
-    } else {
-      console.log('User is not logged in or user ID is not available.');
-    }
-
     this.user$ = this.authService.getUserInfo();
     this.user$.subscribe({
       next: (user) => {
+
         this.model.fullName = user.fullName;
         this.model.userName = user.userName;
+        const sessionUserId = user.id;
+        if (sessionUserId) {
+          this.loadBookingByUserId(sessionUserId);
+          this.loadTotalMoneyByUser(sessionUserId);
+        } else {
+          console.log('User is not logged in or user ID is not available.');
+        }
         // Tìm ngày gần nhất
         if (user?.bookings?.length) {
           this.lastOrder = user.bookings
@@ -81,6 +80,10 @@ export class ProfileComponent implements OnInit, OnDestroy {
         }
       }
     });
+
+
+
+
   }
 
   loadBookingByUserId(userId: string): void {
