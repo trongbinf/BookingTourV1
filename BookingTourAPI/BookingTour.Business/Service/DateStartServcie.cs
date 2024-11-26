@@ -1,6 +1,7 @@
 ﻿using BookingTour.Business.Service.IService;
 using BookingTour.Data.Repository.IRepository;
 using BookingTour.Model;
+using Microsoft.AspNetCore.Http;
 using System.Linq.Expressions;
 
 namespace BookingTour.Business.Service
@@ -47,7 +48,7 @@ namespace BookingTour.Business.Service
 	
 		public async Task UpdateAsync(DateStart entity)
 		{
-			_unitOfWork.DateStart.UpdateAsync(entity); 
+			await _unitOfWork.DateStart.UpdateAsync(entity); 
 			await _unitOfWork.SaveAsync(); 
 		}
 
@@ -57,5 +58,16 @@ namespace BookingTour.Business.Service
 			return await _unitOfWork.DateStart.GetFirstOrDefaultAsync(filter, includeProperties);
 		}
 
-	}
+        public DateOnly ConvertToDateOnlyArray(string dateString)
+        {
+            if (DateOnly.TryParse(dateString, out DateOnly date))
+            {
+                return date;  // Trả về đối tượng DateOnly nếu chuỗi hợp lệ
+            }
+            else
+            {
+                throw new ArgumentException($"Invalid date string: {dateString}");
+            }
+        }
+    }
 }

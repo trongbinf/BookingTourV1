@@ -1,5 +1,6 @@
 ﻿using BookingTour.Model.Enum;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
 
 namespace BookingTour.Model
@@ -14,7 +15,7 @@ namespace BookingTour.Model
 		public string ActivityName { get; set; }
 		public string Location { get; set; }
 		public string Description { get; set; }
-		public int TourId { get; set; }
-
+		public int TourId { get; set; }     
+        public virtual Tour Tour {  get; set; }
 	}
 }

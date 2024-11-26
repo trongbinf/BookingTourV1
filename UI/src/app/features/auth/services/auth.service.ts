@@ -17,8 +17,6 @@ import { PagedResponse } from '../models/PaginatedList';
 })
 export class AuthService {
 
-
-
   $user = new BehaviorSubject<User | undefined>(undefined);
 
   constructor(private http: HttpClient,
