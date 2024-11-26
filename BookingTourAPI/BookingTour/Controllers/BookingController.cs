@@ -56,20 +56,11 @@ namespace BookingTour.API.Controllers
 				return BadRequest("Invalid booking data.");
 			}
 
-			TimeSpan startTime;
-			switch (bookingVm.StartTime)
+		
+
+			if (!DateTime.TryParse(bookingVm.StartTime, out DateTime startTime))
 			{
-				case "08:00:00":
-					startTime = new TimeSpan(0, 8, 0, 0);
-					break;
-				case "09:00:00":
-					startTime = new TimeSpan(0, 9, 0, 0);
-					break;
-				case "10:00:00":
-					startTime = new TimeSpan(10, 0, 0,0);
-					break;
-				default:
-					return BadRequest("Invalid StartTime. Allowed values are 08:00:00, 09:00:00, or 10:00:00.");
+				return BadRequest("Invalid StartTime.");
 			}
 
 			var booking = new Booking
@@ -83,6 +74,7 @@ namespace BookingTour.API.Controllers
 				TourId = bookingVm.TourId,
 				UserId = bookingVm.UserId
 			};
+
 
 			await _bookingService.AddAsync(booking);
 
@@ -272,8 +264,8 @@ namespace BookingTour.API.Controllers
 				{
 					return NotFound($"Tour with ID {booking.TourId} not found.");
 				}
-			
-				var reviewLink = $"http://localhost:4200/review-add/{tour.TourId}/{booking.BookingId}"; 
+
+				var reviewLink = $"http://localhost:4200/review-add/{tour.TourId}/{booking.BookingId}/{booking.UserId}";
 
 				var reviewContent = $@"
 			<!DOCTYPE html>

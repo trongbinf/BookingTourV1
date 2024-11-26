@@ -34,8 +34,9 @@
             </p>
             <p class="text-muted mb-2">
                 <strong>Start Time:</strong>
-                {{ booking?.startTime }} AM
+                {{ booking?.startTime | date: 'shortTime' }}
             </p>
+
             <p class="text-muted mb-2">
                 <strong>Location:</strong>
                 {{ booking?.tour?.city }}, {{ booking?.tour?.country }}
@@ -49,7 +50,7 @@
                 <strong>Status: </strong>
                 <span class="badge badge-phoenix fs-10 badge-phoenix-secondary"
                     [ngClass]="getStatusColor(booking?.status)">
-                    <span class="badge-label p-1">{{ getStatusString(booking?.status) }}</span>
+                    <span class="badge-label p-1">{{booking?.status}}</span>
 
                 </span>
             </p>

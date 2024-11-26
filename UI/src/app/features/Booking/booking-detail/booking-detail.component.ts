@@ -38,10 +38,14 @@ export class BookingDetailComponent implements OnInit, OnDestroy {
     return StatusType[status] ?? 'Unknown';
   }
 
-  getStatusColor(status: number | undefined): string {
+  getStatusColor(status: StatusType | undefined): string {
     if (status === undefined) return 'badge-phoenix-dark'; // Default color for undefined status
 
-    switch (status) {
+    const statusValue = typeof status === 'string'
+      ? StatusType[status as keyof typeof StatusType]
+      : status;
+
+    switch (statusValue) {
       case StatusType.Submited: // 0
         return 'badge-phoenix-primary'; // Blue
       case StatusType.Pending: // 1

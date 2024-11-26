@@ -7,9 +7,9 @@ import { TourGet } from "./tour-get.model";
 
 export interface Tour {
     tour: TourGet;
-    category?: Category;
-    dateStarts?: DateStart[];
-    activities?: Activity[];
-    bookings?: Booking[];
-    reviews?: Review[];
+    category: Category;
+    dateStarts: DateStart[];
+    activities: Activity[];
+    bookings: Booking[];
+    reviews: Review[];
 }

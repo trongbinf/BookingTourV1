@@ -4,12 +4,12 @@
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a [routerLink]="['']">Home</a></li>
-                <li class="breadcrumb-item active" aria-current="page">History Booking</li>
+                <li class="breadcrumb-item active" aria-current="page">My Booking</li>
             </ol>
         </nav>
         <div class="row align-items-center justify-content-between g-3 mb-4">
             <div class="col-auto">
-                <h2 class="mb-0">History Booking</h2>
+                <h2 class="mb-0">My Booking</h2>
             </div>
         </div>
 
@@ -30,7 +30,7 @@
                                         <p class="text-body-secondary">
                                             Full Name: &nbsp;
                                             <input type="text" name="fullName" [(ngModel)]="model.fullName"
-                                                style="margin-left: 8px;;" [readonly]="!isEditingFullName"
+                                                style="margin-left: 8px;" [readonly]="!isEditingFullName"
                                                 [class.no-border]="!isEditingFullName" required>
                                             &nbsp;
                                             <a (click)="toggleEdit('fullName')" *ngIf="!isEditingFullName"><i
@@ -39,21 +39,18 @@
                                         <p class="text-body-secondary">
                                             User Name: &nbsp;
 
-                                            <input type="text" name="userName" [(ngModel)]="model.userName"
-                                                [readonly]="!isEditingUserName" [class.no-border]="!isEditingUserName"
-                                                required>
-                                            &nbsp;
-                                            <a (click)="toggleEdit('userName')" *ngIf="!isEditingUserName"><i
-                                                    class='fas fa-pen'></i></a>
+                                            <input type="text" name="userName" [(ngModel)]="model.userName" readonly
+                                                [class.no-border]="true" disabled required>
                                         </p>
-                                        <div *ngIf="isEditingFullName || isEditingUserName"
-                                            style="display: flex;gap: 60px;">
+
+                                        <div *ngIf="isEditingFullName" style="display: flex;gap: 60px;">
                                             <br>
                                             <a class="btn btn-secondary" (click)="toggleEdit('cancel')">Cancel</a>
                                             <button type="submit" class="btn btn-primary">Save</button>
                                             <br>
                                         </div>
                                     </form>
+
 
                                     <div><a class="me-2"><span
                                                 class="fab fa-linkedin-in text-body-quaternary text-opacity-75 text-primary-hover"></span></a><a
@@ -112,7 +109,7 @@
                                             onclick="sortTable('tour', true)" style="width:8%; min-width:50px">TOUR NAME
                                         </th>
                                         <th class="sort align-middle text-center" scope="col" data-sort="date"
-                                            onclick="sortTable('date', true)" style="width:8%; min-width:140px">CREATED
+                                            onclick="sortTable('date', true)" style="width:8%; min-width:140px">BOOKING
                                             DATE
                                         </th>
                                         <th class="sort align-middle pe-0 text-center" scope="col" data-sort="status"
@@ -139,11 +136,12 @@
 
                                         <td class="date align-middle text-center text-body-tertiary py-2">
                                             {{booking.bookingDate | date: 'dd/MM/yyyy'}}</td>
-                                        <td class="status  align-middle white-space-nowrap text-body py-2 text-end">
+                                        <td
+                                            class="status align-middle white-space-nowrap text-end fw-bold text-body-tertiary">
                                             <span class="badge badge-phoenix fs-10 badge-phoenix-secondary"
                                                 [ngClass]="getStatusColor(booking.status)"><span class="badge-label">{{
-                                                    getStatusString(booking.status) }}</span><span class="ms-1"
-                                                    data-feather="x" style="height:12.8px;width:12.8px;"></span></span>
+                                                    booking.status }}</span><span class="ms-1" data-feather="x"
+                                                    style="height:12.8px;width:12.8px;"></span></span>
 
                                         </td>
 
@@ -159,7 +157,7 @@
                                         <td class="feedback align-middle text-center text-body py-2">
                                             <span>
                                                 <a href="javascript:void(0)" class="text-primary"
-                                                    [ngClass]="{'text-muted': booking.isReviewed || booking.status !== 6}"
+                                                    [ngClass]="{'text-muted': booking.isReviewed || booking.status === StatusType.Completed}"
                                                     (click)="handleFeedbackClick(booking)">
                                                     Feedback
                                                 </a>

@@ -23,7 +23,6 @@ import { Tour } from '../../Tour/models/tour.model';
 export class ProfileComponent implements OnInit, OnDestroy {
   bookings?: PaginatedResponse<BookingWithReviewStatus>;
   model: User
-
   user$?: Observable<User>;
   lastOrder?: string = '';
   listTour: Tour[] = [];
@@ -31,7 +30,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
   isLoadingTotalMoney: boolean = false; // To track loading state
   private destroy$ = new Subject<void>();
   registerSubscription?: Subscription;
-
+  StatusType = StatusType
   constructor(
     private authService: AuthService,
     private bookingService: BookingService,
@@ -55,7 +54,6 @@ export class ProfileComponent implements OnInit, OnDestroy {
     this.destroy$.complete();
     this.registerSubscription?.unsubscribe();
   }
-
 
   ngOnInit(): void {
     const sessionUserId = this.authService.getUserId();
@@ -132,6 +130,9 @@ export class ProfileComponent implements OnInit, OnDestroy {
   }
 
   handleFeedbackClick(booking: BookingWithReviewStatus): void {
+    const statusValue = typeof booking.status === 'string'
+      ? StatusType[booking.status as keyof typeof StatusType]
+      : booking.status;
     // Check if booking has already been reviewed
     if (booking.isReviewed) {
       Swal.fire({
@@ -140,9 +141,15 @@ export class ProfileComponent implements OnInit, OnDestroy {
         icon: 'info',
         confirmButtonText: 'OK'
       });
-    } else if (booking.status === StatusType.Completed) {
+    } else if (statusValue === StatusType.Completed) {
       // Navigate to the review page if status is Completed
-      this.router.navigate(['/review-add', booking.tour?.tourId, booking.bookingId]);
+      this.router.navigate([
+        '/review-add',
+        booking.tour?.tourId || 'default-tourId',
+        booking.bookingId || 'default-bookingId',
+        booking.user?.id || 'default-userId'
+      ]);
+
     } else {
       // Show an error message if the status is not valid for review
       Swal.fire({
@@ -171,32 +178,32 @@ export class ProfileComponent implements OnInit, OnDestroy {
         }
       );
   }
+  getStatusColor(status: StatusType | undefined): string {
+    if (status === undefined) return 'badge-phoenix-dark'; // Default color for undefined status
 
-  getStatusString(status: number | undefined): string {
-    if (status === undefined) return 'Unknown';
-    return StatusType[status] ?? 'Unknown';
-  }
+    const statusValue = typeof status === 'string'
+      ? StatusType[status as keyof typeof StatusType]
+      : status;
 
-  getStatusColor(status: number | undefined): string {
-    if (status === undefined) return 'badge-phoenix-dark';
-
-    switch (status) {
-      case StatusType.Submited:
-        return 'badge-phoenix-primary';
-      case StatusType.Pending:
-        return 'badge-phoenix-warning';
-      case StatusType.Confirmed:
-        return 'badge-phoenix-success';
-      case StatusType.Canceled:
-        return 'badge-phoenix-danger';
-      case StatusType.Available:
-        return 'badge-phoenix-info';
-      case StatusType.Unavailable:
-        return 'badge-phoenix-secondary';
+    switch (statusValue) {
+      case StatusType.Submited: // 0
+        return 'badge-phoenix-primary'; // Blue
+      case StatusType.Pending: // 1
+        return 'badge-phoenix-warning'; // Yellow
+      case StatusType.Confirmed: // 2
+        return 'badge-phoenix-success'; // Green
+      case StatusType.Canceled: // 3
+        return 'badge-phoenix-danger'; // Red
+      case StatusType.Available: // 4
+        return 'badge-phoenix-info'; // Light Blue
+      case StatusType.Unavailable: // 5
+        return 'badge-phoenix-secondary'; // Gray
       default:
-        return 'badge-phoenix-dark';
+        return 'badge-phoenix-dark'; // Dark for unknown states
     }
   }
+
+
 
   isEditingFullName = false;
   isEditingUserName = false;
