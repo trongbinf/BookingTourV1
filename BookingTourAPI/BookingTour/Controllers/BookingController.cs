@@ -56,16 +56,11 @@ namespace BookingTour.API.Controllers
 				return BadRequest("Invalid booking data.");
 			}
 
-			var timeMappings = new Dictionary<string, TimeSpan>
-					{
-						{ "08:00:00", new TimeSpan(8, 0, 0) },
-						{ "09:00:00", new TimeSpan(9, 0, 0) },
-						{ "10:00:00", new TimeSpan(10, 0, 0) }
-					};
+		
 
-			if (!timeMappings.TryGetValue(bookingVm.StartTime, out TimeSpan startTime))
+			if (!DateTime.TryParse(bookingVm.StartTime, out DateTime startTime))
 			{
-				return BadRequest("Invalid StartTime. Allowed values are 08:00:00, 09:00:00, or 10:00:00.");
+				return BadRequest("Invalid StartTime.");
 			}
 
 			var booking = new Booking

@@ -38,7 +38,6 @@ export class ReviewAddComponent implements OnInit, OnDestroy {
     this.route.params.subscribe(params => {
       this.tourId = +params['tourId'];
       this.bookingId = +params['bookingId'];
-
       this.userId = sessionUserId ?? params['userId'];
 
       console.log('Tour ID:', this.tourId);

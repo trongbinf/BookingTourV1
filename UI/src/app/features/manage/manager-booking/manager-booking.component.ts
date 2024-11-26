@@ -98,9 +98,6 @@ export class ManagerBookingComponent implements OnDestroy, OnInit {
   }
 
 
-  getStatusString(status: number): string {
-    return StatusType[status] ?? "Unknown";
-  }
 
 
 
@@ -129,13 +126,16 @@ export class ManagerBookingComponent implements OnDestroy, OnInit {
       return;
     }
 
+    const statusValue = typeof currentBooking.status === 'string'
+      ? StatusType[currentBooking.status as keyof typeof StatusType]
+      : currentBooking.status;
 
     const isValidTransition =
-      (currentBooking.status === StatusType.Submited &&
+      (statusValue === StatusType.Submited &&
         (selectStatus === StatusType.Pending || selectStatus === StatusType.Canceled)) || // Submited -> Pending or Canceled
-      (currentBooking.status === StatusType.Pending &&
+      (statusValue === StatusType.Pending &&
         selectStatus === StatusType.Confirmed) || // Pending -> Confirmed only
-      (currentBooking.status === StatusType.Confirmed &&
+      (statusValue === StatusType.Confirmed &&
         selectStatus === StatusType.Completed); // Confirmed -> Completed only
 
     if (!isValidTransition) {
@@ -164,10 +164,15 @@ export class ManagerBookingComponent implements OnDestroy, OnInit {
       }
     });
   }
-  getStatusColor(status: number | undefined): string {
+
+  getStatusColor(status: StatusType | undefined): string {
     if (status === undefined) return 'badge-phoenix-dark'; // Default color for undefined status
 
-    switch (status) {
+    const statusValue = typeof status === 'string'
+      ? StatusType[status as keyof typeof StatusType]
+      : status;
+
+    switch (statusValue) {
       case StatusType.Submited: // 0
         return 'badge-phoenix-primary'; // Blue
       case StatusType.Pending: // 1

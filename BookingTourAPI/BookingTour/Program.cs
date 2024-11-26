@@ -58,8 +58,9 @@ namespace BookingTour
             builder.Services.AddScoped<IDataStartService, DateStartService>();
             builder.Services.AddScoped<IActivityService, ActivityService>();
             builder.Services.AddScoped<IBookingService, BookingService>();
+			builder.Services.AddScoped<IReviewService, ReviewService>();
 
-            builder.Services.AddControllers();
+			builder.Services.AddControllers();
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen(c =>
             {

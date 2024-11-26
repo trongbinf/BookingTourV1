@@ -4,12 +4,12 @@
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a [routerLink]="['']">Home</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Profile</li>
+                <li class="breadcrumb-item active" aria-current="page">My Booking</li>
             </ol>
         </nav>
         <div class="row align-items-center justify-content-between g-3 mb-4">
             <div class="col-auto">
-                <h2 class="mb-0">Profile</h2>
+                <h2 class="mb-0">My Booking</h2>
             </div>
         </div>
 
@@ -136,11 +136,12 @@
 
                                         <td class="date align-middle text-center text-body-tertiary py-2">
                                             {{booking.bookingDate | date: 'dd/MM/yyyy'}}</td>
-                                        <td class="status  align-middle white-space-nowrap text-body py-2 text-end">
+                                        <td
+                                            class="status align-middle white-space-nowrap text-end fw-bold text-body-tertiary">
                                             <span class="badge badge-phoenix fs-10 badge-phoenix-secondary"
                                                 [ngClass]="getStatusColor(booking.status)"><span class="badge-label">{{
-                                                    getStatusString(booking.status) }}</span><span class="ms-1"
-                                                    data-feather="x" style="height:12.8px;width:12.8px;"></span></span>
+                                                    booking.status }}</span><span class="ms-1" data-feather="x"
+                                                    style="height:12.8px;width:12.8px;"></span></span>
 
                                         </td>
 
@@ -156,7 +157,7 @@
                                         <td class="feedback align-middle text-center text-body py-2">
                                             <span>
                                                 <a href="javascript:void(0)" class="text-primary"
-                                                    [ngClass]="{'text-muted': booking.isReviewed || booking.status !== 6}"
+                                                    [ngClass]="{'text-muted': booking.isReviewed || booking.status === StatusType.Completed}"
                                                     (click)="handleFeedbackClick(booking)">
                                                     Feedback
                                                 </a>

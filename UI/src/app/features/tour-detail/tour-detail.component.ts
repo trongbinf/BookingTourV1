@@ -35,6 +35,7 @@ export class TourDetailComponent implements OnInit, OnDestroy {
   reviews: Review[] = [];  // Store reviews for this tour
   totalRating: number = 0;  // Store total rating
   averageRating: number = 0;  // Store average rating
+  minDate$ = Date.now;
   private destroy$ = new Subject<void>();
 
   constructor(

@@ -721,9 +721,9 @@
                         <div *ngIf="tourVm?.tour?.isFullDay; else selectDateStart">
                             <!-- Full day picker -->
                             <div class="form-icon-container flatpickr-input-container">
-                                <input class="form-control form-icon-input datetimepicker" id="tripDate" type="text"
-                                    placeholder="5 Tháng 5, 2024" data-options='{"disableMobile":true}'
-                                    [(ngModel)]="selectedPickDate" />
+                                <input class="form-control form-icon-input datetimepicker" id="tripDate" type="date"
+                                    min="{{minDate$}}" placeholder="5 Tháng 5, 2024"
+                                    data-options='{"disableMobile":true}' [(ngModel)]="selectedPickDate" />
                                 <span class="fa-solid fa-calendar text-body fs-9 form-icon"></span>
                             </div>
                         </div>

@@ -12,7 +12,7 @@ namespace BookingTour.Model
 		public int BookingId { get; set; }	
 		public DateTime BookingDate { get; set; }
 		public DateTime PickDate { get; set; }
-		public TimeSpan StartTime { get; set; }
+		public DateTime StartTime { get; set; }
 		public int PersonNumber { get; set; }
 		public string? Notes { get; set; }
 		public StatusType Status { get; set; }
